@@ -1,4 +1,8 @@
-"""Debug: list tables and columns. Run from server/."""
+"""
+Debug: list tables and columns. Run from server/.
+Usage: uv run python scripts/inspect_db.py
+"""
+
 import asyncio
 import sys
 from pathlib import Path
