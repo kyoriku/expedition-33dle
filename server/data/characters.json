@@ -1,0 +1,182 @@
+[
+  {
+    "name": "Gustave",
+    "gender": "male",
+    "age": 32,
+    "class_role": "Engineer",
+    "weapon": "Sword & Pistol",
+    "element": ["Lightning"],
+    "act_introduced": 1
+  },
+  {
+    "name": "Maelle",
+    "gender": "female",
+    "age": 16,
+    "class_role": "Duelist",
+    "weapon": "Rapier",
+    "element": ["Fire"],
+    "act_introduced": 1
+  },
+  {
+    "name": "Lune",
+    "gender": "female",
+    "age": 32,
+    "class_role": "Scholar",
+    "weapon": "Elemental Magic",
+    "element": ["Fire", "Ice", "Lightning", "Earth", "Light"],
+    "act_introduced": 1
+  },
+  {
+    "name": "Sciel",
+    "gender": "female",
+    "age": 32,
+    "class_role": "Fortune Teller",
+    "weapon": "Scythe",
+    "element": ["Dark"],
+    "act_introduced": 1
+  },
+  {
+    "name": "Verso",
+    "gender": "male",
+    "age": null,
+    "class_role": "Swordsman",
+    "weapon": "Sword & Dagger",
+    "element": ["Light"],
+    "act_introduced": 2
+  },
+  {
+    "name": "Monoco",
+    "gender": "male",
+    "age": null,
+    "class_role": "Shapeshifter",
+    "weapon": "Staff",
+    "element": ["Fire", "Ice", "Lightning", "Earth", "Light", "Dark"],
+    "act_introduced": 2
+  },
+  {
+    "name": "Esquie",
+    "gender": "male",
+    "age": null,
+    "class_role": "Mythical Companion",
+    "weapon": "None",
+    "element": [],
+    "act_introduced": 1
+  },
+  {
+    "name": "Sophie",
+    "gender": "female",
+    "age": 33,
+    "class_role": "Civilian",
+    "weapon": "None",
+    "element": [],
+    "act_introduced": 1
+  },
+  {
+    "name": "Emma",
+    "gender": "female",
+    "age": null,
+    "class_role": "Chief Councilor",
+    "weapon": "None",
+    "element": [],
+    "act_introduced": 1
+  },
+  {
+    "name": "Renoir",
+    "gender": "male",
+    "age": null,
+    "class_role": "Commander",
+    "weapon": "Cane",
+    "element": [],
+    "act_introduced": 1
+  },
+  {
+    "name": "The Paintress",
+    "gender": "female",
+    "age": null,
+    "class_role": "Paintress",
+    "weapon": "Paintbrush",
+    "element": ["Void"],
+    "act_introduced": 1
+  },
+  {
+    "name": "Clea",
+    "gender": "female",
+    "age": null,
+    "class_role": "Paintress",
+    "weapon": "None",
+    "element": ["Void"],
+    "act_introduced": 3
+  },
+  {
+    "name": "Alicia",
+    "gender": "female",
+    "age": null,
+    "class_role": "Paintress",
+    "weapon": "None",
+    "element": [],
+    "act_introduced": 2
+  },
+  {
+    "name": "Simon",
+    "gender": "male",
+    "age": null,
+    "class_role": "Expeditioner",
+    "weapon": "Sword",
+    "element": ["Void"],
+    "act_introduced": 3
+  },
+  {
+    "name": "Sirène",
+    "gender": "female",
+    "age": null,
+    "class_role": "Axon",
+    "weapon": "None",
+    "element": [],
+    "act_introduced": 2
+  },
+  {
+    "name": "Visages",
+    "gender": "male",
+    "age": null,
+    "class_role": "Axon",
+    "weapon": "None",
+    "element": [],
+    "act_introduced": 2
+  },
+  {
+    "name": "Goblu",
+    "gender": "other",
+    "age": null,
+    "class_role": "Gestral Boss",
+    "weapon": "None",
+    "element": [],
+    "act_introduced": 1
+  },
+  {
+    "name": "Golgra",
+    "gender": "female",
+    "age": null,
+    "class_role": "Gestral Chief",
+    "weapon": "None",
+    "element": [],
+    "act_introduced": 1
+  },
+  {
+    "name": "Noco",
+    "gender": "male",
+    "age": null,
+    "class_role": "Merchant",
+    "weapon": "None",
+    "element": [],
+    "act_introduced": 1
+  },
+  {
+    "name": "François",
+    "gender": "male",
+    "age": null,
+    "class_role": "Mythical Creature",
+    "weapon": "None",
+    "element": [],
+    "act_introduced": 1
+  }
+]
