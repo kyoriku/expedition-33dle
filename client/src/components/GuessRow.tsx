@@ -18,14 +18,14 @@ const CELL_GLYPHS: Partial<Record<CellFeedback, string>> = {
   unknown: "?",
 };
 
-const CELL_BASE =
+export const CELL_BASE =
   "flex min-h-12 flex-col items-center justify-center rounded-[3px] p-1 " +
   "text-center text-[10px] leading-tight break-words " +
   "md:min-h-16 md:text-xs lg:min-h-18 lg:text-[13px] " +
   "shadow-[inset_0_1px_0_rgba(255,255,255,.07),inset_0_-6px_12px_rgba(0,0,0,.18)]";
 
 // Correct guess: the name cell becomes the gold brand moment.
-const WIN_NAME =
+export const WIN_NAME =
   "bg-surface border-gold text-gold border font-bold " +
   "shadow-[inset_0_0_10px_rgba(217,169,63,.12)]";
 

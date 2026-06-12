@@ -46,6 +46,7 @@ export interface StoredGameState {
   status: GameStatus;
   puzzle_number: number;
   stats_recorded: boolean; // prevents double-counting stats on refresh
+  revealed_answer?: Entity | null; // optional: pre-reveal states lack it
 }
 
 export interface Stats {

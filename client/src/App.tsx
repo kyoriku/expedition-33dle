@@ -1,11 +1,12 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import AnswerReveal from "./components/AnswerReveal";
 import GameStatus from "./components/GameStatus";
 import GuessGrid from "./components/GuessGrid";
 import GuessInput from "./components/GuessInput";
 import HowToPlay from "./components/HowToPlay";
 import Modal from "./components/Modal";
-import { ApiError, fetchToday, submitGuess } from "./lib/api";
+import { ApiError, fetchToday, revealAnswer, submitGuess } from "./lib/api";
 import { buildShareString } from "./lib/share";
 import { recordGame } from "./lib/stats";
 import {
@@ -75,8 +76,41 @@ function Game({ today }: { today: TodayResponse }) {
       : false;
   });
   const [stats, setStats] = useState(loadStats);
+  // Restored from storage once at mount; live fetches are derived from the
+  // query below rather than synced into state (avoids set-state-in-effect).
+  const [storedAnswer] = useState<Entity | null>(() => {
+    const stored = loadState(today.puzzle_date);
+    return stored?.puzzle_number === today.puzzle_number
+      ? (stored.revealed_answer ?? null)
+      : null;
+  });
   // Auto-show the tutorial on first visit (Wordle convention)
   const [showHowTo, setShowHowTo] = useState(() => !loadTutorialSeen());
+
+  // Fires only on a lost game with no persisted answer. staleTime: Infinity
+  // keeps the result fresh forever, so the enabled query never refetches.
+  const revealQuery = useQuery({
+    queryKey: ["reveal", today.puzzle_date],
+    queryFn: revealAnswer,
+    enabled: status === "lost" && storedAnswer === null,
+    staleTime: Infinity,
+    retry: 1,
+  });
+  const revealedAnswer = storedAnswer ?? revealQuery.data ?? null;
+
+  // RQ v5 has no onSuccess on useQuery — persist via effect (idempotent:
+  // re-runs write the same JSON).
+  useEffect(() => {
+    if (status === "lost" && storedAnswer === null && revealQuery.data) {
+      saveState(today.puzzle_date, {
+        guesses,
+        status,
+        puzzle_number: today.puzzle_number,
+        stats_recorded: statsRecorded,
+        revealed_answer: revealQuery.data,
+      });
+    }
+  }, [revealQuery.data, storedAnswer, guesses, status, statsRecorded, today]);
 
   const guessMutation = useMutation({
     mutationFn: submitGuess,
@@ -112,6 +146,7 @@ function Game({ today }: { today: TodayResponse }) {
         status: nextStatus,
         puzzle_number: today.puzzle_number,
         stats_recorded: nextRecorded,
+        revealed_answer: revealedAnswer,
       });
     },
   });
@@ -169,32 +204,51 @@ function Game({ today }: { today: TodayResponse }) {
         </header>
         <div className="rule" aria-hidden="true" />
 
-        <GameStatus
-          status={status}
-          guessCount={guesses.length}
-          remaining={MAX_GUESSES - guesses.length}
-          stats={stats}
-          shareText={shareText}
-        />
-
-        {status === "in_progress" && (
-          <GuessInput
-            entities={today.entities}
-            guessedIds={guessedIds}
-            disabled={guessMutation.isPending}
-            onSubmit={handleGuess}
-          />
+        {status === "in_progress" ? (
+          <>
+            <GameStatus
+              status={status}
+              guessCount={guesses.length}
+              remaining={MAX_GUESSES - guesses.length}
+              stats={stats}
+              shareText={shareText}
+            />
+            <GuessInput
+              entities={today.entities}
+              guessedIds={guessedIds}
+              disabled={guessMutation.isPending}
+              onSubmit={handleGuess}
+            />
+            {guessMutation.isError && (
+              <p className="mt-2 rounded-md bg-red-900/60 p-2 text-center text-xs text-red-200">
+                {guessMutation.error instanceof ApiError
+                  ? guessMutation.error.message
+                  : "Guess failed — check your connection and try again"}
+              </p>
+            )}
+            <GuessGrid guesses={guesses} />
+          </>
+        ) : (
+          <>
+            <GuessGrid guesses={guesses} />
+              <div className="rule" aria-hidden="true" />
+            {status === "lost" && (
+              <AnswerReveal
+                answer={revealedAnswer}
+                isError={revealQuery.isError}
+                onRetry={() => revealQuery.refetch()}
+              />
+            )}
+            
+            <GameStatus
+              status={status}
+              guessCount={guesses.length}
+              remaining={MAX_GUESSES - guesses.length}
+              stats={stats}
+              shareText={shareText}
+            />
+          </>
         )}
-
-        {guessMutation.isError && (
-          <p className="mt-2 rounded-md bg-red-900/60 p-2 text-center text-xs text-red-200">
-            {guessMutation.error instanceof ApiError
-              ? guessMutation.error.message
-              : "Guess failed — check your connection and try again"}
-          </p>
-        )}
-
-        <GuessGrid guesses={guesses} />
 
         <footer className="mt-auto pt-8 lg:pt-10">
           <div className="rule" aria-hidden="true" />
