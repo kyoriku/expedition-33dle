@@ -1,3 +1,4 @@
+import { hyphenate } from "../lib/display";
 import type { GuessResponse } from "../lib/types";
 
 type CellFeedback = "match" | "partial" | "miss" | "higher" | "lower" | "unknown";
@@ -25,7 +26,7 @@ function Cell({ feedback, value }: { feedback: CellFeedback; value: string }) {
   const glyph = CELL_GLYPHS[feedback];
   return (
     <div className={`${CELL_BASE} ${CELL_STYLES[feedback]}`}>
-      <span className="max-w-full">{value}</span>
+      <span className="max-w-full">{hyphenate(value)}</span>
       {glyph && <span className="text-xs font-bold">{glyph}</span>}
     </div>
   );

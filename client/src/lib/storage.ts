@@ -75,3 +75,22 @@ export function saveStats(stats: Stats): void {
     // ignore
   }
 }
+
+// Whether the how-to-play modal has ever been dismissed (no date suffix).
+const TUTORIAL_KEY = "expedition33dle:tutorial_seen";
+
+export function loadTutorialSeen(): boolean {
+  try {
+    return localStorage.getItem(TUTORIAL_KEY) === "true";
+  } catch {
+    return false;
+  }
+}
+
+export function saveTutorialSeen(): void {
+  try {
+    localStorage.setItem(TUTORIAL_KEY, "true");
+  } catch {
+    // ignore
+  }
+}

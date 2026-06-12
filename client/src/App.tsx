@@ -3,10 +3,19 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import GameStatus from "./components/GameStatus";
 import GuessGrid from "./components/GuessGrid";
 import GuessInput from "./components/GuessInput";
+import HowToPlay from "./components/HowToPlay";
+import Modal from "./components/Modal";
 import { ApiError, fetchToday, submitGuess } from "./lib/api";
 import { buildShareString } from "./lib/share";
 import { recordGame } from "./lib/stats";
-import { loadState, loadStats, saveState, saveStats } from "./lib/storage";
+import {
+  loadState,
+  loadStats,
+  loadTutorialSeen,
+  saveState,
+  saveStats,
+  saveTutorialSeen,
+} from "./lib/storage";
 import type {
   Entity,
   GameStatus as Status,
@@ -66,6 +75,8 @@ function Game({ today }: { today: TodayResponse }) {
       : false;
   });
   const [stats, setStats] = useState(loadStats);
+  // Auto-show the tutorial on first visit (Wordle convention)
+  const [showHowTo, setShowHowTo] = useState(() => !loadTutorialSeen());
 
   const guessMutation = useMutation({
     mutationFn: submitGuess,
@@ -118,6 +129,11 @@ function Game({ today }: { today: TodayResponse }) {
     [guesses, status, today.puzzle_number],
   );
 
+  function closeHowTo() {
+    setShowHowTo(false);
+    saveTutorialSeen();
+  }
+
   function handleGuess(entity: Entity) {
     if (
       guessMutation.isPending ||
@@ -134,8 +150,16 @@ function Game({ today }: { today: TodayResponse }) {
       <main className="mx-auto w-full max-w-md px-2 py-4">
         <header className="mb-2 flex items-baseline justify-between">
           <h1 className="text-lg font-bold">Expedition 33dle</h1>
-          <span className="text-sm text-zinc-400">
+          <span className="flex items-center gap-2 text-sm text-zinc-400">
             Puzzle #{today.puzzle_number}
+            <button
+              type="button"
+              aria-label="How to play"
+              onClick={() => setShowHowTo(true)}
+              className="flex h-5 w-5 items-center justify-center rounded-full border border-zinc-500 text-xs font-bold text-zinc-400 hover:border-zinc-300 hover:text-zinc-200"
+            >
+              ?
+            </button>
           </span>
         </header>
 
@@ -165,6 +189,10 @@ function Game({ today }: { today: TodayResponse }) {
         )}
 
         <GuessGrid guesses={guesses} />
+
+        <Modal open={showHowTo} onClose={closeHowTo} title="How to Play">
+          <HowToPlay onClose={closeHowTo} />
+        </Modal>
       </main>
     </div>
   );
