@@ -67,7 +67,7 @@ export default function GuessInput({
         placeholder="Type a character name…"
         autoComplete="off"
         enterKeyHint="go"
-        className="w-full rounded-md border border-zinc-600 bg-zinc-800 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:border-zinc-400 focus:outline-none disabled:opacity-50"
+        className="border-line bg-raised text-parchment placeholder-muted focus:border-gold w-full rounded-md border px-3 py-2 text-sm focus:outline-none disabled:opacity-50 md:py-2.5 md:text-base"
         onChange={(e) => {
           setQuery(e.target.value);
           setOpen(true);
@@ -77,13 +77,13 @@ export default function GuessInput({
         onBlur={() => setOpen(false)}
       />
       {open && suggestions.length > 0 && (
-        <ul className="absolute z-10 mt-1 max-h-60 w-full overflow-y-auto rounded-md border border-zinc-600 bg-zinc-800 shadow-lg">
+        <ul className="border-line bg-raised absolute z-10 mt-1 max-h-60 w-full overflow-y-auto rounded-md border shadow-lg">
           {suggestions.map((entity, i) => (
             <li key={entity.id}>
               <button
                 type="button"
-                className={`w-full px-3 py-2 text-left text-sm text-zinc-100 ${
-                  i === activeIndex ? "bg-zinc-700" : "hover:bg-zinc-700"
+                className={`text-parchment w-full px-3 py-2 text-left text-sm ${
+                  i === activeIndex ? "bg-surface" : "hover:bg-surface"
                 }`}
                 // mousedown fires before the input's blur, so selection wins
                 onMouseDown={(e) => {
