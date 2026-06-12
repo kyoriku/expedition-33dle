@@ -4,7 +4,9 @@ import GameStatus from "./components/GameStatus";
 import GuessGrid from "./components/GuessGrid";
 import GuessInput from "./components/GuessInput";
 import { ApiError, fetchToday, submitGuess } from "./lib/api";
-import { loadState, saveState } from "./lib/storage";
+import { buildShareString } from "./lib/share";
+import { recordGame } from "./lib/stats";
+import { loadState, loadStats, saveState, saveStats } from "./lib/storage";
 import type {
   Entity,
   GameStatus as Status,
@@ -57,6 +59,13 @@ function Game({ today }: { today: TodayResponse }) {
       ? stored.status
       : "in_progress";
   });
+  const [statsRecorded, setStatsRecorded] = useState(() => {
+    const stored = loadState(today.puzzle_date);
+    return stored?.puzzle_number === today.puzzle_number
+      ? stored.stats_recorded
+      : false;
+  });
+  const [stats, setStats] = useState(loadStats);
 
   const guessMutation = useMutation({
     mutationFn: submitGuess,
@@ -69,10 +78,29 @@ function Game({ today }: { today: TodayResponse }) {
           : "in_progress";
       setGuesses(nextGuesses);
       setStatus(nextStatus);
+
+      let nextRecorded = statsRecorded;
+      if (
+        (nextStatus === "won" || nextStatus === "lost") &&
+        !statsRecorded
+      ) {
+        const nextStats = recordGame(stats, {
+          puzzle_number: today.puzzle_number,
+          puzzle_date: today.puzzle_date,
+          status: nextStatus,
+          guess_count: nextGuesses.length,
+        });
+        saveStats(nextStats);
+        setStats(nextStats);
+        nextRecorded = true;
+        setStatsRecorded(true);
+      }
+
       saveState(today.puzzle_date, {
         guesses: nextGuesses,
         status: nextStatus,
         puzzle_number: today.puzzle_number,
+        stats_recorded: nextRecorded,
       });
     },
   });
@@ -80,6 +108,14 @@ function Game({ today }: { today: TodayResponse }) {
   const guessedIds = useMemo(
     () => new Set(guesses.map((g) => g.guess.id)),
     [guesses],
+  );
+
+  const shareText = useMemo(
+    () =>
+      status === "in_progress"
+        ? null
+        : buildShareString(guesses, today.puzzle_number, status),
+    [guesses, status, today.puzzle_number],
   );
 
   function handleGuess(entity: Entity) {
@@ -107,6 +143,8 @@ function Game({ today }: { today: TodayResponse }) {
           status={status}
           guessCount={guesses.length}
           remaining={MAX_GUESSES - guesses.length}
+          stats={stats}
+          shareText={shareText}
         />
 
         {status === "in_progress" && (

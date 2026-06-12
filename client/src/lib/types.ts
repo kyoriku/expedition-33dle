@@ -45,4 +45,15 @@ export interface StoredGameState {
   guesses: GuessResponse[];
   status: GameStatus;
   puzzle_number: number;
+  stats_recorded: boolean; // prevents double-counting stats on refresh
+}
+
+export interface Stats {
+  played: number;
+  won: number;
+  current_streak: number;
+  max_streak: number;
+  guess_distribution: [number, number, number, number, number, number]; // wins by guess count (1-6)
+  last_played_puzzle_number: number | null;
+  last_played_date: string | null; // ISO date, used for streak gap detection
 }
