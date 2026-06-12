@@ -28,7 +28,7 @@ export default function ShareButton({ text }: ShareButtonProps) {
     <button
       type="button"
       onClick={handleClick}
-      className="mt-3 w-full rounded-md bg-green-700 py-2 text-sm font-semibold text-white active:bg-green-800"
+      className="bg-gold text-glyph hover:bg-gold-bright active:bg-gold-bright mt-3 w-full rounded-md py-2 text-sm font-bold"
     >
       {label}
     </button>

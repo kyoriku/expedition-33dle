@@ -12,6 +12,8 @@ cd client/og
 npx playwright screenshot --viewport-size=1200,630 og-image.html ../public/og-image.png
 ```
 
-The sample matrix row intentionally keeps the in-game feedback colors
-(green/yellow/gray) as the "Wordle-like" genre signal; the gold-on-black
-title is the E33 brand treatment.
+The image is mode-agnostic (no attribute matrix) so it stays valid for any
+future game mode: gold serif title, ghosted "33", and a tapered brush-stroke
+mark on the warm-black brand background. Fonts are local — the site's
+self-hosted upright variable woff2 (`../public/fonts/`) plus a dev-only
+italic variable woff2 in `./fonts/` — so rendering needs no network.

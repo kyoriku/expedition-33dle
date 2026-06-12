@@ -1,1 +1,59 @@
 @import "tailwindcss";
+
+/* Self-hosted Playfair Display — single variable woff2 (latin subset incl.
+   French accents, weight axis 400-900) covering the 700/800 weights the site
+   uses. No external font requests. */
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/fonts/playfair-display-latin-var.woff2") format("woff2");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Design tokens — single source of truth for the brand identity.
+   Warm near-blacks + parchment + restrained gold; deep emerald / ochre /
+   warm taupe for matrix feedback (hues tuned for WCAG AA, semantics
+   unchanged from dle convention). */
+@theme {
+  --color-ink: #0f0d0a;
+  --color-surface: #1b1713;
+  --color-raised: #27211a;
+  --color-line: #3a322a;
+  --color-gold: #d9a93f;
+  --color-gold-bright: #e8bd55;
+  --color-match: #266b43;
+  --color-partial: #b9881f;
+  --color-miss: #4a4239;
+  --color-parchment: #ece4d6;
+  --color-muted: #a2988a;
+  --color-glyph: #171310;
+
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+}
+
+/* Subtle paper grain over everything; fixed so it doesn't scroll. */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Tapered gold hairline rule. */
+.rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-gold) 25%,
+    var(--color-gold) 75%,
+    transparent
+  );
+  opacity: 0.55;
+}

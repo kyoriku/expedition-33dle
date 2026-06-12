@@ -26,7 +26,7 @@ const MAX_GUESSES = 6;
 
 function Centered({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-900 px-4 text-center text-sm text-zinc-300">
+    <div className="bg-ink text-parchment flex min-h-screen items-center justify-center px-4 text-center text-sm italic">
       {children}
     </div>
   );
@@ -146,22 +146,28 @@ function Game({ today }: { today: TodayResponse }) {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-900 text-zinc-100">
-      <main className="mx-auto w-full max-w-md px-2 py-4">
-        <header className="mb-2 flex items-baseline justify-between">
-          <h1 className="text-lg font-bold">Expedition 33dle</h1>
-          <span className="flex items-center gap-2 text-sm text-zinc-400">
-            Puzzle #{today.puzzle_number}
+    <div className="bg-ink text-parchment min-h-screen">
+      <div className="grain" aria-hidden="true" />
+      <main className="mx-auto flex min-h-screen w-full max-w-md flex-col px-2 py-4 md:max-w-xl md:px-4 md:py-8 lg:max-w-2xl">
+        {/* lg:mt-auto opposes the footer's mt-auto, vertically centering the
+            game block on desktop while keeping the footer pinned */}
+        <header className="mb-1.5 flex items-baseline justify-between lg:mt-auto">
+          <h1 className="font-serif text-2xl font-extrabold tracking-wide md:text-4xl lg:text-[2.75rem]">
+            Expedition <span className="text-gold">33dle</span>
+          </h1>
+          <span className="text-muted flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase md:text-[13px]">
+            № {today.puzzle_number}
             <button
               type="button"
               aria-label="How to play"
               onClick={() => setShowHowTo(true)}
-              className="flex h-5 w-5 items-center justify-center rounded-full border border-zinc-500 text-xs font-bold text-zinc-400 hover:border-zinc-300 hover:text-zinc-200"
+              className="border-gold text-gold hover:border-gold-bright hover:text-gold-bright flex h-5 w-5 items-center justify-center rounded-full border text-[11px] font-bold"
             >
               ?
             </button>
           </span>
         </header>
+        <div className="rule" aria-hidden="true" />
 
         <GameStatus
           status={status}
@@ -189,6 +195,13 @@ function Game({ today }: { today: TodayResponse }) {
         )}
 
         <GuessGrid guesses={guesses} />
+
+        <footer className="mt-auto pt-8 lg:pt-10">
+          <div className="rule" aria-hidden="true" />
+          <p className="text-muted mt-2 text-center text-[10px] tracking-[0.15em] uppercase">
+            expedition33dle.com · an unofficial fan game
+          </p>
+        </footer>
 
         <Modal open={showHowTo} onClose={closeHowTo} title="How to Play">
           <HowToPlay onClose={closeHowTo} />

@@ -20,7 +20,7 @@ export default function GameStatus({
 }: GameStatusProps) {
   if (status === "in_progress") {
     return (
-      <p className="my-3 text-center text-xs text-zinc-400">
+      <p className="text-muted my-3 text-center text-xs italic md:text-sm">
         {remaining} {remaining === 1 ? "guess" : "guesses"} left
       </p>
     );
@@ -29,11 +29,11 @@ export default function GameStatus({
   return (
     <div>
       {status === "won" ? (
-        <p className="my-3 rounded-md bg-green-700 p-3 text-center text-sm font-semibold text-white">
+        <p className="bg-match text-parchment my-3 rounded-md p-3 text-center text-sm font-semibold md:text-base">
           Solved in {guessCount} {guessCount === 1 ? "guess" : "guesses"}!
         </p>
       ) : (
-        <p className="my-3 rounded-md bg-zinc-700 p-3 text-center text-sm font-semibold text-zinc-100">
+        <p className="bg-surface border-line text-parchment my-3 rounded-md border p-3 text-center text-sm font-semibold md:text-base">
           Game over, try again tomorrow
         </p>
       )}

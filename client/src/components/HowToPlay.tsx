@@ -32,29 +32,41 @@ interface HowToPlayProps {
 export default function HowToPlay({ onClose }: HowToPlayProps) {
   return (
     <div>
-      <p className="mb-3 text-sm text-zinc-300">
+      <p className="text-parchment mb-3 text-sm">
         Guess today's <em>Clair Obscur: Expedition 33</em> character in 6
         tries.
       </p>
-      <ul className="mb-4 list-disc space-y-1 pl-5 text-xs text-zinc-300">
-        <li>Type a name to see suggestions</li>
-        <li>Each guess shows how close you are across 6 attributes</li>
-        <li>
-          <span className="font-semibold text-green-500">Green</span> = exact
-          match,{" "}
-          <span className="font-semibold text-yellow-500">Yellow</span> =
-          partial/unknown, Gray = miss
-        </li>
-        <li>Arrows mean the answer is higher (↑) or lower (↓) for Age and Act</li>
+      <ul className="text-parchment mb-4 space-y-1.5 text-xs">
+        {[
+          <>Type a name to see suggestions</>,
+          <>Each guess shows how close you are across 6 attributes</>,
+          <>
+            <span className="font-semibold text-green-500">Green</span> = exact
+            match,{" "}
+            <span className="text-gold-bright font-semibold">Gold</span> =
+            partial/unknown, gray = miss
+          </>,
+          <>Arrows mean the answer is higher (↑) or lower (↓) for Age and Act</>,
+        ].map((item, i) => (
+          <li key={i} className="relative pl-3.5 leading-snug">
+            <span
+              className="text-gold absolute top-0.75 left-0 text-[7px]"
+              aria-hidden="true"
+            >
+              ◆
+            </span>
+            {item}
+          </li>
+        ))}
       </ul>
       <GuessGrid guesses={[EXAMPLE_GUESS]} />
-      <p className="mt-4 text-center text-[11px] text-zinc-500">
+      <p className="text-muted mt-4 text-center text-[11px] italic">
         A new puzzle is available every day at midnight UTC.
       </p>
       <button
         type="button"
         onClick={onClose}
-        className="mt-3 w-full rounded-md bg-green-700 py-2 text-sm font-semibold text-white active:bg-green-800"
+        className="bg-gold text-glyph hover:bg-gold-bright active:bg-gold-bright mt-3 w-full rounded-md py-2 text-sm font-bold"
       >
         Got it
       </button>

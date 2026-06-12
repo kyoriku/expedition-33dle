@@ -69,19 +69,20 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
         aria-modal="true"
         aria-labelledby="modal-title"
         tabIndex={-1}
-        className="relative flex h-full w-full flex-col justify-center overflow-y-auto bg-zinc-900 p-5 outline-none sm:h-auto sm:max-w-md sm:rounded-xl sm:border sm:border-zinc-700"
+        className="bg-surface sm:border-line relative flex h-full w-full flex-col justify-center overflow-y-auto p-5 outline-none sm:h-auto sm:max-w-md sm:rounded-xl sm:border"
       >
         <button
           type="button"
           aria-label="Close"
           onClick={onClose}
-          className="absolute top-3 right-3 p-1 text-zinc-400 hover:text-zinc-200"
+          className="text-muted hover:text-parchment absolute top-3 right-3 p-1"
         >
           ✕
         </button>
-        <h2 id="modal-title" className="mb-2 text-lg font-bold">
+        <h2 id="modal-title" className="mb-1.5 font-serif text-xl font-bold">
           {title}
         </h2>
+        <div className="rule mb-3" aria-hidden="true" />
         {children}
       </div>
     </div>
