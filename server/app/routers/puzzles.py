@@ -84,6 +84,18 @@ async def today(db: AsyncSession = Depends(get_db)) -> TodayResponse:
     )
 
 
+@router.get("/reveal", response_model=EntityRead)
+async def reveal(db: AsyncSession = Depends(get_db)) -> EntityRead:
+    """Return today's answer entity.
+
+    Intentionally unauthenticated: called by the client to complete the lose
+    UX; the theoretical cheating risk is an accepted product decision.
+    """
+    puzzle = await _today_puzzle(db)
+    entity = await db.get(Entity, puzzle.entity_id)
+    return EntityRead.model_validate(entity)
+
+
 @router.post("/guess", response_model=GuessResponse)
 async def guess(
     body: GuessRequest, db: AsyncSession = Depends(get_db)

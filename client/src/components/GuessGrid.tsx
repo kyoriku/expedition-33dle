@@ -9,7 +9,7 @@ interface GuessGridProps {
 
 export default function GuessGrid({ guesses }: GuessGridProps) {
   return (
-    <section className="mt-4">
+    <section className="my-4">
       <div className="mb-1 grid grid-cols-7 gap-1 md:gap-1.5">
         {COLUMNS.map((label) => (
           <div
