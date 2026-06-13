@@ -1,7 +1,7 @@
 import { hyphenate } from "../lib/display";
 import type { GuessResponse } from "../lib/types";
 
-type CellFeedback = "match" | "partial" | "miss" | "higher" | "lower" | "unknown";
+type CellFeedback = "match" | "partial" | "miss" | "higher" | "lower" | "unknown" | "neutral";
 
 const CELL_STYLES: Record<CellFeedback, string> = {
   match: "bg-match text-parchment",
@@ -10,6 +10,7 @@ const CELL_STYLES: Record<CellFeedback, string> = {
   miss: "bg-miss text-parchment",
   higher: "bg-miss text-parchment", // directional non-match = gray + arrow
   lower: "bg-miss text-parchment",
+  neutral: "bg-line text-parchment border border-raised",
 };
 
 const CELL_GLYPHS: Partial<Record<CellFeedback, string>> = {
@@ -31,7 +32,7 @@ export const CELL_BASE =
 
 // Correct guess: the name cell becomes the gold brand moment.
 export const WIN_NAME =
-  "bg-surface border-gold text-gold border font-bold " +
+  "bg-line border-gold-bright text-gold-bright border font-bold " +
   "shadow-[inset_0_0_10px_rgba(217,169,63,.12)]";
 
 function Cell({
@@ -74,7 +75,7 @@ export default function GuessRow({ result, animate = false }: GuessRowProps) {
   return (
     <div className={GRID_TEMPLATE}>
       <Cell
-        feedback={is_correct ? "match" : "miss"}
+        feedback="neutral"
         value={guess.name}
         winName={is_correct}
       />
