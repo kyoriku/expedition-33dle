@@ -25,11 +25,11 @@
   --color-line: #3a322a;
   --color-gold: #d9a93f;
   --color-gold-bright: #e8bd55;
-  --color-match: #266b43;
-  --color-partial: #b9881f;
-  --color-miss: #7a3a2e; /* warm brick — "incorrect"; parchment on it is 6.6:1 */
+  --color-match: #208a3e;
+  --color-partial: #d4a022;
+  --color-miss: #9a3625;
   --color-parchment: #ece4d6;
-  --color-muted: #a2988a;
+  --color-muted: #b8aea0;
   --color-glyph: #171310;
 
   --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;

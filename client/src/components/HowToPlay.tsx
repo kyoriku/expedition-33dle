@@ -45,10 +45,10 @@ export default function HowToPlay({ onClose }: HowToPlayProps) {
           <>Type a name to see suggestions</>,
           <>Each guess shows how close you are across 8 attributes</>,
           <>
-            <span className="font-semibold text-green-500">Green</span> = exact
+            <span className="font-semibold text-match">Green</span> = exact
             match,{" "}
-            <span className="text-gold-bright font-semibold">Gold</span> =
-            partial/unknown, Red = incorrect
+            <span className=" font-semibold text-partial">Gold</span> =
+            partial/unknown,{" "} <span className="font-semibold text-miss">Red</span> = incorrect
           </>,
           <>Arrows mean the answer is higher (↑) or lower (↓) for Age and Act</>,
         ].map((item, i) => (

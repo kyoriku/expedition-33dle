@@ -69,7 +69,7 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
         aria-modal="true"
         aria-labelledby="modal-title"
         tabIndex={-1}
-        className="bg-surface sm:border-line relative flex h-full w-full flex-col justify-center overflow-y-auto p-5 outline-none sm:h-auto sm:max-w-md sm:rounded-xl sm:border"
+        className="bg-surface sm:border-line relative flex h-full w-full flex-col justify-center overflow-y-auto p-5 outline-none sm:h-auto sm:max-w-3xl sm:rounded-xl sm:border"
       >
         <button
           type="button"
