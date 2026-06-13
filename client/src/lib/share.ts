@@ -8,6 +8,8 @@ const FIELD_ORDER = [
   "weapon",
   "element",
   "act_introduced",
+  "species",
+  "affiliation",
 ] as const satisfies readonly (keyof GuessFeedback)[];
 
 // Spoiler-free by construction: higher/lower fold into the same square as

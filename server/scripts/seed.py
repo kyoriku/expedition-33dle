@@ -65,7 +65,9 @@ def build_schedule(names: list[str], n_days: int, seed: int) -> list[str]:
 
 async def upsert_entities(conn) -> dict[str, int]:
     """UPSERT all entities by name; return a name -> id map."""
-    stmt = pg_insert(Entity).values(ENTITIES)
+    # `puzzleable` is a JSON-only flag (see data/README.md), not a DB column.
+    rows_in = [{k: v for k, v in e.items() if k != "puzzleable"} for e in ENTITIES]
+    stmt = pg_insert(Entity).values(rows_in)
     stmt = stmt.on_conflict_do_update(
         index_elements=[Entity.name],
         set_={
@@ -75,6 +77,8 @@ async def upsert_entities(conn) -> dict[str, int]:
             "weapon": stmt.excluded.weapon,
             "element": stmt.excluded.element,
             "act_introduced": stmt.excluded.act_introduced,
+            "species": stmt.excluded.species,
+            "affiliation": stmt.excluded.affiliation,
         },
     ).returning(Entity.name, Entity.id)
     rows = (await conn.execute(stmt)).all()
@@ -83,7 +87,10 @@ async def upsert_entities(conn) -> dict[str, int]:
 
 async def seed_puzzles(conn, name_to_id: dict[str, int]) -> int:
     """Insert puzzle rows for the seed window; return how many were inserted."""
-    schedule = build_schedule(list(name_to_id), DAYS_TO_SEED, SHUFFLE_SEED)
+    # Only puzzleable entities can be daily answers; the rest stay guessable
+    # via autocomplete but never enter the shuffle pool.
+    pool = [e["name"] for e in ENTITIES if e.get("puzzleable", True)]
+    schedule = build_schedule(pool, DAYS_TO_SEED, SHUFFLE_SEED)
     rows = [
         {
             "puzzle_date": LAUNCH_DATE + timedelta(days=i),

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import AnswerReveal from "./components/AnswerReveal";
 import GameStatus from "./components/GameStatus";
+import Legend from "./components/Legend";
 import GuessGrid from "./components/GuessGrid";
 import GuessInput from "./components/GuessInput";
 import HowToPlay from "./components/HowToPlay";
@@ -76,6 +77,9 @@ function Game({ today }: { today: TodayResponse }) {
       : false;
   });
   const [stats, setStats] = useState(loadStats);
+  // Entity id of the most recently submitted guess this session — only that
+  // row flip-reveals; restored/historical rows render in final state.
+  const [animateId, setAnimateId] = useState<number | null>(null);
   // Restored from storage once at mount; live fetches are derived from the
   // query below rather than synced into state (avoids set-state-in-effect).
   const [storedAnswer] = useState<Entity | null>(() => {
@@ -123,6 +127,7 @@ function Game({ today }: { today: TodayResponse }) {
           : "in_progress";
       setGuesses(nextGuesses);
       setStatus(nextStatus);
+      setAnimateId(result.guess.id);
 
       let nextRecorded = statsRecorded;
       if (
@@ -183,7 +188,7 @@ function Game({ today }: { today: TodayResponse }) {
   return (
     <div className="bg-ink text-parchment min-h-screen">
       <div className="grain" aria-hidden="true" />
-      <main className="mx-auto flex min-h-screen w-full max-w-md flex-col px-2 py-4 md:max-w-xl md:px-4 md:py-8 lg:max-w-2xl">
+      <main className="mx-auto flex min-h-screen w-full max-w-md flex-col px-2 py-4 md:max-w-xl md:px-4 md:py-8 lg:max-w-[752px]">
         {/* lg:mt-auto opposes the footer's mt-auto, vertically centering the
             game block on desktop while keeping the footer pinned */}
         <header className="mb-1.5 flex items-baseline justify-between lg:mt-auto">
@@ -192,11 +197,14 @@ function Game({ today }: { today: TodayResponse }) {
           </h1>
           <span className="text-muted flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase md:text-[13px]">
             № {today.puzzle_number}
+            {stats.current_streak > 0 && (
+              <span>· Streak {stats.current_streak}</span>
+            )}
             <button
               type="button"
               aria-label="How to play"
               onClick={() => setShowHowTo(true)}
-              className="border-gold text-gold hover:border-gold-bright hover:text-gold-bright flex h-5 w-5 items-center justify-center rounded-full border text-[11px] font-bold"
+              className="border-gold text-gold hover:border-gold-bright hover:text-gold-bright flex h-5 w-5 items-center justify-center rounded-full border text-[11px] leading-none font-bold tracking-normal"
             >
               ?
             </button>
@@ -226,11 +234,13 @@ function Game({ today }: { today: TodayResponse }) {
                   : "Guess failed — check your connection and try again"}
               </p>
             )}
-            <GuessGrid guesses={guesses} />
+            <Legend />
+            <GuessGrid guesses={guesses} animateId={animateId} />
           </>
         ) : (
           <>
-            <GuessGrid guesses={guesses} />
+            <Legend />
+            <GuessGrid guesses={guesses} animateId={animateId} />
               <div className="rule" aria-hidden="true" />
             {status === "lost" && (
               <AnswerReveal

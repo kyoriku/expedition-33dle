@@ -18,6 +18,30 @@ Fields appear in schema order and map 1:1 to `app/models.py:Entity`:
 | `weapon` | string | `entities.weapon` (NOT NULL) |
 | `element` | array of strings | `entities.element` (Postgres `ARRAY(String)`) |
 | `act_introduced` | int | `entities.act_introduced` — 1 \| 2 \| 3 |
+| `species` | string (closed set) | `entities.species` |
+| `affiliation` | string (closed set) | `entities.affiliation` |
+| `puzzleable` | bool, optional | **JSON-only — not a DB column** (see below) |
+
+**Closed value sets** (keep every value at ≥2 members so a lone value can't
+give an answer away):
+
+- `species`: Human, Painted Human, Gestral, Axon, Nevron, Mythical Creature
+- `affiliation`: Expedition 33, Lumière, Expedition Zero, Dessendre Family,
+  Painted Dessendre Family, Gestrals, Independent
+
+Affiliation reflects who an entity aligns with *in practice*, not who created
+it (e.g. Glissando/Tisseur/Sprong are Dessendre creations but run wild →
+Independent; the four Axons actively serve Renoir's design → Dessendre Family).
+
+## The `puzzleable` flag
+
+Eight Expedition 33 members (Lucien, Jérôme, Léo, Michel, Raphaël, Seba, Tom,
+Tristan) share identical attribute vectors — as daily answers they'd reduce a
+puzzle to a name lottery the feedback can't resolve. They carry
+`"puzzleable": false`: they're still upserted to the entities table and appear
+in autocomplete (completionism preserved), but `seed.py` excludes them from
+the answer shuffle pool. Absence of the key means `true`. The flag never
+reaches the database; the seed script strips it before the UPSERT.
 
 ## Sparse-data conventions
 
@@ -89,7 +113,36 @@ vision appearances don't count; her in-person debut (Old Lumière, Act II) does.
 User-confirmed corrections from Phase 2 review: Lune weapon "Elemental Magic";
 Simon element Void; Clea weapon "None" + element Void (Paintress powers);
 Alicia act 2; Goblu and Golgra weapon "None" (mixed elemental + physical
-attacks, no carried weapon).
+attacks, no carried weapon). Phase 7 corrections: Renoir class Painter +
+element Void; Alicia weapon Rapier + element Void; Goblu class "Boss".
+
+## Phase 7 expansion notes (entities 21–54, sourced 2026-06-12 via Fandom API)
+
+- **Aline Dessendre** — real-world Paintress (aliases Curatress/The Paintress);
+  act 3 = her identity reveal; the in-canvas avatar is the separate
+  "The Paintress" entry. Fights with a summoned brush, Void attacks.
+- **Renoir Dessendre** — = The Curator; joins camp after Goblu (act 1);
+  cane + Void mirrored from his fights.
+- **Verso Dessendre** — the real Verso ("Young Boy" at the swing, act 1);
+  b. 22 Feb 1879, d. 1905 → age 26. Painted the Canvas.
+- **Mask Keeper / Reacher** — the remaining two Axons ("He Who Guards Truth
+  With Lies", act 2; "She Who Grasps the Sky", act 3, represents Alicia).
+- **Julie** — Expedition Zero, killed by Verso (MY 100); flashbacks only, act 2.
+- **Sastro** (camp gestral, Lost Gestrals quest), **Eesda** (Gestral Village
+  merchant, gender unstated → other).
+- **Bastien** (commander-designate of Expedition 32), **Trash-can Man**
+  (born MY 66 → 33, gommaged in prologue), **Lucie** (born MY 65 → 32;
+  trained for E33 but stayed → affiliation Lumière), **Alan** (born MY 65 →
+  32; E33 commander, killed at the landing), **Catherine**, **Margot** and the
+  eight `puzzleable: false` members above — E33 roster from the wiki.
+- **Bosses** — Évêque (first boss, Spring Meadows), Ultimate Sakapatate
+  (Gestral war machine, Ancient Sanctuary), Lampmaster (sword + Light/Dark
+  attacks, Stone Wave Cliffs), Dualliste (dual blades, Forgotten Battlefield),
+  Glissando + Tisseur (Sirène's puppets), Scavenger (Falling Leaves),
+  Grosse Tête (Coastal Cave), Sprong (Clea's early creation, water),
+  Gargant + Danseuse Teacher (Frozen Hearts), Serpenphare (act 3, White
+  Sands). Element [] unless attacks are documented (wiki lists weaknesses,
+  not affinities — never infer affinity from weakness).
 
 ## Editing & re-seeding
 

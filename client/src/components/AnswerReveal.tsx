@@ -1,6 +1,6 @@
 import { hyphenate } from "../lib/display";
 import type { Entity } from "../lib/types";
-import { CELL_BASE, WIN_NAME } from "./GuessRow";
+import { CELL_BASE, GRID_TEMPLATE, WIN_NAME } from "./GuessRow";
 
 interface AnswerRevealProps {
   answer: Entity | null; // null while loading
@@ -23,33 +23,43 @@ export default function AnswerReveal({
         Today's answer
       </p>
       {answer ? (
-        <div className="grid grid-cols-7 gap-1 md:gap-1.5">
-          <div className={`${CELL_BASE} ${WIN_NAME}`}>
-            <span className="max-w-full">{hyphenate(answer.name)}</span>
-          </div>
-          <div className={`${CELL_BASE} ${NEUTRAL}`}>
-            <span className="max-w-full">{answer.gender}</span>
-          </div>
-          <div className={`${CELL_BASE} ${NEUTRAL}`}>
-            <span className="max-w-full">
-              {answer.age === null ? "—" : String(answer.age)}
-            </span>
-          </div>
-          <div className={`${CELL_BASE} ${NEUTRAL}`}>
-            <span className="max-w-full">{hyphenate(answer.class_role)}</span>
-          </div>
-          <div className={`${CELL_BASE} ${NEUTRAL}`}>
-            <span className="max-w-full">{hyphenate(answer.weapon)}</span>
-          </div>
-          <div className={`${CELL_BASE} ${NEUTRAL}`}>
-            <span className="max-w-full">
-              {answer.element.length
-                ? hyphenate(answer.element.join(", "))
-                : "—"}
-            </span>
-          </div>
-          <div className={`${CELL_BASE} ${NEUTRAL}`}>
-            <span className="max-w-full">{String(answer.act_introduced)}</span>
+        <div className="overflow-x-auto md:overflow-visible">
+          <div className={GRID_TEMPLATE}>
+            <div className={`${CELL_BASE} ${WIN_NAME}`}>
+              <span className="max-w-full">{hyphenate(answer.name)}</span>
+            </div>
+            <div className={`${CELL_BASE} ${NEUTRAL}`}>
+              <span className="max-w-full">{answer.gender}</span>
+            </div>
+            <div className={`${CELL_BASE} ${NEUTRAL}`}>
+              <span className="max-w-full">
+                {answer.age === null ? "—" : String(answer.age)}
+              </span>
+            </div>
+            <div className={`${CELL_BASE} ${NEUTRAL}`}>
+              <span className="max-w-full">{hyphenate(answer.class_role)}</span>
+            </div>
+            <div className={`${CELL_BASE} ${NEUTRAL}`}>
+              <span className="max-w-full">{hyphenate(answer.weapon)}</span>
+            </div>
+            <div className={`${CELL_BASE} ${NEUTRAL}`}>
+              <span className="max-w-full">
+                {answer.element.length
+                  ? hyphenate(answer.element.join(", "))
+                  : "—"}
+              </span>
+            </div>
+            <div className={`${CELL_BASE} ${NEUTRAL}`}>
+              <span className="max-w-full">
+                {String(answer.act_introduced)}
+              </span>
+            </div>
+            <div className={`${CELL_BASE} ${NEUTRAL}`}>
+              <span className="max-w-full">{hyphenate(answer.species)}</span>
+            </div>
+            <div className={`${CELL_BASE} ${NEUTRAL}`}>
+              <span className="max-w-full">{hyphenate(answer.affiliation)}</span>
+            </div>
           </div>
         </div>
       ) : isError ? (

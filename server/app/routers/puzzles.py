@@ -63,6 +63,8 @@ def compute_feedback(guess: Entity, answer: Entity) -> GuessFeedback:
         weapon="match" if guess.weapon == answer.weapon else "miss",
         element=element,
         act_introduced=act,
+        species="match" if guess.species == answer.species else "miss",
+        affiliation="match" if guess.affiliation == answer.affiliation else "miss",
     )
 
 

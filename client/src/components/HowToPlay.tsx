@@ -13,6 +13,8 @@ const EXAMPLE_GUESS: GuessResponse = {
     weapon: "Sword & Pistol",
     element: ["Lightning"],
     act_introduced: 1,
+    species: "Human",
+    affiliation: "Expedition 33",
   },
   feedback: {
     gender: "match",
@@ -21,6 +23,8 @@ const EXAMPLE_GUESS: GuessResponse = {
     weapon: "miss",
     element: "partial",
     act_introduced: "higher",
+    species: "match",
+    affiliation: "miss",
   },
   is_correct: false,
 };
@@ -39,12 +43,12 @@ export default function HowToPlay({ onClose }: HowToPlayProps) {
       <ul className="text-parchment mb-4 space-y-1.5 text-xs">
         {[
           <>Type a name to see suggestions</>,
-          <>Each guess shows how close you are across 6 attributes</>,
+          <>Each guess shows how close you are across 8 attributes</>,
           <>
             <span className="font-semibold text-green-500">Green</span> = exact
             match,{" "}
             <span className="text-gold-bright font-semibold">Gold</span> =
-            partial/unknown, gray = miss
+            partial/unknown, Red = incorrect
           </>,
           <>Arrows mean the answer is higher (↑) or lower (↓) for Age and Act</>,
         ].map((item, i) => (
