@@ -25,6 +25,8 @@ class Entity(Base):
         ARRAY(String), nullable=False, server_default="{}"
     )
     act_introduced: Mapped[int] = mapped_column(Integer)  # 1 | 2 | 3
+    species: Mapped[str] = mapped_column(String(32), server_default="Unknown")
+    affiliation: Mapped[str] = mapped_column(String(64), server_default="Unknown")
 
     puzzles: Mapped[list["Puzzle"]] = relationship(back_populates="entity")
 

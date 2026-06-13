@@ -17,6 +17,8 @@ class EntityRead(BaseModel):
     weapon: str
     element: list[str]
     act_introduced: int
+    species: str
+    affiliation: str
 
 
 class TodayResponse(BaseModel):
@@ -57,6 +59,8 @@ class GuessFeedback(BaseModel):
     weapon: ScalarFeedback
     element: ElementFeedback
     act_introduced: DirectionFeedback
+    species: ScalarFeedback
+    affiliation: ScalarFeedback
 
 
 class GuessResponse(BaseModel):

@@ -16,7 +16,7 @@ export default function Histogram({ distribution, highlight }: HistogramProps) {
             <span className="text-muted w-3 text-right">{i + 1}</span>
             <div
               className={`text-parchment flex h-4 items-center justify-end rounded-sm px-1 font-semibold md:h-5 ${
-                highlight === i + 1 ? "bg-match" : "bg-miss"
+                highlight === i + 1 ? "bg-match" : "bg-raised"
               }`}
               // min 8% stub keeps zero-count bars visible
               style={{ width: `${Math.max((count / max) * 100, 8)}%` }}

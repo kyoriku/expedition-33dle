@@ -27,7 +27,7 @@
   --color-gold-bright: #e8bd55;
   --color-match: #266b43;
   --color-partial: #b9881f;
-  --color-miss: #4a4239;
+  --color-miss: #7a3a2e; /* warm brick — "incorrect"; parchment on it is 6.6:1 */
   --color-parchment: #ece4d6;
   --color-muted: #a2988a;
   --color-glyph: #171310;
@@ -43,6 +43,43 @@
   z-index: 40;
   opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Wordle-style tile reveal: scaleY collapse + re-expand, with the feedback
+   color masked (neutral face, hidden text) for the first half. tile-mask is
+   half the flip duration with step-end, so the cascade's real colors snap in
+   exactly at the midpoint. Stagger comes from inline animation-delay. */
+@keyframes tile-flip {
+  0% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+@keyframes tile-mask {
+  from {
+    background-color: var(--color-raised);
+    color: transparent;
+    border-color: transparent;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  }
+  to {
+    /* empty: jumps back to the element's own (feedback) styles */
+  }
+}
+.tile-reveal {
+  animation:
+    tile-flip 600ms ease-out backwards,
+    tile-mask 300ms step-end backwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tile-reveal {
+    animation: none;
+  }
 }
 
 /* Tapered gold hairline rule. */

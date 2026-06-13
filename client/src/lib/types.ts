@@ -14,6 +14,8 @@ export interface Entity {
   weapon: string;
   element: string[];
   act_introduced: number;
+  species: string;
+  affiliation: string;
 }
 
 export interface GuessFeedback {
@@ -23,6 +25,8 @@ export interface GuessFeedback {
   weapon: ScalarFeedback;
   element: ElementFeedback;
   act_introduced: DirectionFeedback;
+  species: ScalarFeedback;
+  affiliation: ScalarFeedback;
 }
 
 export interface GuessResponse {
