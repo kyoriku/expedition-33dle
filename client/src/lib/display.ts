@@ -32,7 +32,6 @@ const HYPHENATION: Record<string, string> = {
   Searcher: `Search${SHY}er`,
   Catherine: `Cath${SHY}er${SHY}ine`,
   Dualliste: `Dual${SHY}liste`,
-  Glissando: `Glis${SHY}sando`,
   Scavenger: `Scav${SHY}en${SHY}ger`,
   Serpenphare: `Ser${SHY}pen${SHY}phare`,
   Sakapatate: `Sa${SHY}ka${SHY}pa${SHY}tate`,
