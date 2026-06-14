@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-from datetime import date
 from typing import Optional
 
-from sqlalchemy import ForeignKey, Integer, String
+from sqlalchemy import Integer, String
 from sqlalchemy.dialects.postgresql import ARRAY
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db import Base
 
@@ -27,19 +26,3 @@ class Entity(Base):
     act_introduced: Mapped[int] = mapped_column(Integer)  # 1 | 2 | 3
     species: Mapped[str] = mapped_column(String(32), server_default="Unknown")
     affiliation: Mapped[str] = mapped_column(String(64), server_default="Unknown")
-
-    puzzles: Mapped[list["Puzzle"]] = relationship(back_populates="entity")
-
-
-class Puzzle(Base):
-    """A date -> entity mapping. One puzzle per day."""
-
-    __tablename__ = "puzzles"
-
-    puzzle_date: Mapped[date] = mapped_column(primary_key=True)
-    entity_id: Mapped[int] = mapped_column(
-        ForeignKey("entities.id", ondelete="RESTRICT"), index=True
-    )
-    puzzle_number: Mapped[int] = mapped_column(Integer, unique=True)
-
-    entity: Mapped["Entity"] = relationship(back_populates="puzzles")
