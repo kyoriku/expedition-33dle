@@ -1,11 +1,11 @@
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db import get_db
-from app.models import Entity, Puzzle
+from app.models import Entity
 from app.schemas import (
     EntityRead,
     GuessFeedback,
@@ -13,22 +13,38 @@ from app.schemas import (
     GuessResponse,
     TodayResponse,
 )
+from app.services.scheduling import PuzzleNotYetAvailable, get_puzzle_for_date
 
 router = APIRouter(prefix="/api", tags=["puzzles"])
 
 
-async def _today_puzzle(db: AsyncSession) -> Puzzle:
-    """Fetch today's puzzle (UTC) or raise the standard structured 404."""
+async def _today_puzzle(
+    db: AsyncSession,
+) -> tuple[list[Entity], Entity, int, date]:
+    """Load all entities, compute today's puzzle (UTC), and return the bundle.
+
+    Returns (all_entities, today_entity, puzzle_number, today_date). The schedule
+    is a pure function of the date and roster — no puzzles table is consulted.
+    """
     today_date = datetime.now(timezone.utc).date()
-    puzzle = await db.scalar(
-        select(Puzzle).where(Puzzle.puzzle_date == today_date)
+    all_entities = list(
+        (await db.scalars(select(Entity).order_by(Entity.name))).all()
     )
-    if puzzle is None:
+    if not all_entities:
+        raise HTTPException(
+            status_code=503,
+            detail="Service not ready: no entities loaded",
+        )
+    names = tuple(e.name for e in all_entities)
+    try:
+        today_name, puzzle_number = get_puzzle_for_date(today_date, names)
+    except PuzzleNotYetAvailable:
         raise HTTPException(
             status_code=404,
-            detail=f"No puzzle scheduled for {today_date.isoformat()}",
+            detail=f"No puzzle available for {today_date.isoformat()}",
         )
-    return puzzle
+    today = next(e for e in all_entities if e.name == today_name)
+    return all_entities, today, puzzle_number, today_date
 
 
 def compute_feedback(guess: Entity, answer: Entity) -> GuessFeedback:
@@ -73,16 +89,14 @@ async def today(db: AsyncSession = Depends(get_db)) -> TodayResponse:
     """Return today's puzzle metadata plus the full entity list.
 
     The answer entity is never singled out in the response. A 404 with a
-    structured detail is returned when no puzzle is scheduled for today.
+    structured detail is returned when no puzzle is available for today.
     """
-    puzzle = await _today_puzzle(db)
-
-    entities = (await db.scalars(select(Entity).order_by(Entity.name))).all()
+    all_entities, _, puzzle_number, today_date = await _today_puzzle(db)
 
     return TodayResponse(
-        puzzle_date=puzzle.puzzle_date,
-        puzzle_number=puzzle.puzzle_number,
-        entities=[EntityRead.model_validate(e) for e in entities],
+        puzzle_date=today_date,
+        puzzle_number=puzzle_number,
+        entities=[EntityRead.model_validate(e) for e in all_entities],
     )
 
 
@@ -93,9 +107,8 @@ async def reveal(db: AsyncSession = Depends(get_db)) -> EntityRead:
     Intentionally unauthenticated: called by the client to complete the lose
     UX; the theoretical cheating risk is an accepted product decision.
     """
-    puzzle = await _today_puzzle(db)
-    entity = await db.get(Entity, puzzle.entity_id)
-    return EntityRead.model_validate(entity)
+    _, today, _, _ = await _today_puzzle(db)
+    return EntityRead.model_validate(today)
 
 
 @router.post("/guess", response_model=GuessResponse)
@@ -103,16 +116,16 @@ async def guess(
     body: GuessRequest, db: AsyncSession = Depends(get_db)
 ) -> GuessResponse:
     """Score a guess against today's answer without revealing the answer."""
-    puzzle = await _today_puzzle(db)
+    all_entities, answer_entity, _, _ = await _today_puzzle(db)
 
-    guess_entity = await db.get(Entity, body.entity_id)
+    guess_entity = next(
+        (e for e in all_entities if e.id == body.entity_id), None
+    )
     if guess_entity is None:
         raise HTTPException(
             status_code=400,
             detail=f"Unknown entity_id {body.entity_id}",
         )
-
-    answer_entity = await db.get(Entity, puzzle.entity_id)
 
     return GuessResponse(
         guess=EntityRead.model_validate(guess_entity),

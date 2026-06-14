@@ -1,13 +1,11 @@
-"""Seed character entities and the daily puzzle schedule. Idempotent; safe to re-run.
+"""Sync character entities from JSON into the database. Idempotent; safe to re-run.
 
 Run from server/:  uv run python scripts/seed.py   (or `npm run seed` from repo root)
 
 Entities are UPSERTed by name, so attribute edits in the data file propagate on
-re-run. Puzzle rows are ON CONFLICT DO NOTHING by date: existing assignments are
-never reshuffled. Hot-fix a published puzzle via psql, not by re-seeding. The
-schedule for not-yet-seeded dates is only stable while the roster and
-SHUFFLE_SEED are unchanged, so extend DAYS_TO_SEED and re-run before the current
-window runs out.
+re-run, and entities removed from the JSON are pruned from the DB. This script no
+longer schedules puzzles: the daily answer is computed on demand by
+app.services.scheduling as a pure function of the date and roster.
 
 Character data lives in server/data/characters.json; see server/data/README.md
 for sourcing and data conventions.
@@ -15,23 +13,17 @@ for sourcing and data conventions.
 
 import asyncio
 import json
-import random
 import sys
-from datetime import timedelta
 from pathlib import Path
 
 # Make the `app` package importable when run as a standalone script
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from sqlalchemy import delete, select
+from sqlalchemy import delete
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 
-from app.constants import LAUNCH_DATE
 from app.db import engine
-from app.models import Entity, Puzzle
-
-SHUFFLE_SEED = 33
-DAYS_TO_SEED = 60
+from app.models import Entity
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
@@ -45,40 +37,13 @@ def load_category(name: str) -> list[dict]:
 ENTITIES: list[dict] = load_category("characters")
 
 
-def build_schedule(names: list[str], n_days: int, seed: int) -> list[str]:
-    """Deterministically assign one entity name per day.
-
-    Keyed on sorted names (not DB ids, which vary across databases) and a single
-    seeded RNG stream, so the same seed + roster yields the same schedule on any
-    machine. No entity repeats on consecutive days, including cycle boundaries.
-    """
-    pool = sorted(names)
-    rng = random.Random(seed)
-    order: list[str] = []
-    while len(order) < n_days:
-        cycle = pool[:]
-        rng.shuffle(cycle)
-        if order and len(cycle) > 1 and cycle[0] == order[-1]:
-            cycle[0], cycle[1] = cycle[1], cycle[0]
-        order.extend(cycle)
-    return order[:n_days]
-
-
 async def prune_removed(conn) -> int:
-    """Delete DB entities (and their puzzles) no longer present in the JSON.
+    """Delete DB entities no longer present in the JSON.
 
     Keeps the seed idempotent for removals as well as additions: re-running
     after trimming the roster brings the DB back to exactly the JSON set.
     """
     names = [e["name"] for e in ENTITIES]
-    # Puzzles first — entities.id is FK'd from puzzles with ondelete RESTRICT.
-    await conn.execute(
-        delete(Puzzle).where(
-            Puzzle.entity_id.in_(
-                select(Entity.id).where(Entity.name.notin_(names))
-            )
-        )
-    )
     result = await conn.execute(delete(Entity).where(Entity.name.notin_(names)))
     return result.rowcount
 
@@ -103,34 +68,11 @@ async def upsert_entities(conn) -> dict[str, int]:
     return {name: id_ for name, id_ in rows}
 
 
-async def seed_puzzles(conn, name_to_id: dict[str, int]) -> int:
-    """Insert puzzle rows for the seed window; return how many were inserted."""
-    pool = [e["name"] for e in ENTITIES]
-    schedule = build_schedule(pool, DAYS_TO_SEED, SHUFFLE_SEED)
-    rows = [
-        {
-            "puzzle_date": LAUNCH_DATE + timedelta(days=i),
-            "puzzle_number": i + 1,
-            "entity_id": name_to_id[schedule[i]],
-        }
-        for i in range(DAYS_TO_SEED)
-    ]
-    stmt = pg_insert(Puzzle).values(rows).on_conflict_do_nothing(
-        index_elements=[Puzzle.puzzle_date]
-    )
-    result = await conn.execute(stmt)
-    return result.rowcount
-
-
 async def main() -> None:
     async with engine.begin() as conn:
         pruned = await prune_removed(conn)
         name_to_id = await upsert_entities(conn)
-        inserted = await seed_puzzles(conn, name_to_id)
-    print(
-        f"entities pruned: {pruned}, "
-        f"entities upserted: {len(name_to_id)}, puzzles inserted: {inserted}"
-    )
+    print(f"entities pruned: {pruned}, upserted: {len(name_to_id)}")
     await engine.dispose()
 
 
