@@ -23,6 +23,7 @@ from pathlib import Path
 # Make the `app` package importable when run as a standalone script
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from sqlalchemy import delete, select
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 
 from app.constants import LAUNCH_DATE
@@ -63,11 +64,28 @@ def build_schedule(names: list[str], n_days: int, seed: int) -> list[str]:
     return order[:n_days]
 
 
+async def prune_removed(conn) -> int:
+    """Delete DB entities (and their puzzles) no longer present in the JSON.
+
+    Keeps the seed idempotent for removals as well as additions: re-running
+    after trimming the roster brings the DB back to exactly the JSON set.
+    """
+    names = [e["name"] for e in ENTITIES]
+    # Puzzles first — entities.id is FK'd from puzzles with ondelete RESTRICT.
+    await conn.execute(
+        delete(Puzzle).where(
+            Puzzle.entity_id.in_(
+                select(Entity.id).where(Entity.name.notin_(names))
+            )
+        )
+    )
+    result = await conn.execute(delete(Entity).where(Entity.name.notin_(names)))
+    return result.rowcount
+
+
 async def upsert_entities(conn) -> dict[str, int]:
     """UPSERT all entities by name; return a name -> id map."""
-    # `puzzleable` is a JSON-only flag (see data/README.md), not a DB column.
-    rows_in = [{k: v for k, v in e.items() if k != "puzzleable"} for e in ENTITIES]
-    stmt = pg_insert(Entity).values(rows_in)
+    stmt = pg_insert(Entity).values(ENTITIES)
     stmt = stmt.on_conflict_do_update(
         index_elements=[Entity.name],
         set_={
@@ -87,9 +105,7 @@ async def upsert_entities(conn) -> dict[str, int]:
 
 async def seed_puzzles(conn, name_to_id: dict[str, int]) -> int:
     """Insert puzzle rows for the seed window; return how many were inserted."""
-    # Only puzzleable entities can be daily answers; the rest stay guessable
-    # via autocomplete but never enter the shuffle pool.
-    pool = [e["name"] for e in ENTITIES if e.get("puzzleable", True)]
+    pool = [e["name"] for e in ENTITIES]
     schedule = build_schedule(pool, DAYS_TO_SEED, SHUFFLE_SEED)
     rows = [
         {
@@ -108,9 +124,13 @@ async def seed_puzzles(conn, name_to_id: dict[str, int]) -> int:
 
 async def main() -> None:
     async with engine.begin() as conn:
+        pruned = await prune_removed(conn)
         name_to_id = await upsert_entities(conn)
         inserted = await seed_puzzles(conn, name_to_id)
-    print(f"entities upserted: {len(name_to_id)}, puzzles inserted: {inserted}")
+    print(
+        f"entities pruned: {pruned}, "
+        f"entities upserted: {len(name_to_id)}, puzzles inserted: {inserted}"
+    )
     await engine.dispose()
 
 
