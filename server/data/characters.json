@@ -352,17 +352,6 @@
     "affiliation": "Expedition 33"
   },
   {
-    "name": "Catherine",
-    "gender": "female",
-    "age": null,
-    "class_role": "Expeditioner",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 1,
-    "species": "Human",
-    "affiliation": "Expedition 33"
-  },
-  {
     "name": "Lucie",
     "gender": "female",
     "age": 32,
@@ -372,113 +361,6 @@
     "act_introduced": 1,
     "species": "Human",
     "affiliation": "Lumière"
-  },
-  {
-    "name": "Lucien",
-    "gender": "male",
-    "age": null,
-    "class_role": "Expeditioner",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 1,
-    "species": "Human",
-    "affiliation": "Expedition 33",
-    "puzzleable": false
-  },
-  {
-    "name": "Jérôme",
-    "gender": "male",
-    "age": null,
-    "class_role": "Expeditioner",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 1,
-    "species": "Human",
-    "affiliation": "Expedition 33",
-    "puzzleable": false
-  },
-  {
-    "name": "Léo",
-    "gender": "male",
-    "age": null,
-    "class_role": "Expeditioner",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 1,
-    "species": "Human",
-    "affiliation": "Expedition 33",
-    "puzzleable": false
-  },
-  {
-    "name": "Margot",
-    "gender": "female",
-    "age": null,
-    "class_role": "Expeditioner",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 1,
-    "species": "Human",
-    "affiliation": "Expedition 33"
-  },
-  {
-    "name": "Michel",
-    "gender": "male",
-    "age": null,
-    "class_role": "Expeditioner",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 1,
-    "species": "Human",
-    "affiliation": "Expedition 33",
-    "puzzleable": false
-  },
-  {
-    "name": "Raphaël",
-    "gender": "male",
-    "age": null,
-    "class_role": "Expeditioner",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 1,
-    "species": "Human",
-    "affiliation": "Expedition 33",
-    "puzzleable": false
-  },
-  {
-    "name": "Seba",
-    "gender": "male",
-    "age": null,
-    "class_role": "Expeditioner",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 1,
-    "species": "Human",
-    "affiliation": "Expedition 33",
-    "puzzleable": false
-  },
-  {
-    "name": "Tom",
-    "gender": "male",
-    "age": null,
-    "class_role": "Expeditioner",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 1,
-    "species": "Human",
-    "affiliation": "Expedition 33",
-    "puzzleable": false
-  },
-  {
-    "name": "Tristan",
-    "gender": "male",
-    "age": null,
-    "class_role": "Expeditioner",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 1,
-    "species": "Human",
-    "affiliation": "Expedition 33",
-    "puzzleable": false
   },
   {
     "name": "Évêque",
