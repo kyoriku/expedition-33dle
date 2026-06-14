@@ -214,7 +214,7 @@
     "age": null,
     "class_role": "Mythical Creature",
     "weapon": "None",
-    "element": [],
+    "element": ["Ice"],
     "act_introduced": 1,
     "species": "Mythical Creature",
     "affiliation": "Independent"
@@ -239,17 +239,6 @@
     "element": ["Void"],
     "act_introduced": 1,
     "species": "Human",
-    "affiliation": "Dessendre Family"
-  },
-  {
-    "name": "Mask Keeper",
-    "gender": "male",
-    "age": null,
-    "class_role": "Axon",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 2,
-    "species": "Axon",
     "affiliation": "Dessendre Family"
   },
   {
@@ -335,7 +324,7 @@
     "age": null,
     "class_role": "Dancer",
     "weapon": "None",
-    "element": [],
+    "element": ["Fire"],
     "act_introduced": 3,
     "species": "Nevron",
     "affiliation": "Independent"
@@ -368,7 +357,7 @@
     "age": null,
     "class_role": "Boss",
     "weapon": "None",
-    "element": [],
+    "element": ["Earth"],
     "act_introduced": 1,
     "species": "Nevron",
     "affiliation": "Independent"
@@ -379,7 +368,7 @@
     "age": null,
     "class_role": "Boss",
     "weapon": "None",
-    "element": [],
+    "element": ["Lightning"],
     "act_introduced": 1,
     "species": "Gestral",
     "affiliation": "Gestrals"
@@ -396,17 +385,6 @@
     "affiliation": "Independent"
   },
   {
-    "name": "Glissando",
-    "gender": "other",
-    "age": null,
-    "class_role": "Boss",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 2,
-    "species": "Nevron",
-    "affiliation": "Independent"
-  },
-  {
     "name": "Tisseur",
     "gender": "other",
     "age": null,
@@ -415,7 +393,7 @@
     "element": [],
     "act_introduced": 2,
     "species": "Nevron",
-    "affiliation": "Independent"
+    "affiliation": "Dessendre Family"
   },
   {
     "name": "Scavenger",
@@ -423,18 +401,7 @@
     "age": null,
     "class_role": "Boss",
     "weapon": "None",
-    "element": [],
-    "act_introduced": 2,
-    "species": "Nevron",
-    "affiliation": "Independent"
-  },
-  {
-    "name": "Grosse Tête",
-    "gender": "other",
-    "age": null,
-    "class_role": "Boss",
-    "weapon": "None",
-    "element": [],
+    "element": ["Dark"],
     "act_introduced": 2,
     "species": "Nevron",
     "affiliation": "Independent"
@@ -456,7 +423,7 @@
     "age": null,
     "class_role": "Boss",
     "weapon": "None",
-    "element": [],
+    "element": ["Fire", "Ice"],
     "act_introduced": 3,
     "species": "Nevron",
     "affiliation": "Independent"
