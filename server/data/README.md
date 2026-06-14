@@ -37,8 +37,10 @@ actively serve Renoir's design → Dessendre Family).
 
 - `age: null` — no source states a numeric age (Painted Humans, Gestrals,
   mythical creatures).
-- `weapon: "None"` — non-combatant or no carried weapon. The DB column is
+- `weapon: "None"` — non-combatant; never fights on-screen. The DB column is
   NOT NULL, so this is the literal string, not a null.
+- `weapon: "Hybrid"` — fights but wields no discrete weapon (spells, abilities,
+  body, or magical effects): Axons, Paintress-type bosses, Nevron monsters, etc.
 - `element: []` — no elemental affinity.
 - `gender: "other"` — undocumented in any source (Goblu).
 
@@ -104,7 +106,8 @@ User-confirmed corrections from Phase 2 review: Lune weapon "Elemental Magic";
 Simon element Void; Clea weapon "None" + element Void (Paintress powers);
 Alicia act 2; Goblu and Golgra weapon "None" (mixed elemental + physical
 attacks, no carried weapon). Phase 7 corrections: Renoir class Painter +
-element Void; Alicia weapon Rapier + element Void; Goblu class "Boss".
+element Void; Alicia weapon Rapier + element Void; Goblu class "Boss". Clea,
+Goblu, and Golgra weapons later moved "None" → "Hybrid" (see Phase 7.7f).
 
 ## Phase 7 expansion notes (entities 21–41, sourced 2026-06-12 via Fandom API)
 
@@ -137,6 +140,13 @@ element Void; Alicia weapon Rapier + element Void; Goblu class "Boss".
   (Visages, Tisseur, Sprong respectively), making the daily puzzle unwinnable
   when the answer was the indistinguishable member. Don't re-add them without a
   differentiating attribute.
+- **Weapon refactor in 7.7f** — `weapon: "None"` was split: 15 on-screen
+  combatants with no carried weapon (Axons, Paintress-type bosses, Nevron
+  monsters, plus Goblu/Golgra/François) moved to `"Hybrid"`; 12 true
+  non-combatants (civilians, merchants, the dead, traversal-only Esquie) keep
+  `"None"`. No specific weapon nouns introduced — Évêque/Serpenphare/Sakapatate
+  are Hybrid by decision. Conservative rule: if unclear whether an entity fights
+  on-screen, keep `"None"`.
 
 ## Editing & re-seeding
 
