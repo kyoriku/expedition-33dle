@@ -16,7 +16,7 @@
     "age": 16,
     "class_role": "Duelist",
     "weapon": "Rapier",
-    "element": ["Fire"],
+    "element": ["Fire", "Void"],
     "act_introduced": 1,
     "species": "Painted Human",
     "affiliation": "Expedition 33"
@@ -38,7 +38,7 @@
     "age": 32,
     "class_role": "Fortune Teller",
     "weapon": "Scythe",
-    "element": ["Dark"],
+    "element": ["Light", "Dark"],
     "act_introduced": 1,
     "species": "Human",
     "affiliation": "Expedition 33"
@@ -118,7 +118,7 @@
     "element": ["Void"],
     "act_introduced": 1,
     "species": "Painted Human",
-    "affiliation": "Dessendre Family"
+    "affiliation": "Painted Dessendre Family"
   },
   {
     "name": "Clea",
@@ -132,23 +132,12 @@
     "affiliation": "Painted Dessendre Family"
   },
   {
-    "name": "Alicia",
-    "gender": "female",
-    "age": null,
-    "class_role": "Paintress",
-    "weapon": "Rapier",
-    "element": ["Void"],
-    "act_introduced": 2,
-    "species": "Painted Human",
-    "affiliation": "Painted Dessendre Family"
-  },
-  {
     "name": "Simon",
     "gender": "male",
     "age": null,
     "class_role": "Expeditioner",
     "weapon": "Sword",
-    "element": ["Void"],
+    "element": ["Light"],
     "act_introduced": 3,
     "species": "Painted Human",
     "affiliation": "Expedition Zero"
@@ -220,28 +209,6 @@
     "affiliation": "Independent"
   },
   {
-    "name": "Aline Dessendre",
-    "gender": "female",
-    "age": null,
-    "class_role": "Paintress",
-    "weapon": "Paintbrush",
-    "element": ["Void"],
-    "act_introduced": 3,
-    "species": "Human",
-    "affiliation": "Dessendre Family"
-  },
-  {
-    "name": "Renoir Dessendre",
-    "gender": "male",
-    "age": null,
-    "class_role": "Painter",
-    "weapon": "Cane",
-    "element": ["Void"],
-    "act_introduced": 1,
-    "species": "Human",
-    "affiliation": "Dessendre Family"
-  },
-  {
     "name": "Reacher",
     "gender": "female",
     "age": null,
@@ -264,99 +231,11 @@
     "affiliation": "Independent"
   },
   {
-    "name": "Julie",
-    "gender": "female",
-    "age": null,
-    "class_role": "Expeditioner",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 2,
-    "species": "Human",
-    "affiliation": "Expedition Zero"
-  },
-  {
-    "name": "Sastro",
-    "gender": "male",
-    "age": null,
-    "class_role": "Searcher",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 1,
-    "species": "Gestral",
-    "affiliation": "Expedition 33"
-  },
-  {
-    "name": "Eesda",
-    "gender": "other",
-    "age": null,
-    "class_role": "Merchant",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 1,
-    "species": "Gestral",
-    "affiliation": "Gestrals"
-  },
-  {
-    "name": "Bastien",
-    "gender": "male",
-    "age": null,
-    "class_role": "Commander",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 1,
-    "species": "Human",
-    "affiliation": "Lumière"
-  },
-  {
-    "name": "Trash-can Man",
-    "gender": "male",
-    "age": 33,
-    "class_role": "Civilian",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 1,
-    "species": "Human",
-    "affiliation": "Lumière"
-  },
-  {
-    "name": "Danseuse Teacher",
-    "gender": "other",
-    "age": null,
-    "class_role": "Dancer",
-    "weapon": "Hybrid",
-    "element": ["Fire"],
-    "act_introduced": 3,
-    "species": "Nevron",
-    "affiliation": "Independent"
-  },
-  {
-    "name": "Alan",
-    "gender": "male",
-    "age": 32,
-    "class_role": "Commander",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 1,
-    "species": "Human",
-    "affiliation": "Expedition 33"
-  },
-  {
-    "name": "Lucie",
-    "gender": "female",
-    "age": 32,
-    "class_role": "Expeditioner",
-    "weapon": "None",
-    "element": [],
-    "act_introduced": 1,
-    "species": "Human",
-    "affiliation": "Lumière"
-  },
-  {
     "name": "Évêque",
     "gender": "other",
     "age": null,
     "class_role": "Boss",
-    "weapon": "Hybrid",
+    "weapon": "Spear",
     "element": ["Earth"],
     "act_introduced": 1,
     "species": "Nevron",
@@ -396,28 +275,6 @@
     "affiliation": "Dessendre Family"
   },
   {
-    "name": "Scavenger",
-    "gender": "other",
-    "age": null,
-    "class_role": "Boss",
-    "weapon": "Hybrid",
-    "element": ["Dark"],
-    "act_introduced": 2,
-    "species": "Nevron",
-    "affiliation": "Independent"
-  },
-  {
-    "name": "Sprong",
-    "gender": "other",
-    "age": null,
-    "class_role": "Boss",
-    "weapon": "Hybrid",
-    "element": [],
-    "act_introduced": 2,
-    "species": "Nevron",
-    "affiliation": "Independent"
-  },
-  {
     "name": "Gargant",
     "gender": "other",
     "age": null,
@@ -433,7 +290,7 @@
     "gender": "other",
     "age": null,
     "class_role": "Boss",
-    "weapon": "Hybrid",
+    "weapon": "Tail",
     "element": [],
     "act_introduced": 3,
     "species": "Nevron",
@@ -449,5 +306,60 @@
     "act_introduced": 1,
     "species": "Human",
     "affiliation": "Dessendre Family"
+  },
+  {
+    "name": "Renoir Dessendre",
+    "gender": "male",
+    "age": null,
+    "class_role": "Painter",
+    "weapon": "Cane",
+    "element": ["Void"],
+    "act_introduced": 1,
+    "species": "Human",
+    "affiliation": "Dessendre Family"
+  },
+  {
+    "name": "Aline Dessendre",
+    "gender": "female",
+    "age": null,
+    "class_role": "Paintress",
+    "weapon": "Paintbrush",
+    "element": ["Void"],
+    "act_introduced": 3,
+    "species": "Human",
+    "affiliation": "Dessendre Family"
+  },
+  {
+    "name": "Clea Dessendre",
+    "gender": "female",
+    "age": null,
+    "class_role": "Paintress",
+    "weapon": "Hybrid",
+    "element": ["Void"],
+    "act_introduced": 3,
+    "species": "Human",
+    "affiliation": "Dessendre Family"
+  },
+  {
+    "name": "Alicia Dessendre",
+    "gender": "female",
+    "age": null,
+    "class_role": "Paintress",
+    "weapon": "Rapier",
+    "element": ["Void"],
+    "act_introduced": 3,
+    "species": "Human",
+    "affiliation": "Dessendre Family"
+  },
+  {
+    "name": "Scavenger",
+    "gender": "other",
+    "age": null,
+    "class_role": "Boss",
+    "weapon": "Hybrid",
+    "element": ["Dark"],
+    "act_introduced": 2,
+    "species": "Nevron",
+    "affiliation": "Independent"
   }
 ]

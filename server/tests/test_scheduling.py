@@ -1,6 +1,6 @@
 """Unit tests for the deterministic puzzle scheduler.
 
-Pure-function tests: no database, no async. The real 41-name roster is loaded
+Pure-function tests: no database, no async. The real 33-name roster is loaded
 from data/characters.json so the tests exercise production inputs, plus a small
 synthetic pool for fast boundary checks.
 """
@@ -31,7 +31,7 @@ SMALL_POOL = ("Alpha", "Bravo", "Charlie", "Delta", "Echo")
 
 def test_roster_loaded():
     """Sanity: the real roster has the expected size and is non-trivial."""
-    assert len(ROSTER) == 41
+    assert len(ROSTER) == 33
     assert len(set(ROSTER)) == len(ROSTER)  # unique names
 
 
