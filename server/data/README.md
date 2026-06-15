@@ -32,9 +32,10 @@ Current accepted exception: **Expedition Zero** has a single member (Simon).
 
 ## Conventions
 
-**Affiliation reflects who an entity aligns with *in practice*, not who
-created it** — Tisseur fights as Sirène's Coliseum puppet → Dessendre Family;
-Sprong, another Dessendre creation but running wild → Independent.
+**Affiliation is faction membership, not provenance.** Only blood-relation
+Dessendres carry `Dessendre Family` / `Painted Dessendre Family`. Their
+creations (Axons, Nevrons) are `Independent` regardless of who made them or
+which side they fight for.
 
 **act_introduced** — party members get the act they become playable (Verso 2,
 Monoco 2). NPCs and bosses get the act of first appearance. The Prologue
