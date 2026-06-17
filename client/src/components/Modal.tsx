@@ -75,7 +75,7 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
           type="button"
           aria-label="Close"
           onClick={onClose}
-          className="text-muted hover:text-parchment absolute top-3 right-3 p-1"
+          className="text-muted hover:text-parchment absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-md"
         >
           ✕
         </button>

@@ -1,0 +1,110 @@
+"""Handler-level tests for the puzzle endpoints.
+
+The route handlers are awaited directly with a fake session (via asyncio.run),
+so these exercise the real wiring — schedule lookup, answer selection, scoring,
+error paths — without a database, an event-loop plugin, or an HTTP client.
+"""
+
+import asyncio
+from datetime import datetime, timezone
+
+import pytest
+from fastapi import HTTPException
+
+from app.models import Entity
+from app.routers.puzzles import compute_feedback, guess, reveal, today
+from app.schemas import GuessRequest
+from app.services.scheduling import get_puzzle_for_date
+
+
+def _ent(id_: int, name: str, **kw) -> Entity:
+    base = dict(
+        gender="female",
+        age=32,
+        class_role="Scholar",
+        weapon="Staff",
+        element=["Fire"],
+        act_introduced=1,
+        species="Human",
+        affiliation="Expedition 33",
+    )
+    return Entity(id=id_, name=name, **{**base, **kw})
+
+
+ROSTER = [
+    _ent(1, "Gustave", gender="male", class_role="Engineer", weapon="Sword & Pistol", element=["Lightning"]),
+    _ent(2, "Maelle", age=16, class_role="Duelist", weapon="Rapier", element=["Fire", "Void"], species="Painted Human"),
+    _ent(3, "Lune", class_role="Scholar", weapon="Elemental Magic", element=["Fire", "Ice"]),
+    _ent(4, "Sciel", class_role="Fortune Teller", weapon="Scythe", element=["Light", "Dark"]),
+]
+
+
+class _Scalars:
+    def __init__(self, items):
+        self._items = items
+
+    def all(self):
+        return list(self._items)
+
+
+class FakeSession:
+    """Minimal stand-in for AsyncSession — only `scalars().all()` is used."""
+
+    def __init__(self, entities):
+        self._entities = entities
+
+    async def scalars(self, *args, **kwargs):
+        return _Scalars(self._entities)
+
+
+def run(coro):
+    return asyncio.run(coro)
+
+
+def _todays_answer(entities) -> Entity:
+    names = tuple(e.name for e in entities)
+    name, _ = get_puzzle_for_date(datetime.now(timezone.utc).date(), names)
+    return next(e for e in entities if e.name == name)
+
+
+def test_today_lists_all_entities_and_hides_answer():
+    resp = run(today(db=FakeSession(ROSTER)))
+    assert len(resp.entities) == len(ROSTER)
+    assert resp.puzzle_number >= 1
+    # The schema structurally cannot leak the answer.
+    assert "answer" not in resp.model_dump()
+
+
+def test_today_503_when_no_entities():
+    with pytest.raises(HTTPException) as exc:
+        run(today(db=FakeSession([])))
+    assert exc.value.status_code == 503
+
+
+def test_guess_correct_is_all_match():
+    answer = _todays_answer(ROSTER)
+    resp = run(guess(GuessRequest(entity_id=answer.id), db=FakeSession(ROSTER)))
+    assert resp.is_correct is True
+    assert all(v == "match" for v in resp.feedback.model_dump().values())
+
+
+def test_guess_incorrect_matches_pure_feedback():
+    answer = _todays_answer(ROSTER)
+    other = next(e for e in ROSTER if e.id != answer.id)
+    resp = run(guess(GuessRequest(entity_id=other.id), db=FakeSession(ROSTER)))
+    assert resp.is_correct is False
+    assert resp.guess.id == other.id
+    assert resp.feedback.model_dump() == compute_feedback(other, answer).model_dump()
+
+
+def test_guess_unknown_id_is_400():
+    with pytest.raises(HTTPException) as exc:
+        run(guess(GuessRequest(entity_id=9999), db=FakeSession(ROSTER)))
+    assert exc.value.status_code == 400
+
+
+def test_reveal_returns_todays_answer():
+    answer = _todays_answer(ROSTER)
+    resp = run(reveal(db=FakeSession(ROSTER)))
+    assert resp.id == answer.id
+    assert resp.name == answer.name
