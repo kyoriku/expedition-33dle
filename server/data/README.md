@@ -42,8 +42,10 @@ Monoco 2). NPCs and bosses get the act of first appearance. The Prologue
 counts as Act 1.
 
 **Sparse-data values:**
-- `age: null` — no source states a numeric age (Painted Humans, Gestrals,
-  mythical creatures).
+- `age: null` — used only when no source states a numeric age. This is common
+  for Painted Humans, Gestrals, and mythical creatures, but it's driven by
+  source availability, not species: a Painted Human with a stated age (e.g.
+  Maelle, 16) carries that number.
 - `weapon: "None"` — non-combatant; never fights on-screen. DB column is NOT
   NULL, so this is the literal string, not a null.
 - `weapon: "Hybrid"` — fights but wields no discrete weapon (spells,

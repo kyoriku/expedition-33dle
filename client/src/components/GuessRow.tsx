@@ -1,22 +1,20 @@
+import {
+  ATTRIBUTES,
+  cellAriaLabel,
+  STATE_GLYPH,
+  type CellState,
+} from "../lib/attributes";
 import { hyphenate } from "../lib/display";
 import type { GuessResponse } from "../lib/types";
 
-type CellFeedback = "match" | "partial" | "miss" | "higher" | "lower" | "unknown" | "neutral";
-
-const CELL_STYLES: Record<CellFeedback, string> = {
+const CELL_STYLES: Record<CellState, string> = {
   match: "bg-match text-parchment",
   partial: "bg-partial text-glyph font-semibold", // element only
   unknown: "bg-partial text-glyph font-semibold", // age only — rendered with "?"
   miss: "bg-miss text-parchment",
-  higher: "bg-miss text-parchment", // directional non-match = gray + arrow
+  higher: "bg-miss text-parchment", // directional non-match = red + arrow
   lower: "bg-miss text-parchment",
   neutral: "bg-line text-parchment border border-raised",
-};
-
-const CELL_GLYPHS: Partial<Record<CellFeedback, string>> = {
-  higher: "↑",
-  lower: "↓",
-  unknown: "?",
 };
 
 // Shared by GuessGrid (header), GuessRow, and AnswerReveal so all rows align
@@ -38,17 +36,25 @@ export const WIN_NAME =
 function Cell({
   feedback,
   value,
+  label,
+  ariaLabel,
+  role = "cell",
   winName = false,
   flipIndex = null,
 }: {
-  feedback: CellFeedback;
+  feedback: CellState;
   value: string;
+  label: string;
+  ariaLabel?: string; // overrides the generated "label: value, state" phrasing
+  role?: "cell" | "rowheader";
   winName?: boolean;
   flipIndex?: number | null; // stagger position; null = render in final state
 }) {
-  const glyph = CELL_GLYPHS[feedback];
+  const glyph = STATE_GLYPH[feedback];
   return (
     <div
+      role={role}
+      aria-label={ariaLabel ?? cellAriaLabel(label, value, feedback)}
       className={`${CELL_BASE} ${winName ? WIN_NAME : CELL_STYLES[feedback]} ${
         flipIndex !== null ? "tile-reveal" : ""
       }`}
@@ -56,8 +62,14 @@ function Cell({
         flipIndex !== null ? { animationDelay: `${flipIndex * 80}ms` } : undefined
       }
     >
-      <span className="max-w-full">{hyphenate(value)}</span>
-      {glyph && <span className="text-xs font-bold">{glyph}</span>}
+      <span className="max-w-full" aria-hidden="true">
+        {hyphenate(value)}
+      </span>
+      {glyph && (
+        <span className="text-[11px] leading-none font-bold" aria-hidden="true">
+          {glyph}
+        </span>
+      )}
     </div>
   );
 }
@@ -73,40 +85,28 @@ export default function GuessRow({ result, animate = false }: GuessRowProps) {
   const { guess, feedback, is_correct } = result;
   const flip = (i: number) => (animate ? i : null);
   return (
-    <div className={GRID_TEMPLATE}>
+    <div className={GRID_TEMPLATE} role="row">
       <Cell
         feedback="neutral"
         value={guess.name}
+        label="Your guess"
+        ariaLabel={
+          is_correct
+            ? `${guess.name}, correct answer`
+            : `Your guess: ${guess.name}`
+        }
+        role="rowheader"
         winName={is_correct}
       />
-      <Cell feedback={feedback.gender} value={guess.gender} flipIndex={flip(0)} />
-      <Cell
-        feedback={feedback.age}
-        value={guess.age === null ? "—" : String(guess.age)}
-        flipIndex={flip(1)}
-      />
-      <Cell
-        feedback={feedback.class_role}
-        value={guess.class_role}
-        flipIndex={flip(2)}
-      />
-      <Cell feedback={feedback.weapon} value={guess.weapon} flipIndex={flip(3)} />
-      <Cell
-        feedback={feedback.element}
-        value={guess.element.length ? guess.element.join(", ") : "—"}
-        flipIndex={flip(4)}
-      />
-      <Cell
-        feedback={feedback.act_introduced}
-        value={String(guess.act_introduced)}
-        flipIndex={flip(5)}
-      />
-      <Cell feedback={feedback.species} value={guess.species} flipIndex={flip(6)} />
-      <Cell
-        feedback={feedback.affiliation}
-        value={guess.affiliation}
-        flipIndex={flip(7)}
-      />
+      {ATTRIBUTES.map((attr, i) => (
+        <Cell
+          key={attr.key}
+          feedback={feedback[attr.key] as CellState}
+          value={attr.format(guess)}
+          label={attr.label}
+          flipIndex={flip(i)}
+        />
+      ))}
     </div>
   );
 }

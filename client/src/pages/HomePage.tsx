@@ -11,6 +11,10 @@ import Modal from "../components/Modal";
 import { ApiError, fetchToday, revealAnswer, submitGuess } from "../lib/api";
 import { buildShareString } from "../lib/share";
 import { recordGame } from "../lib/stats";
+import { msToNextUtcMidnight, todayUtcISO } from "../lib/time";
+import StatsBlock from "../components/StatsBlock";
+import Histogram from "../components/Histogram";
+import Countdown from "../components/Countdown";
 import {
   loadState,
   loadStats,
@@ -22,10 +26,31 @@ import {
 import type {
   Entity,
   GameStatus as Status,
+  GuessResponse,
   TodayResponse,
 } from "../lib/types";
 
 const MAX_GUESSES = 6;
+
+/** Spoken summary of a guess outcome for the screen-reader live region. */
+function describeGuess(
+  result: GuessResponse,
+  guessNumber: number,
+  status: Status,
+): string {
+  const head = `Guess ${guessNumber}: ${result.guess.name}.`;
+  if (result.is_correct) {
+    return `${head} Correct! Solved in ${guessNumber} ${
+      guessNumber === 1 ? "guess" : "guesses"
+    }.`;
+  }
+  const fields = Object.values(result.feedback);
+  const matches = fields.filter((s) => s === "match").length;
+  const body = `${matches} of ${fields.length} attributes match.`;
+  return status === "lost"
+    ? `${head} ${body} Out of guesses — the answer is shown below.`
+    : `${head} ${body} Not the answer.`;
+}
 
 function Centered({ children }: { children: React.ReactNode }) {
   return (
@@ -35,14 +60,40 @@ function Centered({ children }: { children: React.ReactNode }) {
   );
 }
 
+/** Refetch /api/today when the UTC day rolls over — a timer firing at the next
+ *  midnight plus a check on tab refocus. Without this, a long-open session keeps
+ *  serving yesterday's puzzle (staleTime: Infinity) and would score new guesses
+ *  against the *new* day's answer. The +500ms cushions clock skew so the server
+ *  has definitely ticked over. */
+function useDailyRollover(puzzleDate: string | undefined, refetch: () => void) {
+  useEffect(() => {
+    if (!puzzleDate) return;
+    const timer = setTimeout(refetch, msToNextUtcMidnight() + 500);
+    function onVisible() {
+      if (
+        document.visibilityState === "visible" &&
+        todayUtcISO() !== puzzleDate
+      ) {
+        refetch();
+      }
+    }
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
+  }, [puzzleDate, refetch]);
+}
+
 export default function HomePage() {
   // Server state only; game state lives in <Game> + localStorage.
-  const { data: today, isPending, error } = useQuery({
+  const { data: today, isPending, error, refetch } = useQuery({
     queryKey: ["today"],
     queryFn: fetchToday,
     staleTime: Infinity,
     retry: 1,
   });
+  useDailyRollover(today?.puzzle_date, refetch);
 
   if (isPending) return <Centered>Loading today’s puzzle…</Centered>;
   if (error) {
@@ -54,7 +105,9 @@ export default function HomePage() {
       </Centered>
     );
   }
-  return <Game today={today} />;
+  // Key by puzzle_number so a rollover refetch remounts <Game> fresh for the
+  // new day (re-deriving state from localStorage under the new puzzle_date).
+  return <Game key={today.puzzle_number} today={today} />;
 }
 
 function Game({ today }: { today: TodayResponse }) {
@@ -81,6 +134,9 @@ function Game({ today }: { today: TodayResponse }) {
   // Entity id of the most recently submitted guess this session — only that
   // row flip-reveals; restored/historical rows render in final state.
   const [animateId, setAnimateId] = useState<number | null>(null);
+  // Polite screen-reader announcement of the latest guess outcome (the grid is
+  // otherwise silent to assistive tech).
+  const [announcement, setAnnouncement] = useState("");
   // Restored from storage once at mount; live fetches are derived from the
   // query below rather than synced into state (avoids set-state-in-effect).
   const [storedAnswer] = useState<Entity | null>(() => {
@@ -91,6 +147,7 @@ function Game({ today }: { today: TodayResponse }) {
   });
   // Auto-show the tutorial on first visit (Wordle convention)
   const [showHowTo, setShowHowTo] = useState(() => !loadTutorialSeen());
+  const [showStats, setShowStats] = useState(false);
 
   // Fires only on a lost game with no persisted answer. staleTime: Infinity
   // keeps the result fresh forever, so the enabled query never refetches.
@@ -129,6 +186,7 @@ function Game({ today }: { today: TodayResponse }) {
       setGuesses(nextGuesses);
       setStatus(nextStatus);
       setAnimateId(result.guess.id);
+      setAnnouncement(describeGuess(result, nextGuesses.length, nextStatus));
 
       let nextRecorded = statsRecorded;
       if (
@@ -197,15 +255,37 @@ function Game({ today }: { today: TodayResponse }) {
             )}
             <button
               type="button"
+              aria-label="Statistics"
+              onClick={() => setShowStats(true)}
+              className="border-gold text-gold hover:border-gold-bright hover:text-gold-bright flex h-6 w-6 items-center justify-center rounded-full border"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                className="h-3 w-3"
+                fill="currentColor"
+              >
+                <rect x="3" y="12" width="4" height="8" rx="1" />
+                <rect x="10" y="7" width="4" height="13" rx="1" />
+                <rect x="17" y="3" width="4" height="17" rx="1" />
+              </svg>
+            </button>
+            <button
+              type="button"
               aria-label="How to play"
               onClick={() => setShowHowTo(true)}
-              className="border-gold text-gold hover:border-gold-bright hover:text-gold-bright flex h-5 w-5 items-center justify-center rounded-full border text-[11px] leading-none font-bold tracking-normal"
+              className="border-gold text-gold hover:border-gold-bright hover:text-gold-bright flex h-6 w-6 items-center justify-center rounded-full border text-xs leading-none font-bold tracking-normal"
             >
               ?
             </button>
           </span>
         }
       />
+
+      {/* Politely announces each guess outcome to assistive tech. */}
+      <p role="status" aria-live="polite" className="sr-only">
+        {announcement}
+      </p>
 
       {status === "in_progress" ? (
         <>
@@ -257,6 +337,19 @@ function Game({ today }: { today: TodayResponse }) {
 
       <Modal open={showHowTo} onClose={closeHowTo} title="How to Play">
         <HowToPlay onClose={closeHowTo} />
+      </Modal>
+
+      <Modal
+        open={showStats}
+        onClose={() => setShowStats(false)}
+        title="Statistics"
+      >
+        <StatsBlock stats={stats} />
+        <Histogram
+          distribution={stats.guess_distribution}
+          highlight={status === "won" ? guesses.length : null}
+        />
+        <Countdown />
       </Modal>
     </main>
   );

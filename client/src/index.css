@@ -25,7 +25,7 @@
   --color-line: #3a322a;
   --color-gold: #d9a93f;
   --color-gold-bright: #e8bd55;
-  --color-match: #208a3e;
+  --color-match: #15723a; /* deep emerald — ≥4.5:1 with parchment text (WCAG AA) */
   --color-partial: #d4a022;
   --color-miss: #9a3625;
   --color-parchment: #ece4d6;
@@ -82,6 +82,29 @@
   }
 }
 
+/* Win banner: a brief scale + fade-in pop to mark the solve. */
+@keyframes win-pop {
+  0% {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.win-pop {
+  animation: win-pop 420ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .win-pop {
+    animation: none;
+  }
+}
+
 /* Tapered gold hairline rule. */
 .rule {
   height: 1px;
@@ -100,5 +123,15 @@
 @layer base {
   button:not(:disabled) {
     cursor: pointer;
+  }
+
+  /* Consistent, visible keyboard focus ring across every interactive element
+     (replaces reliance on inconsistent UA defaults / color-only focus). Uses
+     :where() so it never out-specifies a deliberate component style, and
+     :focus-visible so it shows for keyboard users without flashing on click. */
+  :where(a, button, input, [tabindex="0"]):focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 }

@@ -1,4 +1,5 @@
 import type { GameStatus as Status, Stats } from "../lib/types";
+import Countdown from "./Countdown";
 import Histogram from "./Histogram";
 import ShareButton from "./ShareButton";
 import StatsBlock from "./StatsBlock";
@@ -29,7 +30,7 @@ export default function GameStatus({
   return (
     <div>
       {status === "won" ? (
-        <p className="bg-match text-parchment my-3 rounded-md p-3 text-center text-sm font-semibold md:text-base">
+        <p className="bg-match text-parchment win-pop my-3 rounded-md p-3 text-center text-sm font-semibold md:text-base">
           Solved in {guessCount} {guessCount === 1 ? "guess" : "guesses"}!
         </p>
       ) : (
@@ -43,6 +44,7 @@ export default function GameStatus({
         highlight={status === "won" ? guessCount : null}
       />
       {shareText !== null && <ShareButton text={shareText} />}
+      <Countdown />
     </div>
   );
 }

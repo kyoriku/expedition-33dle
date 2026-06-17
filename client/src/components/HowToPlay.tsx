@@ -33,6 +33,17 @@ interface HowToPlayProps {
   onClose: () => void;
 }
 
+// Swatch + glyph + plain-parchment description. Parchment text (not the
+// low-contrast feedback color itself) keeps every line WCAG AA legible.
+const KEY: { cls: string; glyph: string; glyphCls: string; label: string }[] = [
+  { cls: "bg-match", glyph: "✓", glyphCls: "text-parchment", label: "Exact match" },
+  { cls: "bg-partial", glyph: "≈", glyphCls: "text-glyph", label: "Partial — shares some elements" },
+  { cls: "bg-partial", glyph: "?", glyphCls: "text-glyph", label: "Unknown — no age on record" },
+  { cls: "bg-miss", glyph: "✗", glyphCls: "text-parchment", label: "No match" },
+  { cls: "bg-miss", glyph: "↑", glyphCls: "text-parchment", label: "Answer’s Age or Act is higher" },
+  { cls: "bg-miss", glyph: "↓", glyphCls: "text-parchment", label: "Answer’s Age or Act is lower" },
+];
+
 export default function HowToPlay({ onClose }: HowToPlayProps) {
   return (
     <div>
@@ -40,17 +51,10 @@ export default function HowToPlay({ onClose }: HowToPlayProps) {
         Guess today's <em>Clair Obscur: Expedition 33</em> character in 6
         tries.
       </p>
-      <ul className="text-parchment mb-4 space-y-1.5 text-xs">
+      <ul className="text-parchment mb-3 space-y-1.5 text-xs">
         {[
           <>Type a name to see suggestions</>,
           <>Each guess shows how close you are across 8 attributes</>,
-          <>
-            <span className="font-semibold text-match">Green</span> = exact
-            match,{" "}
-            <span className=" font-semibold text-partial">Gold</span> =
-            partial/unknown,{" "} <span className="font-semibold text-miss">Red</span> = incorrect
-          </>,
-          <>Arrows mean the answer is higher (↑) or lower (↓) for Age and Act</>,
         ].map((item, i) => (
           <li key={i} className="relative pl-3.5 leading-snug">
             <span
@@ -60,6 +64,19 @@ export default function HowToPlay({ onClose }: HowToPlayProps) {
               ◆
             </span>
             {item}
+          </li>
+        ))}
+      </ul>
+      <ul className="text-parchment mb-4 grid grid-cols-1 gap-1.5 text-xs sm:grid-cols-2">
+        {KEY.map(({ cls, glyph, glyphCls, label }) => (
+          <li key={label} className="flex items-center gap-2">
+            <span
+              aria-hidden="true"
+              className={`${cls} ${glyphCls} flex h-5 w-5 shrink-0 items-center justify-center rounded-[3px] text-[11px] font-bold`}
+            >
+              {glyph}
+            </span>
+            <span className="leading-snug">{label}</span>
           </li>
         ))}
       </ul>
