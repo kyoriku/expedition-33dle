@@ -19,6 +19,7 @@ const SPARSE: Entity = {
   act_introduced: 1,
   species: "Nevron",
   affiliation: "Independent",
+  image: null,
 };
 
 describe("ATTRIBUTES config", () => {

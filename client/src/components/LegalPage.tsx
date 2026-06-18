@@ -46,17 +46,23 @@ interface LegalPageProps {
 
 export default function LegalPage({ source }: LegalPageProps) {
   return (
-    <main className="mx-auto w-full max-w-[752px] flex-1 px-4 py-8 md:py-12">
-      <Header brandAs="div" />
-      <Link
-        to="/"
-        className="text-gold decoration-gold/40 hover:text-gold-bright mt-6 mb-6 inline-block text-sm underline underline-offset-2"
-      >
-        ← Back to game
-      </Link>
-      <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
-        {source}
-      </ReactMarkdown>
+    <main className="flex-1 py-8 md:py-12">
+      {/* Header spans the same width as the homepage header. */}
+      <div className="mx-auto w-full max-w-xl px-4 md:max-w-3xl md:px-6 lg:max-w-6xl">
+        <Header brandAs="div" />
+      </div>
+      {/* Body stays at a comfortable reading width. */}
+      <div className="mx-auto w-full max-w-[752px] px-4">
+        <Link
+          to="/"
+          className="text-gold decoration-gold/40 hover:text-gold-bright mt-6 mb-6 inline-block text-sm underline underline-offset-2"
+        >
+          ← Back to game
+        </Link>
+        <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+          {source}
+        </ReactMarkdown>
+      </div>
     </main>
   );
 }

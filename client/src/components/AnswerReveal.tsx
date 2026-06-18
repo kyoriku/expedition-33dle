@@ -1,17 +1,19 @@
-import { ATTRIBUTES } from "../lib/attributes";
-import { hyphenate } from "../lib/display";
+import { ATTRIBUTES, STATE_VISUAL } from "../lib/attributes";
 import type { Entity } from "../lib/types";
-import { CELL_BASE, GRID_TEMPLATE, WIN_NAME } from "./GuessRow";
+import Portrait from "./Portrait";
+import {
+  CELL_BASE,
+  GRID_TEMPLATE,
+  NAME_CELL_BASE,
+  PORTRAIT_SIZE,
+  WIN_NAME,
+} from "./GuessRow";
 
 interface AnswerRevealProps {
   answer: Entity | null; // null while loading
   isError: boolean;
   onRetry: () => void;
 }
-
-// Neutral cell — attribute values without feedback color (nothing is being
-// compared; the game is over).
-const NEUTRAL = "bg-surface text-parchment";
 
 export default function AnswerReveal({
   answer,
@@ -20,23 +22,31 @@ export default function AnswerReveal({
 }: AnswerRevealProps) {
   return (
     <section className="mt-4">
-      <p className="text-muted mb-1 text-center text-[10px] font-semibold tracking-wide uppercase md:text-[11px]">
+      <p className="font-label text-gold/80 mb-1 text-center text-sm tracking-[0.18em] uppercase md:text-base">
         Today's answer
       </p>
       {answer ? (
         <div
           role="table"
           aria-label="Today's answer"
-          className="overflow-x-auto md:overflow-visible"
+          className="overflow-x-auto"
         >
           <div className={GRID_TEMPLATE} role="row">
             <div
               role="rowheader"
               aria-label={`Answer: ${answer.name}`}
-              className={`${CELL_BASE} ${WIN_NAME}`}
+              className={`${NAME_CELL_BASE} ${WIN_NAME}`}
             >
-              <span className="max-w-full" aria-hidden="true">
-                {hyphenate(answer.name)}
+              <Portrait
+                name={answer.name}
+                image={answer.image}
+                className={PORTRAIT_SIZE}
+              />
+              <span
+                aria-hidden="true"
+                className="text-gold-bright font-display line-clamp-3 text-left text-sm leading-tight font-bold tracking-[0.02em] uppercase md:text-base lg:text-lg"
+              >
+                {answer.name}
               </span>
             </div>
             {ATTRIBUTES.map((attr) => (
@@ -44,10 +54,10 @@ export default function AnswerReveal({
                 key={attr.key}
                 role="cell"
                 aria-label={`${attr.label}: ${attr.format(answer)}`}
-                className={`${CELL_BASE} ${NEUTRAL}`}
+                className={`${CELL_BASE} ${STATE_VISUAL.neutral.cell}`}
               >
-                <span className="max-w-full" aria-hidden="true">
-                  {hyphenate(attr.format(answer))}
+                <span className="max-w-full font-semibold" aria-hidden="true">
+                  {attr.format(answer)}
                 </span>
               </div>
             ))}

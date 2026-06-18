@@ -1,4 +1,4 @@
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
@@ -93,10 +93,21 @@ async def today(db: AsyncSession = Depends(get_db)) -> TodayResponse:
     """
     all_entities, _, puzzle_number, today_date = await _today_puzzle(db)
 
+    # Yesterday's answer is over, so it's safe to surface (nice daily-game touch).
+    names = tuple(e.name for e in all_entities)
+    yesterday: EntityRead | None = None
+    try:
+        y_name, _ = get_puzzle_for_date(today_date - timedelta(days=1), names)
+        y_entity = next(e for e in all_entities if e.name == y_name)
+        yesterday = EntityRead.model_validate(y_entity)
+    except PuzzleNotYetAvailable:
+        pass  # launch day — there is no previous puzzle
+
     return TodayResponse(
         puzzle_date=today_date,
         puzzle_number=puzzle_number,
         entities=[EntityRead.model_validate(e) for e in all_entities],
+        yesterday=yesterday,
     )
 
 

@@ -1,73 +1,88 @@
 import {
   ATTRIBUTES,
   cellAriaLabel,
+  DIRECTION_BIG,
   STATE_GLYPH,
+  STATE_VISUAL,
   type CellState,
 } from "../lib/attributes";
-import { hyphenate } from "../lib/display";
 import type { GuessResponse } from "../lib/types";
+import Portrait from "./Portrait";
 
-const CELL_STYLES: Record<CellState, string> = {
-  match: "bg-match text-parchment",
-  partial: "bg-partial text-glyph font-semibold", // element only
-  unknown: "bg-partial text-glyph font-semibold", // age only — rendered with "?"
-  miss: "bg-miss text-parchment",
-  higher: "bg-miss text-parchment", // directional non-match = red + arrow
-  lower: "bg-miss text-parchment",
-  neutral: "bg-line text-parchment border border-raised",
-};
-
-// Shared by GuessGrid (header), GuessRow, and AnswerReveal so all rows align
-// inside the mobile horizontal-scroll container; fluid 9 columns from md up.
+// Name column wide enough for a portrait + uppercase name; 8 fluid attr columns.
+// Below lg: fixed-width columns that scroll horizontally (mobile/tablet).
+// lg and up: fluid columns that fill the (wide) container, so the whole grid
+// fits with no horizontal scroll and cells are wide enough to hold the text.
 export const GRID_TEMPLATE =
-  "grid w-max grid-cols-[84px_repeat(8,72px)] gap-1 md:w-full md:grid-cols-9 md:gap-1.5";
+  "grid w-max grid-cols-[200px_repeat(8,92px)] gap-1.5 " +
+  "lg:w-full lg:grid-cols-[250px_repeat(8,minmax(0,1fr))]";
 
+// Attribute cell. Background/border/text come from STATE_VISUAL; this is the
+// shared geometry. min-height keeps a roughly-square floor while letting a cell
+// grow if a value wraps to a second line.
 export const CELL_BASE =
-  "flex min-h-12 flex-col items-center justify-center rounded-[3px] p-1 " +
-  "text-center text-[10px] leading-tight break-words " +
-  "md:min-h-16 md:text-xs lg:min-h-18 lg:text-[13px] " +
-  "shadow-[inset_0_1px_0_rgba(255,255,255,.07),inset_0_-6px_12px_rgba(0,0,0,.18)]";
+  "relative flex min-h-20 flex-col items-center justify-center overflow-hidden p-1.5 " +
+  "text-center text-xs leading-snug break-words font-serif md:text-sm lg:min-h-24 " +
+  "shadow-[inset_0_1px_0_rgba(255,255,255,.08)]";
+
+// Name cell geometry (left-aligned, holds the portrait).
+export const NAME_CELL_BASE =
+  "relative flex min-h-20 items-center gap-2.5 overflow-hidden px-2.5 lg:min-h-24 " +
+  "shadow-[inset_0_1px_0_rgba(255,255,255,.08)]";
 
 // Correct guess: the name cell becomes the gold brand moment.
 export const WIN_NAME =
-  "bg-line border-gold-bright text-gold-bright border font-bold " +
-  "shadow-[inset_0_0_10px_rgba(217,169,63,.12)]";
+  "bg-panneau border border-gold-bright text-gold-bright " +
+  "shadow-[inset_0_0_12px_rgba(217,169,63,.15)]";
+
+export const PORTRAIT_SIZE = "h-12 w-12 md:h-14 md:w-14 lg:h-16 lg:w-16";
+
+// Value text: semibold EB Garamond. (No drop-shadow — the gradients already
+// meet AA contrast, and a shadow muddied the dark text on the gold cells.)
+const VALUE_TEXT = "relative z-10 max-w-full font-semibold";
 
 function Cell({
   feedback,
   value,
   label,
-  ariaLabel,
-  role = "cell",
-  winName = false,
   flipIndex = null,
 }: {
   feedback: CellState;
   value: string;
   label: string;
-  ariaLabel?: string; // overrides the generated "label: value, state" phrasing
-  role?: "cell" | "rowheader";
-  winName?: boolean;
   flipIndex?: number | null; // stagger position; null = render in final state
 }) {
-  const glyph = STATE_GLYPH[feedback];
+  const big = DIRECTION_BIG[feedback];
+  // Corner glyph for non-directional states (match ✓, partial ≈, miss ✗, unknown ?).
+  const corner = big ? undefined : STATE_GLYPH[feedback];
   return (
     <div
-      role={role}
-      aria-label={ariaLabel ?? cellAriaLabel(label, value, feedback)}
-      className={`${CELL_BASE} ${winName ? WIN_NAME : CELL_STYLES[feedback]} ${
+      role="cell"
+      aria-label={cellAriaLabel(label, value, feedback)}
+      className={`${CELL_BASE} ${STATE_VISUAL[feedback].cell} ${
         flipIndex !== null ? "tile-reveal" : ""
       }`}
       style={
         flipIndex !== null ? { animationDelay: `${flipIndex * 80}ms` } : undefined
       }
     >
-      <span className="max-w-full" aria-hidden="true">
-        {hyphenate(value)}
+      {big && (
+        <span
+          aria-hidden="true"
+          className="font-display pointer-events-none absolute inset-0 flex items-center justify-center text-3xl leading-none opacity-20"
+        >
+          {big}
+        </span>
+      )}
+      <span className={VALUE_TEXT} aria-hidden="true">
+        {value}
       </span>
-      {glyph && (
-        <span className="text-[11px] leading-none font-bold" aria-hidden="true">
-          {glyph}
+      {corner && (
+        <span
+          aria-hidden="true"
+          className="absolute top-0.5 right-1 z-10 text-[10px] leading-none font-bold opacity-80"
+        >
+          {corner}
         </span>
       )}
     </div>
@@ -79,25 +94,49 @@ interface GuessRowProps {
   /** Flip-reveal the attribute cells (just-submitted guesses only). The Name
    *  cell stays static so the player immediately sees what they guessed. */
   animate?: boolean;
+  /** The most recent guess — gets a gold ring to draw the eye. */
+  latest?: boolean;
 }
 
-export default function GuessRow({ result, animate = false }: GuessRowProps) {
+export default function GuessRow({
+  result,
+  animate = false,
+  latest = false,
+}: GuessRowProps) {
   const { guess, feedback, is_correct } = result;
   const flip = (i: number) => (animate ? i : null);
   return (
-    <div className={GRID_TEMPLATE} role="row">
-      <Cell
-        feedback="neutral"
-        value={guess.name}
-        label="Your guess"
-        ariaLabel={
+    <div
+      className={`${GRID_TEMPLATE} ${
+        latest ? "ring-gold/40 ring-offset-ink ring-1 ring-offset-2" : ""
+      }`}
+      role="row"
+    >
+      <div
+        role="rowheader"
+        aria-label={
           is_correct
             ? `${guess.name}, correct answer`
             : `Your guess: ${guess.name}`
         }
-        role="rowheader"
-        winName={is_correct}
-      />
+        className={`${NAME_CELL_BASE} ${
+          is_correct ? WIN_NAME : "bg-panneau border-line border"
+        }`}
+      >
+        <Portrait
+          name={guess.name}
+          image={guess.image}
+          className={PORTRAIT_SIZE}
+        />
+        <span
+          aria-hidden="true"
+          className={`font-display line-clamp-3 text-left text-sm leading-tight tracking-[0.02em] uppercase md:text-base lg:text-lg ${
+            is_correct ? "text-gold-bright font-bold" : "text-gold"
+          }`}
+        >
+          {guess.name}
+        </span>
+      </div>
       {ATTRIBUTES.map((attr, i) => (
         <Cell
           key={attr.key}

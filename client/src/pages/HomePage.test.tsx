@@ -30,6 +30,7 @@ const ent = (id: number, name: string, over: Partial<Entity> = {}): Entity => ({
   act_introduced: 1,
   species: "Human",
   affiliation: "Expedition 33",
+  image: null,
   ...over,
 });
 
@@ -37,6 +38,7 @@ const TODAY: TodayResponse = {
   puzzle_date: "2026-06-17",
   puzzle_number: 4,
   entities: [ent(1, "Gustave"), ent(2, "Maelle", { gender: "female" })],
+  yesterday: null,
 };
 
 function renderHome() {
@@ -57,13 +59,11 @@ beforeEach(() => {
 });
 
 describe("HomePage", () => {
-  it("loads today's puzzle and renders the board with table semantics", async () => {
+  it("loads today's puzzle and shows the input (grid appears after the first guess)", async () => {
     renderHome();
     expect(await screen.findByRole("combobox")).toBeInTheDocument();
-    expect(
-      screen.getByRole("columnheader", { name: "Gender" }),
-    ).toBeInTheDocument();
-    expect(screen.getByRole("table", { name: /guesses/i })).toBeInTheDocument();
+    // The grid/headers stay hidden until there's a guess to show.
+    expect(screen.queryByRole("table")).toBeNull();
   });
 
   it("scores a guess and exposes per-cell feedback to assistive tech", async () => {
@@ -90,6 +90,11 @@ describe("HomePage", () => {
 
     expect(
       await screen.findByRole("rowheader", { name: /Your guess: Maelle/ }),
+    ).toBeInTheDocument();
+    // The grid (with table semantics + headers) appears once there's a guess.
+    expect(screen.getByRole("table", { name: /guesses/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("columnheader", { name: "Gender" }),
     ).toBeInTheDocument();
     // The mismatched gender cell announces its state, not just a color.
     expect(

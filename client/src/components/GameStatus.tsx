@@ -21,21 +21,22 @@ export default function GameStatus({
 }: GameStatusProps) {
   if (status === "in_progress") {
     return (
-      <p className="text-muted my-3 text-center text-xs italic md:text-sm">
+      <p className="font-serif text-muted my-3 text-center text-sm italic md:text-base">
         {remaining} {remaining === 1 ? "guess" : "guesses"} left
       </p>
     );
   }
 
   return (
-    <div>
+    // Compact, readable end-game column (matches the stats modal width).
+    <div className="mx-auto w-full max-w-md">
       {status === "won" ? (
-        <p className="bg-match text-parchment win-pop my-3 rounded-md p-3 text-center text-sm font-semibold md:text-base">
-          Solved in {guessCount} {guessCount === 1 ? "guess" : "guesses"}!
+        <p className="bg-linear-to-b from-match to-match/80 border-match-edge text-parchment win-pop font-display my-3 border p-3 text-center text-base tracking-[0.08em] uppercase md:text-lg">
+          Solved in {guessCount} {guessCount === 1 ? "guess" : "guesses"}
         </p>
       ) : (
-        <p className="bg-surface border-line text-parchment my-3 rounded-md border p-3 text-center text-sm font-semibold md:text-base">
-          Game over, try again tomorrow
+        <p className="bg-panneau border-line text-parchment font-display my-3 border p-3 text-center text-base tracking-[0.08em] uppercase md:text-lg">
+          Game over — try again tomorrow
         </p>
       )}
       <StatsBlock stats={stats} />

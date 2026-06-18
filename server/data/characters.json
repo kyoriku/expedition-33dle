@@ -1,365 +1,398 @@
 [
   {
     "name": "Gustave",
-    "gender": "male",
+    "gender": "Male",
     "age": 32,
     "class_role": "Engineer",
     "weapon": "Sword & Pistol",
     "element": ["Lightning"],
     "act_introduced": 1,
     "species": "Human",
-    "affiliation": "Expedition 33"
+    "affiliation": "Expedition 33",
+    "image": "gustave.webp"
   },
   {
     "name": "Maelle",
-    "gender": "female",
+    "gender": "Female",
     "age": 16,
     "class_role": "Duelist",
     "weapon": "Rapier",
     "element": ["Fire", "Void"],
     "act_introduced": 1,
     "species": "Painted Human",
-    "affiliation": "Expedition 33"
+    "affiliation": "Expedition 33",
+    "image": "maelle.webp"
   },
   {
     "name": "Lune",
-    "gender": "female",
+    "gender": "Female",
     "age": 32,
     "class_role": "Scholar",
     "weapon": "Elemental Magic",
     "element": ["Fire", "Ice", "Lightning", "Earth", "Light"],
     "act_introduced": 1,
     "species": "Human",
-    "affiliation": "Expedition 33"
+    "affiliation": "Expedition 33",
+    "image": "lune.webp"
   },
   {
     "name": "Sciel",
-    "gender": "female",
+    "gender": "Female",
     "age": 32,
     "class_role": "Fortune Teller",
     "weapon": "Scythe",
     "element": ["Light", "Dark"],
     "act_introduced": 1,
     "species": "Human",
-    "affiliation": "Expedition 33"
+    "affiliation": "Expedition 33",
+    "image": "sciel.webp"
   },
   {
     "name": "Verso",
-    "gender": "male",
+    "gender": "Male",
     "age": null,
     "class_role": "Swordsman",
     "weapon": "Sword & Dagger",
     "element": ["Light"],
     "act_introduced": 2,
     "species": "Painted Human",
-    "affiliation": "Expedition 33"
+    "affiliation": "Expedition 33",
+    "image": "verso.webp"
   },
   {
     "name": "Monoco",
-    "gender": "male",
+    "gender": "Male",
     "age": null,
     "class_role": "Shapeshifter",
     "weapon": "Staff",
     "element": ["Fire", "Ice", "Lightning", "Earth", "Light", "Dark"],
     "act_introduced": 2,
     "species": "Gestral",
-    "affiliation": "Expedition 33"
+    "affiliation": "Expedition 33",
+    "image": "monoco.webp"
   },
   {
     "name": "Esquie",
-    "gender": "male",
+    "gender": "Male",
     "age": null,
     "class_role": "Mythical Companion",
     "weapon": "None",
     "element": [],
     "act_introduced": 1,
     "species": "Mythical Creature",
-    "affiliation": "Expedition 33"
+    "affiliation": "Expedition 33",
+    "image": "esquie.webp"
   },
   {
     "name": "Sophie",
-    "gender": "female",
+    "gender": "Female",
     "age": 33,
     "class_role": "Civilian",
     "weapon": "None",
     "element": [],
     "act_introduced": 1,
     "species": "Human",
-    "affiliation": "Lumière"
+    "affiliation": "Lumière",
+    "image": "sophie.webp"
   },
   {
     "name": "Emma",
-    "gender": "female",
+    "gender": "Female",
     "age": null,
     "class_role": "Chief Councilor",
     "weapon": "None",
     "element": [],
     "act_introduced": 1,
     "species": "Human",
-    "affiliation": "Lumière"
+    "affiliation": "Lumière",
+    "image": "emma.webp"
   },
   {
     "name": "Renoir",
-    "gender": "male",
+    "gender": "Male",
     "age": null,
     "class_role": "Painter",
     "weapon": "Cane",
     "element": ["Void"],
     "act_introduced": 1,
     "species": "Painted Human",
-    "affiliation": "Painted Dessendre Family"
+    "affiliation": "Painted Dessendre Family",
+    "image": "renoir.webp"
   },
   {
     "name": "The Paintress",
-    "gender": "female",
+    "gender": "Female",
     "age": null,
     "class_role": "Paintress",
     "weapon": "Paintbrush",
     "element": ["Void"],
     "act_introduced": 1,
     "species": "Painted Human",
-    "affiliation": "Painted Dessendre Family"
+    "affiliation": "Painted Dessendre Family",
+    "image": "the-paintress.webp"
   },
   {
     "name": "Clea",
-    "gender": "female",
+    "gender": "Female",
     "age": null,
     "class_role": "Paintress",
     "weapon": "Hybrid",
     "element": ["Void"],
     "act_introduced": 3,
     "species": "Painted Human",
-    "affiliation": "Painted Dessendre Family"
+    "affiliation": "Painted Dessendre Family",
+    "image": "clea.webp"
   },
   {
     "name": "Simon",
-    "gender": "male",
+    "gender": "Male",
     "age": null,
     "class_role": "Expeditioner",
     "weapon": "Sword",
     "element": ["Light"],
     "act_introduced": 3,
     "species": "Painted Human",
-    "affiliation": "Expedition Zero"
+    "affiliation": "Expedition Zero",
+    "image": "simon.webp"
   },
   {
     "name": "Sirène",
-    "gender": "female",
+    "gender": "Female",
     "age": null,
     "class_role": "Axon",
     "weapon": "Hybrid",
     "element": [],
     "act_introduced": 2,
     "species": "Axon",
-    "affiliation": "Independent"
+    "affiliation": "Independent",
+    "image": "sirene.webp"
   },
   {
     "name": "Visages",
-    "gender": "male",
+    "gender": "Male",
     "age": null,
     "class_role": "Axon",
     "weapon": "Hybrid",
     "element": [],
     "act_introduced": 2,
     "species": "Axon",
-    "affiliation": "Independent"
+    "affiliation": "Independent",
+    "image": "visages.webp"
   },
   {
     "name": "Goblu",
-    "gender": "other",
+    "gender": "Other",
     "age": null,
     "class_role": "Boss",
     "weapon": "Hybrid",
     "element": [],
     "act_introduced": 1,
     "species": "Gestral",
-    "affiliation": "Gestrals"
+    "affiliation": "Gestrals",
+    "image": "goblu.webp"
   },
   {
     "name": "Golgra",
-    "gender": "female",
+    "gender": "Female",
     "age": null,
     "class_role": "Gestral Chief",
     "weapon": "Hybrid",
     "element": [],
     "act_introduced": 1,
     "species": "Gestral",
-    "affiliation": "Gestrals"
+    "affiliation": "Gestrals",
+    "image": "golgra.webp"
   },
   {
     "name": "Noco",
-    "gender": "male",
+    "gender": "Male",
     "age": null,
     "class_role": "Merchant",
     "weapon": "None",
     "element": [],
     "act_introduced": 1,
     "species": "Gestral",
-    "affiliation": "Gestrals"
+    "affiliation": "Gestrals",
+    "image": "noco.webp"
   },
   {
     "name": "François",
-    "gender": "male",
+    "gender": "Male",
     "age": null,
     "class_role": "Mythical Creature",
     "weapon": "Hybrid",
     "element": ["Ice"],
     "act_introduced": 1,
     "species": "Mythical Creature",
-    "affiliation": "Independent"
+    "affiliation": "Independent",
+    "image": "francois.webp"
   },
   {
     "name": "Reacher",
-    "gender": "female",
+    "gender": "Female",
     "age": null,
     "class_role": "Axon",
     "weapon": "Hybrid",
     "element": [],
     "act_introduced": 3,
     "species": "Axon",
-    "affiliation": "Independent"
+    "affiliation": "Independent",
+    "image": "reacher.webp"
   },
   {
     "name": "Lampmaster",
-    "gender": "other",
+    "gender": "Other",
     "age": null,
     "class_role": "Boss",
     "weapon": "Sword",
     "element": ["Light", "Dark"],
     "act_introduced": 1,
     "species": "Nevron",
-    "affiliation": "Independent"
+    "affiliation": "Independent",
+    "image": "lampmaster.webp"
   },
   {
     "name": "Évêque",
-    "gender": "other",
+    "gender": "Other",
     "age": null,
     "class_role": "Boss",
     "weapon": "Spear",
     "element": ["Earth"],
     "act_introduced": 1,
     "species": "Nevron",
-    "affiliation": "Independent"
+    "affiliation": "Independent",
+    "image": "eveque.webp"
   },
   {
     "name": "Ultimate Sakapatate",
-    "gender": "other",
+    "gender": "Other",
     "age": null,
     "class_role": "Boss",
     "weapon": "Hybrid",
     "element": ["Lightning"],
     "act_introduced": 1,
     "species": "Gestral",
-    "affiliation": "Gestrals"
+    "affiliation": "Gestrals",
+    "image": "ultimate-sakapatate.webp"
   },
   {
     "name": "Dualliste",
-    "gender": "other",
+    "gender": "Other",
     "age": null,
     "class_role": "Boss",
     "weapon": "Sword & Dagger",
     "element": [],
     "act_introduced": 2,
     "species": "Nevron",
-    "affiliation": "Independent"
+    "affiliation": "Independent",
+    "image": "dualliste.webp"
   },
   {
     "name": "Tisseur",
-    "gender": "other",
+    "gender": "Other",
     "age": null,
     "class_role": "Boss",
     "weapon": "Hybrid",
     "element": [],
     "act_introduced": 2,
     "species": "Nevron",
-    "affiliation": "Independent"
+    "affiliation": "Independent",
+    "image": "tisseur.webp"
   },
   {
     "name": "Gargant",
-    "gender": "other",
+    "gender": "Other",
     "age": null,
     "class_role": "Boss",
     "weapon": "Hybrid",
     "element": ["Fire", "Ice"],
     "act_introduced": 3,
     "species": "Nevron",
-    "affiliation": "Independent"
+    "affiliation": "Independent",
+    "image": "gargant.webp"
   },
   {
     "name": "Serpenphare",
-    "gender": "other",
+    "gender": "Other",
     "age": null,
     "class_role": "Boss",
     "weapon": "Tail",
     "element": [],
     "act_introduced": 3,
     "species": "Nevron",
-    "affiliation": "Independent"
+    "affiliation": "Independent",
+    "image": "serpenphare.webp"
   },
   {
     "name": "Verso Dessendre",
-    "gender": "male",
+    "gender": "Male",
     "age": 26,
     "class_role": "Painter",
     "weapon": "None",
     "element": [],
     "act_introduced": 1,
     "species": "Human",
-    "affiliation": "Dessendre Family"
+    "affiliation": "Dessendre Family",
+    "image": "verso-dessendre.webp"
   },
   {
     "name": "Renoir Dessendre",
-    "gender": "male",
+    "gender": "Male",
     "age": null,
     "class_role": "Painter",
     "weapon": "Cane",
     "element": ["Void"],
     "act_introduced": 1,
     "species": "Human",
-    "affiliation": "Dessendre Family"
+    "affiliation": "Dessendre Family",
+    "image": "renoir-dessendre.webp"
   },
   {
     "name": "Aline Dessendre",
-    "gender": "female",
+    "gender": "Female",
     "age": null,
     "class_role": "Paintress",
     "weapon": "Paintbrush",
     "element": ["Void"],
     "act_introduced": 3,
     "species": "Human",
-    "affiliation": "Dessendre Family"
+    "affiliation": "Dessendre Family",
+    "image": "aline-dessendre.webp"
   },
   {
     "name": "Clea Dessendre",
-    "gender": "female",
+    "gender": "Female",
     "age": null,
     "class_role": "Paintress",
     "weapon": "Hybrid",
     "element": ["Void"],
     "act_introduced": 3,
     "species": "Human",
-    "affiliation": "Dessendre Family"
+    "affiliation": "Dessendre Family",
+    "image": "clea-dessendre.webp"
   },
   {
     "name": "Alicia Dessendre",
-    "gender": "female",
+    "gender": "Female",
     "age": null,
     "class_role": "Paintress",
     "weapon": "Rapier",
     "element": ["Void"],
     "act_introduced": 3,
     "species": "Human",
-    "affiliation": "Dessendre Family"
+    "affiliation": "Dessendre Family",
+    "image": "alicia-dessendre.webp"
   },
   {
     "name": "Scavenger",
-    "gender": "other",
+    "gender": "Other",
     "age": null,
     "class_role": "Boss",
     "weapon": "Hybrid",
     "element": ["Dark"],
     "act_introduced": 2,
     "species": "Nevron",
-    "affiliation": "Independent"
+    "affiliation": "Independent",
+    "image": "scavenger.webp"
   }
 ]

@@ -19,6 +19,7 @@ class EntityRead(BaseModel):
     act_introduced: int
     species: str
     affiliation: str
+    image: Optional[str] = None
 
 
 class TodayResponse(BaseModel):
@@ -31,6 +32,7 @@ class TodayResponse(BaseModel):
     puzzle_date: date
     puzzle_number: int
     entities: list[EntityRead]
+    yesterday: Optional[EntityRead] = None  # previous day's answer (over, so public)
 
 
 ScalarFeedback = Literal["match", "miss"]

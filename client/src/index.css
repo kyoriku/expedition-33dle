@@ -1,38 +1,83 @@
 @import "tailwindcss";
 
-/* Self-hosted Playfair Display — single variable woff2 (latin subset incl.
-   French accents, weight axis 400-900) covering the 700/800 weights the site
-   uses. No external font requests. */
+/* Self-hosted, OFL-licensed type system (no external font requests).
+   Cinzel — classical Roman caps (display, names, headings).
+   EB Garamond — body + cell values.
+   Bebas Neue — condensed uppercase micro-labels. */
 @font-face {
-  font-family: "Playfair Display";
-  src: url("/fonts/playfair-display-latin-var.woff2") format("woff2");
-  font-weight: 400 900;
+  font-family: "Cinzel";
+  src: url("/fonts/cinzel-latin-400.woff2") format("woff2");
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
-    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Cinzel";
+  src: url("/fonts/cinzel-latin-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "EB Garamond";
+  src: url("/fonts/eb-garamond-latin-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "EB Garamond";
+  src: url("/fonts/eb-garamond-latin-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "EB Garamond";
+  src: url("/fonts/eb-garamond-latin-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bebas Neue";
+  src: url("/fonts/bebas-neue-latin-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* Design tokens — single source of truth for the brand identity.
    Warm near-blacks + parchment + restrained gold; deep emerald / ochre /
-   warm taupe for matrix feedback (hues tuned for WCAG AA, semantics
-   unchanged from dle convention). */
+   warm taupe for matrix feedback, each paired with a brighter "edge" used for
+   cell borders. Hues tuned for WCAG AA (parchment/glyph text stays >=4.5:1 with
+   the lightest gradient stop). */
 @theme {
   --color-ink: #0f0d0a;
   --color-surface: #1b1713;
+  --color-panneau: #221c15;
   --color-raised: #27211a;
   --color-line: #3a322a;
   --color-gold: #d9a93f;
   --color-gold-bright: #e8bd55;
-  --color-match: #15723a; /* deep emerald — ≥4.5:1 with parchment text (WCAG AA) */
+  --color-match: #15723a;
+  --color-match-edge: #2f9e5c;
   --color-partial: #d4a022;
+  --color-partial-edge: #ecc964;
   --color-miss: #9a3625;
+  --color-miss-edge: #c0533f;
   --color-parchment: #ece4d6;
   --color-muted: #b8aea0;
   --color-glyph: #171310;
 
-  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-display: "Cinzel", Georgia, serif;
+  --font-serif: "EB Garamond", Georgia, "Times New Roman", serif;
+  --font-label: "Bebas Neue", "Cinzel", system-ui, sans-serif;
+}
+
+/* EB Garamond as the default body face. */
+body {
+  font-family: var(--font-serif);
 }
 
 /* Subtle paper grain over everything; fixed so it doesn't scroll. */
@@ -46,9 +91,7 @@
 }
 
 /* Wordle-style tile reveal: scaleY collapse + re-expand, with the feedback
-   color masked (neutral face, hidden text) for the first half. tile-mask is
-   half the flip duration with step-end, so the cascade's real colors snap in
-   exactly at the midpoint. Stagger comes from inline animation-delay. */
+   color masked (neutral face, hidden text) for the first half. */
 @keyframes tile-flip {
   0% {
     transform: scaleY(1);
@@ -62,7 +105,7 @@
 }
 @keyframes tile-mask {
   from {
-    background-color: var(--color-raised);
+    background: var(--color-panneau);
     color: transparent;
     border-color: transparent;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
@@ -118,20 +161,37 @@
   opacity: 0.55;
 }
 
-/* Tailwind v4 removed the classic button cursor default; restore it.
-   Disabled buttons keep the default cursor. */
+/* Centered ornamental divider — a gold rule broken by a ✦. */
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  color: var(--color-gold);
+}
+.ornament::before,
+.ornament::after {
+  content: "";
+  height: 1px;
+  width: clamp(2rem, 18vw, 6rem);
+  background: linear-gradient(90deg, transparent, var(--color-gold));
+  opacity: 0.55;
+}
+.ornament::after {
+  transform: scaleX(-1);
+}
+
 @layer base {
+  /* Tailwind v4 removed the classic button cursor default; restore it. */
   button:not(:disabled) {
     cursor: pointer;
   }
 
-  /* Consistent, visible keyboard focus ring across every interactive element
-     (replaces reliance on inconsistent UA defaults / color-only focus). Uses
-     :where() so it never out-specifies a deliberate component style, and
-     :focus-visible so it shows for keyboard users without flashing on click. */
+  /* Consistent, visible keyboard focus ring across every interactive element.
+     :where() keeps specificity at 0 so component styles win; :focus-visible
+     shows it for keyboard users without flashing on click. */
   :where(a, button, input, [tabindex="0"]):focus-visible {
     outline: 2px solid var(--color-gold);
     outline-offset: 2px;
-    border-radius: 4px;
   }
 }

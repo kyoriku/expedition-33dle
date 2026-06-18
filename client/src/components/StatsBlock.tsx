@@ -17,14 +17,11 @@ export default function StatsBlock({ stats }: StatsBlockProps) {
   return (
     <div className="grid grid-cols-4 gap-1 text-center">
       {cells.map(([value, label]) => (
-        <div
-          key={label}
-          className="bg-surface border-line rounded-md border p-2"
-        >
-          <div className="font-serif text-lg font-bold md:text-2xl">
+        <div key={label} className="bg-panneau border-line border p-2">
+          <div className="font-display text-gold text-xl md:text-2xl">
             {value}
           </div>
-          <div className="text-muted text-[9px] tracking-wide uppercase md:text-[10px]">
+          <div className="font-label text-muted text-[11px] tracking-[0.1em] uppercase md:text-xs">
             {label}
           </div>
         </div>
