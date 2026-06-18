@@ -12,13 +12,13 @@ class EntityRead(BaseModel):
     id: int
     name: str
     gender: str
-    age: Optional[int] = None
-    class_role: str
+    role: str
     weapon: str
     element: list[str]
     act_introduced: int
-    species: str
+    category: str
     affiliation: str
+    zone: str
     image: Optional[str] = None
 
 
@@ -37,7 +37,6 @@ class TodayResponse(BaseModel):
 
 ScalarFeedback = Literal["match", "miss"]
 DirectionFeedback = Literal["match", "higher", "lower"]
-AgeFeedback = Literal["match", "higher", "lower", "unknown"]
 ElementFeedback = Literal["match", "partial", "miss"]
 
 
@@ -51,18 +50,18 @@ class GuessFeedback(BaseModel):
     """Per-attribute comparison of a guess against today's answer.
 
     Directional values are answer-relative: "higher" means the answer's value
-    is higher than the guess's. "unknown" (age only) means exactly one side
-    is null. "partial" (element only) means overlapping but unequal sets.
+    is higher than the guess's (act_introduced only). "partial" (element only)
+    means overlapping but unequal sets.
     """
 
     gender: ScalarFeedback
-    age: AgeFeedback
-    class_role: ScalarFeedback
+    role: ScalarFeedback
     weapon: ScalarFeedback
     element: ElementFeedback
     act_introduced: DirectionFeedback
-    species: ScalarFeedback
+    category: ScalarFeedback
     affiliation: ScalarFeedback
+    zone: ScalarFeedback
 
 
 class GuessResponse(BaseModel):

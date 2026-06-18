@@ -52,13 +52,6 @@ def compute_feedback(guess: Entity, answer: Entity) -> GuessFeedback:
 
     Pure function of the two rows — no I/O — so it is unit-testable.
     """
-    if guess.age == answer.age:  # covers both-null
-        age = "match"
-    elif guess.age is None or answer.age is None:
-        age = "unknown"
-    else:
-        age = "higher" if answer.age > guess.age else "lower"
-
     guess_el, answer_el = set(guess.element), set(answer.element)
     if guess_el == answer_el:  # covers both-empty
         element = "match"
@@ -74,13 +67,13 @@ def compute_feedback(guess: Entity, answer: Entity) -> GuessFeedback:
 
     return GuessFeedback(
         gender="match" if guess.gender == answer.gender else "miss",
-        age=age,
-        class_role="match" if guess.class_role == answer.class_role else "miss",
+        role="match" if guess.role == answer.role else "miss",
         weapon="match" if guess.weapon == answer.weapon else "miss",
         element=element,
         act_introduced=act,
-        species="match" if guess.species == answer.species else "miss",
+        category="match" if guess.category == answer.category else "miss",
         affiliation="match" if guess.affiliation == answer.affiliation else "miss",
+        zone="match" if guess.zone == answer.zone else "miss",
     )
 
 
