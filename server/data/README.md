@@ -13,23 +13,36 @@ Fields appear in schema order and map 1:1 to `app/models.py:Entity`:
 |---|---|---|
 | `name` | string | `entities.name` (unique) |
 | `gender` | string | `entities.gender` — `male` \| `female` \| `other` |
-| `age` | int or null | `entities.age` (nullable) |
-| `class_role` | string | `entities.class_role` |
+| `role` | string | `entities.role` (NOT NULL) — class / role |
 | `weapon` | string | `entities.weapon` (NOT NULL) |
 | `element` | array of strings | `entities.element` (Postgres `ARRAY(String)`) |
 | `act_introduced` | int | `entities.act_introduced` — 1 \| 2 \| 3 |
-| `species` | string (closed set) | `entities.species` |
+| `category` | string (closed set) | `entities.category` |
 | `affiliation` | string (closed set) | `entities.affiliation` |
+| `zone` | string (closed set) | `entities.zone` (NOT NULL) — see below |
 | `image` | string or null | `entities.image` — portrait filename (see below) |
 
 ## Closed value sets
 
-Keep every value at ≥2 members so a lone value can't give an answer away.
-Current accepted exception: **Expedition Zero** has a single member (Simon).
+Prefer keeping every value at ≥2 members so a lone value can't give an answer
+away. Accepted single-member exceptions: **affiliation** Expedition Zero (Simon),
+and **zone**, which has many singletons by nature (see distribution below).
 
-- `species`: Human, Painted Human, Gestral, Axon, Nevron, Mythical Creature
+- `category`: Human, Painted Human, Gestral, Axon, Nevron, Mythical Creature
 - `affiliation`: Expedition 33, Lumière, Expedition Zero, Dessendre Family,
   Painted Dessendre Family, Gestrals, Independent
+- `zone` (18 values): Lumière, Spring Meadows, Flying Waters, Ancient Sanctuary,
+  Esquie's Nest, Gestral Village, Stone Wave Cliffs, Forgotten Battlefield,
+  Old Lumière, Sirène, Visages, The Reacher, The Monolith, White Sands,
+  Falling Leaves, The Manor, The Abyss, Flying Manor
+
+  Distribution across the 33-entity roster: Lumière 6 · The Manor 5 ·
+  Stone Wave Cliffs 3 · Gestral Village 3 · Esquie's Nest 2 · Sirène 2; the
+  remaining 12 zones (Old Lumière, Flying Manor, The Monolith, The Abyss,
+  Visages, Flying Waters, The Reacher, Spring Meadows, Forgotten Battlefield,
+  Ancient Sanctuary, White Sands, Falling Leaves) have a single entity each.
+  Singletons are acceptable here: `zone` is scored as an exact match/miss, so a
+  unique value just yields a clean miss against every other answer.
 
 ## Conventions
 
@@ -43,10 +56,6 @@ Monoco 2). NPCs and bosses get the act of first appearance. The Prologue
 counts as Act 1.
 
 **Sparse-data values:**
-- `age: null` — used only when no source states a numeric age. This is common
-  for Painted Humans, Gestrals, and mythical creatures, but it's driven by
-  source availability, not species: a Painted Human with a stated age (e.g.
-  Maelle, 16) carries that number.
 - `weapon: "None"` — non-combatant; never fights on-screen. DB column is NOT
   NULL, so this is the literal string, not a null.
 - `weapon: "Hybrid"` — fights but wields no discrete weapon (spells,
