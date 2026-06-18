@@ -55,13 +55,13 @@ async def upsert_entities(conn) -> dict[str, int]:
         index_elements=[Entity.name],
         set_={
             "gender": stmt.excluded.gender,
-            "age": stmt.excluded.age,
-            "class_role": stmt.excluded.class_role,
+            "role": stmt.excluded.role,
             "weapon": stmt.excluded.weapon,
             "element": stmt.excluded.element,
             "act_introduced": stmt.excluded.act_introduced,
-            "species": stmt.excluded.species,
+            "category": stmt.excluded.category,
             "affiliation": stmt.excluded.affiliation,
+            "zone": stmt.excluded.zone,
             "image": stmt.excluded.image,
         },
     ).returning(Entity.name, Entity.id)
