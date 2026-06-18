@@ -13,6 +13,7 @@ const ENTITY: Entity = {
   act_introduced: 1,
   species: "Nevron",
   affiliation: "Independent",
+  image: null,
 };
 
 function row(feedback: Partial<GuessFeedback>, is_correct = false): GuessResponse {

@@ -6,12 +6,21 @@ interface ModalProps {
   onClose: () => void;
   title: string;
   children: ReactNode;
+  /** Desktop max-width (sm+). Wide by default for the how-to example grid;
+   *  narrower for content like stats. */
+  widthClass?: string;
 }
 
 const FOCUSABLE =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
-export default function Modal({ open, onClose, title, children }: ModalProps) {
+export default function Modal({
+  open,
+  onClose,
+  title,
+  children,
+  widthClass = "sm:max-w-4xl",
+}: ModalProps) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -69,7 +78,7 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
         aria-modal="true"
         aria-labelledby="modal-title"
         tabIndex={-1}
-        className="bg-surface sm:border-line relative flex h-full w-full flex-col justify-center overflow-y-auto p-5 outline-none sm:h-auto sm:max-w-3xl sm:rounded-xl sm:border"
+        className={`bg-surface sm:border-gold/30 relative flex h-full w-full flex-col justify-center overflow-y-auto p-5 outline-none sm:h-auto sm:border ${widthClass}`}
       >
         <button
           type="button"
@@ -79,7 +88,10 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
         >
           ✕
         </button>
-        <h2 id="modal-title" className="mb-1.5 font-serif text-xl font-bold">
+        <h2
+          id="modal-title"
+          className="font-display mb-1.5 text-xl tracking-[0.06em] uppercase"
+        >
           {title}
         </h2>
         <div className="rule mb-3" aria-hidden="true" />

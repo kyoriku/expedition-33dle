@@ -1,10 +1,9 @@
 import { ATTRIBUTES } from "../lib/attributes";
-import { hyphenate } from "../lib/display";
 import type { GuessResponse } from "../lib/types";
 import GuessRow, { GRID_TEMPLATE } from "./GuessRow";
 
-// Name first, then the shared comparison columns (single source of truth).
-const COLUMNS = ["Name", ...ATTRIBUTES.map((a) => a.label)];
+// Character (portrait + name) first, then the shared comparison columns.
+const COLUMNS = ["Character", ...ATTRIBUTES.map((a) => a.label)];
 
 interface GuessGridProps {
   guesses: GuessResponse[];
@@ -13,39 +12,39 @@ interface GuessGridProps {
 }
 
 export default function GuessGrid({ guesses, animateId = null }: GuessGridProps) {
+  const newestId = guesses.length ? guesses[guesses.length - 1].guess.id : null;
+
+  // Nothing to show before the first guess — the column headers appear together
+  // with the first row rather than floating above an empty grid.
+  if (guesses.length === 0) return null;
+
   return (
-    <section className="relative my-4">
-      {/* Right-edge fade hints the grid scrolls horizontally on mobile; it's an
-          overlay (not a mask) so it never clips the last column, and is hidden
-          once the grid fits at md+. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 right-0 z-1 w-6 md:hidden"
-        style={{ background: "linear-gradient(to left, var(--color-ink), transparent)" }}
-      />
-      {/* One scroll container for header + rows so they pan in sync on mobile.
-          tabIndex makes the overflow keyboard-scrollable; ARIA table roles give
-          screen readers row/column structure the CSS-grid layout otherwise hides. */}
+    <section className="my-4">
+      {/* One scroll container for header + rows so they pan in sync. tabIndex
+          makes the overflow keyboard-scrollable; ARIA table roles give screen
+          readers row/column structure the CSS-grid layout otherwise hides. */}
       <div
         role="table"
         aria-label="Guesses and attribute feedback"
         tabIndex={0}
-        className="overflow-x-auto md:overflow-visible"
+        className="overflow-x-auto px-1 py-1"
       >
         <div role="rowgroup">
-          <div className={`${GRID_TEMPLATE} mb-1`} role="row">
-            {COLUMNS.map((label) => (
+          <div className={`${GRID_TEMPLATE} mb-1.5`} role="row">
+            {COLUMNS.map((label, i) => (
               <div
                 key={label}
                 role="columnheader"
-                className="border-line text-muted border-b pb-1 text-center text-[9px] font-semibold tracking-wide break-words uppercase md:text-[11px]"
+                className={`font-label border-gold/40 text-gold/90 border-b-2 pb-1.5 text-sm tracking-[0.12em] break-words uppercase md:text-base ${
+                  i === 0 ? "pl-2 text-left" : "text-center"
+                }`}
               >
-                {hyphenate(label)}
+                {label}
               </div>
             ))}
           </div>
         </div>
-        <div className="flex flex-col gap-1 md:gap-1.5" role="rowgroup">
+        <div className="flex flex-col gap-1.5" role="rowgroup">
           {/* Newest guess on top (LoLdle convention) — storage and the share
               string stay chronological; only display order flips. Copy before
               reverse() so the prop array isn't mutated. */}
@@ -54,6 +53,7 @@ export default function GuessGrid({ guesses, animateId = null }: GuessGridProps)
               key={g.guess.id}
               result={g}
               animate={g.guess.id === animateId}
+              latest={g.guess.id === newestId}
             />
           ))}
         </div>

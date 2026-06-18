@@ -63,44 +63,52 @@ export default function GuessInput({
   }
 
   return (
-    <div className="relative">
-      <input
-        type="text"
-        value={query}
-        disabled={disabled}
-        placeholder="Type a character name…"
-        autoComplete="off"
-        enterKeyHint="go"
-        role="combobox"
-        aria-expanded={showList}
-        aria-controls={LISTBOX_ID}
-        aria-autocomplete="list"
-        aria-activedescendant={
-          showList && activeIndex >= 0 ? optionId(activeIndex) : undefined
-        }
-        aria-busy={disabled}
-        aria-label="Guess a character"
-        className="border-line bg-raised text-parchment placeholder-muted focus:border-gold w-full rounded-md border px-3 py-2 text-sm disabled:opacity-50 md:py-2.5 md:text-base"
-        onChange={(e) => {
-          setQuery(e.target.value);
-          setOpen(true);
-          setActiveIndex(-1);
-        }}
-        onKeyDown={handleKeyDown}
-        onBlur={() => setOpen(false)}
-      />
-      {disabled && (
-        <span
-          aria-hidden="true"
-          className="border-muted border-t-gold absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 animate-spin rounded-full border-2"
+    // z-30 lifts the whole input (and its dropdown) into a stacking context
+    // above the guess grid, whose relative/animated cells otherwise paint over
+    // an absolutely-positioned dropdown that opens down across them.
+    <div className="relative z-30 mx-auto w-full max-w-md">
+      <div className="border-gold/40 bg-panneau focus-within:border-gold flex items-center gap-2 border px-3 py-2.5 transition-colors focus-within:shadow-[0_0_25px_rgba(217,169,63,0.10)]">
+        <span aria-hidden="true" className="text-gold/70 select-none">
+          ✦
+        </span>
+        <input
+          type="text"
+          value={query}
+          disabled={disabled}
+          placeholder="Type a character's name…"
+          autoComplete="off"
+          enterKeyHint="go"
+          role="combobox"
+          aria-expanded={showList}
+          aria-controls={LISTBOX_ID}
+          aria-autocomplete="list"
+          aria-activedescendant={
+            showList && activeIndex >= 0 ? optionId(activeIndex) : undefined
+          }
+          aria-busy={disabled}
+          aria-label="Guess a character"
+          className="font-serif text-parchment placeholder-muted w-full bg-transparent text-base outline-none disabled:opacity-50"
+          onChange={(e) => {
+            setQuery(e.target.value);
+            setOpen(true);
+            setActiveIndex(-1);
+          }}
+          onKeyDown={handleKeyDown}
+          onBlur={() => setOpen(false)}
         />
-      )}
+        {disabled && (
+          <span
+            aria-hidden="true"
+            className="border-muted border-t-gold h-4 w-4 shrink-0 animate-spin rounded-full border-2"
+          />
+        )}
+      </div>
       {showList && (
         <ul
           id={LISTBOX_ID}
           role="listbox"
           aria-label="Character suggestions"
-          className="border-line bg-raised absolute z-10 mt-1 max-h-60 w-full overflow-y-auto rounded-md border shadow-lg"
+          className="border-gold/40 bg-panneau absolute z-10 mt-1 max-h-60 w-full overflow-y-auto border shadow-lg"
         >
           {suggestions.map((entity, i) => (
             <li
@@ -108,8 +116,8 @@ export default function GuessInput({
               id={optionId(i)}
               role="option"
               aria-selected={i === activeIndex}
-              className={`text-parchment cursor-pointer px-3 py-2 text-sm ${
-                i === activeIndex ? "bg-surface" : "hover:bg-surface"
+              className={`font-serif text-parchment cursor-pointer px-3 py-2 text-base ${
+                i === activeIndex ? "bg-raised" : "hover:bg-raised"
               }`}
               // mousedown fires before the input's blur, so selection wins
               onMouseDown={(e) => {
@@ -125,7 +133,7 @@ export default function GuessInput({
       {showEmpty && (
         <div
           role="status"
-          className="border-line bg-raised text-muted absolute z-10 mt-1 w-full rounded-md border px-3 py-2 text-sm italic shadow-lg"
+          className="border-gold/40 bg-panneau text-muted font-serif absolute z-10 mt-1 w-full border px-3 py-2 text-sm italic shadow-lg"
         >
           No characters match “{trimmed}”
         </div>

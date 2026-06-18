@@ -62,6 +62,7 @@ async def upsert_entities(conn) -> dict[str, int]:
             "act_introduced": stmt.excluded.act_introduced,
             "species": stmt.excluded.species,
             "affiliation": stmt.excluded.affiliation,
+            "image": stmt.excluded.image,
         },
     ).returning(Entity.name, Entity.id)
     rows = (await conn.execute(stmt)).all()

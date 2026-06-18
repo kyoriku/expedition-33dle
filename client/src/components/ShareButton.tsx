@@ -38,7 +38,7 @@ export default function ShareButton({ text }: ShareButtonProps) {
       <button
         type="button"
         onClick={handleClick}
-        className="bg-gold text-glyph hover:bg-gold-bright active:bg-gold-bright mt-3 w-full rounded-md py-2 text-sm font-bold"
+        className="bg-gold text-glyph hover:bg-gold-bright active:bg-gold-bright font-label mt-3 w-full py-2.5 text-sm tracking-[0.18em] uppercase"
       >
         Share
       </button>

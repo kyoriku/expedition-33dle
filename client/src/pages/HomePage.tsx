@@ -15,6 +15,7 @@ import { msToNextUtcMidnight, todayUtcISO } from "../lib/time";
 import StatsBlock from "../components/StatsBlock";
 import Histogram from "../components/Histogram";
 import Countdown from "../components/Countdown";
+import LastTry from "../components/LastTry";
 import {
   loadState,
   loadStats,
@@ -245,36 +246,40 @@ function Game({ today }: { today: TodayResponse }) {
   }
 
   return (
-    <main className="mx-auto flex w-full max-w-md flex-1 flex-col px-4 py-8 md:max-w-xl md:px-4 md:py-8 lg:max-w-[752px] lg:justify-center">
+    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 py-8 md:max-w-3xl md:px-6 lg:max-w-6xl lg:justify-center">
       <Header
         right={
-          <span className="text-muted flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase md:text-[13px]">
-            № {today.puzzle_number}
+          <span className="flex items-center gap-1.5">
+            <span className="font-label border-gold/25 bg-panneau text-muted flex items-center gap-1 border px-2.5 py-1 text-xs tracking-[0.12em] uppercase">
+              №<strong className="text-gold tabular-nums">{today.puzzle_number}</strong>
+            </span>
             {stats.current_streak > 0 && (
-              <span>· Streak {stats.current_streak}</span>
+              <span className="font-label border-gold/25 bg-panneau text-muted hidden items-center gap-1 border px-2.5 py-1 text-xs tracking-[0.12em] uppercase sm:flex">
+                Streak<strong className="text-gold tabular-nums">{stats.current_streak}</strong>
+              </span>
             )}
             <button
               type="button"
               aria-label="Statistics"
               onClick={() => setShowStats(true)}
-              className="border-gold text-gold hover:border-gold-bright hover:text-gold-bright flex h-6 w-6 items-center justify-center rounded-full border"
+              className="border-gold/40 text-gold hover:border-gold-bright hover:text-gold-bright bg-panneau flex h-7 w-7 items-center justify-center border"
             >
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
-                className="h-3 w-3"
+                className="h-3.5 w-3.5"
                 fill="currentColor"
               >
-                <rect x="3" y="12" width="4" height="8" rx="1" />
-                <rect x="10" y="7" width="4" height="13" rx="1" />
-                <rect x="17" y="3" width="4" height="17" rx="1" />
+                <rect x="3" y="12" width="4" height="8" />
+                <rect x="10" y="7" width="4" height="13" />
+                <rect x="17" y="3" width="4" height="17" />
               </svg>
             </button>
             <button
               type="button"
               aria-label="How to play"
               onClick={() => setShowHowTo(true)}
-              className="border-gold text-gold hover:border-gold-bright hover:text-gold-bright flex h-6 w-6 items-center justify-center rounded-full border text-xs leading-none font-bold tracking-normal"
+              className="border-gold/40 text-gold hover:border-gold-bright hover:text-gold-bright bg-panneau font-display flex h-7 w-7 items-center justify-center border text-sm leading-none font-bold"
             >
               ?
             </button>
@@ -285,6 +290,12 @@ function Game({ today }: { today: TodayResponse }) {
       {/* Politely announces each guess outcome to assistive tech. */}
       <p role="status" aria-live="polite" className="sr-only">
         {announcement}
+      </p>
+
+      <p className="font-serif text-muted mt-2 mb-1 text-center text-base italic md:text-lg">
+        Guess today's{" "}
+        <span className="text-parchment">Clair Obscur: Expedition 33</span>{" "}
+        character
       </p>
 
       {status === "in_progress" ? (
@@ -309,7 +320,12 @@ function Game({ today }: { today: TodayResponse }) {
                 : "Guess failed — check your connection and try again"}
             </p>
           )}
-          <Legend />
+          {guesses.length > 0 && (
+            <>
+              <Legend />
+              <LastTry guess={guesses[guesses.length - 1]} />
+            </>
+          )}
           <GuessGrid guesses={guesses} animateId={animateId} />
         </>
       ) : (
@@ -335,6 +351,13 @@ function Game({ today }: { today: TodayResponse }) {
         </>
       )}
 
+      {today.yesterday && (
+        <p className="font-label text-muted mt-6 text-center text-[11px] tracking-[0.14em] uppercase">
+          Yesterday ·{" "}
+          <span className="text-gold">{today.yesterday.name}</span>
+        </p>
+      )}
+
       <Modal open={showHowTo} onClose={closeHowTo} title="How to Play">
         <HowToPlay onClose={closeHowTo} />
       </Modal>
@@ -343,6 +366,7 @@ function Game({ today }: { today: TodayResponse }) {
         open={showStats}
         onClose={() => setShowStats(false)}
         title="Statistics"
+        widthClass="sm:max-w-md"
       >
         <StatsBlock stats={stats} />
         <Histogram

@@ -16,6 +16,7 @@ function ent(id: number, name: string): Entity {
     act_introduced: 2,
     species: "Axon",
     affiliation: "Independent",
+    image: null,
   };
 }
 

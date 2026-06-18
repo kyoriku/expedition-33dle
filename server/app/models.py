@@ -26,3 +26,6 @@ class Entity(Base):
     act_introduced: Mapped[int] = mapped_column(Integer)  # 1 | 2 | 3
     species: Mapped[str] = mapped_column(String(32), server_default="Unknown")
     affiliation: Mapped[str] = mapped_column(String(64), server_default="Unknown")
+    # Portrait filename served from client/public/portraits/<image>; nullable so
+    # the UI falls back to a monogram when art is missing.
+    image: Mapped[Optional[str]] = mapped_column(String(128), nullable=True)

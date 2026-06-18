@@ -95,3 +95,49 @@ export function cellAriaLabel(label: string, value: string, state: CellState): s
   const desc = describeState(state);
   return desc ? `${label}: ${value}, ${desc}` : `${label}: ${value}`;
 }
+
+/** Large faint glyph drawn behind the value for directional (age/act) cells. */
+export const DIRECTION_BIG: Partial<Record<CellState, string>> = {
+  higher: "▲",
+  lower: "▼",
+};
+
+export interface StateVisual {
+  /** Square gradient fill + state-edge border + text color for a guess cell. */
+  cell: string;
+  /** Compact swatch (fill + border + text) for the legend and how-to chips. */
+  swatch: string;
+}
+
+/** Single source of truth for the ornate per-state cell styling. Class strings
+ *  are literal (not interpolated) so Tailwind's JIT scanner picks them up. */
+export const STATE_VISUAL: Record<CellState, StateVisual> = {
+  match: {
+    cell: "bg-linear-to-b from-match to-match/80 border border-match-edge text-parchment",
+    swatch: "bg-match border border-match-edge text-parchment",
+  },
+  partial: {
+    cell: "bg-linear-to-b from-partial to-partial/80 border border-partial-edge text-glyph",
+    swatch: "bg-partial border border-partial-edge text-glyph",
+  },
+  unknown: {
+    cell: "bg-linear-to-b from-partial to-partial/80 border border-partial-edge text-glyph",
+    swatch: "bg-partial border border-partial-edge text-glyph",
+  },
+  miss: {
+    cell: "bg-linear-to-b from-miss to-miss/80 border border-miss-edge text-parchment",
+    swatch: "bg-miss border border-miss-edge text-parchment",
+  },
+  higher: {
+    cell: "bg-linear-to-b from-miss to-miss/80 border border-miss-edge text-parchment",
+    swatch: "bg-miss border border-miss-edge text-parchment",
+  },
+  lower: {
+    cell: "bg-linear-to-b from-miss to-miss/80 border border-miss-edge text-parchment",
+    swatch: "bg-miss border border-miss-edge text-parchment",
+  },
+  neutral: {
+    cell: "bg-panneau border border-line text-parchment",
+    swatch: "bg-panneau border border-line text-parchment",
+  },
+};

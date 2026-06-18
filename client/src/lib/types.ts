@@ -16,6 +16,7 @@ export interface Entity {
   act_introduced: number;
   species: string;
   affiliation: string;
+  image: string | null; // portrait filename in /portraits, or null for monogram
 }
 
 export interface GuessFeedback {
@@ -39,6 +40,7 @@ export interface TodayResponse {
   puzzle_date: string; // ISO date
   puzzle_number: number;
   entities: Entity[];
+  yesterday: Entity | null; // previous day's answer (no longer a spoiler)
 }
 
 // Client-only state.

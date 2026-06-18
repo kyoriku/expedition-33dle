@@ -12,11 +12,9 @@ export default function Countdown() {
   }, []);
 
   return (
-    <p className="text-muted mt-3 text-center text-xs">
+    <p className="font-label text-muted mt-3 text-center text-xs tracking-[0.12em] uppercase md:text-sm">
       Next puzzle in{" "}
-      <span className="text-parchment font-semibold tabular-nums">
-        {formatHMS(ms)}
-      </span>
+      <span className="text-gold tabular-nums">{formatHMS(ms)}</span>
     </p>
   );
 }

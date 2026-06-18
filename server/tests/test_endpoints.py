@@ -75,6 +75,12 @@ def test_today_lists_all_entities_and_hides_answer():
     assert "answer" not in resp.model_dump()
 
 
+def test_today_includes_yesterday():
+    resp = run(today(db=FakeSession(ROSTER)))
+    assert resp.yesterday is not None
+    assert resp.yesterday.name in {e.name for e in ROSTER}
+
+
 def test_today_503_when_no_entities():
     with pytest.raises(HTTPException) as exc:
         run(today(db=FakeSession([])))

@@ -20,6 +20,7 @@ Fields appear in schema order and map 1:1 to `app/models.py:Entity`:
 | `act_introduced` | int | `entities.act_introduced` — 1 \| 2 \| 3 |
 | `species` | string (closed set) | `entities.species` |
 | `affiliation` | string (closed set) | `entities.affiliation` |
+| `image` | string or null | `entities.image` — portrait filename (see below) |
 
 ## Closed value sets
 
@@ -53,8 +54,13 @@ counts as Act 1.
 - `element: []` — no elemental affinity.
 - `gender: "other"` — undocumented in any source.
 
-**Uniqueness invariant** — every entity must have a unique 8-attribute vector.
-Verify clone-freeness after any add, modify, or rename.
+**Uniqueness invariant** — every entity must have a unique 8-attribute vector
+(image is excluded). Verify clone-freeness after any add, modify, or rename.
+
+**Portraits** — `image` is a filename served from
+`client/public/portraits/<image>`. Optional: a missing/unset image (or one that
+fails to load) renders a gold-monogram fallback, so the game works without art.
+Use portraits you have the rights to; do not commit ripped game assets.
 
 ## Editing & re-seeding
 

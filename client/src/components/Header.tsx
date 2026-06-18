@@ -14,10 +14,15 @@ export default function Header({ right, brandAs = "h1" }: HeaderProps) {
   const Brand = brandAs;
   return (
     <>
-      <header className="mb-1.5 flex items-baseline justify-between">
-        <Brand className="font-serif text-2xl font-extrabold tracking-wide md:text-4xl lg:text-[2.75rem]">
-          <Link to="/">
-            Expedition <span className="text-gold">33dle</span>
+      <header className="mb-1.5 flex items-center justify-between gap-2">
+        <Brand className="leading-none">
+          <Link to="/" className="group block">
+            <span className="font-label text-gold/70 block text-[11px] tracking-[0.4em] uppercase md:text-sm">
+              ✦ Clair Obscur ✦
+            </span>
+            <span className="font-display text-parchment group-hover:text-gold-bright mt-0.5 block text-xl font-bold tracking-[0.06em] uppercase transition-colors md:text-3xl lg:text-[2.5rem]">
+              Expedition <span className="text-gold">33dle</span>
+            </span>
           </Link>
         </Brand>
         {right}
