@@ -9,13 +9,13 @@ function ent(id: number, name: string): Entity {
     id,
     name,
     gender: "female",
-    age: null,
-    class_role: "Axon",
+    role: "Axon",
     weapon: "Hybrid",
     element: [],
     act_introduced: 2,
-    species: "Axon",
+    category: "Axon",
     affiliation: "Independent",
+    zone: "Sirène",
     image: null,
   };
 }

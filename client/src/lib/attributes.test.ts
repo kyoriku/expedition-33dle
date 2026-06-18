@@ -12,13 +12,13 @@ const SPARSE: Entity = {
   id: 1,
   name: "X",
   gender: "male",
-  age: null,
-  class_role: "Boss",
+  role: "Boss",
   weapon: "None",
   element: [],
   act_introduced: 1,
-  species: "Nevron",
+  category: "Nevron",
   affiliation: "Independent",
+  zone: "The Manor",
   image: null,
 };
 
@@ -26,13 +26,13 @@ describe("ATTRIBUTES config", () => {
   it("lists the 8 comparison columns in order", () => {
     expect(ATTRIBUTES.map((a) => a.key)).toEqual([
       "gender",
-      "age",
-      "class_role",
+      "role",
       "weapon",
       "element",
       "act_introduced",
-      "species",
+      "category",
       "affiliation",
+      "zone",
     ]);
   });
 
@@ -44,17 +44,15 @@ describe("ATTRIBUTES config", () => {
     const byKey = Object.fromEntries(
       ATTRIBUTES.map((a) => [a.key, a.format(SPARSE)]),
     );
-    expect(byKey.age).toBe("—");
     expect(byKey.element).toBe("—");
     expect(byKey.gender).toBe("male");
   });
 
   it("formats present numeric and multi-element values", () => {
-    const e: Entity = { ...SPARSE, age: 30, element: ["Fire", "Ice"] };
+    const e: Entity = { ...SPARSE, element: ["Fire", "Ice"] };
     const byKey = Object.fromEntries(
       ATTRIBUTES.map((a) => [a.key, a.format(e)]),
     );
-    expect(byKey.age).toBe("30");
     expect(byKey.element).toBe("Fire, Ice");
     expect(byKey.act_introduced).toBe("1");
   });
@@ -62,11 +60,11 @@ describe("ATTRIBUTES config", () => {
 
 describe("accessibility helpers", () => {
   it("cellAriaLabel composes label, value, and a state phrase", () => {
-    expect(cellAriaLabel("Class", "Engineer", "miss")).toBe(
-      "Class: Engineer, no match",
+    expect(cellAriaLabel("Role", "Engineer", "miss")).toBe(
+      "Role: Engineer, no match",
     );
-    expect(cellAriaLabel("Age", "32", "higher")).toBe(
-      "Age: 32, answer is higher",
+    expect(cellAriaLabel("Act", "3", "higher")).toBe(
+      "Act: 3, answer is higher",
     );
   });
 

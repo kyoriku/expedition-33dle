@@ -1,8 +1,7 @@
 import { STATE_GLYPH, STATE_VISUAL, type CellState } from "../lib/attributes";
 
 // Permanent compact key above the matrix. Mirrors the glyphs the cells carry so
-// meaning is clear without color, and distinguishes element "partial" from age
-// "unknown".
+// meaning is clear without color (match ✓ / partial ≈ / miss ✗).
 const ITEMS: { state: CellState; label: string }[] = [
   { state: "match", label: "Match" },
   { state: "partial", label: "Partial" },

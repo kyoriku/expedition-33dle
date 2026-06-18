@@ -8,24 +8,24 @@ const EXAMPLE_GUESS: GuessResponse = {
     id: 0,
     name: "Gustave",
     gender: "male",
-    age: 32,
-    class_role: "Engineer",
+    role: "Engineer",
     weapon: "Sword & Pistol",
     element: ["Lightning"],
     act_introduced: 1,
-    species: "Human",
+    category: "Human",
     affiliation: "Expedition 33",
+    zone: "Lumière",
     image: null,
   },
   feedback: {
     gender: "match",
-    age: "unknown",
-    class_role: "miss",
+    role: "miss",
     weapon: "miss",
     element: "partial",
     act_introduced: "higher",
-    species: "match",
+    category: "match",
     affiliation: "miss",
+    zone: "miss",
   },
   is_correct: false,
 };
@@ -39,10 +39,9 @@ interface HowToPlayProps {
 const KEY: { cls: string; glyph: string; glyphCls: string; label: string }[] = [
   { cls: "bg-match border border-match-edge", glyph: "✓", glyphCls: "text-parchment", label: "Exact match" },
   { cls: "bg-partial border border-partial-edge", glyph: "≈", glyphCls: "text-glyph", label: "Partial — shares some elements" },
-  { cls: "bg-partial border border-partial-edge", glyph: "?", glyphCls: "text-glyph", label: "Unknown — no age on record" },
   { cls: "bg-miss border border-miss-edge", glyph: "✗", glyphCls: "text-parchment", label: "No match" },
-  { cls: "bg-miss border border-miss-edge", glyph: "▲", glyphCls: "text-parchment", label: "Answer’s Age or Act is higher" },
-  { cls: "bg-miss border border-miss-edge", glyph: "▼", glyphCls: "text-parchment", label: "Answer’s Age or Act is lower" },
+  { cls: "bg-miss border border-miss-edge", glyph: "▲", glyphCls: "text-parchment", label: "Answer’s Act is higher" },
+  { cls: "bg-miss border border-miss-edge", glyph: "▼", glyphCls: "text-parchment", label: "Answer’s Act is lower" },
 ];
 
 export default function HowToPlay({ onClose }: HowToPlayProps) {
