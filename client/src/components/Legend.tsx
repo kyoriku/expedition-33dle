@@ -15,7 +15,7 @@ export default function Legend() {
         <span key={label} className="flex items-center gap-1.5">
           <span
             aria-hidden="true"
-            className={`${STATE_VISUAL[state].swatch} inline-flex h-5 w-5 items-center justify-center text-[10px] font-bold`}
+            className={`${STATE_VISUAL[state].swatch} inline-flex h-5 w-5 items-center justify-center text-[12px] font-bold`}
           >
             {STATE_GLYPH[state]}
           </span>

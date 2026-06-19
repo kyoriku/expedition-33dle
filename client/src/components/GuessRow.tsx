@@ -22,7 +22,7 @@ export const GRID_TEMPLATE =
 // grow if a value wraps to a second line.
 export const CELL_BASE =
   "relative flex min-h-20 flex-col items-center justify-center overflow-hidden p-1.5 " +
-  "text-center text-xs leading-snug break-words font-serif md:text-sm lg:min-h-24 " +
+  "text-center text-sm leading-snug break-words font-serif lg:min-h-24 " +
   "shadow-[inset_0_1px_0_rgba(255,255,255,.08)]";
 
 // Name cell geometry (left-aligned, holds the portrait).
@@ -80,7 +80,7 @@ function Cell({
       {corner && (
         <span
           aria-hidden="true"
-          className="absolute top-0.5 right-1 z-10 text-[10px] leading-none font-bold opacity-80"
+          className="absolute top-0.5 right-1 z-10 text-[12px] leading-none font-bold opacity-80"
         >
           {corner}
         </span>

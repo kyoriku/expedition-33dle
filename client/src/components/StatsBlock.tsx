@@ -21,7 +21,7 @@ export default function StatsBlock({ stats }: StatsBlockProps) {
           <div className="font-display text-gold text-xl md:text-2xl">
             {value}
           </div>
-          <div className="font-label text-muted text-[11px] tracking-[0.1em] uppercase md:text-xs">
+          <div className="font-label text-muted text-sm tracking-[0.1em] uppercase">
             {label}
           </div>
         </div>

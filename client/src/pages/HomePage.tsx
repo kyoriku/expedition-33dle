@@ -249,12 +249,12 @@ function Game({ today }: { today: TodayResponse }) {
     <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 py-8 md:max-w-3xl md:px-6 lg:max-w-6xl lg:justify-center">
       <Header
         right={
-          <span className="flex items-center gap-1.5">
-            <span className="font-label border-gold/25 bg-panneau text-muted flex items-center gap-1 border px-2.5 py-1 text-xs tracking-[0.12em] uppercase">
+          <span className="flex items-center gap-2">
+            <span className="font-label border-gold/25 bg-panneau text-muted flex items-center gap-1 border px-3 py-1 text-sm tracking-[0.12em] uppercase">
               №<strong className="text-gold tabular-nums">{today.puzzle_number}</strong>
             </span>
             {stats.current_streak > 0 && (
-              <span className="font-label border-gold/25 bg-panneau text-muted hidden items-center gap-1 border px-2.5 py-1 text-xs tracking-[0.12em] uppercase sm:flex">
+              <span className="font-label border-gold/25 bg-panneau text-muted hidden items-center gap-1 border px-3 py-1 text-sm tracking-[0.12em] uppercase sm:flex">
                 Streak<strong className="text-gold tabular-nums">{stats.current_streak}</strong>
               </span>
             )}
@@ -262,12 +262,12 @@ function Game({ today }: { today: TodayResponse }) {
               type="button"
               aria-label="Statistics"
               onClick={() => setShowStats(true)}
-              className="border-gold/40 text-gold hover:border-gold-bright hover:text-gold-bright bg-panneau flex h-7 w-7 items-center justify-center border"
+              className="border-gold/40 text-gold hover:border-gold-bright hover:text-gold-bright bg-panneau flex h-8 w-8 items-center justify-center border"
             >
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
-                className="h-3.5 w-3.5"
+                className="h-4 w-4"
                 fill="currentColor"
               >
                 <rect x="3" y="12" width="4" height="8" />
@@ -279,7 +279,7 @@ function Game({ today }: { today: TodayResponse }) {
               type="button"
               aria-label="How to play"
               onClick={() => setShowHowTo(true)}
-              className="border-gold/40 text-gold hover:border-gold-bright hover:text-gold-bright bg-panneau font-display flex h-7 w-7 items-center justify-center border text-sm leading-none font-bold"
+              className="border-gold/40 text-gold hover:border-gold-bright hover:text-gold-bright bg-panneau font-display flex h-8 w-8 items-center justify-center border text-base leading-none font-bold"
             >
               ?
             </button>
@@ -352,7 +352,7 @@ function Game({ today }: { today: TodayResponse }) {
       )}
 
       {today.yesterday && (
-        <p className="font-label text-muted mt-6 text-center text-[11px] tracking-[0.14em] uppercase">
+        <p className="font-label text-muted mt-6 text-center text-sm tracking-[0.12em] uppercase">
           Yesterday ·{" "}
           <span className="text-gold">{today.yesterday.name}</span>
         </p>
