@@ -13,7 +13,7 @@ const EXAMPLE_GUESS: GuessResponse = {
     element: ["Lightning"],
     act_introduced: 1,
     category: "Human",
-    affiliation: "Expedition 33",
+    affiliation: ["Expedition 33"],
     zone: "Lumière",
     image: null,
   },

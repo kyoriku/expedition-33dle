@@ -47,18 +47,24 @@ async def _today_puzzle(
     return all_entities, today, puzzle_number, today_date
 
 
+def _set_feedback(guess_values, answer_values) -> str:
+    """Set comparison shared by multi-value fields (element, affiliation):
+    equal sets -> match (covers both-empty), any overlap -> partial, else miss.
+    """
+    g, a = set(guess_values), set(answer_values)
+    if g == a:
+        return "match"
+    if g & a:
+        return "partial"
+    return "miss"
+
+
 def compute_feedback(guess: Entity, answer: Entity) -> GuessFeedback:
     """Compare a guess entity to the answer entity, attribute by attribute.
 
     Pure function of the two rows — no I/O — so it is unit-testable.
     """
-    guess_el, answer_el = set(guess.element), set(answer.element)
-    if guess_el == answer_el:  # covers both-empty
-        element = "match"
-    elif guess_el & answer_el:
-        element = "partial"
-    else:
-        element = "miss"
+    element = _set_feedback(guess.element, answer.element)
 
     if guess.act_introduced == answer.act_introduced:
         act = "match"
@@ -72,7 +78,7 @@ def compute_feedback(guess: Entity, answer: Entity) -> GuessFeedback:
         element=element,
         act_introduced=act,
         category="match" if guess.category == answer.category else "miss",
-        affiliation="match" if guess.affiliation == answer.affiliation else "miss",
+        affiliation=_set_feedback(guess.affiliation, answer.affiliation),
         zone="match" if guess.zone == answer.zone else "miss",
     )
 

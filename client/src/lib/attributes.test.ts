@@ -17,7 +17,7 @@ const SPARSE: Entity = {
   element: [],
   act_introduced: 1,
   category: "Nevron",
-  affiliation: "Independent",
+  affiliation: ["Independent"],
   zone: "The Manor",
   image: null,
 };
@@ -48,12 +48,17 @@ describe("ATTRIBUTES config", () => {
     expect(byKey.gender).toBe("male");
   });
 
-  it("formats present numeric and multi-element values", () => {
-    const e: Entity = { ...SPARSE, element: ["Fire", "Ice"] };
+  it("formats present numeric and multi-value values", () => {
+    const e: Entity = {
+      ...SPARSE,
+      element: ["Fire", "Ice"],
+      affiliation: ["Expedition 33", "Lumière"],
+    };
     const byKey = Object.fromEntries(
       ATTRIBUTES.map((a) => [a.key, a.format(e)]),
     );
     expect(byKey.element).toBe("Fire, Ice");
+    expect(byKey.affiliation).toBe("Expedition 33 • Lumière");
     expect(byKey.act_introduced).toBe("1");
   });
 });

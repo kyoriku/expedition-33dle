@@ -17,7 +17,7 @@ export type CellState =
   | "unknown"
   | "neutral";
 
-export type AttributeKind = "scalar" | "element" | "direction";
+export type AttributeKind = "scalar" | "array" | "element" | "direction";
 
 export interface AttributeDescriptor {
   /** Shared key into both Entity (the value) and GuessFeedback (the state). */
@@ -46,7 +46,7 @@ export const ATTRIBUTES = [
     format: (e: Entity) => String(e.act_introduced),
   },
   { key: "category", label: "Category", kind: "scalar", format: (e: Entity) => e.category },
-  { key: "affiliation", label: "Affiliation", kind: "scalar", format: (e: Entity) => e.affiliation },
+  { key: "affiliation", label: "Affiliation", kind: "array", format: (e: Entity) => e.affiliation.join(" • ") },
   { key: "zone", label: "Zone", kind: "scalar", format: (e: Entity) => e.zone },
 ] as const satisfies readonly AttributeDescriptor[];
 

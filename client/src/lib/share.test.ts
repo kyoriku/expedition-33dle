@@ -11,7 +11,7 @@ const ENTITY: Entity = {
   element: [],
   act_introduced: 1,
   category: "Nevron",
-  affiliation: "Independent",
+  affiliation: ["Independent"],
   zone: "The Manor",
   image: null,
 };

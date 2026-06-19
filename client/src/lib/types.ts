@@ -13,7 +13,7 @@ export interface Entity {
   element: string[];
   act_introduced: number;
   category: string;
-  affiliation: string;
+  affiliation: string[];
   zone: string;
   image: string | null; // portrait filename in /portraits, or null for monogram
 }
@@ -25,7 +25,7 @@ export interface GuessFeedback {
   element: ElementFeedback;
   act_introduced: DirectionFeedback;
   category: ScalarFeedback;
-  affiliation: ScalarFeedback;
+  affiliation: ElementFeedback;
   zone: ScalarFeedback;
 }
 

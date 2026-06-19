@@ -28,7 +28,7 @@ const ent = (id: number, name: string, over: Partial<Entity> = {}): Entity => ({
   element: ["Fire"],
   act_introduced: 1,
   category: "Human",
-  affiliation: "Expedition 33",
+  affiliation: ["Expedition 33"],
   zone: "Lumière",
   image: null,
   ...over,

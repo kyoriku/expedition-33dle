@@ -14,7 +14,7 @@ function ent(id: number, name: string): Entity {
     element: [],
     act_introduced: 2,
     category: "Axon",
-    affiliation: "Independent",
+    affiliation: ["Independent"],
     zone: "Sirène",
     image: null,
   };

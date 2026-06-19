@@ -16,7 +16,7 @@ BASE = dict(
     element=["Fire"],
     act_introduced=2,
     category="Human",
-    affiliation="Expedition 33",
+    affiliation=["Expedition 33"],
     zone="Lumière",
 )
 
@@ -39,7 +39,7 @@ def test_identical_entities_all_match():
 
 def test_scalar_mismatches():
     guess = make(gender="male", role="Boss", weapon="Sword",
-                 category="Nevron", affiliation="Independent", zone="The Manor")
+                 category="Nevron", affiliation=["Independent"], zone="The Manor")
     answer = make()
     fb = compute_feedback(guess, answer)
     assert fb.gender == "miss"
@@ -48,6 +48,13 @@ def test_scalar_mismatches():
     assert fb.category == "miss"
     assert fb.affiliation == "miss"
     assert fb.zone == "miss"
+
+
+def test_affiliation_partial_when_sets_overlap():
+    # guess shares one affiliation with the answer but not all -> partial
+    guess = make(affiliation=["Lumière"])
+    answer = make(affiliation=["Expedition 33", "Lumière"])
+    assert compute_feedback(guess, answer).affiliation == "partial"
 
 
 def test_zone_match_and_miss():

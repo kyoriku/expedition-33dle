@@ -17,7 +17,7 @@ class EntityRead(BaseModel):
     element: list[str]
     act_introduced: int
     category: str
-    affiliation: str
+    affiliation: list[str]
     zone: str
     image: Optional[str] = None
 
@@ -60,7 +60,7 @@ class GuessFeedback(BaseModel):
     element: ElementFeedback
     act_introduced: DirectionFeedback
     category: ScalarFeedback
-    affiliation: ScalarFeedback
+    affiliation: ElementFeedback
     zone: ScalarFeedback
 
 

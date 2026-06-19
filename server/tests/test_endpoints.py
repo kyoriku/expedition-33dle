@@ -25,7 +25,7 @@ def _ent(id_: int, name: str, **kw) -> Entity:
         element=["Fire"],
         act_introduced=1,
         category="Human",
-        affiliation="Expedition 33",
+        affiliation=["Expedition 33"],
         zone="Lumière",
     )
     return Entity(id=id_, name=name, **{**base, **kw})
