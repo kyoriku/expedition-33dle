@@ -2,32 +2,31 @@
 
 export type ScalarFeedback = "match" | "miss";
 export type DirectionFeedback = "match" | "higher" | "lower";
-export type AgeFeedback = "match" | "higher" | "lower" | "unknown";
 export type ElementFeedback = "match" | "partial" | "miss";
 
 export interface Entity {
   id: number;
   name: string;
   gender: string;
-  age: number | null;
-  class_role: string;
+  role: string;
   weapon: string;
   element: string[];
   act_introduced: number;
-  species: string;
-  affiliation: string;
+  category: string;
+  affiliation: string[];
+  zone: string;
   image: string | null; // portrait filename in /portraits, or null for monogram
 }
 
 export interface GuessFeedback {
   gender: ScalarFeedback;
-  age: AgeFeedback;
-  class_role: ScalarFeedback;
+  role: ScalarFeedback;
   weapon: ScalarFeedback;
   element: ElementFeedback;
   act_introduced: DirectionFeedback;
-  species: ScalarFeedback;
-  affiliation: ScalarFeedback;
+  category: ScalarFeedback;
+  affiliation: ElementFeedback;
+  zone: ScalarFeedback;
 }
 
 export interface GuessResponse {

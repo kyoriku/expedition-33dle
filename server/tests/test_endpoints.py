@@ -20,22 +20,22 @@ from app.services.scheduling import get_puzzle_for_date
 def _ent(id_: int, name: str, **kw) -> Entity:
     base = dict(
         gender="female",
-        age=32,
-        class_role="Scholar",
+        role="Scholar",
         weapon="Staff",
         element=["Fire"],
         act_introduced=1,
-        species="Human",
-        affiliation="Expedition 33",
+        category="Human",
+        affiliation=["Expedition 33"],
+        zone="Lumière",
     )
     return Entity(id=id_, name=name, **{**base, **kw})
 
 
 ROSTER = [
-    _ent(1, "Gustave", gender="male", class_role="Engineer", weapon="Sword & Pistol", element=["Lightning"]),
-    _ent(2, "Maelle", age=16, class_role="Duelist", weapon="Rapier", element=["Fire", "Void"], species="Painted Human"),
-    _ent(3, "Lune", class_role="Scholar", weapon="Elemental Magic", element=["Fire", "Ice"]),
-    _ent(4, "Sciel", class_role="Fortune Teller", weapon="Scythe", element=["Light", "Dark"]),
+    _ent(1, "Gustave", gender="male", role="Engineer", weapon="Sword & Pistol", element=["Lightning"]),
+    _ent(2, "Maelle", role="Duelist", weapon="Rapier", element=["Fire", "Void"], category="Painted Human", zone="Lumière"),
+    _ent(3, "Lune", role="Scholar", weapon="Elemental Magic", element=["Fire", "Ice"]),
+    _ent(4, "Sciel", role="Fortune Teller", weapon="Scythe", element=["Light", "Dark"], zone="Stone Wave Cliffs"),
 ]
 
 

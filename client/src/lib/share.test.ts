@@ -6,13 +6,13 @@ const ENTITY: Entity = {
   id: 1,
   name: "X",
   gender: "male",
-  age: null,
-  class_role: "Boss",
+  role: "Boss",
   weapon: "Hybrid",
   element: [],
   act_introduced: 1,
-  species: "Nevron",
-  affiliation: "Independent",
+  category: "Nevron",
+  affiliation: ["Independent"],
+  zone: "The Manor",
   image: null,
 };
 
@@ -22,13 +22,13 @@ function row(feedback: Partial<GuessFeedback>, is_correct = false): GuessRespons
     is_correct,
     feedback: {
       gender: "miss",
-      age: "lower", // AgeFeedback has no "miss"; directions render as red
-      class_role: "miss",
+      role: "miss",
       weapon: "miss",
       element: "miss",
       act_introduced: "lower", // DirectionFeedback has no "miss"
-      species: "miss",
+      category: "miss",
       affiliation: "miss",
+      zone: "miss",
       ...feedback,
     },
   };
@@ -48,31 +48,31 @@ describe("buildShareString", () => {
     expect(out.startsWith("Expedition 33dle #7 1/6")).toBe(true);
   });
 
-  it("maps states to emoji, folding directions into red and unknown/partial into yellow", () => {
+  it("maps states to emoji, folding directions into red and partial into yellow", () => {
     const out = buildShareString(
       [
         row({
           gender: "match", // 🟩
-          age: "unknown", // 🟨
-          class_role: "miss", // 🟥
+          role: "miss", // 🟥
           weapon: "miss", // 🟥
           element: "partial", // 🟨
           act_introduced: "lower", // 🟥
-          species: "miss", // 🟥
+          category: "miss", // 🟥
           affiliation: "miss", // 🟥
+          zone: "match", // 🟩
         }),
       ],
       1,
       "lost",
     );
-    expect(gridLines(out)[0]).toBe("🟩🟨🟥🟥🟨🟥🟥🟥");
+    expect(gridLines(out)[0]).toBe("🟩🟥🟥🟨🟥🟥🟥🟩");
   });
 
   it("orders rows newest-on-top", () => {
     const first = row({ gender: "match" });
-    const second = row({ age: "match" });
+    const second = row({ zone: "match" });
     const lines = gridLines(buildShareString([first, second], 2, "lost"));
-    expect(lines[0]).toBe("🟥🟩🟥🟥🟥🟥🟥🟥"); // second (newest): age match
+    expect(lines[0]).toBe("🟥🟥🟥🟥🟥🟥🟥🟩"); // second (newest): zone match
     expect(lines[1]).toBe("🟩🟥🟥🟥🟥🟥🟥🟥"); // first: gender match
   });
 

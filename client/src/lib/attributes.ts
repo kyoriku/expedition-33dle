@@ -17,7 +17,7 @@ export type CellState =
   | "unknown"
   | "neutral";
 
-export type AttributeKind = "scalar" | "age" | "element" | "direction";
+export type AttributeKind = "scalar" | "array" | "element" | "direction";
 
 export interface AttributeDescriptor {
   /** Shared key into both Entity (the value) and GuessFeedback (the state). */
@@ -31,13 +31,7 @@ export interface AttributeDescriptor {
 
 export const ATTRIBUTES = [
   { key: "gender", label: "Gender", kind: "scalar", format: (e: Entity) => e.gender },
-  {
-    key: "age",
-    label: "Age",
-    kind: "age",
-    format: (e: Entity) => (e.age === null ? "—" : String(e.age)),
-  },
-  { key: "class_role", label: "Class", kind: "scalar", format: (e: Entity) => e.class_role },
+  { key: "role", label: "Role", kind: "scalar", format: (e: Entity) => e.role },
   { key: "weapon", label: "Weapon", kind: "scalar", format: (e: Entity) => e.weapon },
   {
     key: "element",
@@ -51,8 +45,9 @@ export const ATTRIBUTES = [
     kind: "direction",
     format: (e: Entity) => String(e.act_introduced),
   },
-  { key: "species", label: "Species", kind: "scalar", format: (e: Entity) => e.species },
-  { key: "affiliation", label: "Affiliation", kind: "scalar", format: (e: Entity) => e.affiliation },
+  { key: "category", label: "Category", kind: "scalar", format: (e: Entity) => e.category },
+  { key: "affiliation", label: "Affiliation", kind: "array", format: (e: Entity) => e.affiliation.join(" • ") },
+  { key: "zone", label: "Zone", kind: "scalar", format: (e: Entity) => e.zone },
 ] as const satisfies readonly AttributeDescriptor[];
 
 /** Column order for the share grid (feedback keys only). */
@@ -96,7 +91,7 @@ export function cellAriaLabel(label: string, value: string, state: CellState): s
   return desc ? `${label}: ${value}, ${desc}` : `${label}: ${value}`;
 }
 
-/** Large faint glyph drawn behind the value for directional (age/act) cells. */
+/** Large faint glyph drawn behind the value for the directional (Act) cell. */
 export const DIRECTION_BIG: Partial<Record<CellState, string>> = {
   higher: "▲",
   lower: "▼",

@@ -12,50 +12,68 @@ Fields appear in schema order and map 1:1 to `app/models.py:Entity`:
 | Field | Type | Maps to |
 |---|---|---|
 | `name` | string | `entities.name` (unique) |
-| `gender` | string | `entities.gender` — `male` \| `female` \| `other` |
-| `age` | int or null | `entities.age` (nullable) |
-| `class_role` | string | `entities.class_role` |
+| `gender` | string | `entities.gender` — `male` \| `female` \| `unknown` |
+| `role` | string (closed set) | `entities.role` (NOT NULL) — gameplay role |
 | `weapon` | string | `entities.weapon` (NOT NULL) |
 | `element` | array of strings | `entities.element` (Postgres `ARRAY(String)`) |
 | `act_introduced` | int | `entities.act_introduced` — 1 \| 2 \| 3 |
-| `species` | string (closed set) | `entities.species` |
-| `affiliation` | string (closed set) | `entities.affiliation` |
+| `category` | string (closed set) | `entities.category` |
+| `affiliation` | array of strings (closed set) | `entities.affiliation` (Postgres `ARRAY(String)`) |
+| `zone` | string (closed set) | `entities.zone` (NOT NULL) — see below |
 | `image` | string or null | `entities.image` — portrait filename (see below) |
 
 ## Closed value sets
 
-Keep every value at ≥2 members so a lone value can't give an answer away.
-Current accepted exception: **Expedition Zero** has a single member (Simon).
+Prefer keeping every value at ≥2 members so a lone value can't give an answer
+away — but several attributes intentionally carry singletons (see below).
 
-- `species`: Human, Painted Human, Gestral, Axon, Nevron, Mythical Creature
-- `affiliation`: Expedition 33, Lumière, Expedition Zero, Dessendre Family,
-  Painted Dessendre Family, Gestrals, Independent
+- `role` (closed set): Playable, NPC, Boss, Optional Boss.
+- `category`: Human, Painted Human, Gestral, Axon, Nevron, Mythical Creature
+- `affiliation` (**array** — an entity can belong to several): Expedition 33,
+  Lumière, Expedition Zero, Dessendre Family, Painted Dessendre Family, Gestrals,
+  Independent. Scored as a set like `element` (exact / partial overlap / miss).
+- `zone` (20 values): Lumière, Spring Meadows, Flying Waters, Ancient Sanctuary,
+  Esquie's Nest, Gestral Village, Stone Wave Cliffs, Forgotten Battlefield,
+  Landing Beach, Sirène, Visages, The Reacher, The Monolith, White Sands,
+  Falling Leaves, The Manor, The Abyss, Flying Manor, Frozen Hearts,
+  Monoco's Station
+
+  Distribution across the 33-entity roster: Lumière 6 · The Manor 5 ·
+  Stone Wave Cliffs 2 · Flying Waters 2 · Esquie's Nest 2 · Sirène 2; the
+  remaining 14 zones (Gestral Village [Golgra only], Landing Beach, Monoco's
+  Station, The Reacher, Visages, The Monolith, The Abyss, Flying Manor, Spring
+  Meadows, Ancient Sanctuary, Forgotten Battlefield, White Sands, Falling Leaves,
+  Frozen Hearts) have a single entity each.
+  Singletons are acceptable: closed-set attributes are scored match/miss (or set
+  overlap), so a unique value just yields a clean miss against every other answer.
 
 ## Conventions
 
-**Affiliation is faction membership, not provenance.** Only blood-relation
-Dessendres carry `Dessendre Family` / `Painted Dessendre Family`. Their
-creations (Axons, Nevrons) are `Independent` regardless of who made them or
-which side they fight for.
+**Affiliation is multi-value faction membership, not provenance.** An entity can
+belong to several factions at once (e.g. party members carry `Expedition 33` plus
+their home faction; Maelle also carries `Dessendre Family`). Only blood-relation
+Dessendres carry `Dessendre Family` / `Painted Dessendre Family`; their creations
+(Axons, Nevrons) are `Independent` regardless of who made them or which side they
+fight for. Scored as a set: full overlap = match, partial overlap = partial,
+none = miss.
 
 **act_introduced** — party members get the act they become playable (Verso 2,
 Monoco 2). NPCs and bosses get the act of first appearance. The Prologue
 counts as Act 1.
 
 **Sparse-data values:**
-- `age: null` — used only when no source states a numeric age. This is common
-  for Painted Humans, Gestrals, and mythical creatures, but it's driven by
-  source availability, not species: a Painted Human with a stated age (e.g.
-  Maelle, 16) carries that number.
 - `weapon: "None"` — non-combatant; never fights on-screen. DB column is NOT
   NULL, so this is the literal string, not a null.
 - `weapon: "Hybrid"` — fights but wields no discrete weapon (spells,
   abilities, body, magical effects).
 - `element: []` — no elemental affinity.
-- `gender: "other"` — undocumented in any source.
+- `gender: "unknown"` — gender not established in any source (most Nevron/Axon bosses).
 
-**Uniqueness invariant** — every entity must have a unique 8-attribute vector
-(image is excluded). Verify clone-freeness after any add, modify, or rename.
+**Uniqueness invariant** — entities should have a unique 8-attribute vector
+(image excluded; `element` and `affiliation` compared as sets). Verify
+clone-freeness after any add, modify, or rename. **Accepted exception:** Sophie
+and Emma share an identical vector (both Lumière civilians) — a deliberate,
+documented clone.
 
 **Portraits** — `image` is a filename served from
 `client/public/portraits/<image>`. Optional: a missing/unset image (or one that

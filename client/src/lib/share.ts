@@ -6,7 +6,6 @@ import type { GameStatus, GuessResponse } from "./types";
 const EMOJI: Record<string, string> = {
   match: "🟩",
   partial: "🟨", // element only
-  unknown: "🟨", // age only
   miss: "🟥",
   higher: "🟥",
   lower: "🟥",
