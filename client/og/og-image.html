@@ -1,45 +1,88 @@
 <!doctype html>
 <!-- Source of truth for public/og-image.png — see README.md for the render command.
-     Mode-agnostic brand image: gold serif title, ghosted "33", brush stroke.
-     Fonts are local (self-hosted upright + dev-only italic) so rendering
-     works offline. -->
+     Mode-agnostic brand image in the Belle Époque style: Cinzel title, ✦ kicker,
+     ghosted "33", double gold frame. Fonts are the site's self-hosted woff2 in
+     ../public/fonts so rendering works offline. -->
 <html>
 <head>
 <style>
 @font-face {
-  font-family: "Playfair Display";
-  src: url("../public/fonts/playfair-display-latin-var.woff2") format("woff2");
-  font-weight: 400 900;
+  font-family: "Cinzel";
+  src: url("../public/fonts/cinzel-latin-700.woff2") format("woff2");
+  font-weight: 700;
   font-style: normal;
 }
 @font-face {
-  font-family: "Playfair Display";
-  src: url("./fonts/playfair-display-italic-latin-var.woff2") format("woff2");
-  font-weight: 400 900;
+  font-family: "EB Garamond";
+  src: url("../public/fonts/eb-garamond-latin-400-italic.woff2") format("woff2");
+  font-weight: 400;
   font-style: italic;
 }
-*{margin:0;box-sizing:border-box}
-body{width:1200px;height:630px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding-left:96px;background:radial-gradient(ellipse at 28% 30%, #1d1812 0%, #0f0d0a 62%);font-family:'Playfair Display',Georgia,serif}
-.grain{position:absolute;inset:0;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E")}
-.ghost{position:absolute;right:34px;top:50%;transform:translateY(-52%);font-weight:800;font-size:560px;color:#d9a93f;opacity:.075;letter-spacing:-30px;line-height:1}
-svg.stroke{position:absolute;right:80px;bottom:36px;width:430px}
-h1{font-weight:800;font-size:86px;color:#d9a93f;letter-spacing:.5px;text-shadow:0 2px 30px rgba(217,169,63,.22)}
-.tag{margin-top:20px;font-size:29px;color:#ece4d6;font-style:italic;font-weight:500;max-width:620px}
-.rule{width:430px;margin-top:30px;height:1px;background:linear-gradient(90deg,transparent,#d9a93f 25%,#d9a93f 75%,transparent);opacity:.55}
-.url{position:absolute;bottom:42px;left:98px;font-size:22px;color:#a2988a;letter-spacing:2px;font-family:system-ui,sans-serif}
+@font-face {
+  font-family: "Bebas Neue";
+  src: url("../public/fonts/bebas-neue-latin-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+* { margin: 0; box-sizing: border-box; }
+body {
+  width: 1200px; height: 630px; position: relative; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: center;
+  padding-left: 110px;
+  background: radial-gradient(ellipse at 28% 30%, #1d1812 0%, #0f0d0a 62%);
+  font-family: "Cinzel", Georgia, serif;
+}
+/* Ornate double rule, echoing the gold-bordered board. */
+.frame { position: absolute; pointer-events: none; }
+.frame.outer { inset: 26px; border: 1px solid rgba(217,169,63,.32); }
+.frame.inner { inset: 32px; border: 1px solid rgba(232,189,85,.16); }
+.grain {
+  position: absolute; inset: 0; pointer-events: none; opacity: .035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* Ghosted monogram. */
+.ghost {
+  position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+  font-weight: 700; font-size: 500px; color: #d9a93f; opacity: .07;
+  line-height: 1; letter-spacing: -10px;
+}
+.kicker {
+  position: relative; z-index: 1;
+  font-family: "Bebas Neue", system-ui, sans-serif;
+  font-size: 34px; letter-spacing: 12px; color: #d9a93f; opacity: .9;
+  margin-bottom: 14px;
+}
+h1 {
+  position: relative; z-index: 1;
+  font-weight: 700; font-size: 92px; color: #d9a93f; letter-spacing: 1px;
+  text-shadow: 0 2px 34px rgba(217,169,63,.25);
+}
+.rule {
+  position: relative; z-index: 1; width: 470px; margin: 30px 0; height: 1px;
+  background: linear-gradient(90deg, transparent, #d9a93f 22%, #d9a93f 78%, transparent);
+  opacity: .6;
+}
+.tag {
+  position: relative; z-index: 1;
+  font-family: "EB Garamond", Georgia, serif; font-style: italic;
+  font-size: 31px; color: #ece4d6; max-width: 640px; line-height: 1.35;
+}
+.url {
+  position: absolute; bottom: 48px; left: 112px; z-index: 1;
+  font-family: "Bebas Neue", system-ui, sans-serif;
+  font-size: 25px; letter-spacing: 4px; color: #b8aea0;
+}
 </style>
 </head>
 <body>
 <div class="grain"></div>
+<div class="frame outer"></div>
+<div class="frame inner"></div>
 <div class="ghost">33</div>
+<div class="kicker">✦ &nbsp;Clair Obscur&nbsp; ✦</div>
 <h1>Expedition 33dle</h1>
-<p class="tag">A daily guessing game for Clair Obscur: Expedition 33</p>
 <div class="rule"></div>
-<svg class="stroke" viewBox="0 0 200 140">
- <path d="M 22 138 C 88 132, 118 98, 142 64 C 158 41, 172 22, 192 4 C 170 36, 150 70, 122 100 C 95 126, 55 138, 22 138 Z" fill="#d9a93f" opacity=".88"/>
- <path d="M 40 136 C 78 130, 104 112, 124 92 C 102 120, 70 134, 40 136 Z" fill="#e8bd55" opacity=".25"/>
- <path d="M 150 52 C 162 36, 174 20, 190 6 C 178 26, 166 44, 154 60 Z" fill="#d9a93f" opacity=".4"/>
-</svg>
+<p class="tag">Guess today's character from Clair&nbsp;Obscur: Expedition&nbsp;33</p>
 <div class="url">expedition33dle.com</div>
 </body>
 </html>
