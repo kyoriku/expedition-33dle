@@ -80,7 +80,7 @@ function Cell({
       {corner && (
         <span
           aria-hidden="true"
-          className="absolute top-0.5 right-1 z-10 text-[12px] leading-none font-bold opacity-80"
+          className="absolute top-0.5 right-1 z-10 text-[10px] leading-none font-bold opacity-80"
         >
           {corner}
         </span>
