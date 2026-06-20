@@ -67,7 +67,7 @@ export default function Modal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-0 sm:p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) onClose(); // backdrop click only
       }}
@@ -78,24 +78,25 @@ export default function Modal({
         aria-modal="true"
         aria-labelledby="modal-title"
         tabIndex={-1}
-        className={`bg-surface sm:border-gold/30 relative flex h-full w-full flex-col justify-center overflow-y-auto p-5 outline-none sm:h-auto sm:border ${widthClass}`}
+        className={`bg-surface border-gold/30 relative flex max-h-full w-full flex-col border p-5 outline-none ${widthClass}`}
       >
         <button
           type="button"
           aria-label="Close"
           onClick={onClose}
-          className="text-muted hover:text-parchment absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-md"
+          className="text-muted hover:text-parchment absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-md"
         >
           ✕
         </button>
         <h2
           id="modal-title"
-          className="font-display mb-1.5 text-xl tracking-[0.06em] uppercase"
+          className="font-display mb-1.5 shrink-0 text-xl tracking-[0.06em] uppercase"
         >
           {title}
         </h2>
-        <div className="rule mb-3" aria-hidden="true" />
-        {children}
+        <div className="rule mb-3 shrink-0" aria-hidden="true" />
+        {/* Only the body scrolls; the title + close button above stay pinned. */}
+        <div className="min-h-0 flex-1 overflow-y-auto">{children}</div>
       </div>
     </div>
   );
