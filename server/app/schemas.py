@@ -103,3 +103,51 @@ class ClassicGuessResponse(BaseModel):
     guess: EntityRead
     feedback: ClassicGuessFeedback
     is_correct: bool
+
+
+class PictoTodayResponse(BaseModel):
+    """Response for GET /api/pictos/today.
+
+    Mirrors ClassicTodayResponse: the answer picto is never singled out; the
+    full picto list is included so the frontend can do autocomplete.
+    """
+
+    puzzle_date: date
+    puzzle_number: int
+    pictos: list[PictoRead]
+    yesterday: Optional[PictoRead] = None  # previous day's answer (over, so public)
+
+
+class PictoGuessRequest(BaseModel):
+    """Request body for POST /api/pictos/guess."""
+
+    picto_id: int
+
+
+class PictoGuessFeedback(BaseModel):
+    """Per-attribute comparison of a picto guess against today's answer.
+
+    Reuses the classic feedback atoms: scalar (match/miss) for the closed-set
+    fields, ElementFeedback (match/partial/miss) for the multi-value `stats`,
+    and DirectionFeedback (match/higher/lower) for the numeric fields.
+    """
+
+    type: ScalarFeedback
+    stats: ElementFeedback
+    lumina_cost: DirectionFeedback
+    effect_category: ScalarFeedback
+    source: ScalarFeedback
+    zone_obtained: ScalarFeedback
+    act_introduced: DirectionFeedback
+
+
+class PictoGuessResponse(BaseModel):
+    """Response for POST /api/pictos/guess.
+
+    Echoes the guessed picto plus feedback. The answer picto never appears here
+    in any form — name is not compared per-attribute; is_correct covers it.
+    """
+
+    guess: PictoRead
+    feedback: PictoGuessFeedback
+    is_correct: bool

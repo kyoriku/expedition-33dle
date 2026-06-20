@@ -1,4 +1,11 @@
-import type { Entity, ClassicGuessResponse, ClassicTodayResponse } from "./types";
+import type {
+  Entity,
+  ClassicGuessResponse,
+  ClassicTodayResponse,
+  Picto,
+  PictoGuessResponse,
+  PictoTodayResponse,
+} from "./types";
 
 export class ApiError extends Error {
   status: number;
@@ -34,5 +41,23 @@ export function submitGuess(entityId: number): Promise<ClassicGuessResponse> {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ entity_id: entityId }),
+  });
+}
+
+// Pictos mode — parallels the classic functions above.
+
+export function getPictosToday(): Promise<PictoTodayResponse> {
+  return request<PictoTodayResponse>("/api/pictos/today");
+}
+
+export function revealPicto(): Promise<Picto> {
+  return request<Picto>("/api/pictos/reveal");
+}
+
+export function submitPictoGuess(pictoId: number): Promise<PictoGuessResponse> {
+  return request<PictoGuessResponse>("/api/pictos/guess", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ picto_id: pictoId }),
   });
 }

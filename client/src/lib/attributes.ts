@@ -4,7 +4,12 @@
 // reordering, or relabelling a column happens in exactly one place. This is also
 // the seam a future mode (Weapons, Pictos) would swap out.
 
-import type { Entity, Picto } from "./types";
+import type {
+  ClassicGuessFeedback,
+  Entity,
+  Picto,
+  PictoGuessFeedback,
+} from "./types";
 
 /** Comparison outcome a single attribute cell can show. "neutral" is the name
  *  cell / answer-reveal cell, which carries no comparison. */
@@ -19,9 +24,11 @@ export type CellState =
 
 export type AttributeKind = "scalar" | "array" | "element" | "direction";
 
-export interface AttributeDescriptor<T = Entity> {
-  /** Key into the item type (and, for Entity, into ClassicGuessFeedback). */
-  key: keyof T & string;
+export interface AttributeDescriptor<T, F> {
+  /** Key valid on both the item type (the value) and the mode's feedback type
+   *  (the per-cell state) — so a column can't reference a field the feedback
+   *  payload doesn't carry. */
+  key: keyof T & keyof F & string;
   /** Column header and legend label. */
   label: string;
   kind: AttributeKind;
@@ -48,7 +55,7 @@ export const ATTRIBUTES = [
   { key: "category", label: "Category", kind: "scalar", format: (e: Entity) => e.category },
   { key: "affiliation", label: "Affiliation", kind: "array", format: (e: Entity) => e.affiliation.join(" • ") },
   { key: "zone", label: "Zone", kind: "scalar", format: (e: Entity) => e.zone },
-] as const satisfies readonly AttributeDescriptor[];
+] as const satisfies readonly AttributeDescriptor<Entity, ClassicGuessFeedback>[];
 
 /** Column order for the share grid (feedback keys only). */
 export const FIELD_ORDER = ATTRIBUTES.map((a) => a.key);
@@ -79,7 +86,7 @@ export const PICTOS_ATTRIBUTES = [
     kind: "direction",
     format: (p: Picto) => String(p.act_introduced),
   },
-] as const satisfies readonly AttributeDescriptor<Picto>[];
+] as const satisfies readonly AttributeDescriptor<Picto, PictoGuessFeedback>[];
 
 /** Always-visible glyph per state. Distinguishing match/partial/miss by glyph —
  *  not just by green/gold/red — keeps the grid legible without color (WCAG 1.4.1,
