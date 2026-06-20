@@ -358,7 +358,12 @@ function Game({ today }: { today: TodayResponse }) {
         </p>
       )}
 
-      <Modal open={showHowTo} onClose={closeHowTo} title="How to Play">
+      <Modal
+        open={showHowTo}
+        onClose={closeHowTo}
+        title="How to Play"
+        widthClass="sm:max-w-4xl lg:max-w-6xl"
+      >
         <HowToPlay onClose={closeHowTo} />
       </Modal>
 
