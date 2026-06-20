@@ -1,5 +1,5 @@
 import { FIELD_ORDER } from "./attributes";
-import type { GameStatus, GuessResponse } from "./types";
+import type { GameStatus, ClassicGuessResponse } from "./types";
 
 // Spoiler-free by construction: higher/lower fold into the same square as
 // miss, so the grid leaks no directional info.
@@ -12,7 +12,7 @@ const EMOJI: Record<string, string> = {
 };
 
 export function buildShareString(
-  guesses: GuessResponse[],
+  guesses: ClassicGuessResponse[],
   puzzleNumber: number,
   status: GameStatus,
 ): string {

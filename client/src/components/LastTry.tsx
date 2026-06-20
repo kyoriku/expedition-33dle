@@ -1,9 +1,9 @@
 import { ATTRIBUTES } from "../lib/attributes";
-import type { GuessResponse } from "../lib/types";
+import type { ClassicGuessResponse } from "../lib/types";
 
 /** Segmented bar summarizing how many attributes the most recent guess matched
  *  exactly — a quick "getting warmer" read above the grid. */
-export default function LastTry({ guess }: { guess: GuessResponse }) {
+export default function LastTry({ guess }: { guess: ClassicGuessResponse }) {
   const total = ATTRIBUTES.length;
   const exact = ATTRIBUTES.filter((a) => guess.feedback[a.key] === "match").length;
   return (

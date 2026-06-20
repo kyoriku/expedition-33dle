@@ -1,5 +1,5 @@
 // Daily-rollover time helpers. The puzzle rolls at 00:00 UTC server-side
-// (see server/app/routers/puzzles.py), so everything here is UTC-based to stay
+// (see server/app/routers/classic.py), so everything here is UTC-based to stay
 // in lock-step with the server's notion of "today". Pure + injectable `now`
 // for testability.
 

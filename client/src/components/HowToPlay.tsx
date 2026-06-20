@@ -1,9 +1,9 @@
-import type { GuessResponse } from "../lib/types";
+import type { ClassicGuessResponse } from "../lib/types";
 import GuessGrid from "./GuessGrid";
 
 // Synthetic example — fabricated feedback tied to no real puzzle, chosen to
 // demonstrate every color state plus a directional arrow.
-const EXAMPLE_GUESS: GuessResponse = {
+const EXAMPLE_GUESS: ClassicGuessResponse = {
   guess: {
     id: 0,
     name: "Gustave",

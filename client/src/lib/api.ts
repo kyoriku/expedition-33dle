@@ -1,4 +1,4 @@
-import type { Entity, GuessResponse, TodayResponse } from "./types";
+import type { Entity, ClassicGuessResponse, ClassicTodayResponse } from "./types";
 
 export class ApiError extends Error {
   status: number;
@@ -21,16 +21,16 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   return res.json() as Promise<T>;
 }
 
-export function fetchToday(): Promise<TodayResponse> {
-  return request<TodayResponse>("/api/today");
+export function fetchToday(): Promise<ClassicTodayResponse> {
+  return request<ClassicTodayResponse>("/api/classic/today");
 }
 
 export function revealAnswer(): Promise<Entity> {
-  return request<Entity>("/api/reveal");
+  return request<Entity>("/api/classic/reveal");
 }
 
-export function submitGuess(entityId: number): Promise<GuessResponse> {
-  return request<GuessResponse>("/api/guess", {
+export function submitGuess(entityId: number): Promise<ClassicGuessResponse> {
+  return request<ClassicGuessResponse>("/api/classic/guess", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ entity_id: entityId }),

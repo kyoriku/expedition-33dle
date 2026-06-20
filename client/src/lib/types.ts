@@ -30,7 +30,7 @@ export interface Picto {
   act_introduced: number;
 }
 
-export interface GuessFeedback {
+export interface ClassicGuessFeedback {
   gender: ScalarFeedback;
   role: ScalarFeedback;
   weapon: ScalarFeedback;
@@ -41,13 +41,13 @@ export interface GuessFeedback {
   zone: ScalarFeedback;
 }
 
-export interface GuessResponse {
+export interface ClassicGuessResponse {
   guess: Entity;
-  feedback: GuessFeedback;
+  feedback: ClassicGuessFeedback;
   is_correct: boolean;
 }
 
-export interface TodayResponse {
+export interface ClassicTodayResponse {
   puzzle_date: string; // ISO date
   puzzle_number: number;
   entities: Entity[];
@@ -59,7 +59,7 @@ export interface TodayResponse {
 export type GameStatus = "in_progress" | "won" | "lost";
 
 export interface StoredGameState {
-  guesses: GuessResponse[];
+  guesses: ClassicGuessResponse[];
   status: GameStatus;
   puzzle_number: number;
   stats_recorded: boolean; // prevents double-counting stats on refresh

@@ -6,7 +6,7 @@ import {
   STATE_VISUAL,
   type CellState,
 } from "../lib/attributes";
-import type { GuessResponse } from "../lib/types";
+import type { ClassicGuessResponse } from "../lib/types";
 import Portrait from "./Portrait";
 
 // Name column wide enough for a portrait + uppercase name; 8 fluid attr columns.
@@ -91,7 +91,7 @@ function Cell({
 }
 
 interface GuessRowProps {
-  result: GuessResponse;
+  result: ClassicGuessResponse;
   /** Flip-reveal the attribute cells (just-submitted guesses only). The Name
    *  cell stays static so the player immediately sees what they guessed. */
   animate?: boolean;

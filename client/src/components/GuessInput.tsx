@@ -12,7 +12,7 @@ const LISTBOX_ID = "guess-suggestions";
 const optionId = (i: number) => `guess-option-${i}`;
 
 interface GuessInputProps {
-  entities: Entity[]; // pre-sorted by name from /api/today
+  entities: Entity[]; // pre-sorted by name from /api/classic/today
   guessedIds: Set<number>; // excluded from suggestions
   disabled: boolean; // true while POST in flight
   onSubmit: (entity: Entity) => void;
