@@ -1,5 +1,5 @@
 import type { PictoGuessResponse } from "../lib/types";
-import { MAX_GUESSES } from "../pages/PictosPage";
+import { PICTOS_MAX_GUESSES } from "../lib/stats";
 import PictosGuessGrid from "./PictosGuessGrid";
 
 // Synthetic example — fabricated feedback tied to no real puzzle, chosen to
@@ -51,7 +51,7 @@ export default function PictosHowToPlay({ onClose }: PictosHowToPlayProps) {
       <div className="mx-auto max-w-3xl">
         <p className="text-parchment mb-3 text-lg">
           Guess today's <em>Clair Obscur: Expedition 33</em> Picto in{" "}
-          {MAX_GUESSES} tries.
+          {PICTOS_MAX_GUESSES} tries.
         </p>
         <ul className="text-parchment mb-3 space-y-1.5 text-base">
           {[

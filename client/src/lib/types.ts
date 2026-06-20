@@ -91,12 +91,12 @@ export interface StoredGameState {
   revealed_answer?: Entity | null; // optional: pre-reveal states lack it
 }
 
-// Pictos game state — parallels StoredGameState. No stats_recorded (pictos has
-// no stats this phase).
+// Pictos game state — parallels StoredGameState.
 export interface PictoStoredGameState {
   guesses: PictoGuessResponse[];
   status: GameStatus;
   puzzle_number: number;
+  stats_recorded: boolean; // prevents double-counting stats on refresh
   revealed_answer?: Picto | null; // optional: pre-reveal states lack it
 }
 
@@ -105,7 +105,7 @@ export interface Stats {
   won: number;
   current_streak: number;
   max_streak: number;
-  guess_distribution: [number, number, number, number, number, number]; // wins by guess count (1-6)
+  guess_distribution: number[]; // wins by guess count (length = mode's max guesses: 6 classic, 8 pictos)
   last_played_puzzle_number: number | null;
   last_played_date: string | null; // ISO date, used for streak gap detection
 }

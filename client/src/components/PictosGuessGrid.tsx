@@ -44,9 +44,9 @@ export default function PictosGuessGrid({
           </div>
         </div>
         <div className="flex flex-col gap-1.5" role="rowgroup">
-          {/* Newest guess on top — storage stays chronological; display flips.
-              Copy before reverse() so the prop array isn't mutated. */}
-          {[...guesses].reverse().map((g) => (
+          {/* Oldest guess on top, newest at the bottom (traditional Wordle
+              order) — matches the chronological storage and share-string order. */}
+          {guesses.map((g) => (
             <PictosGuessRow
               key={g.guess.id}
               result={g}

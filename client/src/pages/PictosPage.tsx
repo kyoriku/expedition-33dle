@@ -9,13 +9,20 @@ import PictosGuessGrid from "../components/PictosGuessGrid";
 import PictosLastTry from "../components/PictosLastTry";
 import PictosAnswerReveal from "../components/PictosAnswerReveal";
 import PictosHowToPlay from "../components/PictosHowToPlay";
+import StatsBlock from "../components/StatsBlock";
+import Histogram from "../components/Histogram";
+import ShareButton from "../components/ShareButton";
 import { ApiError, getPictosToday, revealPicto, submitPictoGuess } from "../lib/api";
+import { buildPictosShareString } from "../lib/share";
 import { msToNextUtcMidnight, todayUtcISO } from "../lib/time";
 import { usePageTitle } from "../lib/usePageTitle";
+import { PICTOS_MAX_GUESSES as MAX_GUESSES, recordGame } from "../lib/stats";
 import {
   loadPictosState,
+  loadPictosStats,
   loadPictosTutorialSeen,
   savePictosState,
+  savePictosStats,
   savePictosTutorialSeen,
 } from "../lib/storage";
 import type {
@@ -24,10 +31,6 @@ import type {
   PictoGuessResponse,
   PictoTodayResponse,
 } from "../lib/types";
-
-// Two more than classic's 6 to offset the ~6x larger picto pool (201 vs 33).
-// Exported so PictosHowToPlay's "in N tries" copy can't drift from the real cap.
-export const MAX_GUESSES = 8;
 
 /** Spoken summary of a guess outcome for the screen-reader live region. */
 function describeGuess(
@@ -128,6 +131,14 @@ function Game({ today }: { today: PictoTodayResponse }) {
       : null;
   });
   const [showHowTo, setShowHowTo] = useState(() => !loadPictosTutorialSeen());
+  const [stats, setStats] = useState(loadPictosStats);
+  const [statsRecorded, setStatsRecorded] = useState(() => {
+    const stored = loadPictosState(today.puzzle_date);
+    return stored?.puzzle_number === today.puzzle_number
+      ? stored.stats_recorded
+      : false;
+  });
+  const [showStats, setShowStats] = useState(false);
 
   // Fires only on a lost game with no persisted answer. staleTime: Infinity
   // keeps the result fresh forever, so the enabled query never refetches.
@@ -146,10 +157,11 @@ function Game({ today }: { today: PictoTodayResponse }) {
         guesses,
         status,
         puzzle_number: today.puzzle_number,
+        stats_recorded: statsRecorded,
         revealed_answer: revealQuery.data,
       });
     }
-  }, [revealQuery.data, storedAnswer, guesses, status, today]);
+  }, [revealQuery.data, storedAnswer, guesses, status, statsRecorded, today]);
 
   const guessMutation = useMutation({
     mutationFn: submitPictoGuess,
@@ -164,10 +176,27 @@ function Game({ today }: { today: PictoTodayResponse }) {
       setStatus(nextStatus);
       setAnimateId(result.guess.id);
       setAnnouncement(describeGuess(result, nextGuesses.length, nextStatus));
+
+      // Record cumulative stats exactly once per finished game.
+      let nextRecorded = statsRecorded;
+      if ((nextStatus === "won" || nextStatus === "lost") && !statsRecorded) {
+        const nextStats = recordGame(stats, {
+          puzzle_number: today.puzzle_number,
+          puzzle_date: today.puzzle_date,
+          status: nextStatus,
+          guess_count: nextGuesses.length,
+        });
+        savePictosStats(nextStats);
+        setStats(nextStats);
+        nextRecorded = true;
+        setStatsRecorded(true);
+      }
+
       savePictosState(today.puzzle_date, {
         guesses: nextGuesses,
         status: nextStatus,
         puzzle_number: today.puzzle_number,
+        stats_recorded: nextRecorded,
         revealed_answer: revealedAnswer,
       });
     },
@@ -176,6 +205,14 @@ function Game({ today }: { today: PictoTodayResponse }) {
   const guessedIds = useMemo(
     () => new Set(guesses.map((g) => g.guess.id)),
     [guesses],
+  );
+
+  const shareText = useMemo(
+    () =>
+      status === "in_progress"
+        ? null
+        : buildPictosShareString(guesses, today.puzzle_number, status),
+    [guesses, status, today.puzzle_number],
   );
 
   function closeHowTo() {
@@ -204,6 +241,28 @@ function Game({ today }: { today: PictoTodayResponse }) {
             <span className="font-label border-gold/25 bg-panneau text-muted flex items-center gap-1 border px-3 py-1 text-sm tracking-[0.12em] uppercase">
               №<strong className="text-gold tabular-nums">{today.puzzle_number}</strong>
             </span>
+            {stats.current_streak > 0 && (
+              <span className="font-label border-gold/25 bg-panneau text-muted hidden items-center gap-1 border px-3 py-1 text-sm tracking-[0.12em] uppercase sm:flex">
+                Streak<strong className="text-gold tabular-nums">{stats.current_streak}</strong>
+              </span>
+            )}
+            <button
+              type="button"
+              aria-label="Statistics"
+              onClick={() => setShowStats(true)}
+              className="border-gold/40 text-gold hover:border-gold-bright hover:text-gold-bright bg-panneau flex h-8 w-8 items-center justify-center border"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                className="h-4 w-4"
+                fill="currentColor"
+              >
+                <rect x="3" y="12" width="4" height="8" />
+                <rect x="10" y="7" width="4" height="13" />
+                <rect x="17" y="3" width="4" height="17" />
+              </svg>
+            </button>
             <button
               type="button"
               aria-label="How to play"
@@ -266,7 +325,7 @@ function Game({ today }: { today: PictoTodayResponse }) {
             />
           )}
 
-          {/* No stats/share this phase — just the outcome banner + countdown. */}
+          {/* Outcome banner + cumulative stats + share + countdown. */}
           <div className="mx-auto w-full max-w-md">
             {status === "won" ? (
               <p className="bg-linear-to-b from-match to-match/80 border-match-edge text-parchment win-pop font-display my-3 border p-3 text-center text-base tracking-[0.08em] uppercase md:text-lg">
@@ -277,6 +336,12 @@ function Game({ today }: { today: PictoTodayResponse }) {
                 Game over — try again tomorrow
               </p>
             )}
+            <StatsBlock stats={stats} />
+            <Histogram
+              distribution={stats.guess_distribution}
+              highlight={status === "won" ? guesses.length : null}
+            />
+            {shareText !== null && <ShareButton text={shareText} />}
             <Countdown />
           </div>
         </>
@@ -296,6 +361,20 @@ function Game({ today }: { today: PictoTodayResponse }) {
         widthClass="sm:max-w-4xl lg:max-w-6xl"
       >
         <PictosHowToPlay onClose={closeHowTo} />
+      </Modal>
+
+      <Modal
+        open={showStats}
+        onClose={() => setShowStats(false)}
+        title="Statistics"
+        widthClass="sm:max-w-md"
+      >
+        <StatsBlock stats={stats} />
+        <Histogram
+          distribution={stats.guess_distribution}
+          highlight={status === "won" ? guesses.length : null}
+        />
+        <Countdown />
       </Modal>
     </main>
   );

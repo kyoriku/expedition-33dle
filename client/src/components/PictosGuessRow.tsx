@@ -2,12 +2,14 @@ import { PICTOS_ATTRIBUTES, type CellState } from "../lib/attributes";
 import type { PictoGuessResponse } from "../lib/types";
 import { Cell, NAME_CELL_BASE, WIN_NAME } from "./GuessRow";
 
-// 7 attribute columns (pictos has no portrait, so the name column can be a touch
-// narrower than classic's). Literal strings so Tailwind's JIT scanner picks them
-// up — the column count can't be computed at runtime.
+// 7 attribute columns. Same cell sizes and name-column widths as the classic grid
+// so the two modes line up exactly: square cells (92x92 mobile, 96x96 desktop) and
+// a 200px/250px name column. Content-width + centered on desktop; overflows +
+// scrolls on mobile. Literal strings so Tailwind's JIT scanner picks them up — the
+// column count can't be runtime-built.
 export const PICTOS_GRID_TEMPLATE =
-  "grid w-max grid-cols-[180px_repeat(7,92px)] gap-1.5 " +
-  "lg:w-full lg:grid-cols-[220px_repeat(7,minmax(0,1fr))]";
+  "grid w-max mx-auto grid-cols-[200px_repeat(7,92px)] gap-1.5 " +
+  "lg:grid-cols-[250px_repeat(7,96px)]";
 
 // NAME_CELL_BASE carries the same fixed h-23 height as the attribute cells (via
 // Cell/CELL_BASE), so the name cell lines up with the rest of the row.

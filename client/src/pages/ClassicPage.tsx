@@ -297,7 +297,7 @@ function Game({ today }: { today: ClassicTodayResponse }) {
       <p className="font-serif text-muted mt-2 mb-1 text-center text-base italic md:text-lg">
         Guess today's{" "}
         <span className="text-parchment">Clair Obscur: Expedition 33</span>{" "}
-        character
+        Character
       </p>
 
       {status === "in_progress" ? (

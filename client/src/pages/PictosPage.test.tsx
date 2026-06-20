@@ -43,6 +43,21 @@ const missResponse = (p: Picto): PictoGuessResponse => ({
   },
 });
 
+/** An all-match winning guess response. */
+const winResponse = (p: Picto): PictoGuessResponse => ({
+  guess: p,
+  is_correct: true,
+  feedback: {
+    type: "match",
+    stats: "match",
+    lumina_cost: "match",
+    effect_category: "match",
+    source: "match",
+    zone_obtained: "match",
+    act_introduced: "match",
+  },
+});
+
 const TODAY: PictoTodayResponse = {
   puzzle_date: "2026-06-17",
   puzzle_number: 4,
@@ -171,6 +186,8 @@ describe("PictosPage", () => {
       await screen.findByRole("rowheader", { name: /Answer: Energising Start/ }),
     ).toBeInTheDocument();
     expect(vi.mocked(revealPicto)).toHaveBeenCalled();
+    // Share button is available on the loss screen too.
+    expect(screen.getByRole("button", { name: /share/i })).toBeInTheDocument();
   });
 
   it("restores in-progress state from localStorage on reload", async () => {
@@ -195,5 +212,106 @@ describe("PictosPage", () => {
     ).toBeInTheDocument();
     // The restored guess wasn't re-submitted.
     expect(vi.mocked(submitPictoGuess)).toHaveBeenCalledTimes(1);
+  });
+});
+
+const PICTOS_STATS_KEY = "expedition33dle:pictos:stats";
+
+describe("PictosPage stats", () => {
+  it("opens the stats modal from the header (empty state)", async () => {
+    const user = userEvent.setup();
+    renderPage();
+    await user.click(await screen.findByRole("button", { name: "Statistics" }));
+    expect(
+      screen.getByRole("dialog", { name: /statistics/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/next puzzle in/i)).toBeInTheDocument();
+    // No game played yet.
+    expect(localStorage.getItem(PICTOS_STATS_KEY)).toBeNull();
+  });
+
+  it("records a win and shows the inline stats section", async () => {
+    vi.mocked(submitPictoGuess).mockResolvedValue(
+      winResponse(pic(1, "Energising Start")),
+    );
+    const user = userEvent.setup();
+    renderPage();
+
+    await user.type(await screen.findByRole("combobox"), "energ");
+    await user.click(screen.getByRole("option", { name: "Energising Start" }));
+    await screen.findByText("Solved in 1 guess");
+
+    // Inline stats render on the win screen.
+    expect(screen.getByText("Played")).toBeInTheDocument();
+    expect(screen.getByText(/guess distribution/i)).toBeInTheDocument();
+
+    const stored = JSON.parse(localStorage.getItem(PICTOS_STATS_KEY)!);
+    expect(stored.played).toBe(1);
+    expect(stored.won).toBe(1);
+    expect(stored.current_streak).toBe(1);
+    expect(stored.guess_distribution).toHaveLength(8);
+    expect(stored.guess_distribution[0]).toBe(1); // won in 1 guess -> bucket 0
+  });
+
+  it("records the finished game exactly once across reloads", async () => {
+    vi.mocked(submitPictoGuess).mockResolvedValue(
+      winResponse(pic(1, "Energising Start")),
+    );
+    const user = userEvent.setup();
+    renderPage();
+
+    await user.type(await screen.findByRole("combobox"), "energ");
+    await user.click(screen.getByRole("option", { name: "Energising Start" }));
+    await screen.findByText("Solved in 1 guess");
+    expect(JSON.parse(localStorage.getItem(PICTOS_STATS_KEY)!).played).toBe(1);
+
+    // Reload the finished game — recording must not run again.
+    cleanup();
+    renderPage();
+    await screen.findByText("Solved in 1 guess");
+    expect(JSON.parse(localStorage.getItem(PICTOS_STATS_KEY)!).played).toBe(1);
+  });
+
+  it("keeps pictos stats independent from classic stats", async () => {
+    vi.mocked(submitPictoGuess).mockResolvedValue(
+      winResponse(pic(1, "Energising Start")),
+    );
+    const user = userEvent.setup();
+    renderPage();
+    await user.type(await screen.findByRole("combobox"), "energ");
+    await user.click(screen.getByRole("option", { name: "Energising Start" }));
+    await screen.findByText("Solved in 1 guess");
+
+    expect(localStorage.getItem(PICTOS_STATS_KEY)).not.toBeNull();
+    expect(localStorage.getItem("expedition33dle:classic:stats")).toBeNull();
+  });
+});
+
+describe("PictosPage share", () => {
+  it("shows a share button on win that copies the pictos share text", async () => {
+    vi.mocked(submitPictoGuess).mockResolvedValue(
+      winResponse(pic(1, "Energising Start")),
+    );
+    const user = userEvent.setup();
+    renderPage();
+    await user.type(await screen.findByRole("combobox"), "energ");
+    await user.click(screen.getByRole("option", { name: "Energising Start" }));
+    await screen.findByText("Solved in 1 guess");
+
+    // jsdom has no navigator.share, so ShareButton falls back to the clipboard.
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, "clipboard", {
+      value: { writeText },
+      configurable: true,
+    });
+
+    await user.click(screen.getByRole("button", { name: /share/i }));
+    expect(await screen.findByText(/copied to clipboard/i)).toBeInTheDocument();
+
+    expect(writeText).toHaveBeenCalledTimes(1);
+    const text = writeText.mock.calls[0][0] as string;
+    expect(text).toContain("Expedition 33dle Pictos #");
+    expect(text).toContain("1/8");
+    expect(text).toContain("https://expedition33dle.com/pictos");
   });
 });
