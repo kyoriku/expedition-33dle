@@ -4,9 +4,10 @@ import {
   cellAriaLabel,
   describeState,
   FIELD_ORDER,
+  PICTOS_ATTRIBUTES,
   STATE_GLYPH,
 } from "./attributes";
-import type { Entity } from "./types";
+import type { Entity, Picto } from "./types";
 
 const SPARSE: Entity = {
   id: 1,
@@ -82,5 +83,54 @@ describe("accessibility helpers", () => {
     expect(STATE_GLYPH.match).toBe("✓");
     expect(STATE_GLYPH.miss).toBe("✗");
     expect(STATE_GLYPH.match).not.toBe(STATE_GLYPH.miss);
+  });
+});
+
+const SPARSE_PICTO: Picto = {
+  id: 1,
+  name: "X",
+  type: "Offensive",
+  stats: [],
+  lumina_cost: 5,
+  effect_category: "Damage",
+  source: "Pickup",
+  zone_obtained: "Flying Manor",
+  act_introduced: 1,
+};
+
+describe("PICTOS_ATTRIBUTES config", () => {
+  it("lists the 7 comparison columns in order", () => {
+    expect(PICTOS_ATTRIBUTES.map((a) => a.key)).toEqual([
+      "type",
+      "stats",
+      "lumina_cost",
+      "effect_category",
+      "source",
+      "zone_obtained",
+      "act_introduced",
+    ]);
+  });
+
+  it("formats sparse stats with an em dash", () => {
+    const byKey = Object.fromEntries(
+      PICTOS_ATTRIBUTES.map((a) => [a.key, a.format(SPARSE_PICTO)]),
+    );
+    expect(byKey.stats).toBe("—");
+    expect(byKey.type).toBe("Offensive");
+  });
+
+  it("formats present numeric and multi-value values", () => {
+    const p: Picto = {
+      ...SPARSE_PICTO,
+      stats: ["HP", "Crit"],
+      lumina_cost: 10,
+      act_introduced: 4,
+    };
+    const byKey = Object.fromEntries(
+      PICTOS_ATTRIBUTES.map((a) => [a.key, a.format(p)]),
+    );
+    expect(byKey.stats).toBe("HP • Crit");
+    expect(byKey.lumina_cost).toBe("10");
+    expect(byKey.act_introduced).toBe("4");
   });
 });

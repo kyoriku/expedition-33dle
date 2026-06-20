@@ -54,6 +54,31 @@ export interface ClassicTodayResponse {
   yesterday: Entity | null; // previous day's answer (no longer a spoiler)
 }
 
+// Pictos mode — parallels the Classic* shapes (server/app/schemas.py).
+
+export interface PictoGuessFeedback {
+  type: ScalarFeedback;
+  stats: ElementFeedback;
+  lumina_cost: DirectionFeedback;
+  effect_category: ScalarFeedback;
+  source: ScalarFeedback;
+  zone_obtained: ScalarFeedback;
+  act_introduced: DirectionFeedback;
+}
+
+export interface PictoGuessResponse {
+  guess: Picto;
+  feedback: PictoGuessFeedback;
+  is_correct: boolean;
+}
+
+export interface PictoTodayResponse {
+  puzzle_date: string; // ISO date
+  puzzle_number: number;
+  pictos: Picto[];
+  yesterday: Picto | null; // previous day's answer (no longer a spoiler)
+}
+
 // Client-only state.
 
 export type GameStatus = "in_progress" | "won" | "lost";

@@ -136,3 +136,24 @@ def test_empty_pool_pre_launch_still_not_available():
     """Pre-launch check fires before the empty-pool check."""
     with pytest.raises(PuzzleNotYetAvailable):
         get_puzzle_for_date(LAUNCH_DATE - timedelta(days=1), ())
+
+
+def test_empty_salt_is_identical_to_no_salt():
+    """An empty salt is a no-op: the classic schedule is byte-identical, so
+    adding the parameter cannot change existing answers."""
+    for i in range(60):
+        d = LAUNCH_DATE + timedelta(days=i)
+        assert get_puzzle_for_date(d, ROSTER) == get_puzzle_for_date(d, ROSTER, salt="")
+
+
+def test_salt_yields_independent_schedule():
+    """A non-empty salt reshuffles independently: same roster + same dates, but
+    the answers disagree on the overwhelming majority of days (two independent
+    permutations share ~one fixed point per cycle). This is what keeps the
+    pictos daily answer uncorrelated with classic's."""
+    diffs = sum(
+        get_puzzle_for_date(LAUNCH_DATE + timedelta(days=i), ROSTER)[0]
+        != get_puzzle_for_date(LAUNCH_DATE + timedelta(days=i), ROSTER, salt="pictos")[0]
+        for i in range(60)
+    )
+    assert diffs >= 50
