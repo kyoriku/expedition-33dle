@@ -51,7 +51,7 @@ export default function HowToPlay({ onClose }: HowToPlayProps) {
           spans the full modal so it matches the live board. */}
       <div className="mx-auto max-w-3xl">
         <p className="text-parchment mb-3 text-lg">
-          Guess today's <em>Clair Obscur: Expedition 33</em> character in 6
+          Guess today's <em>Clair Obscur: Expedition 33</em> Character in 6
           tries.
         </p>
         <ul className="text-parchment mb-3 space-y-1.5 text-base">

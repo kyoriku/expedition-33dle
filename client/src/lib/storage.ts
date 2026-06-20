@@ -1,10 +1,10 @@
-import { EMPTY_STATS } from "./stats";
+import { EMPTY_PICTO_STATS, EMPTY_STATS, PICTOS_MAX_GUESSES } from "./stats";
 import type { PictoStoredGameState, Stats, StoredGameState } from "./types";
 
 const keyFor = (date: string) => `expedition33dle:classic:state:${date}`;
 
 // Cumulative across days — intentionally NO date suffix, unlike game-state keys.
-const STATS_KEY = "expedition33dle:stats";
+const STATS_KEY = "expedition33dle:classic:stats";
 
 const STATUSES = ["in_progress", "won", "lost"];
 
@@ -43,7 +43,7 @@ export function saveState(date: string, state: StoredGameState): void {
 }
 
 // Pictos game state — separate namespace from classic so the two modes' daily
-// state never collide. No stats_recorded (pictos has no stats this phase).
+// state never collide.
 const pictosKeyFor = (date: string) => `expedition33dle:pictos:state:${date}`;
 
 /** Read stored pictos state for the given puzzle date. Returns null (fresh game)
@@ -62,6 +62,8 @@ export function loadPictosState(date: string): PictoStoredGameState | null {
     ) {
       return null;
     }
+    // States written before stats tracking lack the flag; false is safe.
+    state.stats_recorded = state.stats_recorded === true;
     return state;
   } catch {
     return null;
@@ -112,6 +114,43 @@ export function saveStats(stats: Stats): void {
   }
 }
 
+// Pictos cumulative stats — separate namespace from classic; independent totals.
+const PICTOS_STATS_KEY = "expedition33dle:pictos:stats";
+
+/** Read cumulative pictos stats. Returns EMPTY_PICTO_STATS on missing key,
+ *  corrupt JSON, unexpected shape, or disabled storage. */
+export function loadPictosStats(): Stats {
+  try {
+    const raw = localStorage.getItem(PICTOS_STATS_KEY);
+    if (!raw) return EMPTY_PICTO_STATS;
+    const parsed: unknown = JSON.parse(raw);
+    if (typeof parsed !== "object" || parsed === null) return EMPTY_PICTO_STATS;
+    const stats = parsed as Stats;
+    if (
+      typeof stats.played !== "number" ||
+      typeof stats.won !== "number" ||
+      typeof stats.current_streak !== "number" ||
+      typeof stats.max_streak !== "number" ||
+      !Array.isArray(stats.guess_distribution) ||
+      stats.guess_distribution.length !== PICTOS_MAX_GUESSES
+    ) {
+      return EMPTY_PICTO_STATS;
+    }
+    return stats;
+  } catch {
+    return EMPTY_PICTO_STATS;
+  }
+}
+
+/** Persist cumulative pictos stats. Silently no-ops if storage is unavailable. */
+export function savePictosStats(stats: Stats): void {
+  try {
+    localStorage.setItem(PICTOS_STATS_KEY, JSON.stringify(stats));
+  } catch {
+    // ignore
+  }
+}
+
 // Whether the how-to-play modal has ever been dismissed (no date suffix).
 const CLASSIC_TUTORIAL_KEY = "expedition33dle:classic:tutorial_seen";
 
@@ -145,6 +184,32 @@ export function loadPictosTutorialSeen(): boolean {
 export function savePictosTutorialSeen(): void {
   try {
     localStorage.setItem(PICTOS_TUTORIAL_KEY, "true");
+  } catch {
+    // ignore
+  }
+}
+
+// Daily-state keys accrue one per mode per day played; prune them on boot so
+// localStorage doesn't grow unbounded. ONLY :state:<date> keys are touched —
+// cumulative :stats and :tutorial_seen keys are intentionally preserved.
+const STATE_PREFIXES = [
+  "expedition33dle:classic:state:",
+  "expedition33dle:pictos:state:",
+];
+
+/** Delete every daily-state key whose date isn't `today` (UTC ISO, e.g.
+ *  "2026-06-20"). Call once on app boot. Collect-then-delete avoids mutating
+ *  localStorage mid-iteration. */
+export function pruneOldDailyState(today: string): void {
+  try {
+    const stale: string[] = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (!key) continue;
+      const prefix = STATE_PREFIXES.find((p) => key.startsWith(p));
+      if (prefix && key.slice(prefix.length) !== today) stale.push(key);
+    }
+    stale.forEach((k) => localStorage.removeItem(k));
   } catch {
     // ignore
   }

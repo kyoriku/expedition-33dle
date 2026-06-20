@@ -36,7 +36,10 @@ export default function MenuPage() {
           name="Classic"
           desc="Guess today's Clair Obscur: Expedition 33 character."
         />
-        <ModeCard to="/pictos" name="Pictos" desc="Guess today's Picto." />
+        <ModeCard 
+          to="/pictos" 
+          name="Pictos" 
+          desc="Guess today's Clair Obscur: Expedition 33 Picto." />
       </div>
     </main>
   );

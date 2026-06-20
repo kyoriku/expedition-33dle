@@ -9,13 +9,14 @@ import {
 import type { ClassicGuessResponse } from "../lib/types";
 import Portrait from "./Portrait";
 
-// Name column wide enough for a portrait + uppercase name; 8 fluid attr columns.
-// Below lg: fixed-width columns that scroll horizontally (mobile/tablet).
-// lg and up: fluid columns that fill the (wide) container, so the whole grid
-// fits with no horizontal scroll and cells are wide enough to hold the text.
+// Name column wide enough for a portrait + uppercase name; 8 square attr columns.
+// Square cells: 92x92 on mobile (h-23 + 92px cols), 96x96 on desktop (lg:min-h-24
+// + 96px cols). The pictos grid uses the same cell + name-column widths so the two
+// modes line up exactly. The grid is content-width (w-max) and centered (mx-auto)
+// on desktop; on mobile it overflows and the container scrolls (mx-auto a no-op).
 export const GRID_TEMPLATE =
-  "grid w-max grid-cols-[200px_repeat(8,92px)] gap-1.5 " +
-  "lg:w-full lg:grid-cols-[250px_repeat(8,minmax(0,1fr))]";
+  "grid w-max mx-auto grid-cols-[200px_repeat(8,92px)] gap-1.5 " +
+  "lg:grid-cols-[250px_repeat(8,96px)]";
 
 // Attribute cell. Background/border/text come from STATE_VISUAL; this is the
 // shared geometry. Fixed height keeps every row uniform regardless of content
@@ -67,17 +68,22 @@ export function Cell({
         flipIndex !== null ? { animationDelay: `${flipIndex * 80}ms` } : undefined
       }
     >
-      {big && (
+      {big ? (
+        // Directional cells: arrow and value sit inline (▲ 15) so they read
+        // cleanly. A dedicated class (not VALUE_TEXT) avoids the line-clamp vs
+        // flex display conflict; the value is always a short number.
         <span
           aria-hidden="true"
-          className="font-display pointer-events-none absolute inset-0 flex items-center justify-center text-3xl leading-none opacity-20"
+          className="relative z-10 flex max-w-full items-center justify-center gap-1 font-semibold"
         >
-          {big}
+          <span className="text-base leading-none">{big}</span>
+          {value}
+        </span>
+      ) : (
+        <span className={VALUE_TEXT} aria-hidden="true">
+          {value}
         </span>
       )}
-      <span className={VALUE_TEXT} aria-hidden="true">
-        {value}
-      </span>
       {corner && (
         <span
           aria-hidden="true"

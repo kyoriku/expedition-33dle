@@ -84,9 +84,14 @@ export const PICTOS_ATTRIBUTES = [
     key: "act_introduced",
     label: "Act",
     kind: "direction",
-    format: (p: Picto) => String(p.act_introduced),
+    // Act 4 is DLC / Verso's Drafts content; show "DLC". Numeric value is kept
+    // for the higher/lower directional comparison.
+    format: (p: Picto) => (p.act_introduced === 4 ? "DLC" : String(p.act_introduced)),
   },
 ] as const satisfies readonly AttributeDescriptor<Picto, PictoGuessFeedback>[];
+
+/** Column order for the pictos share grid (feedback keys only). */
+export const PICTOS_FIELD_ORDER = PICTOS_ATTRIBUTES.map((a) => a.key);
 
 /** Always-visible glyph per state. Distinguishing match/partial/miss by glyph —
  *  not just by green/gold/red — keeps the grid legible without color (WCAG 1.4.1,

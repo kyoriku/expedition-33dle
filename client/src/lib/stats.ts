@@ -10,6 +10,16 @@ export const EMPTY_STATS: Stats = {
   last_played_date: null,
 };
 
+// Pictos guess cap — single source of truth. Drives the win/lose check in
+// PictosPage, the "in N tries" HowToPlay copy, the empty-stats bucket count, and
+// the stored-stats length validation, so they can't drift.
+export const PICTOS_MAX_GUESSES = 8;
+
+export const EMPTY_PICTO_STATS: Stats = {
+  ...EMPTY_STATS,
+  guess_distribution: Array(PICTOS_MAX_GUESSES).fill(0),
+};
+
 /** True when `today` is exactly one calendar day after `prev` (both YYYY-MM-DD, UTC). */
 export function isPreviousDay(today: string, prev: string): boolean {
   const t = new Date(today + "T00:00:00Z");

@@ -13,7 +13,9 @@ interface HeaderProps {
 export default function Header({ right, brandAs = "h1" }: HeaderProps) {
   const Brand = brandAs;
   return (
-    <>
+    // Constrain the header to a consistent width on every page (matches the menu),
+    // even where the page's main extends wider for the guess grid.
+    <div className="mx-auto w-full max-w-xl md:max-w-3xl">
       <header className="mb-1.5 flex items-center justify-between gap-2">
         <Brand className="leading-none">
           <Link to="/" className="group block">
@@ -28,6 +30,6 @@ export default function Header({ right, brandAs = "h1" }: HeaderProps) {
         {right}
       </header>
       <div className="rule" aria-hidden="true" />
-    </>
+    </div>
   );
 }
