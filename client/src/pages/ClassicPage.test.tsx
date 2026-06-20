@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router-dom";
-import HomePage from "./HomePage";
+import ClassicPage from "./ClassicPage";
 import type {
   Entity,
   ClassicGuessResponse,
@@ -46,7 +46,7 @@ function renderHome() {
   return render(
     <QueryClientProvider client={qc}>
       <MemoryRouter>
-        <HomePage />
+        <ClassicPage />
       </MemoryRouter>
     </QueryClientProvider>,
   );
@@ -58,7 +58,7 @@ beforeEach(() => {
   vi.mocked(fetchToday).mockResolvedValue(TODAY);
 });
 
-describe("HomePage", () => {
+describe("ClassicPage", () => {
   it("loads today's puzzle and shows the input (grid appears after the first guess)", async () => {
     renderHome();
     expect(await screen.findByRole("combobox")).toBeInTheDocument();
