@@ -11,7 +11,7 @@ from app.routers.puzzles import compute_feedback
 BASE = dict(
     name="Base",
     gender="female",
-    role="Scholar",
+    role="Playable",
     weapon="Staff",
     element=["Fire"],
     act_introduced=2,

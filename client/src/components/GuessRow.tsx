@@ -18,16 +18,17 @@ export const GRID_TEMPLATE =
   "lg:w-full lg:grid-cols-[250px_repeat(8,minmax(0,1fr))]";
 
 // Attribute cell. Background/border/text come from STATE_VISUAL; this is the
-// shared geometry. min-height keeps a roughly-square floor while letting a cell
-// grow if a value wraps to a second line.
+// shared geometry. Fixed height keeps every row uniform regardless of content
+// length; below lg the columns are narrow (scrollable), so cell text is smaller
+// and line-clamps — a busy multi-value cell can't stretch its row taller.
 export const CELL_BASE =
-  "relative flex min-h-20 flex-col items-center justify-center overflow-hidden p-1.5 " +
+  "relative flex h-23 flex-col items-center justify-center overflow-hidden p-1.5 " +
   "text-center text-sm leading-snug break-words font-serif lg:min-h-24 " +
   "shadow-[inset_0_1px_0_rgba(255,255,255,.08)]";
 
 // Name cell geometry (left-aligned, holds the portrait).
 export const NAME_CELL_BASE =
-  "relative flex min-h-20 items-center gap-2.5 overflow-hidden px-2.5 lg:min-h-24 " +
+  "relative flex h-23 items-center gap-2.5 overflow-hidden px-2.5 lg:min-h-24 " +
   "shadow-[inset_0_1px_0_rgba(255,255,255,.08)]";
 
 // Correct guess: the name cell becomes the gold brand moment.
@@ -39,7 +40,7 @@ export const PORTRAIT_SIZE = "h-12 w-12 md:h-14 md:w-14 lg:h-16 lg:w-16";
 
 // Value text: semibold EB Garamond. (No drop-shadow — the gradients already
 // meet AA contrast, and a shadow muddied the dark text on the gold cells.)
-const VALUE_TEXT = "relative z-10 max-w-full font-semibold";
+const VALUE_TEXT = "relative z-10 max-w-full font-semibold line-clamp-4";
 
 function Cell({
   feedback,
@@ -80,7 +81,7 @@ function Cell({
       {corner && (
         <span
           aria-hidden="true"
-          className="absolute top-0.5 right-1 z-10 text-[12px] leading-none font-bold opacity-80"
+          className="state-glyph absolute top-0.5 right-0.5 z-10 text-[12px] leading-none font-bold opacity-80"
         >
           {corner}
         </span>

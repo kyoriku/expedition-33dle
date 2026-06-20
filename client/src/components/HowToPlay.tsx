@@ -8,7 +8,7 @@ const EXAMPLE_GUESS: GuessResponse = {
     id: 0,
     name: "Gustave",
     gender: "male",
-    role: "Engineer",
+    role: "Playable",
     weapon: "Sword & Pistol",
     element: ["Lightning"],
     act_introduced: 1,
@@ -72,7 +72,7 @@ export default function HowToPlay({ onClose }: HowToPlayProps) {
           <li key={label} className="flex items-center gap-2">
             <span
               aria-hidden="true"
-              className={`${cls} ${glyphCls} flex h-5 w-5 shrink-0 items-center justify-center text-[11px] font-bold`}
+              className={`${cls} ${glyphCls} state-glyph flex h-5 w-5 shrink-0 items-center justify-center text-[12px] font-bold`}
             >
               {glyph}
             </span>

@@ -9,7 +9,7 @@ function ent(id: number, name: string): Entity {
     id,
     name,
     gender: "female",
-    role: "Axon",
+    role: "Boss",
     weapon: "Hybrid",
     element: [],
     act_introduced: 2,

@@ -23,7 +23,7 @@ const ent = (id: number, name: string, over: Partial<Entity> = {}): Entity => ({
   id,
   name,
   gender: "male",
-  role: "Engineer",
+  role: "Playable",
   weapon: "Sword",
   element: ["Fire"],
   act_introduced: 1,

@@ -161,6 +161,13 @@ body {
   opacity: 0.55;
 }
 
+/* Status glyphs (✓ ≈ ✗) aren't in the OFL text fonts, so they fall back to
+   whatever the inherited family resolves to — serif in the grid, sans in the
+   legend. Pin them to one system stack so they render identically everywhere. */
+.state-glyph {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
 /* Centered ornamental divider — a gold rule broken by a ✦. */
 .ornament {
   display: flex;

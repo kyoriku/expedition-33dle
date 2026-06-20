@@ -65,8 +65,8 @@ describe("ATTRIBUTES config", () => {
 
 describe("accessibility helpers", () => {
   it("cellAriaLabel composes label, value, and a state phrase", () => {
-    expect(cellAriaLabel("Role", "Engineer", "miss")).toBe(
-      "Role: Engineer, no match",
+    expect(cellAriaLabel("Role", "Playable", "miss")).toBe(
+      "Role: Playable, no match",
     );
     expect(cellAriaLabel("Act", "3", "higher")).toBe(
       "Act: 3, answer is higher",
