@@ -12,6 +12,7 @@ import { ApiError, fetchToday, revealAnswer, submitGuess } from "../lib/api";
 import { buildShareString } from "../lib/share";
 import { recordGame } from "../lib/stats";
 import { msToNextUtcMidnight, todayUtcISO } from "../lib/time";
+import { usePageTitle } from "../lib/usePageTitle";
 import StatsBlock from "../components/StatsBlock";
 import Histogram from "../components/Histogram";
 import Countdown from "../components/Countdown";
@@ -86,7 +87,8 @@ function useDailyRollover(puzzleDate: string | undefined, refetch: () => void) {
   }, [puzzleDate, refetch]);
 }
 
-export default function HomePage() {
+export default function ClassicPage() {
+  usePageTitle("Daily Character | Expedition33dle");
   // Server state only; game state lives in <Game> + localStorage.
   const { data: today, isPending, error, refetch } = useQuery({
     queryKey: ["today"],
