@@ -42,7 +42,7 @@ export const PORTRAIT_SIZE = "h-12 w-12 md:h-14 md:w-14 lg:h-16 lg:w-16";
 // meet AA contrast, and a shadow muddied the dark text on the gold cells.)
 const VALUE_TEXT = "relative z-10 max-w-full font-semibold line-clamp-4";
 
-function Cell({
+export function Cell({
   feedback,
   value,
   label,

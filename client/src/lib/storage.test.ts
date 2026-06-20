@@ -22,13 +22,13 @@ describe("game state storage", () => {
   });
 
   it("returns null on corrupt JSON", () => {
-    localStorage.setItem("expedition33dle:state:2026-06-17", "{not json");
+    localStorage.setItem("expedition33dle:classic:state:2026-06-17", "{not json");
     expect(loadState("2026-06-17")).toBeNull();
   });
 
   it("returns null on an unexpected shape", () => {
     localStorage.setItem(
-      "expedition33dle:state:2026-06-17",
+      "expedition33dle:classic:state:2026-06-17",
       JSON.stringify({ status: "bogus", puzzle_number: "x" }),
     );
     expect(loadState("2026-06-17")).toBeNull();
@@ -36,7 +36,7 @@ describe("game state storage", () => {
 
   it("defaults a missing stats_recorded flag to false", () => {
     localStorage.setItem(
-      "expedition33dle:state:2026-06-17",
+      "expedition33dle:classic:state:2026-06-17",
       JSON.stringify({ guesses: [], status: "won", puzzle_number: 5 }),
     );
     expect(loadState("2026-06-17")?.stats_recorded).toBe(false);

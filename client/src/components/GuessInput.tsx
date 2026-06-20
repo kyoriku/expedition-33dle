@@ -1,5 +1,4 @@
 import { useState } from "react";
-import type { Entity } from "../lib/types";
 
 /** Strip accents and lowercase, so "sirene" matches "Sirène". */
 const norm = (s: string) =>
@@ -11,19 +10,28 @@ const norm = (s: string) =>
 const LISTBOX_ID = "guess-suggestions";
 const optionId = (i: number) => `guess-option-${i}`;
 
-interface GuessInputProps {
-  entities: Entity[]; // pre-sorted by name from /api/classic/today
-  guessedIds: Set<number>; // excluded from suggestions
-  disabled: boolean; // true while POST in flight
-  onSubmit: (entity: Entity) => void;
+/** The minimal shape GuessInput needs from a guessable item. Both Entity and
+ *  Picto satisfy it, so the same combobox serves both modes. */
+interface NamedItem {
+  id: number;
+  name: string;
 }
 
-export default function GuessInput({
+interface GuessInputProps<T extends NamedItem> {
+  entities: T[]; // pre-sorted by name from /api/<mode>/today
+  guessedIds: Set<number>; // excluded from suggestions
+  disabled: boolean; // true while POST in flight
+  onSubmit: (item: T) => void;
+  noun?: string; // singular item noun for copy, e.g. "character" | "Picto"
+}
+
+export default function GuessInput<T extends NamedItem>({
   entities,
   guessedIds,
   disabled,
   onSubmit,
-}: GuessInputProps) {
+  noun = "character",
+}: GuessInputProps<T>) {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -37,11 +45,11 @@ export default function GuessInput({
   const showList = open && suggestions.length > 0;
   const showEmpty = open && trimmed !== "" && suggestions.length === 0;
 
-  function submit(entity: Entity) {
+  function submit(item: T) {
     setQuery("");
     setOpen(false);
     setActiveIndex(-1);
-    onSubmit(entity);
+    onSubmit(item);
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -75,7 +83,7 @@ export default function GuessInput({
           type="text"
           value={query}
           disabled={disabled}
-          placeholder="Type a character's name…"
+          placeholder={`Type a ${noun}'s name…`}
           autoComplete="off"
           enterKeyHint="go"
           role="combobox"
@@ -86,7 +94,7 @@ export default function GuessInput({
             showList && activeIndex >= 0 ? optionId(activeIndex) : undefined
           }
           aria-busy={disabled}
-          aria-label="Guess a character"
+          aria-label={`Guess a ${noun}`}
           className="font-serif text-parchment placeholder-muted w-full bg-transparent text-base outline-none disabled:opacity-50"
           onChange={(e) => {
             setQuery(e.target.value);
@@ -107,7 +115,7 @@ export default function GuessInput({
         <ul
           id={LISTBOX_ID}
           role="listbox"
-          aria-label="Character suggestions"
+          aria-label={`${noun[0].toUpperCase()}${noun.slice(1)} suggestions`}
           className="border-gold/40 bg-panneau absolute z-10 mt-1 max-h-60 w-full overflow-y-auto border shadow-lg"
         >
           {suggestions.map((entity, i) => (
@@ -135,7 +143,7 @@ export default function GuessInput({
           role="status"
           className="border-gold/40 bg-panneau text-muted font-serif absolute z-10 mt-1 w-full border px-3 py-2 text-sm italic shadow-lg"
         >
-          No characters match “{trimmed}”
+          No {noun}s match “{trimmed}”
         </div>
       )}
     </div>

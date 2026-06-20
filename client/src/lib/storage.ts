@@ -1,7 +1,7 @@
 import { EMPTY_STATS } from "./stats";
-import type { Stats, StoredGameState } from "./types";
+import type { PictoStoredGameState, Stats, StoredGameState } from "./types";
 
-const keyFor = (date: string) => `expedition33dle:state:${date}`;
+const keyFor = (date: string) => `expedition33dle:classic:state:${date}`;
 
 // Cumulative across days — intentionally NO date suffix, unlike game-state keys.
 const STATS_KEY = "expedition33dle:stats";
@@ -42,6 +42,42 @@ export function saveState(date: string, state: StoredGameState): void {
   }
 }
 
+// Pictos game state — separate namespace from classic so the two modes' daily
+// state never collide. No stats_recorded (pictos has no stats this phase).
+const pictosKeyFor = (date: string) => `expedition33dle:pictos:state:${date}`;
+
+/** Read stored pictos state for the given puzzle date. Returns null (fresh game)
+ *  on missing key, corrupt JSON, unexpected shape, or disabled storage. */
+export function loadPictosState(date: string): PictoStoredGameState | null {
+  try {
+    const raw = localStorage.getItem(pictosKeyFor(date));
+    if (!raw) return null;
+    const parsed: unknown = JSON.parse(raw);
+    if (typeof parsed !== "object" || parsed === null) return null;
+    const state = parsed as PictoStoredGameState;
+    if (
+      !Array.isArray(state.guesses) ||
+      !STATUSES.includes(state.status) ||
+      typeof state.puzzle_number !== "number"
+    ) {
+      return null;
+    }
+    return state;
+  } catch {
+    return null;
+  }
+}
+
+/** Persist pictos state for the given puzzle date. Silently no-ops if storage is
+ *  unavailable. */
+export function savePictosState(date: string, state: PictoStoredGameState): void {
+  try {
+    localStorage.setItem(pictosKeyFor(date), JSON.stringify(state));
+  } catch {
+    // ignore
+  }
+}
+
 /** Read cumulative stats. Returns EMPTY_STATS on missing key, corrupt JSON,
  *  unexpected shape, or disabled storage. */
 export function loadStats(): Stats {
@@ -77,11 +113,11 @@ export function saveStats(stats: Stats): void {
 }
 
 // Whether the how-to-play modal has ever been dismissed (no date suffix).
-const TUTORIAL_KEY = "expedition33dle:tutorial_seen";
+const CLASSIC_TUTORIAL_KEY = "expedition33dle:classic:tutorial_seen";
 
 export function loadTutorialSeen(): boolean {
   try {
-    return localStorage.getItem(TUTORIAL_KEY) === "true";
+    return localStorage.getItem(CLASSIC_TUTORIAL_KEY) === "true";
   } catch {
     return false;
   }
@@ -89,7 +125,26 @@ export function loadTutorialSeen(): boolean {
 
 export function saveTutorialSeen(): void {
   try {
-    localStorage.setItem(TUTORIAL_KEY, "true");
+    localStorage.setItem(CLASSIC_TUTORIAL_KEY, "true");
+  } catch {
+    // ignore
+  }
+}
+
+// Pictos has its own tutorial flag so first-visit how-to fires per mode.
+const PICTOS_TUTORIAL_KEY = "expedition33dle:pictos:tutorial_seen";
+
+export function loadPictosTutorialSeen(): boolean {
+  try {
+    return localStorage.getItem(PICTOS_TUTORIAL_KEY) === "true";
+  } catch {
+    return false;
+  }
+}
+
+export function savePictosTutorialSeen(): void {
+  try {
+    localStorage.setItem(PICTOS_TUTORIAL_KEY, "true");
   } catch {
     // ignore
   }
