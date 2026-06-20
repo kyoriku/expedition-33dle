@@ -1,4 +1,5 @@
 import type { ClassicGuessResponse } from "../lib/types";
+import { CLASSIC_MAX_GUESSES } from "../lib/stats";
 import GuessGrid from "./GuessGrid";
 
 // Synthetic example — fabricated feedback tied to no real puzzle, chosen to
@@ -51,8 +52,8 @@ export default function HowToPlay({ onClose }: HowToPlayProps) {
           spans the full modal so it matches the live board. */}
       <div className="mx-auto max-w-3xl">
         <p className="text-parchment mb-3 text-lg">
-          Guess today's <em>Clair Obscur: Expedition 33</em> Character in 6
-          tries.
+          Guess today's <em>Clair Obscur: Expedition 33</em> Character in{" "}
+          {CLASSIC_MAX_GUESSES} tries.
         </p>
         <ul className="text-parchment mb-3 space-y-1.5 text-base">
           {[

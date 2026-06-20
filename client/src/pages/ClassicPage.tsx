@@ -10,7 +10,7 @@ import HowToPlay from "../components/HowToPlay";
 import Modal from "../components/Modal";
 import { ApiError, fetchToday, revealAnswer, submitGuess } from "../lib/api";
 import { buildShareString } from "../lib/share";
-import { recordGame } from "../lib/stats";
+import { CLASSIC_MAX_GUESSES as MAX_GUESSES, recordGame } from "../lib/stats";
 import { msToNextUtcMidnight, todayUtcISO } from "../lib/time";
 import { usePageTitle } from "../lib/usePageTitle";
 import StatsBlock from "../components/StatsBlock";
@@ -31,8 +31,6 @@ import type {
   ClassicGuessResponse,
   ClassicTodayResponse,
 } from "../lib/types";
-
-const MAX_GUESSES = 6;
 
 /** Spoken summary of a guess outcome for the screen-reader live region. */
 function describeGuess(
