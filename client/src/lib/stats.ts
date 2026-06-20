@@ -10,6 +10,10 @@ export const EMPTY_STATS: Stats = {
   last_played_date: null,
 };
 
+// Classic guess cap — single source of truth (mirrors PICTOS_MAX_GUESSES below),
+// shared by ClassicPage's win/lose check, the HowToPlay copy, and the menu card.
+export const CLASSIC_MAX_GUESSES = 6;
+
 // Pictos guess cap — single source of truth. Drives the win/lose check in
 // PictosPage, the "in N tries" HowToPlay copy, the empty-stats bucket count, and
 // the stored-stats length validation, so they can't drift.
