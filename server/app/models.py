@@ -32,3 +32,22 @@ class Entity(Base):
     # Portrait filename served from client/public/portraits/<image>; nullable so
     # the UI falls back to a monogram when art is missing.
     image: Mapped[Optional[str]] = mapped_column(String(128), nullable=True)
+
+
+class Picto(Base):
+    """A guessable Picto for the Pictos daily-puzzle mode."""
+
+    __tablename__ = "pictos"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(64), unique=True)  # unique => unique index
+    type: Mapped[str] = mapped_column(String(16))  # Offensive | Defensive | Support
+    # Set-comparison field, like Entity.affiliation; room to evolve without a migration.
+    stats: Mapped[list[str]] = mapped_column(
+        ARRAY(String(8)), nullable=False, server_default="{}"
+    )
+    lumina_cost: Mapped[int] = mapped_column(Integer)
+    effect_category: Mapped[str] = mapped_column(String(32))  # one of 10 closed values
+    source: Mapped[str] = mapped_column(String(16))  # categorical: 5 distinct values
+    zone_obtained: Mapped[str] = mapped_column(String(64))  # str, not enum: room for DLC
+    act_introduced: Mapped[int] = mapped_column(Integer)  # 1 | 2 | 3 | 4 (4 = DLC)

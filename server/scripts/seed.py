@@ -1,14 +1,14 @@
-"""Sync character entities from JSON into the database. Idempotent; safe to re-run.
+"""Sync game data from JSON into the database. Idempotent; safe to re-run.
 
 Run from server/:  uv run python scripts/seed.py   (or `npm run seed` from repo root)
 
-Entities are UPSERTed by name, so attribute edits in the data file propagate on
-re-run, and entities removed from the JSON are pruned from the DB. This script no
+Rows are UPSERTed by name, so attribute edits in the data files propagate on
+re-run, and rows removed from the JSON are pruned from the DB. This script no
 longer schedules puzzles: the daily answer is computed on demand by
 app.services.scheduling as a pure function of the date and roster.
 
-Character data lives in server/data/characters.json; see server/data/README.md
-for sourcing and data conventions.
+Seeds two modes: Classic characters (server/data/characters.json) and Pictos
+(server/data/pictos.json); see server/data/README.md for sourcing conventions.
 """
 
 import asyncio
@@ -19,11 +19,11 @@ from pathlib import Path
 # Make the `app` package importable when run as a standalone script
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from sqlalchemy import delete
+from sqlalchemy import delete, literal_column
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 
 from app.db import engine
-from app.models import Entity
+from app.models import Entity, Picto
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
@@ -35,6 +35,7 @@ def load_category(name: str) -> list[dict]:
 
 
 ENTITIES: list[dict] = load_category("characters")
+PICTOS: list[dict] = load_category("pictos")
 
 
 async def prune_removed(conn) -> int:
@@ -69,11 +70,53 @@ async def upsert_entities(conn) -> dict[str, int]:
     return {name: id_ for name, id_ in rows}
 
 
+async def prune_pictos(conn) -> int:
+    """Delete DB pictos no longer present in the JSON (mirrors prune_removed)."""
+    names = [p["name"] for p in PICTOS]
+    result = await conn.execute(delete(Picto).where(Picto.name.notin_(names)))
+    return result.rowcount
+
+
+async def upsert_pictos(conn) -> tuple[int, int]:
+    """UPSERT all pictos by name; return (inserted, updated) counts.
+
+    The `(xmax = 0)` trick: in an INSERT ... ON CONFLICT, a freshly inserted row
+    has xmax 0, while a row hit by the DO UPDATE branch has a nonzero xmax. So
+    `(xmax = 0)` is TRUE for inserts and FALSE for updates, letting one round-trip
+    report both counts.
+    """
+    stmt = pg_insert(Picto).values(PICTOS)
+    stmt = stmt.on_conflict_do_update(
+        index_elements=[Picto.name],
+        set_={
+            c: stmt.excluded[c]
+            for c in (
+                "type",
+                "stats",
+                "lumina_cost",
+                "effect_category",
+                "source",
+                "zone_obtained",
+                "act_introduced",
+            )
+        },
+    ).returning(Picto.name, literal_column("(xmax = 0)").label("inserted"))
+    rows = (await conn.execute(stmt)).all()
+    inserted = sum(1 for _, ins in rows if ins)
+    return inserted, len(rows) - inserted
+
+
 async def main() -> None:
     async with engine.begin() as conn:
         pruned = await prune_removed(conn)
         name_to_id = await upsert_entities(conn)
+        pictos_pruned = await prune_pictos(conn)
+        p_ins, p_upd = await upsert_pictos(conn)
     print(f"entities pruned: {pruned}, upserted: {len(name_to_id)}")
+    print(
+        f"pictos pruned: {pictos_pruned}, inserted: {p_ins}, "
+        f"updated: {p_upd}, total: {p_ins + p_upd}"
+    )
     await engine.dispose()
 
 
