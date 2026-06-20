@@ -1,0 +1,2595 @@
+[
+  {
+    "name": "Alternating Critical",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Critical",
+    "source": "Pickup",
+    "zone_obtained": "Verso's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "AP Discount",
+    "type": "Support",
+    "stats": [
+      "SPD"
+    ],
+    "lumina_cost": 30,
+    "effect_category": "AP",
+    "source": "Merchant",
+    "zone_obtained": "Verso's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "Clea's Death",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "Death/Revive",
+    "source": "Boss Drop",
+    "zone_obtained": "Endless Tower",
+    "act_introduced": 4
+  },
+  {
+    "name": "Consuming Attack",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Damage",
+    "source": "Merchant",
+    "zone_obtained": "Verso's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "Damage Share",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 30,
+    "effect_category": "Free Aim / Other",
+    "source": "Pickup",
+    "zone_obtained": "Verso's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "Double Third",
+    "type": "Offensive",
+    "stats": [
+      "HP",
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Damage",
+    "source": "Pickup",
+    "zone_obtained": "Verso's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "Empowered Healer",
+    "type": "Offensive",
+    "stats": [
+      "HP",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Damage",
+    "source": "Pickup",
+    "zone_obtained": "Verso's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "Empowering Jumps",
+    "type": "Offensive",
+    "stats": [
+      "DEF"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Damage",
+    "source": "Pickup",
+    "zone_obtained": "Verso's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "Feint",
+    "type": "Offensive",
+    "stats": [
+      "Crit"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "Damage",
+    "source": "Pickup",
+    "zone_obtained": "Verso's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "First Life",
+    "type": "Offensive",
+    "stats": [
+      "DEF"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "Death/Revive",
+    "source": "Boss Drop",
+    "zone_obtained": "Endless Tower",
+    "act_introduced": 4
+  },
+  {
+    "name": "Frenzy",
+    "type": "Offensive",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 20,
+    "effect_category": "Damage",
+    "source": "Boss Drop",
+    "zone_obtained": "Verso's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "Gradient Overcharge",
+    "type": "Offensive",
+    "stats": [
+      "HP"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "Damage",
+    "source": "Pickup",
+    "zone_obtained": "Verso's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "Gradient Parry",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Free Aim / Other",
+    "source": "Pickup",
+    "zone_obtained": "Verso's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "Longer Break",
+    "type": "Offensive",
+    "stats": [
+      "HP",
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Break",
+    "source": "Pickup",
+    "zone_obtained": "Verso's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "SOS Healing Tint",
+    "type": "Defensive",
+    "stats": [
+      "DEF"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Heal",
+    "source": "Pickup",
+    "zone_obtained": "Verso's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "Slowing Attack",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Free Aim / Other",
+    "source": "Pickup",
+    "zone_obtained": "Verso's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "Trigger-Happy",
+    "type": "Offensive",
+    "stats": [
+      "SPD"
+    ],
+    "lumina_cost": 20,
+    "effect_category": "AP",
+    "source": "Boss Drop",
+    "zone_obtained": "Verso's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "Accelerating Heal",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Heal",
+    "source": "Pickup",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Accelerating Last Stand",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "Status",
+    "source": "Boss Drop",
+    "zone_obtained": "Hidden Gestral Arena",
+    "act_introduced": 2
+  },
+  {
+    "name": "Accelerating Shots",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "Free Aim / Other",
+    "source": "Merchant",
+    "zone_obtained": "Flying Manor",
+    "act_introduced": 3
+  },
+  {
+    "name": "Accelerating Tint",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Heal",
+    "source": "Merchant",
+    "zone_obtained": "Endless Night Sanctuary",
+    "act_introduced": 3
+  },
+  {
+    "name": "Aegis Revival",
+    "type": "Defensive",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Shield",
+    "source": "Merchant",
+    "zone_obtained": "Renoir's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "Anti-Blight",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Merchant",
+    "zone_obtained": "The Reacher",
+    "act_introduced": 2
+  },
+  {
+    "name": "Anti-Burn",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "Status",
+    "source": "Boss Drop",
+    "zone_obtained": "Frozen Hearts",
+    "act_introduced": 2
+  },
+  {
+    "name": "Anti-Charm",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Boss Drop",
+    "zone_obtained": "Sirene",
+    "act_introduced": 2
+  },
+  {
+    "name": "Anti-Freeze",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "Status",
+    "source": "Paint Cage",
+    "zone_obtained": "Frozen Hearts",
+    "act_introduced": 2
+  },
+  {
+    "name": "Anti-Stun",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Status",
+    "source": "Boss Drop",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "At Death's Door",
+    "type": "Offensive",
+    "stats": [
+      "DEF",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Damage",
+    "source": "Boss Drop",
+    "zone_obtained": "Stone Wave Cliffs",
+    "act_introduced": 1
+  },
+  {
+    "name": "Attack Lifesteal",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "Heal",
+    "source": "Pickup",
+    "zone_obtained": "Ancient Sanctuary",
+    "act_introduced": 1
+  },
+  {
+    "name": "Augmented Aim",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "Free Aim / Other",
+    "source": "Pickup",
+    "zone_obtained": "Flying Waters",
+    "act_introduced": 1
+  },
+  {
+    "name": "Augmented Attack",
+    "type": "Offensive",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 7,
+    "effect_category": "Damage",
+    "source": "Boss Drop",
+    "zone_obtained": "Spring Meadows",
+    "act_introduced": 1
+  },
+  {
+    "name": "Augmented Counter",
+    "type": "Offensive",
+    "stats": [
+      "HP",
+      "Crit"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "Damage",
+    "source": "Merchant",
+    "zone_obtained": "Flying Waters",
+    "act_introduced": 1
+  },
+  {
+    "name": "Augmented First Strike",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Damage",
+    "source": "Merchant",
+    "zone_obtained": "Esquie's Nest",
+    "act_introduced": 1
+  },
+  {
+    "name": "Auto Death",
+    "type": "Support",
+    "stats": [
+      "Crit"
+    ],
+    "lumina_cost": 1,
+    "effect_category": "Death/Revive",
+    "source": "Merchant",
+    "zone_obtained": "Yellow Harvest",
+    "act_introduced": 2
+  },
+  {
+    "name": "Auto Powerful",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Quest",
+    "zone_obtained": "Floating Cemetery",
+    "act_introduced": 2
+  },
+  {
+    "name": "Auto Regen",
+    "type": "Defensive",
+    "stats": [
+      "DEF"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Pickup",
+    "zone_obtained": "Sirene",
+    "act_introduced": 2
+  },
+  {
+    "name": "Auto Rush",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Pickup",
+    "zone_obtained": "Old Lumiere",
+    "act_introduced": 1
+  },
+  {
+    "name": "Auto Shell",
+    "type": "Defensive",
+    "stats": [
+      "HP"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Quest",
+    "zone_obtained": "Stone Wave Cliffs",
+    "act_introduced": 1
+  },
+  {
+    "name": "Base Shield",
+    "type": "Defensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 20,
+    "effect_category": "Shield",
+    "source": "Boss Drop",
+    "zone_obtained": "The Chosen Path",
+    "act_introduced": 4
+  },
+  {
+    "name": "Beneficial Contamination",
+    "type": "Support",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "AP",
+    "source": "Merchant",
+    "zone_obtained": "Falling Leaves",
+    "act_introduced": 2
+  },
+  {
+    "name": "Break Specialist",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 1,
+    "effect_category": "Break",
+    "source": "Merchant",
+    "zone_obtained": "Flying Manor",
+    "act_introduced": 3
+  },
+  {
+    "name": "Breaker",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Break",
+    "source": "Boss Drop",
+    "zone_obtained": "Ancient Sanctuary",
+    "act_introduced": 1
+  },
+  {
+    "name": "Breaking Attack",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Break",
+    "source": "Boss Drop",
+    "zone_obtained": "The Monolith",
+    "act_introduced": 3
+  },
+  {
+    "name": "Breaking Burn",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Burn",
+    "source": "Pickup",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Breaking Counter",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "Break",
+    "source": "Pickup",
+    "zone_obtained": "Stone Wave Cliffs",
+    "act_introduced": 1
+  },
+  {
+    "name": "Breaking Death",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Death/Revive",
+    "source": "Pickup",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Breaking Shots",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 1,
+    "effect_category": "Free Aim / Other",
+    "source": "Pickup",
+    "zone_obtained": "Stone Wave Cliffs",
+    "act_introduced": 1
+  },
+  {
+    "name": "Breaking Slow",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Break",
+    "source": "Pickup",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Burn Affinity",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Burn",
+    "source": "Pickup",
+    "zone_obtained": "Frozen Hearts",
+    "act_introduced": 2
+  },
+  {
+    "name": "Burning Break",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "Crit"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "Burn",
+    "source": "Pickup",
+    "zone_obtained": "Frozen Hearts",
+    "act_introduced": 2
+  },
+  {
+    "name": "Burning Death",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Death/Revive",
+    "source": "Boss Drop",
+    "zone_obtained": "Frozen Hearts",
+    "act_introduced": 2
+  },
+  {
+    "name": "Burning Mark",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "Burn",
+    "source": "Pickup",
+    "zone_obtained": "Ancient Sanctuary",
+    "act_introduced": 1
+  },
+  {
+    "name": "Burning Shots",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "Free Aim / Other",
+    "source": "Merchant",
+    "zone_obtained": "Spring Meadows",
+    "act_introduced": 1
+  },
+  {
+    "name": "Charging Alteration",
+    "type": "Support",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Free Aim / Other",
+    "source": "Boss Drop",
+    "zone_obtained": "Flying Manor",
+    "act_introduced": 3
+  },
+  {
+    "name": "Charging Attack",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 7,
+    "effect_category": "Free Aim / Other",
+    "source": "Pickup",
+    "zone_obtained": "The Reacher",
+    "act_introduced": 2
+  },
+  {
+    "name": "Charging Burn",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Free Aim / Other",
+    "source": "Merchant",
+    "zone_obtained": "Renoir's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "Charging Counter",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Free Aim / Other",
+    "source": "Pickup",
+    "zone_obtained": "The Reacher",
+    "act_introduced": 2
+  },
+  {
+    "name": "Charging Critical",
+    "type": "Support",
+    "stats": [
+      "DEF",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Critical",
+    "source": "Merchant",
+    "zone_obtained": "Renoir's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "Charging Mark",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Merchant",
+    "zone_obtained": "Endless Night Sanctuary",
+    "act_introduced": 3
+  },
+  {
+    "name": "Charging Stun",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Free Aim / Other",
+    "source": "Pickup",
+    "zone_obtained": "Lumiere Act III",
+    "act_introduced": 3
+  },
+  {
+    "name": "Charging Tint",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 2,
+    "effect_category": "Free Aim / Other",
+    "source": "Pickup",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Charging Weakness",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Free Aim / Other",
+    "source": "Merchant",
+    "zone_obtained": "The Reacher",
+    "act_introduced": 2
+  },
+  {
+    "name": "Cheater",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 40,
+    "effect_category": "Free Aim / Other",
+    "source": "Boss Drop",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Clea's Life",
+    "type": "Defensive",
+    "stats": [
+      "HP"
+    ],
+    "lumina_cost": 30,
+    "effect_category": "Heal",
+    "source": "Boss Drop",
+    "zone_obtained": "Flying Manor",
+    "act_introduced": 3
+  },
+  {
+    "name": "Cleansing Tint",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Heal",
+    "source": "Pickup",
+    "zone_obtained": "Spring Meadows",
+    "act_introduced": 1
+  },
+  {
+    "name": "Combo Attack",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Damage",
+    "source": "Boss Drop",
+    "zone_obtained": "Forgotten Battlefield",
+    "act_introduced": 1
+  },
+  {
+    "name": "Confident",
+    "type": "Defensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 20,
+    "effect_category": "Damage",
+    "source": "Pickup",
+    "zone_obtained": "Stone Wave Cliffs",
+    "act_introduced": 1
+  },
+  {
+    "name": "Confident Fighter",
+    "type": "Offensive",
+    "stats": [
+      "HP",
+      "Crit"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "Damage",
+    "source": "Pickup",
+    "zone_obtained": "Visages",
+    "act_introduced": 2
+  },
+  {
+    "name": "Critical Break",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Critical",
+    "source": "Pickup",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Critical Burn",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Burn",
+    "source": "Merchant",
+    "zone_obtained": "Endless Night Sanctuary",
+    "act_introduced": 3
+  },
+  {
+    "name": "Critical Moment",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Critical",
+    "source": "Merchant",
+    "zone_obtained": "Gestral Village",
+    "act_introduced": 1
+  },
+  {
+    "name": "Critical Stun",
+    "type": "Offensive",
+    "stats": [
+      "DEF",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Critical",
+    "source": "Merchant",
+    "zone_obtained": "Sacred River",
+    "act_introduced": 2
+  },
+  {
+    "name": "Critical Vulnerability",
+    "type": "Offensive",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Critical",
+    "source": "Pickup",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Critical Weakness",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Critical",
+    "source": "Pickup",
+    "zone_obtained": "Endless Tower",
+    "act_introduced": 4
+  },
+  {
+    "name": "Dead Energy",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 2,
+    "effect_category": "AP",
+    "source": "Pickup",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Death Bomb",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Death/Revive",
+    "source": "Pickup",
+    "zone_obtained": "Yellow Harvest",
+    "act_introduced": 2
+  },
+  {
+    "name": "Defensive Mode",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 1,
+    "effect_category": "AP",
+    "source": "Boss Drop",
+    "zone_obtained": "Stone Wave Cliffs",
+    "act_introduced": 1
+  },
+  {
+    "name": "Dodger",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 1,
+    "effect_category": "AP",
+    "source": "Pickup",
+    "zone_obtained": "Spring Meadows",
+    "act_introduced": 1
+  },
+  {
+    "name": "Double Burn",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 30,
+    "effect_category": "Burn",
+    "source": "Merchant",
+    "zone_obtained": "Sacred River",
+    "act_introduced": 2
+  },
+  {
+    "name": "Double Mark",
+    "type": "Support",
+    "stats": [
+      "SPD"
+    ],
+    "lumina_cost": 20,
+    "effect_category": "Status",
+    "source": "Merchant",
+    "zone_obtained": "Sirene",
+    "act_introduced": 2
+  },
+  {
+    "name": "Draining Cleanse",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "AP",
+    "source": "Pickup",
+    "zone_obtained": "The Reacher",
+    "act_introduced": 2
+  },
+  {
+    "name": "Effective Heal",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 30,
+    "effect_category": "Heal",
+    "source": "Boss Drop",
+    "zone_obtained": "Sirene",
+    "act_introduced": 2
+  },
+  {
+    "name": "Effective Support",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "AP",
+    "source": "Pickup",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Empowering Attack",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Merchant",
+    "zone_obtained": "Spring Meadows",
+    "act_introduced": 1
+  },
+  {
+    "name": "Empowering Break",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "Status",
+    "source": "Pickup",
+    "zone_obtained": "Flying Manor",
+    "act_introduced": 3
+  },
+  {
+    "name": "Empowering Dodge",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Damage",
+    "source": "Pickup",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Empowering Last Stand",
+    "type": "Offensive",
+    "stats": [
+      "HP",
+      "Crit"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "Status",
+    "source": "Boss Drop",
+    "zone_obtained": "Hidden Gestral Arena",
+    "act_introduced": 2
+  },
+  {
+    "name": "Empowering Parry",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Damage",
+    "source": "Paint Cage",
+    "zone_obtained": "The Monolith",
+    "act_introduced": 3
+  },
+  {
+    "name": "Empowering Tint",
+    "type": "Offensive",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Heal",
+    "source": "Pickup",
+    "zone_obtained": "Forgotten Battlefield",
+    "act_introduced": 1
+  },
+  {
+    "name": "Energetic Healer",
+    "type": "Support",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "AP",
+    "source": "Pickup",
+    "zone_obtained": "Flying Manor",
+    "act_introduced": 3
+  },
+  {
+    "name": "Energising Attack",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "AP",
+    "source": "Merchant",
+    "zone_obtained": "Yellow Harvest",
+    "act_introduced": 2
+  },
+  {
+    "name": "Energising Break",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "AP",
+    "source": "Boss Drop",
+    "zone_obtained": "Flying Waters",
+    "act_introduced": 1
+  },
+  {
+    "name": "Energising Burn",
+    "type": "Support",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "AP",
+    "source": "Boss Drop",
+    "zone_obtained": "Frozen Hearts",
+    "act_introduced": 2
+  },
+  {
+    "name": "Energising Cleanse",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "AP",
+    "source": "Merchant",
+    "zone_obtained": "The Monolith",
+    "act_introduced": 3
+  },
+  {
+    "name": "Energising Death",
+    "type": "Support",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Death/Revive",
+    "source": "Merchant",
+    "zone_obtained": "Forgotten Battlefield",
+    "act_introduced": 1
+  },
+  {
+    "name": "Energising Gradient",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "AP",
+    "source": "Pickup",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Energising Heal",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "AP",
+    "source": "Pickup",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Energising Jump",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "AP",
+    "source": "Pickup",
+    "zone_obtained": "Ancient Sanctuary",
+    "act_introduced": 1
+  },
+  {
+    "name": "Energising Pain",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "AP",
+    "source": "Pickup",
+    "zone_obtained": "Stone Wave Cliffs",
+    "act_introduced": 1
+  },
+  {
+    "name": "Energising Parry",
+    "type": "Support",
+    "stats": [
+      "HP"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "AP",
+    "source": "Merchant",
+    "zone_obtained": "Forgotten Battlefield",
+    "act_introduced": 1
+  },
+  {
+    "name": "Energising Powerful",
+    "type": "Support",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "AP",
+    "source": "Pickup",
+    "zone_obtained": "Lumiere Act III",
+    "act_introduced": 3
+  },
+  {
+    "name": "Energising Revive",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Death/Revive",
+    "source": "Boss Drop",
+    "zone_obtained": "Stone Wave Cliffs Cave",
+    "act_introduced": 2
+  },
+  {
+    "name": "Energising Rush",
+    "type": "Support",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "AP",
+    "source": "Pickup",
+    "zone_obtained": "Endless Tower",
+    "act_introduced": 4
+  },
+  {
+    "name": "Energising Shell",
+    "type": "Support",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "AP",
+    "source": "Pickup",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Energising Shots",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "AP",
+    "source": "Boss Drop",
+    "zone_obtained": "Flying Manor",
+    "act_introduced": 3
+  },
+  {
+    "name": "Energising Start",
+    "type": "Support",
+    "stats": [
+      "HP"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "AP",
+    "source": "Pickup",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Energising Stun",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "AP",
+    "source": "Paint Cage",
+    "zone_obtained": "Flying Manor",
+    "act_introduced": 3
+  },
+  {
+    "name": "Energising Turn",
+    "type": "Support",
+    "stats": [
+      "SPD"
+    ],
+    "lumina_cost": 20,
+    "effect_category": "AP",
+    "source": "Merchant",
+    "zone_obtained": "Sirene",
+    "act_introduced": 2
+  },
+  {
+    "name": "Energy Master",
+    "type": "Support",
+    "stats": [
+      "HP"
+    ],
+    "lumina_cost": 40,
+    "effect_category": "AP",
+    "source": "Boss Drop",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Enfeebling Attack",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Merchant",
+    "zone_obtained": "The Monolith",
+    "act_introduced": 3
+  },
+  {
+    "name": "Enfeebling Mark",
+    "type": "Defensive",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Pickup",
+    "zone_obtained": "Stone Wave Cliffs",
+    "act_introduced": 1
+  },
+  {
+    "name": "Exhausting Power",
+    "type": "Offensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 2,
+    "effect_category": "Status",
+    "source": "Pickup",
+    "zone_obtained": "Stone Wave Cliffs Cave",
+    "act_introduced": 2
+  },
+  {
+    "name": "Exposing Attack",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Status",
+    "source": "Merchant",
+    "zone_obtained": "Flying Waters",
+    "act_introduced": 1
+  },
+  {
+    "name": "Exposing Break",
+    "type": "Offensive",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Status",
+    "source": "Merchant",
+    "zone_obtained": "The Reacher",
+    "act_introduced": 2
+  },
+  {
+    "name": "Faster Than Strong",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Damage",
+    "source": "Boss Drop",
+    "zone_obtained": "Lumiere Act III",
+    "act_introduced": 3
+  },
+  {
+    "name": "First Offensive",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Damage",
+    "source": "Boss Drop",
+    "zone_obtained": "Abbest Cave",
+    "act_introduced": 2
+  },
+  {
+    "name": "First Strike",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Free Aim / Other",
+    "source": "Pickup",
+    "zone_obtained": "Stone Wave Cliffs",
+    "act_introduced": 1
+  },
+  {
+    "name": "Fueling Break",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Break",
+    "source": "Pickup",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Full Strength",
+    "type": "Offensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "Damage",
+    "source": "Merchant",
+    "zone_obtained": "Lumiere Act III",
+    "act_introduced": 3
+  },
+  {
+    "name": "Glass Cannon",
+    "type": "Offensive",
+    "stats": [
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Free Aim / Other",
+    "source": "Merchant",
+    "zone_obtained": "Visages",
+    "act_introduced": 2
+  },
+  {
+    "name": "Gradient Break",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Break",
+    "source": "Pickup",
+    "zone_obtained": "Endless Night Sanctuary",
+    "act_introduced": 3
+  },
+  {
+    "name": "Gradient Breaker",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Status",
+    "source": "Merchant",
+    "zone_obtained": "Flying Manor",
+    "act_introduced": 3
+  },
+  {
+    "name": "Gradient Fighter",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Damage",
+    "source": "Pickup",
+    "zone_obtained": "Lumiere Act III",
+    "act_introduced": 3
+  },
+  {
+    "name": "Greater Defenceless",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "Status",
+    "source": "Merchant",
+    "zone_obtained": "The Monolith",
+    "act_introduced": 3
+  },
+  {
+    "name": "Greater Powerful",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Merchant",
+    "zone_obtained": "Sirene",
+    "act_introduced": 2
+  },
+  {
+    "name": "Greater Powerless",
+    "type": "Defensive",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "Status",
+    "source": "Pickup",
+    "zone_obtained": "Endless Tower",
+    "act_introduced": 4
+  },
+  {
+    "name": "Greater Rush",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Free Aim / Other",
+    "source": "Merchant",
+    "zone_obtained": "Monoco's Station",
+    "act_introduced": 2
+  },
+  {
+    "name": "Greater Shell",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Pickup",
+    "zone_obtained": "Sirene",
+    "act_introduced": 2
+  },
+  {
+    "name": "Greater Slow",
+    "type": "Support",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "Status",
+    "source": "Pickup",
+    "zone_obtained": "Sky Island",
+    "act_introduced": 2
+  },
+  {
+    "name": "Healing Boon",
+    "type": "Defensive",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Heal",
+    "source": "Pickup",
+    "zone_obtained": "The Reacher",
+    "act_introduced": 2
+  },
+  {
+    "name": "Healing Counter",
+    "type": "Defensive",
+    "stats": [
+      "HP"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Heal",
+    "source": "Merchant",
+    "zone_obtained": "Old Lumiere",
+    "act_introduced": 1
+  },
+  {
+    "name": "Healing Death",
+    "type": "Defensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Death/Revive",
+    "source": "Pickup",
+    "zone_obtained": "Old Lumiere",
+    "act_introduced": 1
+  },
+  {
+    "name": "Healing Fire",
+    "type": "Defensive",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Heal",
+    "source": "Pickup",
+    "zone_obtained": "Sirene",
+    "act_introduced": 2
+  },
+  {
+    "name": "Healing Mark",
+    "type": "Defensive",
+    "stats": [
+      "DEF"
+    ],
+    "lumina_cost": 20,
+    "effect_category": "Heal",
+    "source": "Merchant",
+    "zone_obtained": "Gestral Village",
+    "act_introduced": 1
+  },
+  {
+    "name": "Healing Parry",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Heal",
+    "source": "Quest",
+    "zone_obtained": "Stone Quarry",
+    "act_introduced": 2
+  },
+  {
+    "name": "Healing Share",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Heal",
+    "source": "Merchant",
+    "zone_obtained": "Visages",
+    "act_introduced": 2
+  },
+  {
+    "name": "Healing Stun",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Heal",
+    "source": "Pickup",
+    "zone_obtained": "Lumiere Act III",
+    "act_introduced": 3
+  },
+  {
+    "name": "Healing Tint Energy",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 1,
+    "effect_category": "Heal",
+    "source": "Pickup",
+    "zone_obtained": "Stone Wave Cliffs",
+    "act_introduced": 1
+  },
+  {
+    "name": "Immaculate",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Damage",
+    "source": "Boss Drop",
+    "zone_obtained": "Visages",
+    "act_introduced": 2
+  },
+  {
+    "name": "In Medias Res",
+    "type": "Defensive",
+    "stats": [
+      "DEF",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Shield",
+    "source": "Pickup",
+    "zone_obtained": "Dark Shores",
+    "act_introduced": 2
+  },
+  {
+    "name": "Inverted Affinity",
+    "type": "Offensive",
+    "stats": [
+      "HP",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Status",
+    "source": "Merchant",
+    "zone_obtained": "Forgotten Battlefield",
+    "act_introduced": 1
+  },
+  {
+    "name": "Last Stand Critical",
+    "type": "Offensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "Critical",
+    "source": "Boss Drop",
+    "zone_obtained": "Hidden Gestral Arena",
+    "act_introduced": 2
+  },
+  {
+    "name": "Longer Burn",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "Burn",
+    "source": "Merchant",
+    "zone_obtained": "Flying Manor",
+    "act_introduced": 3
+  },
+  {
+    "name": "Longer Powerful",
+    "type": "Offensive",
+    "stats": [
+      "HP",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Merchant",
+    "zone_obtained": "Old Lumiere",
+    "act_introduced": 1
+  },
+  {
+    "name": "Longer Rush",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Pickup",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Longer Shell",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Pickup",
+    "zone_obtained": "Forgotten Battlefield",
+    "act_introduced": 1
+  },
+  {
+    "name": "Marking Break",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Status",
+    "source": "Merchant",
+    "zone_obtained": "Endless Night Sanctuary",
+    "act_introduced": 3
+  },
+  {
+    "name": "Marking Shots",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "Free Aim / Other",
+    "source": "Pickup",
+    "zone_obtained": "Flying Waters",
+    "act_introduced": 1
+  },
+  {
+    "name": "Painted Power",
+    "type": "Offensive",
+    "stats": [
+      "HP"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Damage",
+    "source": "Boss Drop",
+    "zone_obtained": "The Monolith",
+    "act_introduced": 3
+  },
+  {
+    "name": "Painter",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Pickup",
+    "zone_obtained": "Flying Manor",
+    "act_introduced": 3
+  },
+  {
+    "name": "Perilous Parry",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "AP",
+    "source": "Pickup",
+    "zone_obtained": "Stone Wave Cliffs",
+    "act_introduced": 1
+  },
+  {
+    "name": "Piercing Shot",
+    "type": "Offensive",
+    "stats": [
+      "HP",
+      "Crit"
+    ],
+    "lumina_cost": 2,
+    "effect_category": "Free Aim / Other",
+    "source": "Pickup",
+    "zone_obtained": "Ancient Sanctuary",
+    "act_introduced": 1
+  },
+  {
+    "name": "Powered Attack",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "AP",
+    "source": "Pickup",
+    "zone_obtained": "Visages",
+    "act_introduced": 2
+  },
+  {
+    "name": "Powerful Heal",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Heal",
+    "source": "Merchant",
+    "zone_obtained": "Endless Night Sanctuary",
+    "act_introduced": 3
+  },
+  {
+    "name": "Powerful Mark",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Status",
+    "source": "Pickup",
+    "zone_obtained": "Flying Manor",
+    "act_introduced": 3
+  },
+  {
+    "name": "Powerful on Shell",
+    "type": "Offensive",
+    "stats": [
+      "DEF",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Pickup",
+    "zone_obtained": "Sirene",
+    "act_introduced": 2
+  },
+  {
+    "name": "Powerful Revive",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "Death/Revive",
+    "source": "Boss Drop",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Powerful Shield",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Damage",
+    "source": "Merchant",
+    "zone_obtained": "Endless Night Sanctuary",
+    "act_introduced": 3
+  },
+  {
+    "name": "Powerful Shots",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "Free Aim / Other",
+    "source": "Pickup",
+    "zone_obtained": "Gestral Village",
+    "act_introduced": 1
+  },
+  {
+    "name": "Pro Retreat",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 40,
+    "effect_category": "Free Aim / Other",
+    "source": "Pickup",
+    "zone_obtained": "Camp",
+    "act_introduced": 2
+  },
+  {
+    "name": "Protecting Attack",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Merchant",
+    "zone_obtained": "Endless Night Sanctuary",
+    "act_introduced": 3
+  },
+  {
+    "name": "Protecting Death",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Death/Revive",
+    "source": "Pickup",
+    "zone_obtained": "Sirene",
+    "act_introduced": 2
+  },
+  {
+    "name": "Protecting Heal",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "SPD"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Heal",
+    "source": "Merchant",
+    "zone_obtained": "The Reacher",
+    "act_introduced": 2
+  },
+  {
+    "name": "Protecting Last Stand",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "Status",
+    "source": "Boss Drop",
+    "zone_obtained": "Hidden Gestral Arena",
+    "act_introduced": 2
+  },
+  {
+    "name": "Protecting Shots",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "Free Aim / Other",
+    "source": "Pickup",
+    "zone_obtained": "Flying Manor",
+    "act_introduced": 3
+  },
+  {
+    "name": "Protecting Tint",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Heal",
+    "source": "Pickup",
+    "zone_obtained": "The Reacher",
+    "act_introduced": 2
+  },
+  {
+    "name": "Quick Break",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "Break",
+    "source": "Boss Drop",
+    "zone_obtained": "Endless Night Sanctuary",
+    "act_introduced": 3
+  },
+  {
+    "name": "Random Defense",
+    "type": "Defensive",
+    "stats": [
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Free Aim / Other",
+    "source": "Paint Cage",
+    "zone_obtained": "The Monolith",
+    "act_introduced": 3
+  },
+  {
+    "name": "Recovery",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Heal",
+    "source": "Quest",
+    "zone_obtained": "Red Woods",
+    "act_introduced": 2
+  },
+  {
+    "name": "Rejuvenating Revive",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "Death/Revive",
+    "source": "Pickup",
+    "zone_obtained": "Stone Wave Cliffs",
+    "act_introduced": 1
+  },
+  {
+    "name": "Revive Paradox",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Death/Revive",
+    "source": "Boss Drop",
+    "zone_obtained": "Old Lumiere",
+    "act_introduced": 1
+  },
+  {
+    "name": "Revive Tint Energy",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Death/Revive",
+    "source": "Merchant",
+    "zone_obtained": "Forgotten Battlefield",
+    "act_introduced": 1
+  },
+  {
+    "name": "Rewarding Mark",
+    "type": "Support",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "AP",
+    "source": "Merchant",
+    "zone_obtained": "Sacred River",
+    "act_introduced": 2
+  },
+  {
+    "name": "Roulette",
+    "type": "Offensive",
+    "stats": [
+      "DEF",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Damage",
+    "source": "Pickup",
+    "zone_obtained": "Gestral Village",
+    "act_introduced": 1
+  },
+  {
+    "name": "Rush on Powerful",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Pickup",
+    "zone_obtained": "Endless Tower",
+    "act_introduced": 4
+  },
+  {
+    "name": "SOS Power",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Status",
+    "source": "Pickup",
+    "zone_obtained": "Stone Wave Cliffs",
+    "act_introduced": 1
+  },
+  {
+    "name": "SOS Rush",
+    "type": "Offensive",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Status",
+    "source": "Pickup",
+    "zone_obtained": "Falling Leaves",
+    "act_introduced": 2
+  },
+  {
+    "name": "SOS Shell",
+    "type": "Defensive",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Status",
+    "source": "Pickup",
+    "zone_obtained": "Flying Waters",
+    "act_introduced": 1
+  },
+  {
+    "name": "Second Chance",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "Crit"
+    ],
+    "lumina_cost": 40,
+    "effect_category": "Death/Revive",
+    "source": "Boss Drop",
+    "zone_obtained": "The Monolith",
+    "act_introduced": 3
+  },
+  {
+    "name": "Shared Care",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Heal",
+    "source": "Pickup",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Shell On Rush",
+    "type": "Defensive",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Merchant",
+    "zone_obtained": "Endless Night Sanctuary",
+    "act_introduced": 3
+  },
+  {
+    "name": "Shield Affinity",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "Damage",
+    "source": "Merchant",
+    "zone_obtained": "Sirene",
+    "act_introduced": 2
+  },
+  {
+    "name": "Shielding Death",
+    "type": "Defensive",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Death/Revive",
+    "source": "Boss Drop",
+    "zone_obtained": "The Crows",
+    "act_introduced": 3
+  },
+  {
+    "name": "Shielding Tint",
+    "type": "Defensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Heal",
+    "source": "Pickup",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Shortcut",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Free Aim / Other",
+    "source": "Merchant",
+    "zone_obtained": "Renoir's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "Slowing Break",
+    "type": "Support",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Status",
+    "source": "Merchant",
+    "zone_obtained": "Flying Manor",
+    "act_introduced": 3
+  },
+  {
+    "name": "Sniper",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "Free Aim / Other",
+    "source": "Pickup",
+    "zone_obtained": "The Reacher",
+    "act_introduced": 2
+  },
+  {
+    "name": "Solidifying",
+    "type": "Defensive",
+    "stats": [
+      "DEF",
+      "SPD"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Shield",
+    "source": "Merchant",
+    "zone_obtained": "Sacred River",
+    "act_introduced": 2
+  },
+  {
+    "name": "Solo Fighter",
+    "type": "Offensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 1,
+    "effect_category": "Damage",
+    "source": "Merchant",
+    "zone_obtained": "Hidden Gestral Arena",
+    "act_introduced": 2
+  },
+  {
+    "name": "Staggering Attack",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 1,
+    "effect_category": "Break",
+    "source": "Pickup",
+    "zone_obtained": "Flying Waters",
+    "act_introduced": 1
+  },
+  {
+    "name": "Stay Marked",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Merchant",
+    "zone_obtained": "Flying Manor",
+    "act_introduced": 3
+  },
+  {
+    "name": "Stun Boost",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Damage",
+    "source": "Merchant",
+    "zone_obtained": "Sacred River",
+    "act_introduced": 2
+  },
+  {
+    "name": "Survivor",
+    "type": "Defensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 20,
+    "effect_category": "Death/Revive",
+    "source": "Merchant",
+    "zone_obtained": "Monoco's Station",
+    "act_introduced": 2
+  },
+  {
+    "name": "Sweet Kill",
+    "type": "Defensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Heal",
+    "source": "Merchant",
+    "zone_obtained": "Renoir's Drafts",
+    "act_introduced": 4
+  },
+  {
+    "name": "Tainted",
+    "type": "Offensive",
+    "stats": [
+      "DEF",
+      "Crit"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "Damage",
+    "source": "Merchant",
+    "zone_obtained": "Stone Wave Cliffs",
+    "act_introduced": 1
+  },
+  {
+    "name": "Teamwork",
+    "type": "Offensive",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Damage",
+    "source": "Merchant",
+    "zone_obtained": "Yellow Harvest",
+    "act_introduced": 2
+  },
+  {
+    "name": "The One",
+    "type": "Support",
+    "stats": [
+      "Crit"
+    ],
+    "lumina_cost": 1,
+    "effect_category": "Free Aim / Other",
+    "source": "Boss Drop",
+    "zone_obtained": "Sunless Cliffs",
+    "act_introduced": 2
+  },
+  {
+    "name": "Time Tint",
+    "type": "Support",
+    "stats": [
+      "HP",
+      "DEF"
+    ],
+    "lumina_cost": 10,
+    "effect_category": "Status",
+    "source": "Pickup",
+    "zone_obtained": "Old Lumiere",
+    "act_introduced": 1
+  },
+  {
+    "name": "Versatile",
+    "type": "Offensive",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 5,
+    "effect_category": "Free Aim / Other",
+    "source": "Merchant",
+    "zone_obtained": "Endless Night Sanctuary",
+    "act_introduced": 3
+  },
+  {
+    "name": "Warming Up",
+    "type": "Offensive",
+    "stats": [
+      "HP",
+      "Crit"
+    ],
+    "lumina_cost": 15,
+    "effect_category": "Damage",
+    "source": "Boss Drop",
+    "zone_obtained": "The Continent",
+    "act_introduced": 2
+  },
+  {
+    "name": "Weakness Gain",
+    "type": "Support",
+    "stats": [
+      "SPD",
+      "Crit"
+    ],
+    "lumina_cost": 3,
+    "effect_category": "AP",
+    "source": "Pickup",
+    "zone_obtained": "The Monolith",
+    "act_introduced": 3
+  }
+]

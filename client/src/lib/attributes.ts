@@ -4,7 +4,7 @@
 // reordering, or relabelling a column happens in exactly one place. This is also
 // the seam a future mode (Weapons, Pictos) would swap out.
 
-import type { Entity, GuessFeedback } from "./types";
+import type { Entity, Picto } from "./types";
 
 /** Comparison outcome a single attribute cell can show. "neutral" is the name
  *  cell / answer-reveal cell, which carries no comparison. */
@@ -19,14 +19,14 @@ export type CellState =
 
 export type AttributeKind = "scalar" | "array" | "element" | "direction";
 
-export interface AttributeDescriptor {
-  /** Shared key into both Entity (the value) and GuessFeedback (the state). */
-  key: keyof GuessFeedback & keyof Entity;
+export interface AttributeDescriptor<T = Entity> {
+  /** Key into the item type (and, for Entity, into GuessFeedback). */
+  key: keyof T & string;
   /** Column header and legend label. */
   label: string;
   kind: AttributeKind;
-  /** Display string for an entity's value in this column. */
-  format: (entity: Entity) => string;
+  /** Display string for the item's value in this column. */
+  format: (item: T) => string;
 }
 
 export const ATTRIBUTES = [
@@ -52,6 +52,34 @@ export const ATTRIBUTES = [
 
 /** Column order for the share grid (feedback keys only). */
 export const FIELD_ORDER = ATTRIBUTES.map((a) => a.key);
+
+/** Pictos-mode comparison columns (the future-mode seam). Same descriptor shape
+ *  as ATTRIBUTES, keyed to Picto. Compare logic and a share grid land in a later
+ *  phase; this is declarative metadata only. */
+export const PICTOS_ATTRIBUTES = [
+  { key: "type", label: "Type", kind: "scalar", format: (p: Picto) => p.type },
+  {
+    key: "stats",
+    label: "Stats",
+    kind: "array",
+    format: (p: Picto) => (p.stats.length ? p.stats.join(" • ") : "—"),
+  },
+  {
+    key: "lumina_cost",
+    label: "Lumina",
+    kind: "direction",
+    format: (p: Picto) => String(p.lumina_cost),
+  },
+  { key: "effect_category", label: "Effect", kind: "scalar", format: (p: Picto) => p.effect_category },
+  { key: "source", label: "Source", kind: "scalar", format: (p: Picto) => p.source },
+  { key: "zone_obtained", label: "Zone", kind: "scalar", format: (p: Picto) => p.zone_obtained },
+  {
+    key: "act_introduced",
+    label: "Act",
+    kind: "direction",
+    format: (p: Picto) => String(p.act_introduced),
+  },
+] as const satisfies readonly AttributeDescriptor<Picto>[];
 
 /** Always-visible glyph per state. Distinguishing match/partial/miss by glyph —
  *  not just by green/gold/red — keeps the grid legible without color (WCAG 1.4.1,

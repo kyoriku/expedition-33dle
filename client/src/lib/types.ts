@@ -18,6 +18,18 @@ export interface Entity {
   image: string | null; // portrait filename in /portraits, or null for monogram
 }
 
+export interface Picto {
+  id: number;
+  name: string;
+  type: string;
+  stats: string[];
+  lumina_cost: number;
+  effect_category: string;
+  source: string;
+  zone_obtained: string;
+  act_introduced: number;
+}
+
 export interface GuessFeedback {
   gender: ScalarFeedback;
   role: ScalarFeedback;

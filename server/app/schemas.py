@@ -22,6 +22,35 @@ class EntityRead(BaseModel):
     image: Optional[str] = None
 
 
+PictoType = Literal["Offensive", "Defensive", "Support"]
+PictoEffectCategory = Literal[
+    "AP", "Break", "Burn", "Critical", "Damage", "Death/Revive",
+    "Free Aim / Other", "Heal", "Shield", "Status",
+]
+PictoSource = Literal["Boss Drop", "Merchant", "Paint Cage", "Pickup", "Quest"]
+
+
+class PictoRead(BaseModel):
+    """Public view of a Picto. Built from ORM rows via from_attributes.
+
+    The DB columns are plain strings, but the closed-set fields (type,
+    effect_category, source) are constrained here with Literal so invalid values
+    surface at the schema layer. zone_obtained stays open (str) for DLC zones.
+    """
+
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    name: str
+    type: PictoType
+    stats: list[str]
+    lumina_cost: int
+    effect_category: PictoEffectCategory
+    source: PictoSource
+    zone_obtained: str
+    act_introduced: int
+
+
 class TodayResponse(BaseModel):
     """Response for GET /api/today.
 
