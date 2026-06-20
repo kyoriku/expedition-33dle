@@ -51,8 +51,8 @@ class PictoRead(BaseModel):
     act_introduced: int
 
 
-class TodayResponse(BaseModel):
-    """Response for GET /api/today.
+class ClassicTodayResponse(BaseModel):
+    """Response for GET /api/classic/today.
 
     Intentionally does NOT expose which entity is the answer; the full entity
     list is included so the frontend can do autocomplete.
@@ -69,13 +69,13 @@ DirectionFeedback = Literal["match", "higher", "lower"]
 ElementFeedback = Literal["match", "partial", "miss"]
 
 
-class GuessRequest(BaseModel):
-    """Request body for POST /api/guess."""
+class ClassicGuessRequest(BaseModel):
+    """Request body for POST /api/classic/guess."""
 
     entity_id: int
 
 
-class GuessFeedback(BaseModel):
+class ClassicGuessFeedback(BaseModel):
     """Per-attribute comparison of a guess against today's answer.
 
     Directional values are answer-relative: "higher" means the answer's value
@@ -93,13 +93,13 @@ class GuessFeedback(BaseModel):
     zone: ScalarFeedback
 
 
-class GuessResponse(BaseModel):
-    """Response for POST /api/guess.
+class ClassicGuessResponse(BaseModel):
+    """Response for POST /api/classic/guess.
 
     Echoes the guessed entity plus feedback. The answer entity never appears
     here in any form — name is not compared per-attribute; is_correct covers it.
     """
 
     guess: EntityRead
-    feedback: GuessFeedback
+    feedback: ClassicGuessFeedback
     is_correct: bool

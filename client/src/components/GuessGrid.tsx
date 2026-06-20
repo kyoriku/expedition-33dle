@@ -1,12 +1,12 @@
 import { ATTRIBUTES } from "../lib/attributes";
-import type { GuessResponse } from "../lib/types";
+import type { ClassicGuessResponse } from "../lib/types";
 import GuessRow, { GRID_TEMPLATE } from "./GuessRow";
 
 // Character (portrait + name) first, then the shared comparison columns.
 const COLUMNS = ["Character", ...ATTRIBUTES.map((a) => a.label)];
 
 interface GuessGridProps {
-  guesses: GuessResponse[];
+  guesses: ClassicGuessResponse[];
   /** Entity id of the just-submitted guess — that row flip-reveals. */
   animateId?: number | null;
 }

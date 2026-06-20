@@ -20,7 +20,7 @@ export type CellState =
 export type AttributeKind = "scalar" | "array" | "element" | "direction";
 
 export interface AttributeDescriptor<T = Entity> {
-  /** Key into the item type (and, for Entity, into GuessFeedback). */
+  /** Key into the item type (and, for Entity, into ClassicGuessFeedback). */
   key: keyof T & string;
   /** Column header and legend label. */
   label: string;

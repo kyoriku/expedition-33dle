@@ -12,8 +12,9 @@ import pytest
 from fastapi import HTTPException
 
 from app.models import Entity
-from app.routers.puzzles import compute_feedback, guess, reveal, today
-from app.schemas import GuessRequest
+from app.routers.classic import guess, reveal, today
+from app.schemas import ClassicGuessRequest
+from app.services.compare import classic_feedback
 from app.services.scheduling import get_puzzle_for_date
 
 
@@ -89,7 +90,7 @@ def test_today_503_when_no_entities():
 
 def test_guess_correct_is_all_match():
     answer = _todays_answer(ROSTER)
-    resp = run(guess(GuessRequest(entity_id=answer.id), db=FakeSession(ROSTER)))
+    resp = run(guess(ClassicGuessRequest(entity_id=answer.id), db=FakeSession(ROSTER)))
     assert resp.is_correct is True
     assert all(v == "match" for v in resp.feedback.model_dump().values())
 
@@ -97,15 +98,15 @@ def test_guess_correct_is_all_match():
 def test_guess_incorrect_matches_pure_feedback():
     answer = _todays_answer(ROSTER)
     other = next(e for e in ROSTER if e.id != answer.id)
-    resp = run(guess(GuessRequest(entity_id=other.id), db=FakeSession(ROSTER)))
+    resp = run(guess(ClassicGuessRequest(entity_id=other.id), db=FakeSession(ROSTER)))
     assert resp.is_correct is False
     assert resp.guess.id == other.id
-    assert resp.feedback.model_dump() == compute_feedback(other, answer).model_dump()
+    assert resp.feedback.model_dump() == classic_feedback(other, answer).model_dump()
 
 
 def test_guess_unknown_id_is_400():
     with pytest.raises(HTTPException) as exc:
-        run(guess(GuessRequest(entity_id=9999), db=FakeSession(ROSTER)))
+        run(guess(ClassicGuessRequest(entity_id=9999), db=FakeSession(ROSTER)))
     assert exc.value.status_code == 400
 
 

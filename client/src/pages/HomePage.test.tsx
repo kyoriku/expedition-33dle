@@ -6,8 +6,8 @@ import { MemoryRouter } from "react-router-dom";
 import HomePage from "./HomePage";
 import type {
   Entity,
-  GuessResponse,
-  TodayResponse,
+  ClassicGuessResponse,
+  ClassicTodayResponse,
 } from "../lib/types";
 
 // Mock the network layer so the full component tree mounts without a server.
@@ -34,7 +34,7 @@ const ent = (id: number, name: string, over: Partial<Entity> = {}): Entity => ({
   ...over,
 });
 
-const TODAY: TodayResponse = {
+const TODAY: ClassicTodayResponse = {
   puzzle_date: "2026-06-17",
   puzzle_number: 4,
   entities: [ent(1, "Gustave"), ent(2, "Maelle", { gender: "female" })],
@@ -67,7 +67,7 @@ describe("HomePage", () => {
   });
 
   it("scores a guess and exposes per-cell feedback to assistive tech", async () => {
-    const result: GuessResponse = {
+    const result: ClassicGuessResponse = {
       guess: ent(2, "Maelle", { gender: "female" }),
       is_correct: false,
       feedback: {

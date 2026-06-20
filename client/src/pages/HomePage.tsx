@@ -27,15 +27,15 @@ import {
 import type {
   Entity,
   GameStatus as Status,
-  GuessResponse,
-  TodayResponse,
+  ClassicGuessResponse,
+  ClassicTodayResponse,
 } from "../lib/types";
 
 const MAX_GUESSES = 6;
 
 /** Spoken summary of a guess outcome for the screen-reader live region. */
 function describeGuess(
-  result: GuessResponse,
+  result: ClassicGuessResponse,
   guessNumber: number,
   status: Status,
 ): string {
@@ -61,7 +61,7 @@ function Centered({ children }: { children: React.ReactNode }) {
   );
 }
 
-/** Refetch /api/today when the UTC day rolls over — a timer firing at the next
+/** Refetch /api/classic/today when the UTC day rolls over — a timer firing at the next
  *  midnight plus a check on tab refocus. Without this, a long-open session keeps
  *  serving yesterday's puzzle (staleTime: Infinity) and would score new guesses
  *  against the *new* day's answer. The +500ms cushions clock skew so the server
@@ -111,8 +111,8 @@ export default function HomePage() {
   return <Game key={today.puzzle_number} today={today} />;
 }
 
-function Game({ today }: { today: TodayResponse }) {
-  // Restore happens synchronously on mount; Game only mounts once /api/today
+function Game({ today }: { today: ClassicTodayResponse }) {
+  // Restore happens synchronously on mount; Game only mounts once /api/classic/today
   // has resolved, so the stored puzzle_number is always validated against
   // live data. A mismatch (new day, reseeded DB) starts fresh.
   const [guesses, setGuesses] = useState(() => {

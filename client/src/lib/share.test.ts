@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildShareString } from "./share";
-import type { Entity, GuessFeedback, GuessResponse } from "./types";
+import type { Entity, ClassicGuessFeedback, ClassicGuessResponse } from "./types";
 
 const ENTITY: Entity = {
   id: 1,
@@ -16,7 +16,7 @@ const ENTITY: Entity = {
   image: null,
 };
 
-function row(feedback: Partial<GuessFeedback>, is_correct = false): GuessResponse {
+function row(feedback: Partial<ClassicGuessFeedback>, is_correct = false): ClassicGuessResponse {
   return {
     guess: ENTITY,
     is_correct,
