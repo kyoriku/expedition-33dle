@@ -54,7 +54,7 @@ function renderHome() {
 
 beforeEach(() => {
   localStorage.clear();
-  localStorage.setItem("expedition33dle:tutorial_seen", "true"); // skip auto-modal
+  localStorage.setItem("expedition33dle:classic:tutorial_seen", "true"); // skip auto-modal
   vi.mocked(fetchToday).mockResolvedValue(TODAY);
 });
 

@@ -1,0 +1,67 @@
+import { PICTOS_ATTRIBUTES, type CellState } from "../lib/attributes";
+import type { PictoGuessResponse } from "../lib/types";
+import { Cell, NAME_CELL_BASE, WIN_NAME } from "./GuessRow";
+
+// 7 attribute columns (pictos has no portrait, so the name column can be a touch
+// narrower than classic's). Literal strings so Tailwind's JIT scanner picks them
+// up — the column count can't be computed at runtime.
+export const PICTOS_GRID_TEMPLATE =
+  "grid w-max grid-cols-[180px_repeat(7,92px)] gap-1.5 " +
+  "lg:w-full lg:grid-cols-[220px_repeat(7,minmax(0,1fr))]";
+
+// NAME_CELL_BASE carries the same fixed h-23 height as the attribute cells (via
+// Cell/CELL_BASE), so the name cell lines up with the rest of the row.
+const NAME_CELL = `${NAME_CELL_BASE} bg-panneau border-line border`;
+
+interface PictosGuessRowProps {
+  result: PictoGuessResponse;
+  /** Flip-reveal the attribute cells (just-submitted guesses only). The name
+   *  cell stays static so the player immediately sees what they guessed. */
+  animate?: boolean;
+  /** The most recent guess — gets a gold ring to draw the eye. */
+  latest?: boolean;
+}
+
+export default function PictosGuessRow({
+  result,
+  animate = false,
+  latest = false,
+}: PictosGuessRowProps) {
+  const { guess, feedback, is_correct } = result;
+  const flip = (i: number) => (animate ? i : null);
+  return (
+    <div
+      className={`${PICTOS_GRID_TEMPLATE} ${
+        latest ? "ring-gold/40 ring-offset-ink ring-1 ring-offset-2" : ""
+      }`}
+      role="row"
+    >
+      {/* Name cell — no portrait (pictos have no art), just the name. */}
+      <div
+        role="rowheader"
+        aria-label={
+          is_correct ? `${guess.name}, correct answer` : `Your guess: ${guess.name}`
+        }
+        className={is_correct ? `${NAME_CELL_BASE} ${WIN_NAME}` : NAME_CELL}
+      >
+        <span
+          aria-hidden="true"
+          className={`font-display line-clamp-3 text-left text-sm leading-tight tracking-[0.02em] uppercase md:text-base lg:text-lg ${
+            is_correct ? "text-gold-bright font-bold" : "text-gold"
+          }`}
+        >
+          {guess.name}
+        </span>
+      </div>
+      {PICTOS_ATTRIBUTES.map((attr, i) => (
+        <Cell
+          key={attr.key}
+          feedback={feedback[attr.key] as CellState}
+          value={attr.format(guess)}
+          label={attr.label}
+          flipIndex={flip(i)}
+        />
+      ))}
+    </div>
+  );
+}

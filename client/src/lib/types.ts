@@ -91,6 +91,15 @@ export interface StoredGameState {
   revealed_answer?: Entity | null; // optional: pre-reveal states lack it
 }
 
+// Pictos game state — parallels StoredGameState. No stats_recorded (pictos has
+// no stats this phase).
+export interface PictoStoredGameState {
+  guesses: PictoGuessResponse[];
+  status: GameStatus;
+  puzzle_number: number;
+  revealed_answer?: Picto | null; // optional: pre-reveal states lack it
+}
+
 export interface Stats {
   played: number;
   won: number;
