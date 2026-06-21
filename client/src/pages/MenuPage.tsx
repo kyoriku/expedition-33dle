@@ -96,7 +96,7 @@ export default function MenuPage() {
   );
 
   return (
-    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col lg:justify-center px-4 py-8 md:max-w-3xl md:px-6 lg:max-w-6xl">
+    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col  px-4 py-8 md:py-12 md:max-w-3xl md:px-6 lg:max-w-6xl">
       <Header />
       {/* <main> widens to max-w-6xl at lg (matching the game pages, so the header
           self-constrains to the same 768px offset); keep the menu content at that

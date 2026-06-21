@@ -10,7 +10,8 @@
     "effect_category": "Critical",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "2-pictos.webp"
   },
   {
     "name": "AP Discount",
@@ -22,7 +23,8 @@
     "effect_category": "AP",
     "source": "Merchant",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "4-pictos.webp"
   },
   {
     "name": "Clea's Death",
@@ -35,7 +37,8 @@
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
     "zone_obtained": "Endless Tower",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "4-pictos.webp"
   },
   {
     "name": "Consuming Attack",
@@ -48,7 +51,8 @@
     "effect_category": "Damage",
     "source": "Merchant",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "5-pictos.webp"
   },
   {
     "name": "Damage Share",
@@ -61,7 +65,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "5-pictos.webp"
   },
   {
     "name": "Double Third",
@@ -75,7 +80,8 @@
     "effect_category": "Damage",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Empowered Healer",
@@ -88,7 +94,8 @@
     "effect_category": "Damage",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "9-pictos.webp"
   },
   {
     "name": "Empowering Jumps",
@@ -100,7 +107,8 @@
     "effect_category": "Damage",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "1-pictos.webp"
   },
   {
     "name": "Feint",
@@ -112,7 +120,8 @@
     "effect_category": "Damage",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "10-pictos.webp"
   },
   {
     "name": "First Life",
@@ -124,7 +133,8 @@
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
     "zone_obtained": "Endless Tower",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Frenzy",
@@ -137,7 +147,8 @@
     "effect_category": "Damage",
     "source": "Boss Drop",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Gradient Overcharge",
@@ -149,7 +160,8 @@
     "effect_category": "Damage",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Gradient Parry",
@@ -162,7 +174,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Longer Break",
@@ -176,7 +189,8 @@
     "effect_category": "Break",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "6-pictos.webp"
   },
   {
     "name": "SOS Healing Tint",
@@ -188,7 +202,8 @@
     "effect_category": "Heal",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "1-pictos.webp"
   },
   {
     "name": "Slowing Attack",
@@ -201,7 +216,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "8-pictos.webp"
   },
   {
     "name": "Trigger-Happy",
@@ -213,7 +229,8 @@
     "effect_category": "AP",
     "source": "Boss Drop",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "11-pictos.webp"
   },
   {
     "name": "Accelerating Heal",
@@ -226,7 +243,8 @@
     "effect_category": "Heal",
     "source": "Pickup",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Accelerating Last Stand",
@@ -239,7 +257,8 @@
     "effect_category": "Status",
     "source": "Boss Drop",
     "zone_obtained": "Hidden Gestral Arena",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "4-pictos.webp"
   },
   {
     "name": "Accelerating Shots",
@@ -252,7 +271,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
     "zone_obtained": "Flying Manor",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "5-pictos.webp"
   },
   {
     "name": "Accelerating Tint",
@@ -265,7 +285,8 @@
     "effect_category": "Heal",
     "source": "Merchant",
     "zone_obtained": "Endless Night Sanctuary",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Aegis Revival",
@@ -278,7 +299,8 @@
     "effect_category": "Shield",
     "source": "Merchant",
     "zone_obtained": "Renoir's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "4-pictos.webp"
   },
   {
     "name": "Anti-Blight",
@@ -291,7 +313,8 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "6-pictos.webp"
   },
   {
     "name": "Anti-Burn",
@@ -304,7 +327,8 @@
     "effect_category": "Status",
     "source": "Boss Drop",
     "zone_obtained": "Frozen Hearts",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "1-pictos.webp"
   },
   {
     "name": "Anti-Charm",
@@ -317,7 +341,8 @@
     "effect_category": "Status",
     "source": "Boss Drop",
     "zone_obtained": "Sirene",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "1-pictos.webp"
   },
   {
     "name": "Anti-Freeze",
@@ -330,7 +355,8 @@
     "effect_category": "Status",
     "source": "Paint Cage",
     "zone_obtained": "Frozen Hearts",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "8-pictos.webp"
   },
   {
     "name": "Anti-Stun",
@@ -343,7 +369,8 @@
     "effect_category": "Status",
     "source": "Boss Drop",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "4-pictos.webp"
   },
   {
     "name": "At Death's Door",
@@ -356,7 +383,8 @@
     "effect_category": "Damage",
     "source": "Boss Drop",
     "zone_obtained": "Stone Wave Cliffs",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Attack Lifesteal",
@@ -369,7 +397,8 @@
     "effect_category": "Heal",
     "source": "Pickup",
     "zone_obtained": "Ancient Sanctuary",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Augmented Aim",
@@ -382,7 +411,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "Flying Waters",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "5-pictos.webp"
   },
   {
     "name": "Augmented Attack",
@@ -395,7 +425,8 @@
     "effect_category": "Damage",
     "source": "Boss Drop",
     "zone_obtained": "Spring Meadows",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "6-pictos.webp"
   },
   {
     "name": "Augmented Counter",
@@ -408,7 +439,8 @@
     "effect_category": "Damage",
     "source": "Merchant",
     "zone_obtained": "Flying Waters",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Augmented First Strike",
@@ -421,7 +453,8 @@
     "effect_category": "Damage",
     "source": "Merchant",
     "zone_obtained": "Esquie's Nest",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "9-pictos.webp"
   },
   {
     "name": "Auto Death",
@@ -433,7 +466,8 @@
     "effect_category": "Death/Revive",
     "source": "Merchant",
     "zone_obtained": "Yellow Harvest",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "8-pictos.webp"
   },
   {
     "name": "Auto Powerful",
@@ -446,7 +480,8 @@
     "effect_category": "Status",
     "source": "Quest",
     "zone_obtained": "Floating Cemetery",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "5-pictos.webp"
   },
   {
     "name": "Auto Regen",
@@ -458,7 +493,8 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Sirene",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "10-pictos.webp"
   },
   {
     "name": "Auto Rush",
@@ -471,7 +507,8 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Old Lumiere",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Auto Shell",
@@ -483,7 +520,8 @@
     "effect_category": "Status",
     "source": "Quest",
     "zone_obtained": "Stone Wave Cliffs",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Base Shield",
@@ -496,7 +534,8 @@
     "effect_category": "Shield",
     "source": "Boss Drop",
     "zone_obtained": "The Chosen Path",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Beneficial Contamination",
@@ -509,7 +548,8 @@
     "effect_category": "AP",
     "source": "Merchant",
     "zone_obtained": "Falling Leaves",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "8-pictos.webp"
   },
   {
     "name": "Break Specialist",
@@ -522,7 +562,8 @@
     "effect_category": "Break",
     "source": "Merchant",
     "zone_obtained": "Flying Manor",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "8-pictos.webp"
   },
   {
     "name": "Breaker",
@@ -535,7 +576,8 @@
     "effect_category": "Break",
     "source": "Boss Drop",
     "zone_obtained": "Ancient Sanctuary",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "8-pictos.webp"
   },
   {
     "name": "Breaking Attack",
@@ -548,7 +590,8 @@
     "effect_category": "Break",
     "source": "Boss Drop",
     "zone_obtained": "The Monolith",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Breaking Burn",
@@ -561,7 +604,8 @@
     "effect_category": "Burn",
     "source": "Pickup",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "10-pictos.webp"
   },
   {
     "name": "Breaking Counter",
@@ -574,7 +618,8 @@
     "effect_category": "Break",
     "source": "Pickup",
     "zone_obtained": "Stone Wave Cliffs",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "5-pictos.webp"
   },
   {
     "name": "Breaking Death",
@@ -587,7 +632,8 @@
     "effect_category": "Death/Revive",
     "source": "Pickup",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "5-pictos.webp"
   },
   {
     "name": "Breaking Shots",
@@ -600,7 +646,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "Stone Wave Cliffs",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Breaking Slow",
@@ -613,7 +660,8 @@
     "effect_category": "Break",
     "source": "Pickup",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "5-pictos.webp"
   },
   {
     "name": "Burn Affinity",
@@ -626,7 +674,8 @@
     "effect_category": "Burn",
     "source": "Pickup",
     "zone_obtained": "Frozen Hearts",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Burning Break",
@@ -639,7 +688,8 @@
     "effect_category": "Burn",
     "source": "Pickup",
     "zone_obtained": "Frozen Hearts",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "11-pictos.webp"
   },
   {
     "name": "Burning Death",
@@ -652,7 +702,8 @@
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
     "zone_obtained": "Frozen Hearts",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "5-pictos.webp"
   },
   {
     "name": "Burning Mark",
@@ -665,7 +716,8 @@
     "effect_category": "Burn",
     "source": "Pickup",
     "zone_obtained": "Ancient Sanctuary",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "10-pictos.webp"
   },
   {
     "name": "Burning Shots",
@@ -678,7 +730,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
     "zone_obtained": "Spring Meadows",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "5-pictos.webp"
   },
   {
     "name": "Charging Alteration",
@@ -691,7 +744,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Boss Drop",
     "zone_obtained": "Flying Manor",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Charging Attack",
@@ -704,7 +758,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "1-pictos.webp"
   },
   {
     "name": "Charging Burn",
@@ -717,7 +772,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
     "zone_obtained": "Renoir's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "8-pictos.webp"
   },
   {
     "name": "Charging Counter",
@@ -730,7 +786,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "4-pictos.webp"
   },
   {
     "name": "Charging Critical",
@@ -743,7 +800,8 @@
     "effect_category": "Critical",
     "source": "Merchant",
     "zone_obtained": "Renoir's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "6-pictos.webp"
   },
   {
     "name": "Charging Mark",
@@ -756,7 +814,8 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "Endless Night Sanctuary",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "8-pictos.webp"
   },
   {
     "name": "Charging Stun",
@@ -769,7 +828,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "Lumiere Act III",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "1-pictos.webp"
   },
   {
     "name": "Charging Tint",
@@ -782,7 +842,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "4-pictos.webp"
   },
   {
     "name": "Charging Weakness",
@@ -795,7 +856,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Cheater",
@@ -808,7 +870,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Boss Drop",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Clea's Life",
@@ -820,7 +883,8 @@
     "effect_category": "Heal",
     "source": "Boss Drop",
     "zone_obtained": "Flying Manor",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "1-pictos.webp"
   },
   {
     "name": "Cleansing Tint",
@@ -833,7 +897,8 @@
     "effect_category": "Heal",
     "source": "Pickup",
     "zone_obtained": "Spring Meadows",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "9-pictos.webp"
   },
   {
     "name": "Combo Attack",
@@ -846,7 +911,8 @@
     "effect_category": "Damage",
     "source": "Boss Drop",
     "zone_obtained": "Forgotten Battlefield",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "4-pictos.webp"
   },
   {
     "name": "Confident",
@@ -859,7 +925,8 @@
     "effect_category": "Damage",
     "source": "Pickup",
     "zone_obtained": "Stone Wave Cliffs",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "4-pictos.webp"
   },
   {
     "name": "Confident Fighter",
@@ -872,7 +939,8 @@
     "effect_category": "Damage",
     "source": "Pickup",
     "zone_obtained": "Visages",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Critical Break",
@@ -885,7 +953,8 @@
     "effect_category": "Critical",
     "source": "Pickup",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Critical Burn",
@@ -898,7 +967,8 @@
     "effect_category": "Burn",
     "source": "Merchant",
     "zone_obtained": "Endless Night Sanctuary",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "4-pictos.webp"
   },
   {
     "name": "Critical Moment",
@@ -911,7 +981,8 @@
     "effect_category": "Critical",
     "source": "Merchant",
     "zone_obtained": "Gestral Village",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "4-pictos.webp"
   },
   {
     "name": "Critical Stun",
@@ -924,7 +995,8 @@
     "effect_category": "Critical",
     "source": "Merchant",
     "zone_obtained": "Sacred River",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "9-pictos.webp"
   },
   {
     "name": "Critical Vulnerability",
@@ -937,7 +1009,8 @@
     "effect_category": "Critical",
     "source": "Pickup",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "4-pictos.webp"
   },
   {
     "name": "Critical Weakness",
@@ -950,7 +1023,8 @@
     "effect_category": "Critical",
     "source": "Pickup",
     "zone_obtained": "Endless Tower",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Dead Energy",
@@ -963,7 +1037,8 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "4-pictos.webp"
   },
   {
     "name": "Death Bomb",
@@ -976,7 +1051,8 @@
     "effect_category": "Death/Revive",
     "source": "Pickup",
     "zone_obtained": "Yellow Harvest",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "8-pictos.webp"
   },
   {
     "name": "Defensive Mode",
@@ -989,7 +1065,8 @@
     "effect_category": "AP",
     "source": "Boss Drop",
     "zone_obtained": "Stone Wave Cliffs",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "8-pictos.webp"
   },
   {
     "name": "Dodger",
@@ -1002,7 +1079,8 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "Spring Meadows",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Double Burn",
@@ -1015,7 +1093,8 @@
     "effect_category": "Burn",
     "source": "Merchant",
     "zone_obtained": "Sacred River",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Double Mark",
@@ -1027,7 +1106,8 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "Sirene",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Draining Cleanse",
@@ -1040,7 +1120,8 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "5-pictos.webp"
   },
   {
     "name": "Effective Heal",
@@ -1053,7 +1134,8 @@
     "effect_category": "Heal",
     "source": "Boss Drop",
     "zone_obtained": "Sirene",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "6-pictos.webp"
   },
   {
     "name": "Effective Support",
@@ -1066,7 +1148,8 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "8-pictos.webp"
   },
   {
     "name": "Empowering Attack",
@@ -1079,7 +1162,8 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "Spring Meadows",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "4-pictos.webp"
   },
   {
     "name": "Empowering Break",
@@ -1092,7 +1176,8 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Flying Manor",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "8-pictos.webp"
   },
   {
     "name": "Empowering Dodge",
@@ -1105,7 +1190,8 @@
     "effect_category": "Damage",
     "source": "Pickup",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "10-pictos.webp"
   },
   {
     "name": "Empowering Last Stand",
@@ -1118,7 +1204,8 @@
     "effect_category": "Status",
     "source": "Boss Drop",
     "zone_obtained": "Hidden Gestral Arena",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Empowering Parry",
@@ -1131,7 +1218,8 @@
     "effect_category": "Damage",
     "source": "Paint Cage",
     "zone_obtained": "The Monolith",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Empowering Tint",
@@ -1144,7 +1232,8 @@
     "effect_category": "Heal",
     "source": "Pickup",
     "zone_obtained": "Forgotten Battlefield",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "5-pictos.webp"
   },
   {
     "name": "Energetic Healer",
@@ -1157,7 +1246,8 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "Flying Manor",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "11-pictos.webp"
   },
   {
     "name": "Energising Attack",
@@ -1170,7 +1260,8 @@
     "effect_category": "AP",
     "source": "Merchant",
     "zone_obtained": "Yellow Harvest",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Energising Break",
@@ -1183,7 +1274,8 @@
     "effect_category": "AP",
     "source": "Boss Drop",
     "zone_obtained": "Flying Waters",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "1-pictos.webp"
   },
   {
     "name": "Energising Burn",
@@ -1196,7 +1288,8 @@
     "effect_category": "AP",
     "source": "Boss Drop",
     "zone_obtained": "Frozen Hearts",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "6-pictos.webp"
   },
   {
     "name": "Energising Cleanse",
@@ -1209,7 +1302,8 @@
     "effect_category": "AP",
     "source": "Merchant",
     "zone_obtained": "The Monolith",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Energising Death",
@@ -1222,7 +1316,8 @@
     "effect_category": "Death/Revive",
     "source": "Merchant",
     "zone_obtained": "Forgotten Battlefield",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "10-pictos.webp"
   },
   {
     "name": "Energising Gradient",
@@ -1235,7 +1330,8 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Energising Heal",
@@ -1248,7 +1344,8 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Energising Jump",
@@ -1261,7 +1358,8 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "Ancient Sanctuary",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Energising Pain",
@@ -1274,7 +1372,8 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "Stone Wave Cliffs",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Energising Parry",
@@ -1286,7 +1385,8 @@
     "effect_category": "AP",
     "source": "Merchant",
     "zone_obtained": "Forgotten Battlefield",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "9-pictos.webp"
   },
   {
     "name": "Energising Powerful",
@@ -1299,7 +1399,8 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "Lumiere Act III",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "10-pictos.webp"
   },
   {
     "name": "Energising Revive",
@@ -1312,7 +1413,8 @@
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
     "zone_obtained": "Stone Wave Cliffs Cave",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Energising Rush",
@@ -1325,7 +1427,8 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "Endless Tower",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "1-pictos.webp"
   },
   {
     "name": "Energising Shell",
@@ -1338,7 +1441,8 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "9-pictos.webp"
   },
   {
     "name": "Energising Shots",
@@ -1351,7 +1455,8 @@
     "effect_category": "AP",
     "source": "Boss Drop",
     "zone_obtained": "Flying Manor",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "10-pictos.webp"
   },
   {
     "name": "Energising Start",
@@ -1363,7 +1468,8 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "9-pictos.webp"
   },
   {
     "name": "Energising Stun",
@@ -1376,7 +1482,8 @@
     "effect_category": "AP",
     "source": "Paint Cage",
     "zone_obtained": "Flying Manor",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "4-pictos.webp"
   },
   {
     "name": "Energising Turn",
@@ -1388,7 +1495,8 @@
     "effect_category": "AP",
     "source": "Merchant",
     "zone_obtained": "Sirene",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "10-pictos.webp"
   },
   {
     "name": "Energy Master",
@@ -1400,7 +1508,8 @@
     "effect_category": "AP",
     "source": "Boss Drop",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Enfeebling Attack",
@@ -1413,7 +1522,8 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "The Monolith",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "5-pictos.webp"
   },
   {
     "name": "Enfeebling Mark",
@@ -1426,7 +1536,8 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Stone Wave Cliffs",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "6-pictos.webp"
   },
   {
     "name": "Exhausting Power",
@@ -1439,7 +1550,8 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Stone Wave Cliffs Cave",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "10-pictos.webp"
   },
   {
     "name": "Exposing Attack",
@@ -1452,7 +1564,8 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "Flying Waters",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Exposing Break",
@@ -1465,7 +1578,8 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "10-pictos.webp"
   },
   {
     "name": "Faster Than Strong",
@@ -1478,7 +1592,8 @@
     "effect_category": "Damage",
     "source": "Boss Drop",
     "zone_obtained": "Lumiere Act III",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "10-pictos.webp"
   },
   {
     "name": "First Offensive",
@@ -1491,7 +1606,8 @@
     "effect_category": "Damage",
     "source": "Boss Drop",
     "zone_obtained": "Abbest Cave",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "3-pictos.webp"
   },
   {
     "name": "First Strike",
@@ -1504,7 +1620,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "Stone Wave Cliffs",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "10-pictos.webp"
   },
   {
     "name": "Fueling Break",
@@ -1517,7 +1634,8 @@
     "effect_category": "Break",
     "source": "Pickup",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "8-pictos.webp"
   },
   {
     "name": "Full Strength",
@@ -1530,7 +1648,8 @@
     "effect_category": "Damage",
     "source": "Merchant",
     "zone_obtained": "Lumiere Act III",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "10-pictos.webp"
   },
   {
     "name": "Glass Cannon",
@@ -1542,7 +1661,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
     "zone_obtained": "Visages",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "4-pictos.webp"
   },
   {
     "name": "Gradient Break",
@@ -1555,7 +1675,8 @@
     "effect_category": "Break",
     "source": "Pickup",
     "zone_obtained": "Endless Night Sanctuary",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "8-pictos.webp"
   },
   {
     "name": "Gradient Breaker",
@@ -1568,7 +1689,8 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "Flying Manor",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Gradient Fighter",
@@ -1581,7 +1703,8 @@
     "effect_category": "Damage",
     "source": "Pickup",
     "zone_obtained": "Lumiere Act III",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Greater Defenceless",
@@ -1594,7 +1717,8 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "The Monolith",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "1-pictos.webp"
   },
   {
     "name": "Greater Powerful",
@@ -1607,7 +1731,8 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "Sirene",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Greater Powerless",
@@ -1620,7 +1745,8 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Endless Tower",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "11-pictos.webp"
   },
   {
     "name": "Greater Rush",
@@ -1633,7 +1759,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
     "zone_obtained": "Monoco's Station",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "6-pictos.webp"
   },
   {
     "name": "Greater Shell",
@@ -1646,7 +1773,8 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Sirene",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Greater Slow",
@@ -1659,7 +1787,8 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Sky Island",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Healing Boon",
@@ -1672,7 +1801,8 @@
     "effect_category": "Heal",
     "source": "Pickup",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "1-pictos.webp"
   },
   {
     "name": "Healing Counter",
@@ -1684,7 +1814,8 @@
     "effect_category": "Heal",
     "source": "Merchant",
     "zone_obtained": "Old Lumiere",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "6-pictos.webp"
   },
   {
     "name": "Healing Death",
@@ -1697,7 +1828,8 @@
     "effect_category": "Death/Revive",
     "source": "Pickup",
     "zone_obtained": "Old Lumiere",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Healing Fire",
@@ -1710,7 +1842,8 @@
     "effect_category": "Heal",
     "source": "Pickup",
     "zone_obtained": "Sirene",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Healing Mark",
@@ -1722,7 +1855,8 @@
     "effect_category": "Heal",
     "source": "Merchant",
     "zone_obtained": "Gestral Village",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Healing Parry",
@@ -1735,7 +1869,8 @@
     "effect_category": "Heal",
     "source": "Quest",
     "zone_obtained": "Stone Quarry",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Healing Share",
@@ -1748,7 +1883,8 @@
     "effect_category": "Heal",
     "source": "Merchant",
     "zone_obtained": "Visages",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "9-pictos.webp"
   },
   {
     "name": "Healing Stun",
@@ -1761,7 +1897,8 @@
     "effect_category": "Heal",
     "source": "Pickup",
     "zone_obtained": "Lumiere Act III",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "8-pictos.webp"
   },
   {
     "name": "Healing Tint Energy",
@@ -1774,7 +1911,8 @@
     "effect_category": "Heal",
     "source": "Pickup",
     "zone_obtained": "Stone Wave Cliffs",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Immaculate",
@@ -1787,7 +1925,8 @@
     "effect_category": "Damage",
     "source": "Boss Drop",
     "zone_obtained": "Visages",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "11-pictos.webp"
   },
   {
     "name": "In Medias Res",
@@ -1800,7 +1939,8 @@
     "effect_category": "Shield",
     "source": "Pickup",
     "zone_obtained": "Dark Shores",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "11-pictos.webp"
   },
   {
     "name": "Inverted Affinity",
@@ -1813,7 +1953,8 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "Forgotten Battlefield",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Last Stand Critical",
@@ -1826,7 +1967,8 @@
     "effect_category": "Critical",
     "source": "Boss Drop",
     "zone_obtained": "Hidden Gestral Arena",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Longer Burn",
@@ -1839,7 +1981,8 @@
     "effect_category": "Burn",
     "source": "Merchant",
     "zone_obtained": "Flying Manor",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Longer Powerful",
@@ -1852,7 +1995,8 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "Old Lumiere",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Longer Rush",
@@ -1865,7 +2009,8 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "4-pictos.webp"
   },
   {
     "name": "Longer Shell",
@@ -1878,7 +2023,8 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Forgotten Battlefield",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "11-pictos.webp"
   },
   {
     "name": "Marking Break",
@@ -1891,7 +2037,8 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "Endless Night Sanctuary",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "10-pictos.webp"
   },
   {
     "name": "Marking Shots",
@@ -1904,7 +2051,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "Flying Waters",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "6-pictos.webp"
   },
   {
     "name": "Painted Power",
@@ -1916,7 +2064,8 @@
     "effect_category": "Damage",
     "source": "Boss Drop",
     "zone_obtained": "The Monolith",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "1-pictos.webp"
   },
   {
     "name": "Painter",
@@ -1929,7 +2078,8 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Flying Manor",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "1-pictos.webp"
   },
   {
     "name": "Perilous Parry",
@@ -1942,7 +2092,8 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "Stone Wave Cliffs",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "6-pictos.webp"
   },
   {
     "name": "Piercing Shot",
@@ -1955,7 +2106,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "Ancient Sanctuary",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "8-pictos.webp"
   },
   {
     "name": "Powered Attack",
@@ -1968,7 +2120,8 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "Visages",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Powerful Heal",
@@ -1981,7 +2134,8 @@
     "effect_category": "Heal",
     "source": "Merchant",
     "zone_obtained": "Endless Night Sanctuary",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "11-pictos.webp"
   },
   {
     "name": "Powerful Mark",
@@ -1994,7 +2148,8 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Flying Manor",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "10-pictos.webp"
   },
   {
     "name": "Powerful on Shell",
@@ -2007,7 +2162,8 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Sirene",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Powerful Revive",
@@ -2020,7 +2176,8 @@
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Powerful Shield",
@@ -2033,7 +2190,8 @@
     "effect_category": "Damage",
     "source": "Merchant",
     "zone_obtained": "Endless Night Sanctuary",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "9-pictos.webp"
   },
   {
     "name": "Powerful Shots",
@@ -2046,7 +2204,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "Gestral Village",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "9-pictos.webp"
   },
   {
     "name": "Pro Retreat",
@@ -2059,7 +2218,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "Camp",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "9-pictos.webp"
   },
   {
     "name": "Protecting Attack",
@@ -2072,7 +2232,8 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "Endless Night Sanctuary",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Protecting Death",
@@ -2085,7 +2246,8 @@
     "effect_category": "Death/Revive",
     "source": "Pickup",
     "zone_obtained": "Sirene",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "10-pictos.webp"
   },
   {
     "name": "Protecting Heal",
@@ -2098,7 +2260,8 @@
     "effect_category": "Heal",
     "source": "Merchant",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "6-pictos.webp"
   },
   {
     "name": "Protecting Last Stand",
@@ -2111,7 +2274,8 @@
     "effect_category": "Status",
     "source": "Boss Drop",
     "zone_obtained": "Hidden Gestral Arena",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Protecting Shots",
@@ -2124,7 +2288,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "Flying Manor",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Protecting Tint",
@@ -2137,7 +2302,8 @@
     "effect_category": "Heal",
     "source": "Pickup",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "11-pictos.webp"
   },
   {
     "name": "Quick Break",
@@ -2150,7 +2316,8 @@
     "effect_category": "Break",
     "source": "Boss Drop",
     "zone_obtained": "Endless Night Sanctuary",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Random Defense",
@@ -2162,7 +2329,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Paint Cage",
     "zone_obtained": "The Monolith",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Recovery",
@@ -2175,7 +2343,8 @@
     "effect_category": "Heal",
     "source": "Quest",
     "zone_obtained": "Red Woods",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "5-pictos.webp"
   },
   {
     "name": "Rejuvenating Revive",
@@ -2188,7 +2357,8 @@
     "effect_category": "Death/Revive",
     "source": "Pickup",
     "zone_obtained": "Stone Wave Cliffs",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "1-pictos.webp"
   },
   {
     "name": "Revive Paradox",
@@ -2201,7 +2371,8 @@
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
     "zone_obtained": "Old Lumiere",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "10-pictos.webp"
   },
   {
     "name": "Revive Tint Energy",
@@ -2214,7 +2385,8 @@
     "effect_category": "Death/Revive",
     "source": "Merchant",
     "zone_obtained": "Forgotten Battlefield",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "5-pictos.webp"
   },
   {
     "name": "Rewarding Mark",
@@ -2227,7 +2399,8 @@
     "effect_category": "AP",
     "source": "Merchant",
     "zone_obtained": "Sacred River",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Roulette",
@@ -2240,7 +2413,8 @@
     "effect_category": "Damage",
     "source": "Pickup",
     "zone_obtained": "Gestral Village",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "1-pictos.webp"
   },
   {
     "name": "Rush on Powerful",
@@ -2253,7 +2427,8 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Endless Tower",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "4-pictos.webp"
   },
   {
     "name": "SOS Power",
@@ -2266,7 +2441,8 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Stone Wave Cliffs",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "4-pictos.webp"
   },
   {
     "name": "SOS Rush",
@@ -2279,7 +2455,8 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Falling Leaves",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "2-pictos.webp"
   },
   {
     "name": "SOS Shell",
@@ -2292,7 +2469,8 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Flying Waters",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "10-pictos.webp"
   },
   {
     "name": "Second Chance",
@@ -2305,7 +2483,8 @@
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
     "zone_obtained": "The Monolith",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "8-pictos.webp"
   },
   {
     "name": "Shared Care",
@@ -2318,7 +2497,8 @@
     "effect_category": "Heal",
     "source": "Pickup",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "6-pictos.webp"
   },
   {
     "name": "Shell On Rush",
@@ -2331,7 +2511,8 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "Endless Night Sanctuary",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "10-pictos.webp"
   },
   {
     "name": "Shield Affinity",
@@ -2344,7 +2525,8 @@
     "effect_category": "Damage",
     "source": "Merchant",
     "zone_obtained": "Sirene",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "4-pictos.webp"
   },
   {
     "name": "Shielding Death",
@@ -2357,7 +2539,8 @@
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
     "zone_obtained": "The Crows",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Shielding Tint",
@@ -2370,7 +2553,8 @@
     "effect_category": "Heal",
     "source": "Pickup",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "11-pictos.webp"
   },
   {
     "name": "Shortcut",
@@ -2383,7 +2567,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
     "zone_obtained": "Renoir's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Slowing Break",
@@ -2396,7 +2581,8 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "Flying Manor",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "4-pictos.webp"
   },
   {
     "name": "Sniper",
@@ -2409,7 +2595,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "1-pictos.webp"
   },
   {
     "name": "Solidifying",
@@ -2422,7 +2609,8 @@
     "effect_category": "Shield",
     "source": "Merchant",
     "zone_obtained": "Sacred River",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "7-pictos.webp"
   },
   {
     "name": "Solo Fighter",
@@ -2435,7 +2623,8 @@
     "effect_category": "Damage",
     "source": "Merchant",
     "zone_obtained": "Hidden Gestral Arena",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "11-pictos.webp"
   },
   {
     "name": "Staggering Attack",
@@ -2448,7 +2637,8 @@
     "effect_category": "Break",
     "source": "Pickup",
     "zone_obtained": "Flying Waters",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "5-pictos.webp"
   },
   {
     "name": "Stay Marked",
@@ -2461,7 +2651,8 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "Flying Manor",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "2-pictos.webp"
   },
   {
     "name": "Stun Boost",
@@ -2474,7 +2665,8 @@
     "effect_category": "Damage",
     "source": "Merchant",
     "zone_obtained": "Sacred River",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "5-pictos.webp"
   },
   {
     "name": "Survivor",
@@ -2487,7 +2679,8 @@
     "effect_category": "Death/Revive",
     "source": "Merchant",
     "zone_obtained": "Monoco's Station",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "3-pictos.webp"
   },
   {
     "name": "Sweet Kill",
@@ -2500,7 +2693,8 @@
     "effect_category": "Heal",
     "source": "Merchant",
     "zone_obtained": "Renoir's Drafts",
-    "act_introduced": 4
+    "act_introduced": 4,
+    "image": "8-pictos.webp"
   },
   {
     "name": "Tainted",
@@ -2513,7 +2707,8 @@
     "effect_category": "Damage",
     "source": "Merchant",
     "zone_obtained": "Stone Wave Cliffs",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "9-pictos.webp"
   },
   {
     "name": "Teamwork",
@@ -2526,7 +2721,8 @@
     "effect_category": "Damage",
     "source": "Merchant",
     "zone_obtained": "Yellow Harvest",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "3-pictos.webp"
   },
   {
     "name": "The One",
@@ -2538,7 +2734,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Boss Drop",
     "zone_obtained": "Sunless Cliffs",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "9-pictos.webp"
   },
   {
     "name": "Time Tint",
@@ -2551,7 +2748,8 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Old Lumiere",
-    "act_introduced": 1
+    "act_introduced": 1,
+    "image": "6-pictos.webp"
   },
   {
     "name": "Versatile",
@@ -2564,7 +2762,8 @@
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
     "zone_obtained": "Endless Night Sanctuary",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "1-pictos.webp"
   },
   {
     "name": "Warming Up",
@@ -2577,7 +2776,8 @@
     "effect_category": "Damage",
     "source": "Boss Drop",
     "zone_obtained": "The Continent",
-    "act_introduced": 2
+    "act_introduced": 2,
+    "image": "5-pictos.webp"
   },
   {
     "name": "Weakness Gain",
@@ -2590,6 +2790,7 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "The Monolith",
-    "act_introduced": 3
+    "act_introduced": 3,
+    "image": "3-pictos.webp"
   }
 ]

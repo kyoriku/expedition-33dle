@@ -100,6 +100,7 @@ const PICTO: Picto = {
   source: "Pickup",
   zone_obtained: "Lumière",
   act_introduced: 1,
+  image: null,
 };
 
 function pictoRow(

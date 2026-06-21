@@ -246,7 +246,7 @@ function Game({ today }: { today: ClassicTodayResponse }) {
   }
 
   return (
-    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 py-8 md:max-w-3xl md:px-6 lg:max-w-6xl lg:justify-center">
+    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 py-8 md:py-12 md:max-w-3xl md:px-6 lg:max-w-6xl">
       <Header
         right={
           <span className="flex items-center gap-2">

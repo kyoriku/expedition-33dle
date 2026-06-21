@@ -49,6 +49,7 @@ class PictoRead(BaseModel):
     source: PictoSource
     zone_obtained: str
     act_introduced: int
+    image: Optional[str] = None
 
 
 class ClassicTodayResponse(BaseModel):

@@ -1,6 +1,7 @@
 import { PICTOS_ATTRIBUTES, STATE_VISUAL } from "../lib/attributes";
 import type { Picto } from "../lib/types";
-import { CELL_BASE, NAME_CELL_BASE, WIN_NAME } from "./GuessRow";
+import { CELL_BASE, NAME_CELL_BASE, PORTRAIT_SIZE, WIN_NAME } from "./GuessRow";
+import Portrait from "./Portrait";
 import { PICTOS_GRID_TEMPLATE } from "./PictosGuessRow";
 
 interface PictosAnswerRevealProps {
@@ -27,6 +28,12 @@ export default function PictosAnswerReveal({
               aria-label={`Answer: ${answer.name}`}
               className={`${NAME_CELL_BASE} ${WIN_NAME}`}
             >
+              <Portrait
+                name={answer.name}
+                image={answer.image}
+                dir="pictos"
+                className={PORTRAIT_SIZE}
+              />
               <span
                 aria-hidden="true"
                 className="text-gold-bright font-display line-clamp-3 text-left text-sm leading-tight font-bold tracking-[0.02em] uppercase md:text-base lg:text-lg"

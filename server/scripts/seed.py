@@ -36,6 +36,11 @@ def load_category(name: str) -> list[dict]:
 
 ENTITIES: list[dict] = load_category("characters")
 PICTOS: list[dict] = load_category("pictos")
+# `image` is optional in pictos.json and populated incrementally (R5b). Default it
+# to None so every row carries the key — pg_insert().values() requires a consistent
+# column set across the multi-row VALUES clause (mixing keyed/unkeyed rows errors).
+for _p in PICTOS:
+    _p.setdefault("image", None)
 
 
 async def prune_removed(conn) -> int:
@@ -98,6 +103,7 @@ async def upsert_pictos(conn) -> tuple[int, int]:
                 "source",
                 "zone_obtained",
                 "act_introduced",
+                "image",
             )
         },
     ).returning(Picto.name, literal_column("(xmax = 0)").label("inserted"))

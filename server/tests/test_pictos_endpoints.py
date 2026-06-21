@@ -14,7 +14,7 @@ from fastapi import HTTPException
 
 from app.models import Picto
 from app.routers.pictos import guess, reveal, today
-from app.schemas import PictoGuessRequest
+from app.schemas import PictoGuessRequest, PictoRead
 from app.services.compare import picto_feedback
 from app.services.scheduling import get_puzzle_for_date
 
@@ -119,3 +119,13 @@ def test_reveal_returns_todays_answer():
     resp = run(reveal(db=FakeSession(ROSTER)))
     assert resp.id == answer.id
     assert resp.name == answer.name
+
+
+def test_picto_read_round_trips_image():
+    """The new nullable image field serializes through PictoRead both ways."""
+    with_image = PictoRead.model_validate(
+        _picto(1, "Glass Cannon", image="glass-cannon.webp")
+    )
+    without = PictoRead.model_validate(_picto(2, "AP Discount"))
+    assert with_image.image == "glass-cannon.webp"
+    assert without.image is None

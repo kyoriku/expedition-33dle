@@ -51,3 +51,6 @@ class Picto(Base):
     source: Mapped[str] = mapped_column(String(16))  # categorical: 5 distinct values
     zone_obtained: Mapped[str] = mapped_column(String(64))  # str, not enum: room for DLC
     act_introduced: Mapped[int] = mapped_column(Integer)  # 1 | 2 | 3 | 4 (4 = DLC)
+    # Icon filename served from client/public/pictos/<image>; nullable so the UI
+    # falls back to a monogram when art is missing. Pictos may share an icon file.
+    image: Mapped[Optional[str]] = mapped_column(String(128), nullable=True)

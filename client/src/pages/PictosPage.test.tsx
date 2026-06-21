@@ -25,6 +25,7 @@ const pic = (id: number, name: string, over: Partial<Picto> = {}): Picto => ({
   source: "Pickup",
   zone_obtained: "Lumière",
   act_introduced: 1,
+  image: null,
   ...over,
 });
 

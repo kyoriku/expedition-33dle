@@ -52,7 +52,7 @@ export default function LegalPage({ source }: LegalPageProps) {
         <Header brandAs="div" />
       </div>
       {/* Body stays at a comfortable reading width. */}
-      <div className="mx-auto w-full max-w-[752px] px-4">
+      <div className="mx-auto w-full max-w-3xl px-4">
         <Link
           to="/"
           className="text-gold decoration-gold/40 hover:text-gold-bright mt-6 mb-6 inline-block text-sm underline underline-offset-2"

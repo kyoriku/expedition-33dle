@@ -28,6 +28,7 @@ export interface Picto {
   source: string;
   zone_obtained: string;
   act_introduced: number;
+  image: string | null; // picto icon filename in /pictos, or null for monogram
 }
 
 export interface ClassicGuessFeedback {
