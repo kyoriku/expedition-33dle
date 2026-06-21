@@ -96,6 +96,7 @@ const SPARSE_PICTO: Picto = {
   source: "Pickup",
   zone_obtained: "Flying Manor",
   act_introduced: 1,
+  image: null,
 };
 
 describe("PICTOS_ATTRIBUTES config", () => {

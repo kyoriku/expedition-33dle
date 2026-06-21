@@ -8,7 +8,7 @@ const EXAMPLE_GUESS: ClassicGuessResponse = {
   guess: {
     id: 0,
     name: "Gustave",
-    gender: "male",
+    gender: "Male",
     role: "Playable",
     weapon: "Sword & Pistol",
     element: ["Lightning"],

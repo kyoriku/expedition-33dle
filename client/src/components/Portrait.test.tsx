@@ -26,4 +26,14 @@ describe("Portrait", () => {
     expect(container.querySelector("img")).toBeNull();
     expect(getByText("M")).toBeInTheDocument();
   });
+
+  it("renders from a custom dir when one is given", () => {
+    const { container } = render(
+      <Portrait name="Glass Cannon" image="glass-cannon.webp" dir="pictos" />,
+    );
+    expect(container.querySelector("img")).toHaveAttribute(
+      "src",
+      "/pictos/glass-cannon.webp",
+    );
+  });
 });

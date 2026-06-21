@@ -16,6 +16,7 @@ const EXAMPLE_GUESS: PictoGuessResponse = {
     source: "Pickup",
     zone_obtained: "Spring Meadows",
     act_introduced: 1,
+    image: "9-pictos.webp"
   },
   feedback: {
     type: "match",

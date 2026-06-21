@@ -1,6 +1,7 @@
 import { PICTOS_ATTRIBUTES, type CellState } from "../lib/attributes";
 import type { PictoGuessResponse } from "../lib/types";
-import { Cell, NAME_CELL_BASE, WIN_NAME } from "./GuessRow";
+import { Cell, NAME_CELL_BASE, PORTRAIT_SIZE, WIN_NAME } from "./GuessRow";
+import Portrait from "./Portrait";
 
 // 7 attribute columns. Same cell sizes and name-column widths as the classic grid
 // so the two modes line up exactly: square cells (92x92 mobile, 96x96 desktop) and
@@ -38,7 +39,7 @@ export default function PictosGuessRow({
       }`}
       role="row"
     >
-      {/* Name cell — no portrait (pictos have no art), just the name. */}
+      {/* Name cell — picto icon (monogram fallback when art is missing) + name. */}
       <div
         role="rowheader"
         aria-label={
@@ -46,6 +47,12 @@ export default function PictosGuessRow({
         }
         className={is_correct ? `${NAME_CELL_BASE} ${WIN_NAME}` : NAME_CELL}
       >
+        <Portrait
+          name={guess.name}
+          image={guess.image}
+          dir="pictos"
+          className={PORTRAIT_SIZE}
+        />
         <span
           aria-hidden="true"
           className={`font-display line-clamp-3 text-left text-sm leading-tight tracking-[0.02em] uppercase md:text-base lg:text-lg ${
