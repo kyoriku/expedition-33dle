@@ -23,18 +23,25 @@ CharacterAffiliation = Literal[
 
 
 class CharacterRead(BaseModel):
-    """Public view of a character. Built from ORM rows via from_attributes."""
+    """Public view of a character. Built from ORM rows via from_attributes.
+
+    The DB columns are plain strings, but the closed-set scalar fields (gender,
+    role, category) are constrained here with Literal so invalid values surface at
+    the schema layer — mirroring WeaponRead/PictoRead. weapon and zone stay open
+    (str); element/affiliation stay list[str] (their closed sets are enforced in
+    the seed via get_args, like scaling_stats/stats).
+    """
 
     model_config = ConfigDict(from_attributes=True)
 
     id: int
     name: str
-    gender: str
-    role: str
+    gender: CharacterGender
+    role: CharacterRole
     weapon: str
     element: list[str]
     act_introduced: int
-    category: str
+    category: CharacterCategory
     affiliation: list[str]
     zone: str
     image: Optional[str] = None

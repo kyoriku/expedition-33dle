@@ -21,7 +21,7 @@ from app.services.scheduling import get_puzzle_for_date
 
 def _char(id_: int, name: str, **kw) -> Character:
     base = dict(
-        gender="female",
+        gender="Female",
         role="Playable",
         weapon="Staff",
         element=["Fire"],
@@ -34,7 +34,7 @@ def _char(id_: int, name: str, **kw) -> Character:
 
 
 ROSTER = [
-    _char(1, "Gustave", gender="male", role="Playable", weapon="Sword & Pistol", element=["Lightning"]),
+    _char(1, "Gustave", gender="Male", role="Playable", weapon="Sword & Pistol", element=["Lightning"]),
     _char(2, "Maelle", role="Playable", weapon="Rapier", element=["Fire", "Void"], category="Painted Human", zone="Lumière"),
     _char(3, "Lune", role="Playable", weapon="Elemental Magic", element=["Fire", "Ice"]),
     _char(4, "Sciel", role="Playable", weapon="Scythe", element=["Light", "Dark"], zone="Stone Wave Cliffs"),
