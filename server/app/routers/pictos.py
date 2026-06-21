@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.constants import PICTOS_MAX_GUESSES
 from app.db import get_db
 from app.models import Picto
 from app.schemas import (
@@ -11,6 +12,7 @@ from app.schemas import (
     PictoGuessResponse,
     PictoRead,
     PictoTodayResponse,
+    RevealRequest,
 )
 from app.services.compare import picto_feedback
 from app.services.scheduling import PuzzleNotYetAvailable, get_puzzle_for_date
@@ -86,15 +88,23 @@ async def today(db: AsyncSession = Depends(get_db)) -> PictoTodayResponse:
     )
 
 
-@router.get("/reveal", response_model=PictoRead)
-async def reveal(db: AsyncSession = Depends(get_db)) -> PictoRead:
-    """Return today's answer picto.
+@router.post("/reveal", response_model=PictoRead)
+async def reveal(
+    body: RevealRequest, db: AsyncSession = Depends(get_db)
+) -> PictoRead:
+    """Return today's answer only once the caller proves the game is over.
 
-    Intentionally unauthenticated: called by the client to complete the lose
-    UX; the theoretical cheating risk is an accepted product decision.
+    Stateless proof-of-completion mirroring classic: reveal only if today's answer
+    is among the submitted guesses (solved) or PICTOS_MAX_GUESSES distinct valid
+    guesses were made (lost); 403 otherwise. Bypassable by scripting MAX wrong
+    guesses — accepted — but no longer a single unauthenticated GET.
     """
-    _, today, _, _ = await _today_picto(db)
-    return PictoRead.model_validate(today)
+    all_pictos, answer, _, _ = await _today_picto(db)
+    roster_ids = {p.id for p in all_pictos}
+    valid = {gid for gid in body.guess_ids if gid in roster_ids}
+    if answer.id not in valid and len(valid) < PICTOS_MAX_GUESSES:
+        raise HTTPException(status_code=403, detail="Puzzle not yet completed")
+    return PictoRead.model_validate(answer)
 
 
 @router.post("/guess", response_model=PictoGuessResponse)

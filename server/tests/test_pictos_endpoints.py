@@ -12,9 +12,10 @@ from datetime import datetime, timezone
 import pytest
 from fastapi import HTTPException
 
+from app.constants import PICTOS_MAX_GUESSES
 from app.models import Picto
 from app.routers.pictos import guess, reveal, today
-from app.schemas import PictoGuessRequest, PictoRead
+from app.schemas import PictoGuessRequest, PictoRead, RevealRequest
 from app.services.compare import picto_feedback
 from app.services.scheduling import get_puzzle_for_date
 
@@ -114,11 +115,29 @@ def test_guess_unknown_id_is_400():
     assert exc.value.status_code == 400
 
 
-def test_reveal_returns_todays_answer():
+def test_reveal_solved_returns_answer():
     answer = _todays_answer(ROSTER)
-    resp = run(reveal(db=FakeSession(ROSTER)))
+    resp = run(reveal(RevealRequest(guess_ids=[answer.id]), db=FakeSession(ROSTER)))
     assert resp.id == answer.id
     assert resp.name == answer.name
+
+
+def test_reveal_incomplete_is_403():
+    answer = _todays_answer(ROSTER)
+    wrong = next(p for p in ROSTER if p.id != answer.id)
+    for ids in ([], [wrong.id], [wrong.id, wrong.id, 999999]):
+        with pytest.raises(HTTPException) as exc:
+            run(reveal(RevealRequest(guess_ids=ids), db=FakeSession(ROSTER)))
+        assert exc.value.status_code == 403
+
+
+def test_reveal_loss_unlocks_with_max_distinct_guesses():
+    # MAX (8) exceeds the shared 4-picto ROSTER, so build one large enough.
+    roster = [_picto(i, f"P{i}") for i in range(1, PICTOS_MAX_GUESSES + 2)]
+    answer = _todays_answer(roster)
+    wrong_ids = [p.id for p in roster if p.id != answer.id][:PICTOS_MAX_GUESSES]
+    resp = run(reveal(RevealRequest(guess_ids=wrong_ids), db=FakeSession(roster)))
+    assert resp.id == answer.id
 
 
 def test_picto_read_round_trips_image():

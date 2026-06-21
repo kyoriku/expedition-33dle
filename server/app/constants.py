@@ -12,3 +12,9 @@ LAUNCH_DATE = date(2026, 6, 14)
 # Deterministic schedule seed; shared by the scheduling service. Changing this
 # reshuffles all future puzzles, so treat it as frozen for the live roster.
 SHUFFLE_SEED = 33
+
+# Per-mode guess caps. MIRROR of the client values in client/src/lib/stats.ts
+# (CLASSIC_MAX_GUESSES / PICTOS_MAX_GUESSES) — keep in sync. Used to gate /reveal:
+# the answer is returned only after a solve or this many distinct valid guesses.
+CLASSIC_MAX_GUESSES = 6
+PICTOS_MAX_GUESSES = 8

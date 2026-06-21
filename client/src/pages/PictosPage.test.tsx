@@ -186,7 +186,10 @@ describe("PictosPage", () => {
     expect(
       await screen.findByRole("rowheader", { name: /Answer: Energising Start/ }),
     ).toBeInTheDocument();
-    expect(vi.mocked(revealPicto)).toHaveBeenCalled();
+    // Reveal is gated server-side on proof of loss; the client sends its guess ids.
+    expect(vi.mocked(revealPicto)).toHaveBeenCalledWith(
+      expect.arrayContaining([2]),
+    );
     // Share button is available on the loss screen too.
     expect(screen.getByRole("button", { name: /share/i })).toBeInTheDocument();
   });
