@@ -5,8 +5,8 @@ has its own `*_feedback()` (classic now; pictos later) that builds on the
 shared `set_feedback()` set-comparison primitive.
 """
 
-from app.models import Character, Picto
-from app.schemas import ClassicGuessFeedback, PictoGuessFeedback
+from app.models import Character, Picto, Weapon
+from app.schemas import ClassicGuessFeedback, PictoGuessFeedback, WeaponGuessFeedback
 
 
 def set_feedback(guess_values, answer_values) -> str:
@@ -72,5 +72,22 @@ def picto_feedback(guess: Picto, answer: Picto) -> PictoGuessFeedback:
         zone_obtained=(
             "match" if guess.zone_obtained == answer.zone_obtained else "miss"
         ),
+        act_introduced=direction_feedback(guess.act_introduced, answer.act_introduced),
+    )
+
+
+def weapon_feedback(guess: Weapon, answer: Weapon) -> WeaponGuessFeedback:
+    """Compare a guess weapon to the answer weapon, attribute by attribute.
+
+    Pure function of the two rows — no I/O. Scalar equality for the closed-set
+    fields, set_feedback() for the multi-value scaling_stats, direction_feedback()
+    for the numeric fields (max_power and the ordinal act_introduced).
+    """
+    return WeaponGuessFeedback(
+        wielder="match" if guess.wielder == answer.wielder else "miss",
+        element="match" if guess.element == answer.element else "miss",
+        max_power=direction_feedback(guess.max_power, answer.max_power),
+        scaling_stats=set_feedback(guess.scaling_stats, answer.scaling_stats),
+        source="match" if guess.source == answer.source else "miss",
         act_introduced=direction_feedback(guess.act_introduced, answer.act_introduced),
     )

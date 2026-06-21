@@ -54,3 +54,24 @@ class Picto(Base):
     # Icon filename served from client/public/pictos/<image>; nullable so the UI
     # falls back to a monogram when art is missing. Pictos may share an icon file.
     image: Mapped[Optional[str]] = mapped_column(String(128), nullable=True)
+
+
+class Weapon(Base):
+    """A guessable Weapon for the Weapons daily-puzzle mode."""
+
+    __tablename__ = "weapons"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(64), unique=True)  # unique => unique index
+    wielder: Mapped[str] = mapped_column(String(32))  # 5 closed values; Gustave/Verso share a bucket
+    element: Mapped[str] = mapped_column(String(16))  # 8 closed values (scalar, not a set)
+    max_power: Mapped[int] = mapped_column(Integer)
+    # Set-comparison field, like Picto.stats; 1–2 values, order not meaningful.
+    scaling_stats: Mapped[list[str]] = mapped_column(
+        ARRAY(String(16)), nullable=False, server_default="{}"
+    )
+    source: Mapped[str] = mapped_column(String(16))  # categorical: 6 distinct values
+    act_introduced: Mapped[int] = mapped_column(Integer)  # 1 | 2 | 3 | 4
+    # Filename served from client/public/weapons/<image>; nullable so the UI falls
+    # back to a monogram when art is missing (mirrors Picto.image / Character.image).
+    image: Mapped[Optional[str]] = mapped_column(String(128), nullable=True)
