@@ -41,7 +41,7 @@ def test_scalar_mismatches():
         type="Defensive",
         effect_category="Heal",
         source="Merchant",
-        zone_obtained="Old Lumiere",
+        zone_obtained="Old Lumière",
     )
     fb = picto_feedback(guess, make())
     assert fb.type == "miss"
@@ -71,12 +71,18 @@ def test_stats_one_empty_is_miss():
 
 
 def test_lumina_cost_higher_lower_match():
-    assert picto_feedback(make(lumina_cost=5), make(lumina_cost=20)).lumina_cost == "higher"
-    assert picto_feedback(make(lumina_cost=20), make(lumina_cost=5)).lumina_cost == "lower"
-    assert picto_feedback(make(lumina_cost=10), make(lumina_cost=10)).lumina_cost == "match"
+    assert picto_feedback(make(lumina_cost=5), make(
+        lumina_cost=20)).lumina_cost == "higher"
+    assert picto_feedback(make(lumina_cost=20), make(
+        lumina_cost=5)).lumina_cost == "lower"
+    assert picto_feedback(make(lumina_cost=10), make(
+        lumina_cost=10)).lumina_cost == "match"
 
 
 def test_act_introduced_higher_lower_match():
-    assert picto_feedback(make(act_introduced=1), make(act_introduced=4)).act_introduced == "higher"
-    assert picto_feedback(make(act_introduced=4), make(act_introduced=1)).act_introduced == "lower"
-    assert picto_feedback(make(act_introduced=2), make(act_introduced=2)).act_introduced == "match"
+    assert picto_feedback(make(act_introduced=1), make(
+        act_introduced=4)).act_introduced == "higher"
+    assert picto_feedback(make(act_introduced=4), make(
+        act_introduced=1)).act_introduced == "lower"
+    assert picto_feedback(make(act_introduced=2), make(
+        act_introduced=2)).act_introduced == "match"

@@ -37,8 +37,8 @@ enum so DLC zones can be added without a migration. The 36 values currently in t
 roster: Abbest Cave, Ancient Sanctuary, Camp, Dark Shores, Endless Night Sanctuary,
 Endless Tower, Esquie's Nest, Falling Leaves, Floating Cemetery, Flying Manor,
 Flying Waters, Forgotten Battlefield, Frozen Hearts, Gestral Village, Hidden
-Gestral Arena, Lumiere Act III, Monoco's Station, Old Lumiere, Red Woods, Renoir's
-Drafts, Sacred River, Sirene, Sky Island, Spring Meadows, Stone Quarry, Stone Wave
+Gestral Arena, Lumière Act III, Monoco's Station, Old Lumière, Red Woods, Renoir's
+Drafts, Sacred River, Sirène, Sky Island, Spring Meadows, Stone Quarry, Stone Wave
 Cliffs, Stone Wave Cliffs Cave, Sunless Cliffs, The Chosen Path, The Continent, The
 Crows, The Monolith, The Reacher, Verso's Drafts, Visages, Yellow Harvest.
 

@@ -34,12 +34,13 @@ def _picto(id_: int, name: str, **kw) -> Picto:
 
 
 ROSTER = [
-    _picto(1, "Alternating Critical", stats=["SPD", "Crit"], effect_category="Critical"),
+    _picto(1, "Alternating Critical", stats=[
+           "SPD", "Crit"], effect_category="Critical"),
     _picto(2, "AP Discount", type="Support", stats=["SPD"], lumina_cost=30,
            effect_category="AP", source="Merchant"),
     _picto(3, "Double Third", stats=["HP", "SPD", "Crit"]),
     _picto(4, "Energising Start", type="Support", stats=["DEF"],
-           effect_category="AP", zone_obtained="Old Lumiere"),
+           effect_category="AP", zone_obtained="Old Lumière"),
 ]
 
 
@@ -95,7 +96,8 @@ def test_today_503_when_no_pictos():
 
 def test_guess_correct_is_all_match():
     answer = _todays_answer(ROSTER)
-    resp = run(guess(PictoGuessRequest(picto_id=answer.id), db=FakeSession(ROSTER)))
+    resp = run(guess(PictoGuessRequest(
+        picto_id=answer.id), db=FakeSession(ROSTER)))
     assert resp.is_correct is True
     assert all(v == "match" for v in resp.feedback.model_dump().values())
 
@@ -103,7 +105,8 @@ def test_guess_correct_is_all_match():
 def test_guess_incorrect_matches_pure_feedback():
     answer = _todays_answer(ROSTER)
     other = next(p for p in ROSTER if p.id != answer.id)
-    resp = run(guess(PictoGuessRequest(picto_id=other.id), db=FakeSession(ROSTER)))
+    resp = run(guess(PictoGuessRequest(
+        picto_id=other.id), db=FakeSession(ROSTER)))
     assert resp.is_correct is False
     assert resp.guess.id == other.id
     assert resp.feedback.model_dump() == picto_feedback(other, answer).model_dump()
@@ -117,7 +120,8 @@ def test_guess_unknown_id_is_400():
 
 def test_reveal_solved_returns_answer():
     answer = _todays_answer(ROSTER)
-    resp = run(reveal(RevealRequest(guess_ids=[answer.id]), db=FakeSession(ROSTER)))
+    resp = run(reveal(RevealRequest(
+        guess_ids=[answer.id]), db=FakeSession(ROSTER)))
     assert resp.id == answer.id
     assert resp.name == answer.name
 
@@ -135,7 +139,8 @@ def test_reveal_loss_unlocks_with_max_distinct_guesses():
     # MAX (8) exceeds the shared 4-picto ROSTER, so build one large enough.
     roster = [_picto(i, f"P{i}") for i in range(1, PICTOS_MAX_GUESSES + 2)]
     answer = _todays_answer(roster)
-    wrong_ids = [p.id for p in roster if p.id != answer.id][:PICTOS_MAX_GUESSES]
+    wrong_ids = [p.id for p in roster if p.id !=
+                 answer.id][:PICTOS_MAX_GUESSES]
     resp = run(reveal(RevealRequest(guess_ids=wrong_ids), db=FakeSession(roster)))
     assert resp.id == answer.id
 

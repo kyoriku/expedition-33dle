@@ -10,7 +10,7 @@ const norm = (s: string) =>
 const LISTBOX_ID = "guess-suggestions";
 const optionId = (i: number) => `guess-option-${i}`;
 
-/** The minimal shape GuessInput needs from a guessable item. Both Entity and
+/** The minimal shape GuessInput needs from a guessable item. Both Character and
  *  Picto satisfy it, so the same combobox serves both modes. */
 interface NamedItem {
   id: number;
@@ -18,7 +18,7 @@ interface NamedItem {
 }
 
 interface GuessInputProps<T extends NamedItem> {
-  entities: T[]; // pre-sorted by name from /api/<mode>/today
+  items: T[]; // pre-sorted by name from /api/<mode>/today
   guessedIds: Set<number>; // excluded from suggestions
   disabled: boolean; // true while POST in flight
   onSubmit: (item: T) => void;
@@ -26,7 +26,7 @@ interface GuessInputProps<T extends NamedItem> {
 }
 
 export default function GuessInput<T extends NamedItem>({
-  entities,
+  items,
   guessedIds,
   disabled,
   onSubmit,
@@ -38,8 +38,8 @@ export default function GuessInput<T extends NamedItem>({
 
   const trimmed = query.trim();
   const suggestions = trimmed
-    ? entities.filter(
-        (e) => !guessedIds.has(e.id) && norm(e.name).includes(norm(query)),
+    ? items.filter(
+        (item) => !guessedIds.has(item.id) && norm(item.name).includes(norm(query)),
       )
     : [];
   const showList = open && suggestions.length > 0;
@@ -118,9 +118,9 @@ export default function GuessInput<T extends NamedItem>({
           aria-label={`${noun[0].toUpperCase()}${noun.slice(1)} suggestions`}
           className="border-gold/40 bg-panneau absolute z-10 mt-1 max-h-60 w-full overflow-y-auto border shadow-lg"
         >
-          {suggestions.map((entity, i) => (
+          {suggestions.map((item, i) => (
             <li
-              key={entity.id}
+              key={item.id}
               id={optionId(i)}
               role="option"
               aria-selected={i === activeIndex}
@@ -130,10 +130,10 @@ export default function GuessInput<T extends NamedItem>({
               // mousedown fires before the input's blur, so selection wins
               onMouseDown={(e) => {
                 e.preventDefault();
-                submit(entity);
+                submit(item);
               }}
             >
-              {entity.name}
+              {item.name}
             </li>
           ))}
         </ul>

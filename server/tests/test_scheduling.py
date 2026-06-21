@@ -69,7 +69,7 @@ def test_puzzle_number_progression():
 
 
 def test_no_consecutive_repeats_over_200_days():
-    """No two adjacent days resolve to the same entity, across cycle boundaries."""
+    """No two adjacent days resolve to the same name, across cycle boundaries."""
     previous = None
     for i in range(200):
         name, _ = get_puzzle_for_date(LAUNCH_DATE + timedelta(days=i), ROSTER)
@@ -96,7 +96,7 @@ def test_cycle_boundaries():
 
 
 def test_each_cycle_is_a_full_permutation():
-    """Within any single cycle every entity appears exactly once."""
+    """Within any single cycle every name appears exactly once."""
     pool_size = len(ROSTER)
     for cycle in range(3):
         names = [

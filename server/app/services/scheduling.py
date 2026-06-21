@@ -2,8 +2,11 @@
 
 No DB state required. Same inputs always produce the same output. The
 no-consecutive-repeats invariant is preserved across cycle boundaries (when
-the pool cycles back to position 0, the first entity is swapped with the
-second if it would otherwise equal the previous cycle's last entity).
+the pool cycles back to position 0, the first name is swapped with the
+second if it would otherwise equal the previous cycle's last name).
+
+Mode-agnostic: the roster is just a tuple of names, so every mode (classic,
+pictos, …) schedules through here, differentiated only by `salt`.
 """
 
 from datetime import date
@@ -33,12 +36,12 @@ def _salt_offset(salt: str) -> int:
 
 def get_puzzle_for_date(
     target_date: date,
-    entity_names: tuple[str, ...],
+    names: tuple[str, ...],
     salt: str = "",
 ) -> tuple[str, int]:
-    """Return (entity_name, puzzle_number) for the given date.
+    """Return (name, puzzle_number) for the given date.
 
-    entity_names should be a tuple (hashable) so caching works; order doesn't
+    `names` should be a tuple (hashable) so caching works; order doesn't
     matter as the function sorts internally for determinism. `salt` namespaces
     the schedule so parallel modes (classic vs pictos) pick uncorrelated answers
     on the same day; the default "" preserves the original classic schedule.
@@ -48,10 +51,10 @@ def get_puzzle_for_date(
         raise PuzzleNotYetAvailable()
 
     puzzle_number = days_since_launch + 1
-    pool = tuple(sorted(entity_names))
+    pool = tuple(sorted(names))
     pool_size = len(pool)
     if pool_size == 0:
-        raise RuntimeError("Cannot compute puzzle with empty entity pool")
+        raise RuntimeError("Cannot compute puzzle with an empty roster")
 
     cycle_index = days_since_launch // pool_size
     position = days_since_launch % pool_size

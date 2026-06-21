@@ -20,7 +20,7 @@ app/
   settings.py      env-sourced settings (DATABASE_URL); pydantic-settings
   db.py            async engine, session factory, get_db() dependency, Base
   constants.py     LAUNCH_DATE, SHUFFLE_SEED, CLASSIC/PICTOS_MAX_GUESSES
-  models.py        SQLAlchemy models: Entity (characters), Picto
+  models.py        SQLAlchemy models: Character, Picto
   schemas.py       Pydantic request/response models + feedback literals
   routers/
     classic.py     /api/classic/{today,guess,reveal}
@@ -60,7 +60,7 @@ All routes are under `/api`. Both modes share the same shape:
 | Method | Path | Body | Returns |
 |---|---|---|---|
 | `GET` | `/api/<mode>/today` | — | `puzzle_date`, `puzzle_number`, the full guessable roster, and yesterday's answer. The answer is **never** singled out. |
-| `POST` | `/api/<mode>/guess` | `{ entity_id }` / `{ picto_id }` | The guessed row, per-attribute `feedback`, and `is_correct`. |
+| `POST` | `/api/<mode>/guess` | `{ character_id }` / `{ picto_id }` | The guessed row, per-attribute `feedback`, and `is_correct`. |
 | `POST` | `/api/<mode>/reveal` | `{ guess_ids: int[] }` | Today's answer — **only** if the proof shows the game is over. |
 | `GET` | `/api/health` | — | `{ "status": "ok" }` |
 

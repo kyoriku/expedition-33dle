@@ -2,9 +2,9 @@ import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import GuessInput from "./GuessInput";
-import type { Entity } from "../lib/types";
+import type { Character } from "../lib/types";
 
-function ent(id: number, name: string): Entity {
+function ent(id: number, name: string): Character {
   return {
     id,
     name,
@@ -20,13 +20,13 @@ function ent(id: number, name: string): Entity {
   };
 }
 
-const ENTITIES = [ent(1, "Lune"), ent(2, "Sirène"), ent(3, "Gustave")];
+const ITEMS = [ent(1, "Lune"), ent(2, "Sirène"), ent(3, "Gustave")];
 
 function setup(props: Partial<React.ComponentProps<typeof GuessInput>> = {}) {
   const onSubmit = vi.fn();
   render(
     <GuessInput
-      entities={ENTITIES}
+      items={ITEMS}
       guessedIds={new Set()}
       disabled={false}
       onSubmit={onSubmit}
@@ -51,14 +51,14 @@ describe("GuessInput", () => {
     expect(screen.getByRole("option")).toHaveTextContent("Sirène");
   });
 
-  it("submits the picked entity", async () => {
+  it("submits the picked item", async () => {
     const { user, onSubmit } = setup();
     await user.type(screen.getByRole("combobox"), "gust");
     await user.click(screen.getByRole("option", { name: "Gustave" }));
-    expect(onSubmit).toHaveBeenCalledWith(ENTITIES[2]);
+    expect(onSubmit).toHaveBeenCalledWith(ITEMS[2]);
   });
 
-  it("excludes already-guessed entities and shows an empty state", async () => {
+  it("excludes already-guessed items and shows an empty state", async () => {
     const { user } = setup({ guessedIds: new Set([1]) });
     await user.type(screen.getByRole("combobox"), "lune");
     expect(screen.queryByRole("option")).toBeNull();

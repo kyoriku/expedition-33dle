@@ -7,9 +7,9 @@ import {
   PICTOS_ATTRIBUTES,
   STATE_GLYPH,
 } from "./attributes";
-import type { Entity, Picto } from "./types";
+import type { Character, Picto } from "./types";
 
-const SPARSE: Entity = {
+const SPARSE: Character = {
   id: 1,
   name: "X",
   gender: "male",
@@ -50,13 +50,13 @@ describe("ATTRIBUTES config", () => {
   });
 
   it("formats present numeric and multi-value values", () => {
-    const e: Entity = {
+    const c: Character = {
       ...SPARSE,
       element: ["Fire", "Ice"],
       affiliation: ["Expedition 33", "Lumière"],
     };
     const byKey = Object.fromEntries(
-      ATTRIBUTES.map((a) => [a.key, a.format(e)]),
+      ATTRIBUTES.map((a) => [a.key, a.format(c)]),
     );
     expect(byKey.element).toBe("Fire, Ice");
     expect(byKey.affiliation).toBe("Expedition 33 • Lumière");

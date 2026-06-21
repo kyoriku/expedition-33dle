@@ -26,7 +26,7 @@ import {
   saveTutorialSeen,
 } from "../lib/storage";
 import type {
-  Entity,
+  Character,
   GameStatus as Status,
   ClassicGuessResponse,
   ClassicTodayResponse,
@@ -132,7 +132,7 @@ function Game({ today }: { today: ClassicTodayResponse }) {
       : false;
   });
   const [stats, setStats] = useState(loadStats);
-  // Entity id of the most recently submitted guess this session — only that
+  // Character id of the most recently submitted guess this session — only that
   // row flip-reveals; restored/historical rows render in final state.
   const [animateId, setAnimateId] = useState<number | null>(null);
   // Polite screen-reader announcement of the latest guess outcome (the grid is
@@ -140,7 +140,7 @@ function Game({ today }: { today: ClassicTodayResponse }) {
   const [announcement, setAnnouncement] = useState("");
   // Restored from storage once at mount; live fetches are derived from the
   // query below rather than synced into state (avoids set-state-in-effect).
-  const [storedAnswer] = useState<Entity | null>(() => {
+  const [storedAnswer] = useState<Character | null>(() => {
     const stored = loadState(today.puzzle_date);
     return stored?.puzzle_number === today.puzzle_number
       ? (stored.revealed_answer ?? null)
@@ -234,15 +234,15 @@ function Game({ today }: { today: ClassicTodayResponse }) {
     saveTutorialSeen();
   }
 
-  function handleGuess(entity: Entity) {
+  function handleGuess(character: Character) {
     if (
       guessMutation.isPending ||
       status !== "in_progress" ||
-      guessedIds.has(entity.id)
+      guessedIds.has(character.id)
     ) {
       return;
     }
-    guessMutation.mutate(entity.id);
+    guessMutation.mutate(character.id);
   }
 
   return (
@@ -308,7 +308,7 @@ function Game({ today }: { today: ClassicTodayResponse }) {
             shareText={shareText}
           />
           <GuessInput
-            entities={today.entities}
+            items={today.characters}
             guessedIds={guessedIds}
             disabled={guessMutation.isPending}
             onSubmit={handleGuess}

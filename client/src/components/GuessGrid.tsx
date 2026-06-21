@@ -7,7 +7,7 @@ const COLUMNS = ["Character", ...ATTRIBUTES.map((a) => a.label)];
 
 interface GuessGridProps {
   guesses: ClassicGuessResponse[];
-  /** Entity id of the just-submitted guess — that row flip-reveals. */
+  /** Character id of the just-submitted guess — that row flip-reveals. */
   animateId?: number | null;
 }
 

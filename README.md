@@ -11,8 +11,8 @@ Live at **[expedition33dle.com](https://expedition33dle.com)**.
 
 | Mode | Guess | Roster | Guesses | Data |
 |---|---|---|---|---|
-| **Classic** | a character | 33 | 6 | [`server/data/characters.json`](server/data/characters.md) |
-| **Pictos** | a Picto | 201 | 8 | [`server/data/pictos.json`](server/data/pictos.md) |
+| **Classic** | a character | 33 | 6 | [`server/data/characters.md`](server/data/characters.md) |
+| **Pictos** | a Picto | 201 | 8 | [`server/data/pictos.md`](server/data/pictos.md) |
 | **Weapon** | a weapon | _in progress_ | — | `server/data/weapons.json` |
 
 Each mode picks an uncorrelated answer for the same day; see [Daily puzzle](#daily-puzzle).
@@ -22,31 +22,21 @@ Each mode picks an uncorrelated answer for the same day; see [Daily puzzle](#dai
 - **Frontend** — React 19 + TypeScript, Vite, Tailwind CSS v4, React Router, and
   TanStack Query. See [`client/README.md`](client/README.md).
 - **Backend** — Python 3.12 + FastAPI (async), SQLAlchemy 2.0, Alembic migrations,
-  served by Uvicorn. Managed with [uv](https://docs.astral.sh/uv/).
+  served by Uvicorn. Managed with [uv](https://docs.astral.sh/uv/). See
+  [`server/README.md`](server/README.md).
 - **Database** — PostgreSQL 16 (asyncpg driver).
 
 ## Repository layout
 
 ```
 client/              React SPA (see client/README.md)
-server/
-  app/
-    main.py          FastAPI app: mounts routers, serves the built SPA
-    models.py        SQLAlchemy models (Entity, Picto)
-    constants.py     LAUNCH_DATE, SHUFFLE_SEED, per-mode guess caps
-    settings.py      env-sourced settings (DATABASE_URL)
-    db.py            async engine / session
-    routers/         classic.py, pictos.py — /api/<mode>/{today,guess,reveal}
-    services/
-      compare.py     per-attribute guess feedback (pure, unit-tested)
-      scheduling.py  deterministic on-demand daily-puzzle selection
-  data/              JSON seed data + per-mode docs (see server/data/README.md)
-  alembic/           database migrations
-  scripts/seed.py    sync JSON data into the DB (idempotent)
-  tests/             pytest suite
+server/              FastAPI backend (see server/README.md)
 .devcontainer/       Docker Compose dev environment (dev + postgres)
 package.json         root scripts that orchestrate client + server
 ```
+
+The per-app READMEs document their own structure; the seed-data field
+references live in [`server/data/`](server/data/README.md).
 
 ## API
 

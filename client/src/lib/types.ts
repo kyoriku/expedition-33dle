@@ -4,7 +4,7 @@ export type ScalarFeedback = "match" | "miss";
 export type DirectionFeedback = "match" | "higher" | "lower";
 export type ElementFeedback = "match" | "partial" | "miss";
 
-export interface Entity {
+export interface Character {
   id: number;
   name: string;
   gender: string;
@@ -43,7 +43,7 @@ export interface ClassicGuessFeedback {
 }
 
 export interface ClassicGuessResponse {
-  guess: Entity;
+  guess: Character;
   feedback: ClassicGuessFeedback;
   is_correct: boolean;
 }
@@ -51,8 +51,8 @@ export interface ClassicGuessResponse {
 export interface ClassicTodayResponse {
   puzzle_date: string; // ISO date
   puzzle_number: number;
-  entities: Entity[];
-  yesterday: Entity | null; // previous day's answer (no longer a spoiler)
+  characters: Character[];
+  yesterday: Character | null; // previous day's answer (no longer a spoiler)
 }
 
 // Pictos mode — parallels the Classic* shapes (server/app/schemas.py).
@@ -89,7 +89,7 @@ export interface StoredGameState {
   status: GameStatus;
   puzzle_number: number;
   stats_recorded: boolean; // prevents double-counting stats on refresh
-  revealed_answer?: Entity | null; // optional: pre-reveal states lack it
+  revealed_answer?: Character | null; // optional: pre-reveal states lack it
 }
 
 // Pictos game state — parallels StoredGameState.

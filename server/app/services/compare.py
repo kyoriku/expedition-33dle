@@ -5,7 +5,7 @@ has its own `*_feedback()` (classic now; pictos later) that builds on the
 shared `set_feedback()` set-comparison primitive.
 """
 
-from app.models import Entity, Picto
+from app.models import Character, Picto
 from app.schemas import ClassicGuessFeedback, PictoGuessFeedback
 
 
@@ -30,8 +30,8 @@ def direction_feedback(guess_value, answer_value) -> str:
     return "higher" if answer_value > guess_value else "lower"
 
 
-def classic_feedback(guess: Entity, answer: Entity) -> ClassicGuessFeedback:
-    """Compare a guess entity to the answer entity, attribute by attribute.
+def classic_feedback(guess: Character, answer: Character) -> ClassicGuessFeedback:
+    """Compare a guess character to the answer character, attribute by attribute.
 
     Pure function of the two rows — no I/O — so it is unit-testable.
     """

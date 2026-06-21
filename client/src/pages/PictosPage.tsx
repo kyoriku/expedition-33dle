@@ -291,7 +291,7 @@ function Game({ today }: { today: PictoTodayResponse }) {
             {remaining} {remaining === 1 ? "guess" : "guesses"} left
           </p>
           <GuessInput
-            entities={today.pictos}
+            items={today.pictos}
             guessedIds={guessedIds}
             disabled={guessMutation.isPending}
             onSubmit={handleGuess}

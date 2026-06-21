@@ -5,6 +5,8 @@
     "element": "Physical",
     "max_power": 3228,
     "scaling_stats": ["Vitality", "Defense"],
+    "source": "Pickup",
+    "act_introduced": 1,
     "image": "abysseram.webp"
   },
   {
@@ -13,6 +15,8 @@
     "element": "Light",
     "max_power": 3487,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "blodam.webp"
   },
   {
@@ -21,6 +25,8 @@
     "element": "Physical",
     "max_power": 3067,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "chevalam.webp"
   },
   {
@@ -29,6 +35,8 @@
     "element": "Light",
     "max_power": 3067,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Pickup",
+    "act_introduced": 2,
     "image": "confuso.webp"
   },
   {
@@ -37,6 +45,8 @@
     "element": "Lightning",
     "max_power": 2841,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Pickup",
+    "act_introduced": 2,
     "image": "contorso.webp"
   },
   {
@@ -45,6 +55,8 @@
     "element": "Fire",
     "max_power": 3648,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Pickup",
+    "act_introduced": 2,
     "image": "corpeso.webp"
   },
   {
@@ -53,6 +65,8 @@
     "element": "Ice",
     "max_power": 3454,
     "scaling_stats": ["Defense", "Luck"],
+    "source": "Pickup",
+    "act_introduced": 1,
     "image": "cruleram.webp"
   },
   {
@@ -61,6 +75,8 @@
     "element": "Dark",
     "max_power": 3132,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Merchant",
+    "act_introduced": 2,
     "image": "cultam.webp"
   },
   {
@@ -69,6 +85,8 @@
     "element": "Fire",
     "max_power": 2970,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "danseso.webp"
   },
   {
@@ -77,6 +95,8 @@
     "element": "Light",
     "max_power": 3390,
     "scaling_stats": ["Vitality", "Luck"],
+    "source": "Paint Cage",
+    "act_introduced": 1,
     "image": "delaram.webp"
   },
   {
@@ -85,6 +105,8 @@
     "element": "Light",
     "max_power": 2809,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Merchant",
+    "act_introduced": 1,
     "image": "demonam.webp"
   },
   {
@@ -93,6 +115,8 @@
     "element": "Physical",
     "max_power": 3067,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Pickup",
+    "act_introduced": 2,
     "image": "dreameso.webp"
   },
   {
@@ -101,6 +125,8 @@
     "element": "Lightning",
     "max_power": 1776,
     "scaling_stats": ["Vitality", "Defense"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "dualiso.webp"
   },
   {
@@ -109,6 +135,8 @@
     "element": "Light",
     "max_power": 3551,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 4,
     "image": "esquiso.webp"
   },
   {
@@ -117,6 +145,8 @@
     "element": "Earth",
     "max_power": 3261,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "gaulteram.webp"
   },
   {
@@ -125,6 +155,8 @@
     "element": "Physical",
     "max_power": 3228,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Pickup",
+    "act_introduced": 3,
     "image": "gesam.webp"
   },
   {
@@ -133,6 +165,8 @@
     "element": "Ice",
     "max_power": 2873,
     "scaling_stats": ["Defense", "Luck"],
+    "source": "Pickup",
+    "act_introduced": 2,
     "image": "glaceso.webp"
   },
   {
@@ -141,6 +175,8 @@
     "element": "Physical",
     "max_power": 3713,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Pickup",
+    "act_introduced": 1,
     "image": "lanceram.webp"
   },
   {
@@ -149,6 +185,8 @@
     "element": "Physical",
     "max_power": 3551,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Pickup",
+    "act_introduced": 3,
     "image": "liteso.webp"
   },
   {
@@ -157,6 +195,8 @@
     "element": "Physical",
     "max_power": 2260,
     "scaling_stats": ["Vitality"],
+    "source": "Starting",
+    "act_introduced": 1,
     "image": "noahram.webp"
   },
   {
@@ -165,6 +205,8 @@
     "element": "Physical",
     "max_power": 3551,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Merchant",
+    "act_introduced": 4,
     "image": "nosaram.webp"
   },
   {
@@ -173,6 +215,8 @@
     "element": "Physical",
     "max_power": 2938,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 1,
     "image": "sakaram.webp"
   },
   {
@@ -181,6 +225,8 @@
     "element": "Light",
     "max_power": 3713,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Merchant",
+    "act_introduced": 2,
     "image": "seeram.webp"
   },
   {
@@ -189,6 +235,8 @@
     "element": "Light",
     "max_power": 3228,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Boss Drop",
+    "act_introduced": 4,
     "image": "simoso.webp"
   },
   {
@@ -197,6 +245,8 @@
     "element": "Physical",
     "max_power": 2583,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Pickup",
+    "act_introduced": 2,
     "image": "sireso.webp"
   },
   {
@@ -205,6 +255,8 @@
     "element": "Earth",
     "max_power": 3713,
     "scaling_stats": ["Vitality", "Defense"],
+    "source": "Pickup",
+    "act_introduced": 4,
     "image": "sucreso.webp"
   },
   {
@@ -213,6 +265,8 @@
     "element": "Earth",
     "max_power": 3713,
     "scaling_stats": ["Vitality", "Defense"],
+    "source": "Merchant",
+    "act_introduced": 3,
     "image": "tireso.webp"
   },
   {
@@ -221,6 +275,8 @@
     "element": "Physical",
     "max_power": 3454,
     "scaling_stats": ["Vitality"],
+    "source": "Starting",
+    "act_introduced": 1,
     "image": "verleso.webp"
   },
   {
@@ -229,6 +285,8 @@
     "element": "Fire",
     "max_power": 3293,
     "scaling_stats": ["Defense", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "angerim.webp"
   },
   {
@@ -237,6 +295,8 @@
     "element": "Earth",
     "max_power": 2744,
     "scaling_stats": ["Vitality", "Defense"],
+    "source": "Merchant",
+    "act_introduced": 2,
     "image": "benisim.webp"
   },
   {
@@ -245,6 +305,8 @@
     "element": "Earth",
     "max_power": 3228,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Pickup",
+    "act_introduced": 1,
     "image": "betelim.webp"
   },
   {
@@ -253,6 +315,8 @@
     "element": "Lightning",
     "max_power": 3810,
     "scaling_stats": ["Vitality", "Defense"],
+    "source": "Merchant",
+    "act_introduced": 4,
     "image": "bonbim.webp"
   },
   {
@@ -261,6 +325,8 @@
     "element": "Fire",
     "max_power": 3390,
     "scaling_stats": ["Vitality", "Luck"],
+    "source": "Pickup",
+    "act_introduced": 2,
     "image": "braselim.webp"
   },
   {
@@ -269,6 +335,8 @@
     "element": "Earth",
     "max_power": 3164,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "chapelim.webp"
   },
   {
@@ -277,6 +345,8 @@
     "element": "Fire",
     "max_power": 3551,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Boss Drop",
+    "act_introduced": 3,
     "image": "choralim.webp"
   },
   {
@@ -285,6 +355,8 @@
     "element": "Light",
     "max_power": 3551,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 4,
     "image": "cleim.webp"
   },
   {
@@ -293,6 +365,8 @@
     "element": "Light",
     "max_power": 2583,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Pickup",
+    "act_introduced": 2,
     "image": "colim.webp"
   },
   {
@@ -301,6 +375,8 @@
     "element": "Ice",
     "max_power": 2744,
     "scaling_stats": ["Vitality", "Defense"],
+    "source": "Pickup",
+    "act_introduced": 1,
     "image": "coralim.webp"
   },
   {
@@ -309,6 +385,8 @@
     "element": "Lightning",
     "max_power": 2744,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Quest",
+    "act_introduced": 1,
     "image": "deminerim.webp"
   },
   {
@@ -317,6 +395,8 @@
     "element": "Earth",
     "max_power": 3551,
     "scaling_stats": ["Vitality", "Defense"],
+    "source": "Pickup",
+    "act_introduced": 2,
     "image": "elerim.webp"
   },
   {
@@ -325,6 +405,8 @@
     "element": "Dark",
     "max_power": 3616,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Paint Cage",
+    "act_introduced": 4,
     "image": "esquim.webp"
   },
   {
@@ -333,6 +415,8 @@
     "element": "Lightning",
     "max_power": 3390,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Pickup",
+    "act_introduced": 3,
     "image": "kralim.webp"
   },
   {
@@ -341,6 +425,8 @@
     "element": "Fire",
     "max_power": 2744,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Pickup",
+    "act_introduced": 1,
     "image": "lighterim.webp"
   },
   {
@@ -349,6 +435,8 @@
     "element": "Void",
     "max_power": 3099,
     "scaling_stats": ["Vitality", "Luck"],
+    "source": "Pickup",
+    "act_introduced": 2,
     "image": "lithelim.webp"
   },
   {
@@ -357,6 +445,8 @@
     "element": "Fire",
     "max_power": 2421,
     "scaling_stats": ["Vitality", "Luck"],
+    "source": "Starting",
+    "act_introduced": 1,
     "image": "lunerim.webp"
   },
   {
@@ -365,6 +455,8 @@
     "element": "Earth",
     "max_power": 2744,
     "scaling_stats": ["Vitality", "Luck"],
+    "source": "Merchant",
+    "act_introduced": 4,
     "image": "painerim.webp"
   },
   {
@@ -373,6 +465,8 @@
     "element": "Ice",
     "max_power": 2906,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Pickup",
+    "act_introduced": 2,
     "image": "potierim.webp"
   },
   {
@@ -381,6 +475,8 @@
     "element": "Ice",
     "max_power": 2583,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Paint Cage",
+    "act_introduced": 2,
     "image": "redalim.webp"
   },
   {
@@ -389,6 +485,8 @@
     "element": "Lightning",
     "max_power": 3067,
     "scaling_stats": ["Defense", "Luck"],
+    "source": "Pickup",
+    "act_introduced": 2,
     "image": "saperim.webp"
   },
   {
@@ -397,6 +495,8 @@
     "element": "Dark",
     "max_power": 4197,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "scaverim.webp"
   },
   {
@@ -405,6 +505,8 @@
     "element": "Ice",
     "max_power": 3874,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "snowim.webp"
   },
   {
@@ -413,6 +515,8 @@
     "element": "Lightning",
     "max_power": 3067,
     "scaling_stats": ["Vitality", "Luck"],
+    "source": "Pickup",
+    "act_introduced": 1,
     "image": "trebuchim.webp"
   },
   {
@@ -421,6 +525,8 @@
     "element": "Physical",
     "max_power": 3067,
     "scaling_stats": ["Vitality", "Defense"],
+    "source": "Boss Drop",
+    "act_introduced": 1,
     "image": "troubadim.webp"
   },
   {
@@ -429,6 +535,8 @@
     "element": "Void",
     "max_power": 3616,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "barrier-breaker.webp"
   },
   {
@@ -437,6 +545,8 @@
     "element": "Physical",
     "max_power": 3067,
     "scaling_stats": ["Defense", "Luck"],
+    "source": "Pickup",
+    "act_introduced": 2,
     "image": "battlum.webp"
   },
   {
@@ -445,6 +555,8 @@
     "element": "Fire",
     "max_power": 2744,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Pickup",
+    "act_introduced": 1,
     "image": "brulerum.webp"
   },
   {
@@ -453,6 +565,8 @@
     "element": "Light",
     "max_power": 3422,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "chalium.webp"
   },
   {
@@ -461,6 +575,8 @@
     "element": "Fire",
     "max_power": 2841,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Merchant",
+    "act_introduced": 2,
     "image": "chantenum.webp"
   },
   {
@@ -469,6 +585,8 @@
     "element": "Lightning",
     "max_power": 3196,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "clierum.webp"
   },
   {
@@ -477,6 +595,8 @@
     "element": "Ice",
     "max_power": 2583,
     "scaling_stats": ["Vitality", "Defense"],
+    "source": "Merchant",
+    "act_introduced": 2,
     "image": "coldum.webp"
   },
   {
@@ -485,6 +605,8 @@
     "element": "Physical",
     "max_power": 2421,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Paint Cage",
+    "act_introduced": 1,
     "image": "duenum.webp"
   },
   {
@@ -493,6 +615,8 @@
     "element": "Fire",
     "max_power": 3680,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Boss Drop",
+    "act_introduced": 4,
     "image": "esqium.webp"
   },
   {
@@ -501,6 +625,8 @@
     "element": "Physical",
     "max_power": 3519,
     "scaling_stats": ["Vitality", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "facesum.webp"
   },
   {
@@ -509,6 +635,8 @@
     "element": "Physical",
     "max_power": 3713,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Pickup",
+    "act_introduced": 2,
     "image": "glaisum.webp"
   },
   {
@@ -517,6 +645,8 @@
     "element": "Physical",
     "max_power": 2583,
     "scaling_stats": ["Defense", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "jarum.webp"
   },
   {
@@ -525,6 +655,8 @@
     "element": "Physical",
     "max_power": 3551,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 4,
     "image": "licorum.webp"
   },
   {
@@ -533,6 +665,8 @@
     "element": "Void",
     "max_power": 3228,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 3,
     "image": "lithum.webp"
   },
   {
@@ -541,6 +675,8 @@
     "element": "Physical",
     "max_power": 3228,
     "scaling_stats": ["Vitality"],
+    "source": "Starting",
+    "act_introduced": 1,
     "image": "maellum.webp"
   },
   {
@@ -549,6 +685,8 @@
     "element": "Physical",
     "max_power": 2906,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Quest",
+    "act_introduced": 1,
     "image": "medalum.webp"
   },
   {
@@ -557,6 +695,8 @@
     "element": "Physical",
     "max_power": 3584,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "melarum.webp"
   },
   {
@@ -565,6 +705,8 @@
     "element": "Ice",
     "max_power": 3035,
     "scaling_stats": ["Defense", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "plenum.webp"
   },
   {
@@ -573,6 +715,8 @@
     "element": "Fire",
     "max_power": 3003,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Merchant",
+    "act_introduced": 3,
     "image": "seashelum.webp"
   },
   {
@@ -581,6 +725,8 @@
     "element": "Physical",
     "max_power": 3390,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Merchant",
+    "act_introduced": 1,
     "image": "sekarum.webp"
   },
   {
@@ -589,6 +735,8 @@
     "element": "Fire",
     "max_power": 3228,
     "scaling_stats": ["Defense", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "stalum.webp"
   },
   {
@@ -597,6 +745,8 @@
     "element": "Earth",
     "max_power": 3874,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "tissenum.webp"
   },
   {
@@ -605,6 +755,8 @@
     "element": "Physical",
     "max_power": 3293,
     "scaling_stats": ["Vitality", "Luck"],
+    "source": "Merchant",
+    "act_introduced": 2,
     "image": "veremum.webp"
   },
   {
@@ -613,6 +765,8 @@
     "element": "Physical",
     "max_power": 3293,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Merchant",
+    "act_introduced": 3,
     "image": "volesterum.webp"
   },
   {
@@ -621,6 +775,8 @@
     "element": "Physical",
     "max_power": 3358,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Merchant",
+    "act_introduced": 4,
     "image": "yeverum.webp"
   },
   {
@@ -629,6 +785,8 @@
     "element": "Ice",
     "max_power": 3228,
     "scaling_stats": ["Vitality", "Luck"],
+    "source": "Merchant",
+    "act_introduced": 2,
     "image": "algueron.webp"
   },
   {
@@ -637,6 +795,8 @@
     "element": "Ice",
     "max_power": 4197,
     "scaling_stats": ["Defense", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "blizzon.webp"
   },
   {
@@ -645,6 +805,8 @@
     "element": "Light",
     "max_power": 3099,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "bourgelon.webp"
   },
   {
@@ -653,6 +815,8 @@
     "element": "Void",
     "max_power": 2970,
     "scaling_stats": ["Defense", "Luck"],
+    "source": "Merchant",
+    "act_introduced": 4,
     "image": "charnon.webp"
   },
   {
@@ -661,6 +825,8 @@
     "element": "Dark",
     "max_power": 3551,
     "scaling_stats": ["Vitality", "Luck"],
+    "source": "Pickup",
+    "act_introduced": 1,
     "image": "chation.webp"
   },
   {
@@ -669,6 +835,8 @@
     "element": "Dark",
     "max_power": 2744,
     "scaling_stats": ["Defense", "Luck"],
+    "source": "Pickup",
+    "act_introduced": 2,
     "image": "corderon.webp"
   },
   {
@@ -677,6 +845,8 @@
     "element": "Earth",
     "max_power": 4035,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Merchant",
+    "act_introduced": 2,
     "image": "direton.webp"
   },
   {
@@ -685,6 +855,8 @@
     "element": "Physical",
     "max_power": 3680,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 4,
     "image": "duollison.webp"
   },
   {
@@ -693,6 +865,8 @@
     "element": "Physical",
     "max_power": 3842,
     "scaling_stats": ["Vitality", "Luck"],
+    "source": "Pickup",
+    "act_introduced": 4,
     "image": "esquion.webp"
   },
   {
@@ -701,6 +875,8 @@
     "element": "Fire",
     "max_power": 3132,
     "scaling_stats": ["Vitality", "Defense"],
+    "source": "Merchant",
+    "act_introduced": 2,
     "image": "garganon.webp"
   },
   {
@@ -709,6 +885,8 @@
     "element": "Fire",
     "max_power": 3358,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Merchant",
+    "act_introduced": 2,
     "image": "gobluson.webp"
   },
   {
@@ -717,6 +895,8 @@
     "element": "Lightning",
     "max_power": 3132,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Merchant",
+    "act_introduced": 3,
     "image": "guleson.webp"
   },
   {
@@ -725,6 +905,8 @@
     "element": "Physical",
     "max_power": 3454,
     "scaling_stats": ["Vitality", "Defense"],
+    "source": "Quest",
+    "act_introduced": 1,
     "image": "hevasson.webp"
   },
   {
@@ -733,6 +915,8 @@
     "element": "Physical",
     "max_power": 2809,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Pickup",
+    "act_introduced": 3,
     "image": "litheson.webp"
   },
   {
@@ -741,6 +925,8 @@
     "element": "Dark",
     "max_power": 3422,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "lusteson.webp"
   },
   {
@@ -749,6 +935,8 @@
     "element": "Earth",
     "max_power": 3874,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Merchant",
+    "act_introduced": 3,
     "image": "martenon.webp"
   },
   {
@@ -757,6 +945,8 @@
     "element": "Physical",
     "max_power": 2809,
     "scaling_stats": ["Vitality", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 3,
     "image": "minason.webp"
   },
   {
@@ -765,6 +955,8 @@
     "element": "Physical",
     "max_power": 3325,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "moisson.webp"
   },
   {
@@ -773,6 +965,8 @@
     "element": "Physical",
     "max_power": 3519,
     "scaling_stats": ["Vitality", "Luck"],
+    "source": "Pickup",
+    "act_introduced": 2,
     "image": "ramasson.webp"
   },
   {
@@ -781,6 +975,8 @@
     "element": "Dark",
     "max_power": 3132,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Merchant",
+    "act_introduced": 1,
     "image": "rangeson.webp"
   },
   {
@@ -789,6 +985,8 @@
     "element": "Light",
     "max_power": 2583,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Merchant",
+    "act_introduced": 2,
     "image": "sadon.webp"
   },
   {
@@ -797,6 +995,8 @@
     "element": "Physical",
     "max_power": 3454,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Starting",
+    "act_introduced": 1,
     "image": "scieleson.webp"
   },
   {
@@ -805,6 +1005,8 @@
     "element": "Fire",
     "max_power": 5948,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 4,
     "image": "sucetton.webp"
   },
   {
@@ -813,6 +1015,8 @@
     "element": "Lightning",
     "max_power": 3067,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "tisseron.webp"
   },
   {
@@ -821,6 +1025,8 @@
     "element": "Fire",
     "max_power": 3745,
     "scaling_stats": ["Defense", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 4,
     "image": "baguettaro.webp"
   },
   {
@@ -829,6 +1035,8 @@
     "element": "Light",
     "max_power": 3067,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Boss Drop",
+    "act_introduced": 3,
     "image": "ballaro.webp"
   },
   {
@@ -837,6 +1045,8 @@
     "element": "Fire",
     "max_power": 3228,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "boucharo.webp"
   },
   {
@@ -845,6 +1055,8 @@
     "element": "Physical",
     "max_power": 3390,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "brumaro.webp"
   },
   {
@@ -853,6 +1065,8 @@
     "element": "Light",
     "max_power": 3648,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 4,
     "image": "cannaro.webp"
   },
   {
@@ -861,6 +1075,8 @@
     "element": "Ice",
     "max_power": 3390,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Merchant",
+    "act_introduced": 4,
     "image": "chromaro.webp"
   },
   {
@@ -869,6 +1085,8 @@
     "element": "Earth",
     "max_power": 3745,
     "scaling_stats": ["Vitality", "Defense"],
+    "source": "Pickup",
+    "act_introduced": 4,
     "image": "esquiaro.webp"
   },
   {
@@ -877,6 +1095,8 @@
     "element": "Lightning",
     "max_power": 4197,
     "scaling_stats": ["Defense", "Luck"],
+    "source": "Merchant",
+    "act_introduced": 2,
     "image": "fragaro.webp"
   },
   {
@@ -885,6 +1105,8 @@
     "element": "Earth",
     "max_power": 3551,
     "scaling_stats": ["Vitality", "Defense"],
+    "source": "Merchant",
+    "act_introduced": 2,
     "image": "grandaro.webp"
   },
   {
@@ -893,6 +1115,8 @@
     "element": "Lightning",
     "max_power": 3713,
     "scaling_stats": ["Agility", "Defense"],
+    "source": "Boss Drop",
+    "act_introduced": 3,
     "image": "joyaro.webp"
   },
   {
@@ -901,6 +1125,8 @@
     "element": "Physical",
     "max_power": 2744,
     "scaling_stats": ["Agility", "Luck"],
+    "source": "Starting",
+    "act_introduced": 1,
     "image": "monocaro.webp"
   },
   {
@@ -909,6 +1135,8 @@
     "element": "Dark",
     "max_power": 4197,
     "scaling_stats": ["Vitality", "Agility"],
+    "source": "Pickup",
+    "act_introduced": 2,
     "image": "nusaro.webp"
   },
   {
@@ -917,6 +1145,8 @@
     "element": "Dark",
     "max_power": 3035,
     "scaling_stats": ["Might", "Luck"],
+    "source": "Merchant",
+    "act_introduced": 3,
     "image": "sidaro.webp"
   },
   {
@@ -925,6 +1155,8 @@
     "element": "Earth",
     "max_power": 3422,
     "scaling_stats": ["Vitality", "Luck"],
+    "source": "Boss Drop",
+    "act_introduced": 2,
     "image": "urnaro.webp"
   }
 ]

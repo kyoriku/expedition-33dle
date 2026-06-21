@@ -4,8 +4,8 @@ from typing import Literal, Optional
 from pydantic import BaseModel, ConfigDict
 
 
-class EntityRead(BaseModel):
-    """Public view of an entity. Built from ORM rows via from_attributes."""
+class CharacterRead(BaseModel):
+    """Public view of a character. Built from ORM rows via from_attributes."""
 
     model_config = ConfigDict(from_attributes=True)
 
@@ -55,14 +55,14 @@ class PictoRead(BaseModel):
 class ClassicTodayResponse(BaseModel):
     """Response for GET /api/classic/today.
 
-    Intentionally does NOT expose which entity is the answer; the full entity
-    list is included so the frontend can do autocomplete.
+    Intentionally does NOT expose which character is the answer; the full
+    character list is included so the frontend can do autocomplete.
     """
 
     puzzle_date: date
     puzzle_number: int
-    entities: list[EntityRead]
-    yesterday: Optional[EntityRead] = None  # previous day's answer (over, so public)
+    characters: list[CharacterRead]
+    yesterday: Optional[CharacterRead] = None  # previous day's answer (over, so public)
 
 
 ScalarFeedback = Literal["match", "miss"]
@@ -80,7 +80,7 @@ class RevealRequest(BaseModel):
 class ClassicGuessRequest(BaseModel):
     """Request body for POST /api/classic/guess."""
 
-    entity_id: int
+    character_id: int
 
 
 class ClassicGuessFeedback(BaseModel):
@@ -104,11 +104,12 @@ class ClassicGuessFeedback(BaseModel):
 class ClassicGuessResponse(BaseModel):
     """Response for POST /api/classic/guess.
 
-    Echoes the guessed entity plus feedback. The answer entity never appears
-    here in any form — name is not compared per-attribute; is_correct covers it.
+    Echoes the guessed character plus feedback. The answer character never
+    appears here in any form — name is not compared per-attribute; is_correct
+    covers it.
     """
 
-    guess: EntityRead
+    guess: CharacterRead
     feedback: ClassicGuessFeedback
     is_correct: bool
 

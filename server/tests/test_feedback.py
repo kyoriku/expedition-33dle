@@ -1,10 +1,10 @@
 """Unit tests for classic_feedback — the per-attribute scoring core.
 
-Pure function over two entity rows; no DB or async. Covers every branch of the
-non-trivial fields (element, act) plus the scalar equals/not-equals fields.
+Pure function over two character rows; no DB or async. Covers every branch of
+the non-trivial fields (element, act) plus the scalar equals/not-equals fields.
 """
 
-from app.models import Entity
+from app.models import Character
 from app.services.compare import classic_feedback
 
 # A complete, valid baseline; tests override only the fields under test.
@@ -21,11 +21,11 @@ BASE = dict(
 )
 
 
-def make(**overrides) -> Entity:
-    return Entity(**{**BASE, "id": 1, **overrides})
+def make(**overrides) -> Character:
+    return Character(**{**BASE, "id": 1, **overrides})
 
 
-def test_identical_entities_all_match():
+def test_identical_characters_all_match():
     fb = classic_feedback(make(), make())
     assert fb.gender == "match"
     assert fb.role == "match"

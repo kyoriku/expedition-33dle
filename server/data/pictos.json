@@ -249,7 +249,7 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2,
+    "act_introduced": 3,
     "image": "6-pictos.webp"
   },
   {
@@ -270,7 +270,7 @@
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Boss Drop",
-    "zone_obtained": "Sirene",
+    "zone_obtained": "Sirène",
     "act_introduced": 2,
     "image": "1-pictos.webp"
   },
@@ -391,7 +391,7 @@
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Pickup",
-    "zone_obtained": "Sirene",
+    "zone_obtained": "Sirène",
     "act_introduced": 2,
     "image": "10-pictos.webp"
   },
@@ -402,8 +402,8 @@
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Pickup",
-    "zone_obtained": "Old Lumiere",
-    "act_introduced": 1,
+    "zone_obtained": "Old Lumière",
+    "act_introduced": 2,
     "image": "3-pictos.webp"
   },
   {
@@ -469,7 +469,7 @@
     "effect_category": "Break",
     "source": "Boss Drop",
     "zone_obtained": "The Monolith",
-    "act_introduced": 3,
+    "act_introduced": 2,
     "image": "7-pictos.webp"
   },
   {
@@ -601,7 +601,7 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2,
+    "act_introduced": 3,
     "image": "1-pictos.webp"
   },
   {
@@ -623,7 +623,7 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2,
+    "act_introduced": 3,
     "image": "4-pictos.webp"
   },
   {
@@ -655,7 +655,7 @@
     "lumina_cost": 5,
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
-    "zone_obtained": "Lumiere Act III",
+    "zone_obtained": "Lumière Act III",
     "act_introduced": 3,
     "image": "1-pictos.webp"
   },
@@ -678,7 +678,7 @@
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2,
+    "act_introduced": 3,
     "image": "2-pictos.webp"
   },
   {
@@ -722,7 +722,7 @@
     "effect_category": "Damage",
     "source": "Boss Drop",
     "zone_obtained": "Forgotten Battlefield",
-    "act_introduced": 1,
+    "act_introduced": 2,
     "image": "4-pictos.webp"
   },
   {
@@ -875,7 +875,7 @@
     "lumina_cost": 20,
     "effect_category": "Status",
     "source": "Merchant",
-    "zone_obtained": "Sirene",
+    "zone_obtained": "Sirène",
     "act_introduced": 2,
     "image": "7-pictos.webp"
   },
@@ -887,7 +887,7 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2,
+    "act_introduced": 3,
     "image": "5-pictos.webp"
   },
   {
@@ -897,7 +897,7 @@
     "lumina_cost": 30,
     "effect_category": "Heal",
     "source": "Boss Drop",
-    "zone_obtained": "Sirene",
+    "zone_obtained": "Sirène",
     "act_introduced": 2,
     "image": "6-pictos.webp"
   },
@@ -964,7 +964,7 @@
     "effect_category": "Damage",
     "source": "Paint Cage",
     "zone_obtained": "The Monolith",
-    "act_introduced": 3,
+    "act_introduced": 2,
     "image": "7-pictos.webp"
   },
   {
@@ -975,7 +975,7 @@
     "effect_category": "Heal",
     "source": "Pickup",
     "zone_obtained": "Forgotten Battlefield",
-    "act_introduced": 1,
+    "act_introduced": 2,
     "image": "5-pictos.webp"
   },
   {
@@ -1030,7 +1030,7 @@
     "effect_category": "AP",
     "source": "Merchant",
     "zone_obtained": "The Monolith",
-    "act_introduced": 3,
+    "act_introduced": 2,
     "image": "3-pictos.webp"
   },
   {
@@ -1041,7 +1041,7 @@
     "effect_category": "Death/Revive",
     "source": "Merchant",
     "zone_obtained": "Forgotten Battlefield",
-    "act_introduced": 1,
+    "act_introduced": 2,
     "image": "10-pictos.webp"
   },
   {
@@ -1096,7 +1096,7 @@
     "effect_category": "AP",
     "source": "Merchant",
     "zone_obtained": "Forgotten Battlefield",
-    "act_introduced": 1,
+    "act_introduced": 2,
     "image": "9-pictos.webp"
   },
   {
@@ -1106,7 +1106,7 @@
     "lumina_cost": 10,
     "effect_category": "AP",
     "source": "Pickup",
-    "zone_obtained": "Lumiere Act III",
+    "zone_obtained": "Lumière Act III",
     "act_introduced": 3,
     "image": "10-pictos.webp"
   },
@@ -1183,7 +1183,7 @@
     "lumina_cost": 20,
     "effect_category": "AP",
     "source": "Merchant",
-    "zone_obtained": "Sirene",
+    "zone_obtained": "Sirène",
     "act_introduced": 2,
     "image": "10-pictos.webp"
   },
@@ -1206,7 +1206,7 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "The Monolith",
-    "act_introduced": 3,
+    "act_introduced": 2,
     "image": "5-pictos.webp"
   },
   {
@@ -1250,7 +1250,7 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2,
+    "act_introduced": 3,
     "image": "10-pictos.webp"
   },
   {
@@ -1260,7 +1260,7 @@
     "lumina_cost": 10,
     "effect_category": "Damage",
     "source": "Boss Drop",
-    "zone_obtained": "Lumiere Act III",
+    "zone_obtained": "Lumière Act III",
     "act_introduced": 3,
     "image": "10-pictos.webp"
   },
@@ -1304,7 +1304,7 @@
     "lumina_cost": 15,
     "effect_category": "Damage",
     "source": "Merchant",
-    "zone_obtained": "Lumiere Act III",
+    "zone_obtained": "Lumière Act III",
     "act_introduced": 3,
     "image": "10-pictos.webp"
   },
@@ -1348,7 +1348,7 @@
     "lumina_cost": 5,
     "effect_category": "Damage",
     "source": "Pickup",
-    "zone_obtained": "Lumiere Act III",
+    "zone_obtained": "Lumière Act III",
     "act_introduced": 3,
     "image": "7-pictos.webp"
   },
@@ -1360,7 +1360,7 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "The Monolith",
-    "act_introduced": 3,
+    "act_introduced": 2,
     "image": "1-pictos.webp"
   },
   {
@@ -1370,7 +1370,7 @@
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Merchant",
-    "zone_obtained": "Sirene",
+    "zone_obtained": "Sirène",
     "act_introduced": 2,
     "image": "2-pictos.webp"
   },
@@ -1403,7 +1403,7 @@
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Pickup",
-    "zone_obtained": "Sirene",
+    "zone_obtained": "Sirène",
     "act_introduced": 2,
     "image": "3-pictos.webp"
   },
@@ -1426,7 +1426,7 @@
     "effect_category": "Heal",
     "source": "Pickup",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2,
+    "act_introduced": 3,
     "image": "1-pictos.webp"
   },
   {
@@ -1436,8 +1436,8 @@
     "lumina_cost": 10,
     "effect_category": "Heal",
     "source": "Merchant",
-    "zone_obtained": "Old Lumiere",
-    "act_introduced": 1,
+    "zone_obtained": "Old Lumière",
+    "act_introduced": 2,
     "image": "6-pictos.webp"
   },
   {
@@ -1447,8 +1447,8 @@
     "lumina_cost": 5,
     "effect_category": "Death/Revive",
     "source": "Pickup",
-    "zone_obtained": "Old Lumiere",
-    "act_introduced": 1,
+    "zone_obtained": "Old Lumière",
+    "act_introduced": 2,
     "image": "2-pictos.webp"
   },
   {
@@ -1458,7 +1458,7 @@
     "lumina_cost": 10,
     "effect_category": "Heal",
     "source": "Pickup",
-    "zone_obtained": "Sirene",
+    "zone_obtained": "Sirène",
     "act_introduced": 2,
     "image": "2-pictos.webp"
   },
@@ -1502,7 +1502,7 @@
     "lumina_cost": 10,
     "effect_category": "Heal",
     "source": "Pickup",
-    "zone_obtained": "Lumiere Act III",
+    "zone_obtained": "Lumière Act III",
     "act_introduced": 3,
     "image": "8-pictos.webp"
   },
@@ -1547,7 +1547,7 @@
     "effect_category": "Status",
     "source": "Merchant",
     "zone_obtained": "Forgotten Battlefield",
-    "act_introduced": 1,
+    "act_introduced": 2,
     "image": "3-pictos.webp"
   },
   {
@@ -1579,8 +1579,8 @@
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Merchant",
-    "zone_obtained": "Old Lumiere",
-    "act_introduced": 1,
+    "zone_obtained": "Old Lumière",
+    "act_introduced": 2,
     "image": "2-pictos.webp"
   },
   {
@@ -1602,7 +1602,7 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Forgotten Battlefield",
-    "act_introduced": 1,
+    "act_introduced": 2,
     "image": "11-pictos.webp"
   },
   {
@@ -1635,7 +1635,7 @@
     "effect_category": "Damage",
     "source": "Boss Drop",
     "zone_obtained": "The Monolith",
-    "act_introduced": 3,
+    "act_introduced": 2,
     "image": "1-pictos.webp"
   },
   {
@@ -1711,7 +1711,7 @@
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Pickup",
-    "zone_obtained": "Sirene",
+    "zone_obtained": "Sirène",
     "act_introduced": 2,
     "image": "2-pictos.webp"
   },
@@ -1777,7 +1777,7 @@
     "lumina_cost": 5,
     "effect_category": "Death/Revive",
     "source": "Pickup",
-    "zone_obtained": "Sirene",
+    "zone_obtained": "Sirène",
     "act_introduced": 2,
     "image": "10-pictos.webp"
   },
@@ -1789,7 +1789,7 @@
     "effect_category": "Heal",
     "source": "Merchant",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2,
+    "act_introduced": 3,
     "image": "6-pictos.webp"
   },
   {
@@ -1822,7 +1822,7 @@
     "effect_category": "Heal",
     "source": "Pickup",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2,
+    "act_introduced": 3,
     "image": "11-pictos.webp"
   },
   {
@@ -1844,7 +1844,7 @@
     "effect_category": "Free Aim / Other",
     "source": "Paint Cage",
     "zone_obtained": "The Monolith",
-    "act_introduced": 3,
+    "act_introduced": 2,
     "image": "2-pictos.webp"
   },
   {
@@ -1876,8 +1876,8 @@
     "lumina_cost": 5,
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
-    "zone_obtained": "Old Lumiere",
-    "act_introduced": 1,
+    "zone_obtained": "Old Lumière",
+    "act_introduced": 2,
     "image": "10-pictos.webp"
   },
   {
@@ -1888,7 +1888,7 @@
     "effect_category": "Death/Revive",
     "source": "Merchant",
     "zone_obtained": "Forgotten Battlefield",
-    "act_introduced": 1,
+    "act_introduced": 2,
     "image": "5-pictos.webp"
   },
   {
@@ -1965,7 +1965,7 @@
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
     "zone_obtained": "The Monolith",
-    "act_introduced": 3,
+    "act_introduced": 2,
     "image": "8-pictos.webp"
   },
   {
@@ -1997,7 +1997,7 @@
     "lumina_cost": 15,
     "effect_category": "Damage",
     "source": "Merchant",
-    "zone_obtained": "Sirene",
+    "zone_obtained": "Sirène",
     "act_introduced": 2,
     "image": "4-pictos.webp"
   },
@@ -2053,7 +2053,7 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "The Reacher",
-    "act_introduced": 2,
+    "act_introduced": 3,
     "image": "1-pictos.webp"
   },
   {
@@ -2173,8 +2173,8 @@
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Pickup",
-    "zone_obtained": "Old Lumiere",
-    "act_introduced": 1,
+    "zone_obtained": "Old Lumière",
+    "act_introduced": 2,
     "image": "6-pictos.webp"
   },
   {
@@ -2207,7 +2207,7 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "The Monolith",
-    "act_introduced": 3,
+    "act_introduced": 2,
     "image": "3-pictos.webp"
   }
 ]
