@@ -4,6 +4,24 @@ from typing import Literal, Optional
 from pydantic import BaseModel, ConfigDict
 
 
+# Full in-game element taxonomy, shared by Weapon (scalar) and Character
+# (multi-valued). Validating against all 8 — not just the values currently in the
+# data — avoids loud-failing a valid/DLC Physical character in the seed.
+Element = Literal["Physical", "Fire", "Ice", "Lightning", "Earth", "Light", "Dark", "Void"]
+
+# Closed-set Character fields, derived exactly from characters.json. Reused by the
+# seed validator via get_args to fail loudly on enum typos.
+CharacterGender = Literal["Female", "Male", "Unknown"]
+CharacterRole = Literal["Boss", "NPC", "Optional Boss", "Playable"]
+CharacterCategory = Literal[
+    "Axon", "Gestral", "Human", "Mythical Creature", "Nevron", "Painted Human"
+]
+CharacterAffiliation = Literal[
+    "Independent", "Expedition 33", "Dessendre Family", "Lumière", "Gestrals",
+    "Painted Dessendre Family", "Expedition Zero",
+]
+
+
 class CharacterRead(BaseModel):
     """Public view of a character. Built from ORM rows via from_attributes."""
 
@@ -28,6 +46,9 @@ PictoEffectCategory = Literal[
     "Free Aim / Other", "Heal", "Shield", "Status",
 ]
 PictoSource = Literal["Boss Drop", "Merchant", "Paint Cage", "Pickup", "Quest"]
+# stats stays list[str] on the wire (like scaling_stats); this closed set is
+# reused by the seed to validate the multi-value column loudly.
+PictoStat = Literal["HP", "Crit", "SPD", "DEF"]
 
 
 class PictoRead(BaseModel):
@@ -163,9 +184,6 @@ class PictoGuessResponse(BaseModel):
 
 
 WeaponWielder = Literal["Gustave/Verso", "Lune", "Maelle", "Sciel", "Monoco"]
-WeaponElement = Literal[
-    "Physical", "Fire", "Ice", "Lightning", "Earth", "Light", "Dark", "Void"
-]
 WeaponSource = Literal["Starting", "Boss Drop", "Merchant", "Pickup", "Paint Cage", "Quest"]
 # scaling_stats stays list[str] on the wire (mirrors Picto.stats); this closed set
 # is reused by the seed to validate the multi-value column loudly.
@@ -185,7 +203,7 @@ class WeaponRead(BaseModel):
     id: int
     name: str
     wielder: WeaponWielder
-    element: WeaponElement
+    element: Element
     max_power: int
     scaling_stats: list[str]
     source: WeaponSource

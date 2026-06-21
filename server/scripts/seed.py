@@ -27,7 +27,15 @@ from sqlalchemy.dialects.postgresql import insert as pg_insert
 from app.db import engine
 from app.models import Character, Picto, Weapon
 from app.schemas import (
-    WeaponElement,
+    CharacterAffiliation,
+    CharacterCategory,
+    CharacterGender,
+    CharacterRole,
+    Element,
+    PictoEffectCategory,
+    PictoSource,
+    PictoStat,
+    PictoType,
     WeaponScalingStat,
     WeaponSource,
     WeaponWielder,
@@ -65,7 +73,7 @@ def validate_weapons(rows: list[dict]) -> None:
     ValueError on the first offending row.
     """
     wielders = set(get_args(WeaponWielder))
-    elements = set(get_args(WeaponElement))
+    elements = set(get_args(Element))
     sources = set(get_args(WeaponSource))
     scaling = set(get_args(WeaponScalingStat))
     enums = {"wielder": wielders, "element": elements, "source": sources}
@@ -89,7 +97,73 @@ def validate_weapons(rows: list[dict]) -> None:
             )
 
 
-validate_weapons(WEAPONS)
+def validate_pictos(rows: list[dict]) -> None:
+    """Fail LOUDLY on any enum/shape violation before the upsert (mirrors
+    validate_weapons). type/effect_category/source reuse their existing read-schema
+    Literals; stats reuses PictoStat. stats may be empty (the column server-defaults
+    to {}), so only distinctness + membership are enforced.
+    """
+    enums = {
+        "type": set(get_args(PictoType)),
+        "effect_category": set(get_args(PictoEffectCategory)),
+        "source": set(get_args(PictoSource)),
+    }
+    stats_allowed = set(get_args(PictoStat))
+
+    for r in rows:
+        name = r.get("name", "<unnamed>")
+        for field, allowed in enums.items():
+            if r[field] not in allowed:
+                raise ValueError(f"{name}: invalid {field}={r[field]!r}")
+        stats = r["stats"]
+        if len(set(stats)) != len(stats):
+            raise ValueError(f"{name}: stats has duplicates, got {stats!r}")
+        for s in stats:
+            if s not in stats_allowed:
+                raise ValueError(f"{name}: invalid stat={s!r}")
+        if r["act_introduced"] not in (1, 2, 3, 4):
+            raise ValueError(
+                f"{name}: invalid act_introduced={r['act_introduced']!r}"
+            )
+
+
+def validate_characters(rows: list[dict]) -> None:
+    """Fail LOUDLY on any enum/shape violation before the upsert (mirrors
+    validate_weapons). gender/role/category reuse the Character* Literals; element
+    reuses the shared Element taxonomy. element may be empty; affiliation is non-empty
+    by convention ("Independent" is the explicit no-faction sentinel).
+    """
+    enums = {
+        "gender": set(get_args(CharacterGender)),
+        "role": set(get_args(CharacterRole)),
+        "category": set(get_args(CharacterCategory)),
+    }
+    elements = set(get_args(Element))
+    affiliations = set(get_args(CharacterAffiliation))
+
+    for r in rows:
+        name = r.get("name", "<unnamed>")
+        for field, allowed in enums.items():
+            if r[field] not in allowed:
+                raise ValueError(f"{name}: invalid {field}={r[field]!r}")
+        element = r["element"]
+        if len(set(element)) != len(element):
+            raise ValueError(f"{name}: element has duplicates, got {element!r}")
+        for e in element:
+            if e not in elements:
+                raise ValueError(f"{name}: invalid element={e!r}")
+        affiliation = r["affiliation"]
+        if not affiliation or len(set(affiliation)) != len(affiliation):
+            raise ValueError(
+                f"{name}: affiliation must be 1+ distinct values, got {affiliation!r}"
+            )
+        for a in affiliation:
+            if a not in affiliations:
+                raise ValueError(f"{name}: invalid affiliation={a!r}")
+        if r["act_introduced"] not in (1, 2, 3, 4):
+            raise ValueError(
+                f"{name}: invalid act_introduced={r['act_introduced']!r}"
+            )
 
 
 async def prune_characters(conn) -> int:
@@ -196,6 +270,11 @@ async def upsert_weapons(conn) -> tuple[int, int]:
 
 
 async def main() -> None:
+    # Validate every roster up front: any enum/shape violation aborts loudly
+    # before a single row is written (no silent coercion, no partial seed).
+    validate_characters(CHARACTERS)
+    validate_pictos(PICTOS)
+    validate_weapons(WEAPONS)
     async with engine.begin() as conn:
         pruned = await prune_characters(conn)
         name_to_id = await upsert_characters(conn)
