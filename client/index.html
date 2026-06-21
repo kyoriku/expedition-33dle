@@ -5,14 +5,23 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Expedition 33dle</title>
+    <!-- Preload the faces that paint above the fold so the browser fetches them
+         in parallel with the CSS instead of after parsing it — shrinks the
+         font-swap (FOUT) flash on a hard refresh. Stable /fonts URLs (public/)
+         survive Vite asset hashing. crossorigin is required: font fetches use
+         anonymous CORS even same-origin; omitting it wastes the preload. -->
+    <link rel="preload" href="/fonts/cinzel-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/eb-garamond-latin-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/eb-garamond-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/bebas-neue-latin-400.woff2" as="font" type="font/woff2" crossorigin />
     <meta
       name="description"
-      content="A daily character guessing game for Clair Obscur: Expedition 33. New puzzle every day at midnight UTC."
+      content="A daily guessing game for Clair Obscur: Expedition 33. New puzzle every day at midnight UTC."
     />
     <meta property="og:title" content="Expedition 33dle" />
     <meta
       property="og:description"
-      content="A daily character guessing game for Clair Obscur: Expedition 33. New puzzle every day at midnight UTC."
+      content="A daily guessing game for Clair Obscur: Expedition 33. New puzzle every day at midnight UTC."
     />
     <meta property="og:image" content="https://expedition33dle.com/og-image.png" />
     <meta property="og:url" content="https://expedition33dle.com" />
@@ -21,7 +30,7 @@
     <meta name="twitter:title" content="Expedition 33dle" />
     <meta
       name="twitter:description"
-      content="A daily character guessing game for Clair Obscur: Expedition 33. New puzzle every day at midnight UTC."
+      content="A daily guessing game for Clair Obscur: Expedition 33. New puzzle every day at midnight UTC."
     />
     <meta name="twitter:image" content="https://expedition33dle.com/og-image.png" />
   </head>
