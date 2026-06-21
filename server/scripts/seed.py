@@ -7,14 +7,16 @@ re-run, and rows removed from the JSON are pruned from the DB. This script no
 longer schedules puzzles: the daily answer is computed on demand by
 app.services.scheduling as a pure function of the date and roster.
 
-Seeds two modes: Classic characters (server/data/characters.json) and Pictos
-(server/data/pictos.json); see server/data/README.md for sourcing conventions.
+Seeds three modes: Classic characters (server/data/characters.json), Pictos
+(server/data/pictos.json), and Weapons (server/data/weapons.json); see
+server/data/README.md for sourcing conventions.
 """
 
 import asyncio
 import json
 import sys
 from pathlib import Path
+from typing import get_args
 
 # Make the `app` package importable when run as a standalone script
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -23,7 +25,13 @@ from sqlalchemy import delete, literal_column
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 
 from app.db import engine
-from app.models import Character, Picto
+from app.models import Character, Picto, Weapon
+from app.schemas import (
+    WeaponElement,
+    WeaponScalingStat,
+    WeaponSource,
+    WeaponWielder,
+)
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
@@ -41,6 +49,47 @@ PICTOS: list[dict] = load_category("pictos")
 # column set across the multi-row VALUES clause (mixing keyed/unkeyed rows errors).
 for _p in PICTOS:
     _p.setdefault("image", None)
+
+WEAPONS: list[dict] = load_category("weapons")
+# Mirror the pictos image default so every row carries the key.
+for _w in WEAPONS:
+    _w.setdefault("image", None)
+
+
+def validate_weapons(rows: list[dict]) -> None:
+    """Fail LOUDLY on any enum/shape violation before the upsert (no coercion).
+
+    The weapons table uses plain String columns (no PG enums, matching the Pictos
+    convention), so categorical typos would otherwise insert silently. We reuse the
+    schema Literals as the single source of truth for the allowed values, raising
+    ValueError on the first offending row.
+    """
+    wielders = set(get_args(WeaponWielder))
+    elements = set(get_args(WeaponElement))
+    sources = set(get_args(WeaponSource))
+    scaling = set(get_args(WeaponScalingStat))
+    enums = {"wielder": wielders, "element": elements, "source": sources}
+
+    for r in rows:
+        name = r.get("name", "<unnamed>")
+        for field, allowed in enums.items():
+            if r[field] not in allowed:
+                raise ValueError(f"{name}: invalid {field}={r[field]!r}")
+        stats = r["scaling_stats"]
+        if not 1 <= len(stats) <= 2 or len(set(stats)) != len(stats):
+            raise ValueError(
+                f"{name}: scaling_stats must be 1–2 distinct values, got {stats!r}"
+            )
+        for s in stats:
+            if s not in scaling:
+                raise ValueError(f"{name}: invalid scaling_stat={s!r}")
+        if r["act_introduced"] not in (1, 2, 3, 4):
+            raise ValueError(
+                f"{name}: invalid act_introduced={r['act_introduced']!r}"
+            )
+
+
+validate_weapons(WEAPONS)
 
 
 async def prune_characters(conn) -> int:
@@ -112,16 +161,56 @@ async def upsert_pictos(conn) -> tuple[int, int]:
     return inserted, len(rows) - inserted
 
 
+async def prune_weapons(conn) -> int:
+    """Delete DB weapons no longer present in the JSON (mirrors prune_pictos)."""
+    names = [w["name"] for w in WEAPONS]
+    result = await conn.execute(delete(Weapon).where(Weapon.name.notin_(names)))
+    return result.rowcount
+
+
+async def upsert_weapons(conn) -> tuple[int, int]:
+    """UPSERT all weapons by name; return (inserted, updated) counts.
+
+    Same `(xmax = 0)` trick as upsert_pictos to report both counts in one
+    round-trip: freshly inserted rows have xmax 0, DO UPDATE rows have nonzero.
+    """
+    stmt = pg_insert(Weapon).values(WEAPONS)
+    stmt = stmt.on_conflict_do_update(
+        index_elements=[Weapon.name],
+        set_={
+            c: stmt.excluded[c]
+            for c in (
+                "wielder",
+                "element",
+                "max_power",
+                "scaling_stats",
+                "source",
+                "act_introduced",
+                "image",
+            )
+        },
+    ).returning(Weapon.name, literal_column("(xmax = 0)").label("inserted"))
+    rows = (await conn.execute(stmt)).all()
+    inserted = sum(1 for _, ins in rows if ins)
+    return inserted, len(rows) - inserted
+
+
 async def main() -> None:
     async with engine.begin() as conn:
         pruned = await prune_characters(conn)
         name_to_id = await upsert_characters(conn)
         pictos_pruned = await prune_pictos(conn)
         p_ins, p_upd = await upsert_pictos(conn)
+        weapons_pruned = await prune_weapons(conn)
+        w_ins, w_upd = await upsert_weapons(conn)
     print(f"characters pruned: {pruned}, upserted: {len(name_to_id)}")
     print(
         f"pictos pruned: {pictos_pruned}, inserted: {p_ins}, "
         f"updated: {p_upd}, total: {p_ins + p_upd}"
+    )
+    print(
+        f"weapons pruned: {weapons_pruned}, inserted: {w_ins}, "
+        f"updated: {w_upd}, total: {w_ins + w_upd}"
     )
     await engine.dispose()
 

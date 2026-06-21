@@ -160,3 +160,82 @@ class PictoGuessResponse(BaseModel):
     guess: PictoRead
     feedback: PictoGuessFeedback
     is_correct: bool
+
+
+WeaponWielder = Literal["Gustave/Verso", "Lune", "Maelle", "Sciel", "Monoco"]
+WeaponElement = Literal[
+    "Physical", "Fire", "Ice", "Lightning", "Earth", "Light", "Dark", "Void"
+]
+WeaponSource = Literal["Starting", "Boss Drop", "Merchant", "Pickup", "Paint Cage", "Quest"]
+# scaling_stats stays list[str] on the wire (mirrors Picto.stats); this closed set
+# is reused by the seed to validate the multi-value column loudly.
+WeaponScalingStat = Literal["Vitality", "Might", "Agility", "Defense", "Luck"]
+
+
+class WeaponRead(BaseModel):
+    """Public view of a Weapon. Built from ORM rows via from_attributes.
+
+    The DB columns are plain strings, but the closed-set fields (wielder, element,
+    source) are constrained here with Literal so invalid values surface at the
+    schema layer. scaling_stats stays open (list[str]) like Picto.stats.
+    """
+
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    name: str
+    wielder: WeaponWielder
+    element: WeaponElement
+    max_power: int
+    scaling_stats: list[str]
+    source: WeaponSource
+    act_introduced: int
+    image: Optional[str] = None
+
+
+class WeaponTodayResponse(BaseModel):
+    """Response for GET /api/weapons/today.
+
+    Mirrors PictoTodayResponse: the answer weapon is never singled out; the full
+    weapon list is included so the frontend can do autocomplete.
+    """
+
+    puzzle_date: date
+    puzzle_number: int
+    weapons: list[WeaponRead]
+    yesterday: Optional[WeaponRead] = None  # previous day's answer (over, so public)
+
+
+class WeaponGuessRequest(BaseModel):
+    """Request body for POST /api/weapons/guess."""
+
+    weapon_id: int
+
+
+class WeaponGuessFeedback(BaseModel):
+    """Per-attribute comparison of a weapon guess against today's answer.
+
+    Reuses the shared feedback atoms: scalar (match/miss) for the closed-set
+    fields, ElementFeedback (match/partial/miss) for the multi-value
+    scaling_stats, and DirectionFeedback (match/higher/lower) for the numeric
+    fields (max_power and the ordinal act_introduced).
+    """
+
+    wielder: ScalarFeedback
+    element: ScalarFeedback
+    max_power: DirectionFeedback
+    scaling_stats: ElementFeedback
+    source: ScalarFeedback
+    act_introduced: DirectionFeedback
+
+
+class WeaponGuessResponse(BaseModel):
+    """Response for POST /api/weapons/guess.
+
+    Echoes the guessed weapon plus feedback. The answer weapon never appears here
+    in any form — name is not compared per-attribute; is_correct covers it.
+    """
+
+    guess: WeaponRead
+    feedback: WeaponGuessFeedback
+    is_correct: bool
