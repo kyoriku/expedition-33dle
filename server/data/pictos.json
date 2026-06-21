@@ -2,10 +2,7 @@
   {
     "name": "Alternating Critical",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Critical",
     "source": "Pickup",
@@ -16,9 +13,7 @@
   {
     "name": "AP Discount",
     "type": "Support",
-    "stats": [
-      "SPD"
-    ],
+    "stats": ["SPD"],
     "lumina_cost": 30,
     "effect_category": "AP",
     "source": "Merchant",
@@ -29,10 +24,7 @@
   {
     "name": "Clea's Death",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 15,
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
@@ -43,10 +35,7 @@
   {
     "name": "Consuming Attack",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Damage",
     "source": "Merchant",
@@ -57,10 +46,7 @@
   {
     "name": "Damage Share",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 30,
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
@@ -71,11 +57,7 @@
   {
     "name": "Double Third",
     "type": "Offensive",
-    "stats": [
-      "HP",
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["HP", "SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Damage",
     "source": "Pickup",
@@ -86,10 +68,7 @@
   {
     "name": "Empowered Healer",
     "type": "Offensive",
-    "stats": [
-      "HP",
-      "Crit"
-    ],
+    "stats": ["HP", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Damage",
     "source": "Pickup",
@@ -100,9 +79,7 @@
   {
     "name": "Empowering Jumps",
     "type": "Offensive",
-    "stats": [
-      "DEF"
-    ],
+    "stats": ["DEF"],
     "lumina_cost": 5,
     "effect_category": "Damage",
     "source": "Pickup",
@@ -113,9 +90,7 @@
   {
     "name": "Feint",
     "type": "Offensive",
-    "stats": [
-      "Crit"
-    ],
+    "stats": ["Crit"],
     "lumina_cost": 15,
     "effect_category": "Damage",
     "source": "Pickup",
@@ -126,9 +101,7 @@
   {
     "name": "First Life",
     "type": "Offensive",
-    "stats": [
-      "DEF"
-    ],
+    "stats": ["DEF"],
     "lumina_cost": 15,
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
@@ -139,10 +112,7 @@
   {
     "name": "Frenzy",
     "type": "Offensive",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 20,
     "effect_category": "Damage",
     "source": "Boss Drop",
@@ -153,9 +123,7 @@
   {
     "name": "Gradient Overcharge",
     "type": "Offensive",
-    "stats": [
-      "HP"
-    ],
+    "stats": ["HP"],
     "lumina_cost": 15,
     "effect_category": "Damage",
     "source": "Pickup",
@@ -166,10 +134,7 @@
   {
     "name": "Gradient Parry",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
@@ -180,11 +145,7 @@
   {
     "name": "Longer Break",
     "type": "Offensive",
-    "stats": [
-      "HP",
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["HP", "DEF", "SPD"],
     "lumina_cost": 10,
     "effect_category": "Break",
     "source": "Pickup",
@@ -195,9 +156,7 @@
   {
     "name": "SOS Healing Tint",
     "type": "Defensive",
-    "stats": [
-      "DEF"
-    ],
+    "stats": ["DEF"],
     "lumina_cost": 10,
     "effect_category": "Heal",
     "source": "Pickup",
@@ -208,10 +167,7 @@
   {
     "name": "Slowing Attack",
     "type": "Support",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 10,
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
@@ -222,9 +178,7 @@
   {
     "name": "Trigger-Happy",
     "type": "Offensive",
-    "stats": [
-      "SPD"
-    ],
+    "stats": ["SPD"],
     "lumina_cost": 20,
     "effect_category": "AP",
     "source": "Boss Drop",
@@ -235,10 +189,7 @@
   {
     "name": "Accelerating Heal",
     "type": "Support",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 5,
     "effect_category": "Heal",
     "source": "Pickup",
@@ -249,10 +200,7 @@
   {
     "name": "Accelerating Last Stand",
     "type": "Support",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 3,
     "effect_category": "Status",
     "source": "Boss Drop",
@@ -263,10 +211,7 @@
   {
     "name": "Accelerating Shots",
     "type": "Support",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 3,
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
@@ -277,10 +222,7 @@
   {
     "name": "Accelerating Tint",
     "type": "Support",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 5,
     "effect_category": "Heal",
     "source": "Merchant",
@@ -291,10 +233,7 @@
   {
     "name": "Aegis Revival",
     "type": "Defensive",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 5,
     "effect_category": "Shield",
     "source": "Merchant",
@@ -305,10 +244,7 @@
   {
     "name": "Anti-Blight",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Merchant",
@@ -319,10 +255,7 @@
   {
     "name": "Anti-Burn",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 15,
     "effect_category": "Status",
     "source": "Boss Drop",
@@ -333,10 +266,7 @@
   {
     "name": "Anti-Charm",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Boss Drop",
@@ -347,10 +277,7 @@
   {
     "name": "Anti-Freeze",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 15,
     "effect_category": "Status",
     "source": "Paint Cage",
@@ -361,10 +288,7 @@
   {
     "name": "Anti-Stun",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 5,
     "effect_category": "Status",
     "source": "Boss Drop",
@@ -375,10 +299,7 @@
   {
     "name": "At Death's Door",
     "type": "Offensive",
-    "stats": [
-      "DEF",
-      "Crit"
-    ],
+    "stats": ["DEF", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Damage",
     "source": "Boss Drop",
@@ -389,10 +310,7 @@
   {
     "name": "Attack Lifesteal",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 15,
     "effect_category": "Heal",
     "source": "Pickup",
@@ -403,10 +321,7 @@
   {
     "name": "Augmented Aim",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 3,
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
@@ -417,10 +332,7 @@
   {
     "name": "Augmented Attack",
     "type": "Offensive",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 7,
     "effect_category": "Damage",
     "source": "Boss Drop",
@@ -431,10 +343,7 @@
   {
     "name": "Augmented Counter",
     "type": "Offensive",
-    "stats": [
-      "HP",
-      "Crit"
-    ],
+    "stats": ["HP", "Crit"],
     "lumina_cost": 3,
     "effect_category": "Damage",
     "source": "Merchant",
@@ -445,10 +354,7 @@
   {
     "name": "Augmented First Strike",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Damage",
     "source": "Merchant",
@@ -459,9 +365,7 @@
   {
     "name": "Auto Death",
     "type": "Support",
-    "stats": [
-      "Crit"
-    ],
+    "stats": ["Crit"],
     "lumina_cost": 1,
     "effect_category": "Death/Revive",
     "source": "Merchant",
@@ -472,10 +376,7 @@
   {
     "name": "Auto Powerful",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Quest",
@@ -486,9 +387,7 @@
   {
     "name": "Auto Regen",
     "type": "Defensive",
-    "stats": [
-      "DEF"
-    ],
+    "stats": ["DEF"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Pickup",
@@ -499,10 +398,7 @@
   {
     "name": "Auto Rush",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Pickup",
@@ -513,9 +409,7 @@
   {
     "name": "Auto Shell",
     "type": "Defensive",
-    "stats": [
-      "HP"
-    ],
+    "stats": ["HP"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Quest",
@@ -526,10 +420,7 @@
   {
     "name": "Base Shield",
     "type": "Defensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 20,
     "effect_category": "Shield",
     "source": "Boss Drop",
@@ -540,10 +431,7 @@
   {
     "name": "Beneficial Contamination",
     "type": "Support",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 15,
     "effect_category": "AP",
     "source": "Merchant",
@@ -554,10 +442,7 @@
   {
     "name": "Break Specialist",
     "type": "Support",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 1,
     "effect_category": "Break",
     "source": "Merchant",
@@ -568,10 +453,7 @@
   {
     "name": "Breaker",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Break",
     "source": "Boss Drop",
@@ -582,10 +464,7 @@
   {
     "name": "Breaking Attack",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Break",
     "source": "Boss Drop",
@@ -596,10 +475,7 @@
   {
     "name": "Breaking Burn",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Burn",
     "source": "Pickup",
@@ -610,10 +486,7 @@
   {
     "name": "Breaking Counter",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 3,
     "effect_category": "Break",
     "source": "Pickup",
@@ -624,10 +497,7 @@
   {
     "name": "Breaking Death",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Death/Revive",
     "source": "Pickup",
@@ -638,10 +508,7 @@
   {
     "name": "Breaking Shots",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 1,
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
@@ -652,10 +519,7 @@
   {
     "name": "Breaking Slow",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Break",
     "source": "Pickup",
@@ -666,10 +530,7 @@
   {
     "name": "Burn Affinity",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Burn",
     "source": "Pickup",
@@ -680,10 +541,7 @@
   {
     "name": "Burning Break",
     "type": "Support",
-    "stats": [
-      "HP",
-      "Crit"
-    ],
+    "stats": ["HP", "Crit"],
     "lumina_cost": 3,
     "effect_category": "Burn",
     "source": "Pickup",
@@ -694,10 +552,7 @@
   {
     "name": "Burning Death",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
@@ -708,10 +563,7 @@
   {
     "name": "Burning Mark",
     "type": "Support",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 15,
     "effect_category": "Burn",
     "source": "Pickup",
@@ -722,10 +574,7 @@
   {
     "name": "Burning Shots",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 3,
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
@@ -736,10 +585,7 @@
   {
     "name": "Charging Alteration",
     "type": "Support",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 10,
     "effect_category": "Free Aim / Other",
     "source": "Boss Drop",
@@ -750,10 +596,7 @@
   {
     "name": "Charging Attack",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 7,
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
@@ -764,10 +607,7 @@
   {
     "name": "Charging Burn",
     "type": "Support",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 10,
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
@@ -778,10 +618,7 @@
   {
     "name": "Charging Counter",
     "type": "Support",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 10,
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
@@ -792,10 +629,7 @@
   {
     "name": "Charging Critical",
     "type": "Support",
-    "stats": [
-      "DEF",
-      "Crit"
-    ],
+    "stats": ["DEF", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Critical",
     "source": "Merchant",
@@ -806,10 +640,7 @@
   {
     "name": "Charging Mark",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Merchant",
@@ -820,10 +651,7 @@
   {
     "name": "Charging Stun",
     "type": "Support",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 5,
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
@@ -834,10 +662,7 @@
   {
     "name": "Charging Tint",
     "type": "Support",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 2,
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
@@ -848,10 +673,7 @@
   {
     "name": "Charging Weakness",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
@@ -862,10 +684,7 @@
   {
     "name": "Cheater",
     "type": "Support",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 40,
     "effect_category": "Free Aim / Other",
     "source": "Boss Drop",
@@ -876,9 +695,7 @@
   {
     "name": "Clea's Life",
     "type": "Defensive",
-    "stats": [
-      "HP"
-    ],
+    "stats": ["HP"],
     "lumina_cost": 30,
     "effect_category": "Heal",
     "source": "Boss Drop",
@@ -889,10 +706,7 @@
   {
     "name": "Cleansing Tint",
     "type": "Support",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 5,
     "effect_category": "Heal",
     "source": "Pickup",
@@ -903,10 +717,7 @@
   {
     "name": "Combo Attack",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Damage",
     "source": "Boss Drop",
@@ -917,10 +728,7 @@
   {
     "name": "Confident",
     "type": "Defensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 20,
     "effect_category": "Damage",
     "source": "Pickup",
@@ -931,10 +739,7 @@
   {
     "name": "Confident Fighter",
     "type": "Offensive",
-    "stats": [
-      "HP",
-      "Crit"
-    ],
+    "stats": ["HP", "Crit"],
     "lumina_cost": 15,
     "effect_category": "Damage",
     "source": "Pickup",
@@ -945,10 +750,7 @@
   {
     "name": "Critical Break",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Critical",
     "source": "Pickup",
@@ -959,10 +761,7 @@
   {
     "name": "Critical Burn",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Burn",
     "source": "Merchant",
@@ -973,10 +772,7 @@
   {
     "name": "Critical Moment",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Critical",
     "source": "Merchant",
@@ -987,10 +783,7 @@
   {
     "name": "Critical Stun",
     "type": "Offensive",
-    "stats": [
-      "DEF",
-      "Crit"
-    ],
+    "stats": ["DEF", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Critical",
     "source": "Merchant",
@@ -1001,10 +794,7 @@
   {
     "name": "Critical Vulnerability",
     "type": "Offensive",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 5,
     "effect_category": "Critical",
     "source": "Pickup",
@@ -1015,10 +805,7 @@
   {
     "name": "Critical Weakness",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Critical",
     "source": "Pickup",
@@ -1029,10 +816,7 @@
   {
     "name": "Dead Energy",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 2,
     "effect_category": "AP",
     "source": "Pickup",
@@ -1043,10 +827,7 @@
   {
     "name": "Death Bomb",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Death/Revive",
     "source": "Pickup",
@@ -1057,10 +838,7 @@
   {
     "name": "Defensive Mode",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 1,
     "effect_category": "AP",
     "source": "Boss Drop",
@@ -1071,10 +849,7 @@
   {
     "name": "Dodger",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 1,
     "effect_category": "AP",
     "source": "Pickup",
@@ -1085,10 +860,7 @@
   {
     "name": "Double Burn",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 30,
     "effect_category": "Burn",
     "source": "Merchant",
@@ -1099,9 +871,7 @@
   {
     "name": "Double Mark",
     "type": "Support",
-    "stats": [
-      "SPD"
-    ],
+    "stats": ["SPD"],
     "lumina_cost": 20,
     "effect_category": "Status",
     "source": "Merchant",
@@ -1112,10 +882,7 @@
   {
     "name": "Draining Cleanse",
     "type": "Support",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 15,
     "effect_category": "AP",
     "source": "Pickup",
@@ -1126,10 +893,7 @@
   {
     "name": "Effective Heal",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 30,
     "effect_category": "Heal",
     "source": "Boss Drop",
@@ -1140,10 +904,7 @@
   {
     "name": "Effective Support",
     "type": "Support",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 5,
     "effect_category": "AP",
     "source": "Pickup",
@@ -1154,10 +915,7 @@
   {
     "name": "Empowering Attack",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Merchant",
@@ -1168,10 +926,7 @@
   {
     "name": "Empowering Break",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 3,
     "effect_category": "Status",
     "source": "Pickup",
@@ -1182,10 +937,7 @@
   {
     "name": "Empowering Dodge",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Damage",
     "source": "Pickup",
@@ -1196,10 +948,7 @@
   {
     "name": "Empowering Last Stand",
     "type": "Offensive",
-    "stats": [
-      "HP",
-      "Crit"
-    ],
+    "stats": ["HP", "Crit"],
     "lumina_cost": 3,
     "effect_category": "Status",
     "source": "Boss Drop",
@@ -1210,10 +959,7 @@
   {
     "name": "Empowering Parry",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Damage",
     "source": "Paint Cage",
@@ -1224,10 +970,7 @@
   {
     "name": "Empowering Tint",
     "type": "Offensive",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 5,
     "effect_category": "Heal",
     "source": "Pickup",
@@ -1238,10 +981,7 @@
   {
     "name": "Energetic Healer",
     "type": "Support",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 10,
     "effect_category": "AP",
     "source": "Pickup",
@@ -1252,10 +992,7 @@
   {
     "name": "Energising Attack",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "AP",
     "source": "Merchant",
@@ -1266,10 +1003,7 @@
   {
     "name": "Energising Break",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 3,
     "effect_category": "AP",
     "source": "Boss Drop",
@@ -1280,10 +1014,7 @@
   {
     "name": "Energising Burn",
     "type": "Support",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 10,
     "effect_category": "AP",
     "source": "Boss Drop",
@@ -1294,10 +1025,7 @@
   {
     "name": "Energising Cleanse",
     "type": "Support",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 10,
     "effect_category": "AP",
     "source": "Merchant",
@@ -1308,10 +1036,7 @@
   {
     "name": "Energising Death",
     "type": "Support",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 5,
     "effect_category": "Death/Revive",
     "source": "Merchant",
@@ -1322,10 +1047,7 @@
   {
     "name": "Energising Gradient",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "AP",
     "source": "Pickup",
@@ -1336,10 +1058,7 @@
   {
     "name": "Energising Heal",
     "type": "Support",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 10,
     "effect_category": "AP",
     "source": "Pickup",
@@ -1350,10 +1069,7 @@
   {
     "name": "Energising Jump",
     "type": "Support",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 5,
     "effect_category": "AP",
     "source": "Pickup",
@@ -1364,10 +1080,7 @@
   {
     "name": "Energising Pain",
     "type": "Support",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 10,
     "effect_category": "AP",
     "source": "Pickup",
@@ -1378,9 +1091,7 @@
   {
     "name": "Energising Parry",
     "type": "Support",
-    "stats": [
-      "HP"
-    ],
+    "stats": ["HP"],
     "lumina_cost": 15,
     "effect_category": "AP",
     "source": "Merchant",
@@ -1391,10 +1102,7 @@
   {
     "name": "Energising Powerful",
     "type": "Support",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 10,
     "effect_category": "AP",
     "source": "Pickup",
@@ -1405,10 +1113,7 @@
   {
     "name": "Energising Revive",
     "type": "Support",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 5,
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
@@ -1419,10 +1124,7 @@
   {
     "name": "Energising Rush",
     "type": "Support",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 10,
     "effect_category": "AP",
     "source": "Pickup",
@@ -1433,10 +1135,7 @@
   {
     "name": "Energising Shell",
     "type": "Support",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 10,
     "effect_category": "AP",
     "source": "Pickup",
@@ -1447,10 +1146,7 @@
   {
     "name": "Energising Shots",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "AP",
     "source": "Boss Drop",
@@ -1461,9 +1157,7 @@
   {
     "name": "Energising Start",
     "type": "Support",
-    "stats": [
-      "HP"
-    ],
+    "stats": ["HP"],
     "lumina_cost": 5,
     "effect_category": "AP",
     "source": "Pickup",
@@ -1474,10 +1168,7 @@
   {
     "name": "Energising Stun",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "AP",
     "source": "Paint Cage",
@@ -1488,9 +1179,7 @@
   {
     "name": "Energising Turn",
     "type": "Support",
-    "stats": [
-      "SPD"
-    ],
+    "stats": ["SPD"],
     "lumina_cost": 20,
     "effect_category": "AP",
     "source": "Merchant",
@@ -1501,9 +1190,7 @@
   {
     "name": "Energy Master",
     "type": "Support",
-    "stats": [
-      "HP"
-    ],
+    "stats": ["HP"],
     "lumina_cost": 40,
     "effect_category": "AP",
     "source": "Boss Drop",
@@ -1514,10 +1201,7 @@
   {
     "name": "Enfeebling Attack",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Merchant",
@@ -1528,10 +1212,7 @@
   {
     "name": "Enfeebling Mark",
     "type": "Defensive",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Pickup",
@@ -1542,10 +1223,7 @@
   {
     "name": "Exhausting Power",
     "type": "Offensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 2,
     "effect_category": "Status",
     "source": "Pickup",
@@ -1556,10 +1234,7 @@
   {
     "name": "Exposing Attack",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Status",
     "source": "Merchant",
@@ -1570,10 +1245,7 @@
   {
     "name": "Exposing Break",
     "type": "Offensive",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 5,
     "effect_category": "Status",
     "source": "Merchant",
@@ -1584,10 +1256,7 @@
   {
     "name": "Faster Than Strong",
     "type": "Support",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 10,
     "effect_category": "Damage",
     "source": "Boss Drop",
@@ -1598,10 +1267,7 @@
   {
     "name": "First Offensive",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Damage",
     "source": "Boss Drop",
@@ -1612,10 +1278,7 @@
   {
     "name": "First Strike",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
@@ -1626,10 +1289,7 @@
   {
     "name": "Fueling Break",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Break",
     "source": "Pickup",
@@ -1640,10 +1300,7 @@
   {
     "name": "Full Strength",
     "type": "Offensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 15,
     "effect_category": "Damage",
     "source": "Merchant",
@@ -1654,9 +1311,7 @@
   {
     "name": "Glass Cannon",
     "type": "Offensive",
-    "stats": [
-      "SPD"
-    ],
+    "stats": ["SPD"],
     "lumina_cost": 10,
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
@@ -1667,10 +1322,7 @@
   {
     "name": "Gradient Break",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Break",
     "source": "Pickup",
@@ -1681,10 +1333,7 @@
   {
     "name": "Gradient Breaker",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Status",
     "source": "Merchant",
@@ -1695,10 +1344,7 @@
   {
     "name": "Gradient Fighter",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Damage",
     "source": "Pickup",
@@ -1709,10 +1355,7 @@
   {
     "name": "Greater Defenceless",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 15,
     "effect_category": "Status",
     "source": "Merchant",
@@ -1723,10 +1366,7 @@
   {
     "name": "Greater Powerful",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Merchant",
@@ -1737,10 +1377,7 @@
   {
     "name": "Greater Powerless",
     "type": "Defensive",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 15,
     "effect_category": "Status",
     "source": "Pickup",
@@ -1751,10 +1388,7 @@
   {
     "name": "Greater Rush",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
@@ -1765,10 +1399,7 @@
   {
     "name": "Greater Shell",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Pickup",
@@ -1779,10 +1410,7 @@
   {
     "name": "Greater Slow",
     "type": "Support",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 15,
     "effect_category": "Status",
     "source": "Pickup",
@@ -1793,10 +1421,7 @@
   {
     "name": "Healing Boon",
     "type": "Defensive",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 10,
     "effect_category": "Heal",
     "source": "Pickup",
@@ -1807,9 +1432,7 @@
   {
     "name": "Healing Counter",
     "type": "Defensive",
-    "stats": [
-      "HP"
-    ],
+    "stats": ["HP"],
     "lumina_cost": 10,
     "effect_category": "Heal",
     "source": "Merchant",
@@ -1820,10 +1443,7 @@
   {
     "name": "Healing Death",
     "type": "Defensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Death/Revive",
     "source": "Pickup",
@@ -1834,10 +1454,7 @@
   {
     "name": "Healing Fire",
     "type": "Defensive",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 10,
     "effect_category": "Heal",
     "source": "Pickup",
@@ -1848,9 +1465,7 @@
   {
     "name": "Healing Mark",
     "type": "Defensive",
-    "stats": [
-      "DEF"
-    ],
+    "stats": ["DEF"],
     "lumina_cost": 20,
     "effect_category": "Heal",
     "source": "Merchant",
@@ -1861,10 +1476,7 @@
   {
     "name": "Healing Parry",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 5,
     "effect_category": "Heal",
     "source": "Quest",
@@ -1875,10 +1487,7 @@
   {
     "name": "Healing Share",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "Crit"
-    ],
+    "stats": ["HP", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Heal",
     "source": "Merchant",
@@ -1889,10 +1498,7 @@
   {
     "name": "Healing Stun",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 10,
     "effect_category": "Heal",
     "source": "Pickup",
@@ -1903,10 +1509,7 @@
   {
     "name": "Healing Tint Energy",
     "type": "Support",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 1,
     "effect_category": "Heal",
     "source": "Pickup",
@@ -1917,10 +1520,7 @@
   {
     "name": "Immaculate",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Damage",
     "source": "Boss Drop",
@@ -1931,10 +1531,7 @@
   {
     "name": "In Medias Res",
     "type": "Defensive",
-    "stats": [
-      "DEF",
-      "Crit"
-    ],
+    "stats": ["DEF", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Shield",
     "source": "Pickup",
@@ -1945,10 +1542,7 @@
   {
     "name": "Inverted Affinity",
     "type": "Offensive",
-    "stats": [
-      "HP",
-      "Crit"
-    ],
+    "stats": ["HP", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Status",
     "source": "Merchant",
@@ -1959,10 +1553,7 @@
   {
     "name": "Last Stand Critical",
     "type": "Offensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 3,
     "effect_category": "Critical",
     "source": "Boss Drop",
@@ -1973,10 +1564,7 @@
   {
     "name": "Longer Burn",
     "type": "Support",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 15,
     "effect_category": "Burn",
     "source": "Merchant",
@@ -1987,10 +1575,7 @@
   {
     "name": "Longer Powerful",
     "type": "Offensive",
-    "stats": [
-      "HP",
-      "Crit"
-    ],
+    "stats": ["HP", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Merchant",
@@ -2001,10 +1586,7 @@
   {
     "name": "Longer Rush",
     "type": "Support",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Pickup",
@@ -2015,10 +1597,7 @@
   {
     "name": "Longer Shell",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Pickup",
@@ -2029,10 +1608,7 @@
   {
     "name": "Marking Break",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Status",
     "source": "Merchant",
@@ -2043,10 +1619,7 @@
   {
     "name": "Marking Shots",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 3,
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
@@ -2057,9 +1630,7 @@
   {
     "name": "Painted Power",
     "type": "Offensive",
-    "stats": [
-      "HP"
-    ],
+    "stats": ["HP"],
     "lumina_cost": 5,
     "effect_category": "Damage",
     "source": "Boss Drop",
@@ -2070,10 +1641,7 @@
   {
     "name": "Painter",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Pickup",
@@ -2084,10 +1652,7 @@
   {
     "name": "Perilous Parry",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "AP",
     "source": "Pickup",
@@ -2098,10 +1663,7 @@
   {
     "name": "Piercing Shot",
     "type": "Offensive",
-    "stats": [
-      "HP",
-      "Crit"
-    ],
+    "stats": ["HP", "Crit"],
     "lumina_cost": 2,
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
@@ -2112,10 +1674,7 @@
   {
     "name": "Powered Attack",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "AP",
     "source": "Pickup",
@@ -2126,10 +1685,7 @@
   {
     "name": "Powerful Heal",
     "type": "Support",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 5,
     "effect_category": "Heal",
     "source": "Merchant",
@@ -2140,10 +1696,7 @@
   {
     "name": "Powerful Mark",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Status",
     "source": "Pickup",
@@ -2154,10 +1707,7 @@
   {
     "name": "Powerful on Shell",
     "type": "Offensive",
-    "stats": [
-      "DEF",
-      "Crit"
-    ],
+    "stats": ["DEF", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Pickup",
@@ -2168,10 +1718,7 @@
   {
     "name": "Powerful Revive",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 3,
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
@@ -2182,10 +1729,7 @@
   {
     "name": "Powerful Shield",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Damage",
     "source": "Merchant",
@@ -2196,10 +1740,7 @@
   {
     "name": "Powerful Shots",
     "type": "Support",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 3,
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
@@ -2210,10 +1751,7 @@
   {
     "name": "Pro Retreat",
     "type": "Support",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 40,
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
@@ -2224,10 +1762,7 @@
   {
     "name": "Protecting Attack",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Merchant",
@@ -2238,10 +1773,7 @@
   {
     "name": "Protecting Death",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 5,
     "effect_category": "Death/Revive",
     "source": "Pickup",
@@ -2252,10 +1784,7 @@
   {
     "name": "Protecting Heal",
     "type": "Support",
-    "stats": [
-      "HP",
-      "SPD"
-    ],
+    "stats": ["HP", "SPD"],
     "lumina_cost": 5,
     "effect_category": "Heal",
     "source": "Merchant",
@@ -2266,10 +1795,7 @@
   {
     "name": "Protecting Last Stand",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 3,
     "effect_category": "Status",
     "source": "Boss Drop",
@@ -2280,10 +1806,7 @@
   {
     "name": "Protecting Shots",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 3,
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
@@ -2294,10 +1817,7 @@
   {
     "name": "Protecting Tint",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 5,
     "effect_category": "Heal",
     "source": "Pickup",
@@ -2308,10 +1828,7 @@
   {
     "name": "Quick Break",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 3,
     "effect_category": "Break",
     "source": "Boss Drop",
@@ -2322,9 +1839,7 @@
   {
     "name": "Random Defense",
     "type": "Defensive",
-    "stats": [
-      "Crit"
-    ],
+    "stats": ["Crit"],
     "lumina_cost": 5,
     "effect_category": "Free Aim / Other",
     "source": "Paint Cage",
@@ -2335,10 +1850,7 @@
   {
     "name": "Recovery",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 10,
     "effect_category": "Heal",
     "source": "Quest",
@@ -2349,10 +1861,7 @@
   {
     "name": "Rejuvenating Revive",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 3,
     "effect_category": "Death/Revive",
     "source": "Pickup",
@@ -2363,10 +1872,7 @@
   {
     "name": "Revive Paradox",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
@@ -2377,10 +1883,7 @@
   {
     "name": "Revive Tint Energy",
     "type": "Support",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 10,
     "effect_category": "Death/Revive",
     "source": "Merchant",
@@ -2391,10 +1894,7 @@
   {
     "name": "Rewarding Mark",
     "type": "Support",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 5,
     "effect_category": "AP",
     "source": "Merchant",
@@ -2405,10 +1905,7 @@
   {
     "name": "Roulette",
     "type": "Offensive",
-    "stats": [
-      "DEF",
-      "Crit"
-    ],
+    "stats": ["DEF", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Damage",
     "source": "Pickup",
@@ -2419,10 +1916,7 @@
   {
     "name": "Rush on Powerful",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Pickup",
@@ -2433,10 +1927,7 @@
   {
     "name": "SOS Power",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Status",
     "source": "Pickup",
@@ -2447,10 +1938,7 @@
   {
     "name": "SOS Rush",
     "type": "Offensive",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 5,
     "effect_category": "Status",
     "source": "Pickup",
@@ -2461,10 +1949,7 @@
   {
     "name": "SOS Shell",
     "type": "Defensive",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 5,
     "effect_category": "Status",
     "source": "Pickup",
@@ -2475,10 +1960,7 @@
   {
     "name": "Second Chance",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "Crit"
-    ],
+    "stats": ["HP", "Crit"],
     "lumina_cost": 40,
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
@@ -2489,10 +1971,7 @@
   {
     "name": "Shared Care",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 10,
     "effect_category": "Heal",
     "source": "Pickup",
@@ -2503,10 +1982,7 @@
   {
     "name": "Shell On Rush",
     "type": "Defensive",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Merchant",
@@ -2517,10 +1993,7 @@
   {
     "name": "Shield Affinity",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 15,
     "effect_category": "Damage",
     "source": "Merchant",
@@ -2531,10 +2004,7 @@
   {
     "name": "Shielding Death",
     "type": "Defensive",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 10,
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
@@ -2545,10 +2015,7 @@
   {
     "name": "Shielding Tint",
     "type": "Defensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 10,
     "effect_category": "Heal",
     "source": "Pickup",
@@ -2559,10 +2026,7 @@
   {
     "name": "Shortcut",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
@@ -2573,10 +2037,7 @@
   {
     "name": "Slowing Break",
     "type": "Support",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 5,
     "effect_category": "Status",
     "source": "Merchant",
@@ -2587,10 +2048,7 @@
   {
     "name": "Sniper",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 15,
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
@@ -2601,10 +2059,7 @@
   {
     "name": "Solidifying",
     "type": "Defensive",
-    "stats": [
-      "DEF",
-      "SPD"
-    ],
+    "stats": ["DEF", "SPD"],
     "lumina_cost": 10,
     "effect_category": "Shield",
     "source": "Merchant",
@@ -2615,10 +2070,7 @@
   {
     "name": "Solo Fighter",
     "type": "Offensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 1,
     "effect_category": "Damage",
     "source": "Merchant",
@@ -2629,10 +2081,7 @@
   {
     "name": "Staggering Attack",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 1,
     "effect_category": "Break",
     "source": "Pickup",
@@ -2643,10 +2092,7 @@
   {
     "name": "Stay Marked",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Merchant",
@@ -2657,10 +2103,7 @@
   {
     "name": "Stun Boost",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 10,
     "effect_category": "Damage",
     "source": "Merchant",
@@ -2671,10 +2114,7 @@
   {
     "name": "Survivor",
     "type": "Defensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 20,
     "effect_category": "Death/Revive",
     "source": "Merchant",
@@ -2685,10 +2125,7 @@
   {
     "name": "Sweet Kill",
     "type": "Defensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Heal",
     "source": "Merchant",
@@ -2699,10 +2136,7 @@
   {
     "name": "Tainted",
     "type": "Offensive",
-    "stats": [
-      "DEF",
-      "Crit"
-    ],
+    "stats": ["DEF", "Crit"],
     "lumina_cost": 3,
     "effect_category": "Damage",
     "source": "Merchant",
@@ -2713,10 +2147,7 @@
   {
     "name": "Teamwork",
     "type": "Offensive",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 5,
     "effect_category": "Damage",
     "source": "Merchant",
@@ -2727,9 +2158,7 @@
   {
     "name": "The One",
     "type": "Support",
-    "stats": [
-      "Crit"
-    ],
+    "stats": ["Crit"],
     "lumina_cost": 1,
     "effect_category": "Free Aim / Other",
     "source": "Boss Drop",
@@ -2740,10 +2169,7 @@
   {
     "name": "Time Tint",
     "type": "Support",
-    "stats": [
-      "HP",
-      "DEF"
-    ],
+    "stats": ["HP", "DEF"],
     "lumina_cost": 10,
     "effect_category": "Status",
     "source": "Pickup",
@@ -2754,10 +2180,7 @@
   {
     "name": "Versatile",
     "type": "Offensive",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 5,
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
@@ -2768,10 +2191,7 @@
   {
     "name": "Warming Up",
     "type": "Offensive",
-    "stats": [
-      "HP",
-      "Crit"
-    ],
+    "stats": ["HP", "Crit"],
     "lumina_cost": 15,
     "effect_category": "Damage",
     "source": "Boss Drop",
@@ -2782,10 +2202,7 @@
   {
     "name": "Weakness Gain",
     "type": "Support",
-    "stats": [
-      "SPD",
-      "Crit"
-    ],
+    "stats": ["SPD", "Crit"],
     "lumina_cost": 3,
     "effect_category": "AP",
     "source": "Pickup",

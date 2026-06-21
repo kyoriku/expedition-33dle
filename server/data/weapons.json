@@ -1,0 +1,930 @@
+[
+  {
+    "name": "Abysseram",
+    "wielder": "Gustave/Verso",
+    "element": "Physical",
+    "max_power": 3228,
+    "scaling_stats": ["Vitality", "Defense"],
+    "image": "abysseram.webp"
+  },
+  {
+    "name": "Blodam",
+    "wielder": "Gustave/Verso",
+    "element": "Light",
+    "max_power": 3487,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "blodam.webp"
+  },
+  {
+    "name": "Chevalam",
+    "wielder": "Gustave/Verso",
+    "element": "Physical",
+    "max_power": 3067,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "chevalam.webp"
+  },
+  {
+    "name": "Confuso",
+    "wielder": "Gustave/Verso",
+    "element": "Light",
+    "max_power": 3067,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "confuso.webp"
+  },
+  {
+    "name": "Contorso",
+    "wielder": "Gustave/Verso",
+    "element": "Lightning",
+    "max_power": 2841,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "contorso.webp"
+  },
+  {
+    "name": "Corpeso",
+    "wielder": "Gustave/Verso",
+    "element": "Fire",
+    "max_power": 3648,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "corpeso.webp"
+  },
+  {
+    "name": "Cruleram",
+    "wielder": "Gustave/Verso",
+    "element": "Ice",
+    "max_power": 3454,
+    "scaling_stats": ["Defense", "Luck"],
+    "image": "cruleram.webp"
+  },
+  {
+    "name": "Cultam",
+    "wielder": "Gustave/Verso",
+    "element": "Dark",
+    "max_power": 3132,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "cultam.webp"
+  },
+  {
+    "name": "Danseso",
+    "wielder": "Gustave/Verso",
+    "element": "Fire",
+    "max_power": 2970,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "danseso.webp"
+  },
+  {
+    "name": "Delaram",
+    "wielder": "Gustave/Verso",
+    "element": "Light",
+    "max_power": 3390,
+    "scaling_stats": ["Vitality", "Luck"],
+    "image": "delaram.webp"
+  },
+  {
+    "name": "Demonam",
+    "wielder": "Gustave/Verso",
+    "element": "Light",
+    "max_power": 2809,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "demonam.webp"
+  },
+  {
+    "name": "Dreameso",
+    "wielder": "Gustave/Verso",
+    "element": "Physical",
+    "max_power": 3067,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "dreameso.webp"
+  },
+  {
+    "name": "Dualiso",
+    "wielder": "Gustave/Verso",
+    "element": "Lightning",
+    "max_power": 1776,
+    "scaling_stats": ["Vitality", "Defense"],
+    "image": "dualiso.webp"
+  },
+  {
+    "name": "Esquiso",
+    "wielder": "Gustave/Verso",
+    "element": "Light",
+    "max_power": 3551,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "esquiso.webp"
+  },
+  {
+    "name": "Gaulteram",
+    "wielder": "Gustave/Verso",
+    "element": "Earth",
+    "max_power": 3261,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "gaulteram.webp"
+  },
+  {
+    "name": "Gesam",
+    "wielder": "Gustave/Verso",
+    "element": "Physical",
+    "max_power": 3228,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "gesam.webp"
+  },
+  {
+    "name": "Glaceso",
+    "wielder": "Gustave/Verso",
+    "element": "Ice",
+    "max_power": 2873,
+    "scaling_stats": ["Defense", "Luck"],
+    "image": "glaceso.webp"
+  },
+  {
+    "name": "Lanceram",
+    "wielder": "Gustave/Verso",
+    "element": "Physical",
+    "max_power": 3713,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "lanceram.webp"
+  },
+  {
+    "name": "Liteso",
+    "wielder": "Gustave/Verso",
+    "element": "Physical",
+    "max_power": 3551,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "liteso.webp"
+  },
+  {
+    "name": "Noahram",
+    "wielder": "Gustave/Verso",
+    "element": "Physical",
+    "max_power": 2260,
+    "scaling_stats": ["Vitality"],
+    "image": "noahram.webp"
+  },
+  {
+    "name": "Nosaram",
+    "wielder": "Gustave/Verso",
+    "element": "Physical",
+    "max_power": 3551,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "nosaram.webp"
+  },
+  {
+    "name": "Sakaram",
+    "wielder": "Gustave/Verso",
+    "element": "Physical",
+    "max_power": 2938,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "sakaram.webp"
+  },
+  {
+    "name": "Seeram",
+    "wielder": "Gustave/Verso",
+    "element": "Light",
+    "max_power": 3713,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "seeram.webp"
+  },
+  {
+    "name": "Simoso",
+    "wielder": "Gustave/Verso",
+    "element": "Light",
+    "max_power": 3228,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "simoso.webp"
+  },
+  {
+    "name": "Sireso",
+    "wielder": "Gustave/Verso",
+    "element": "Physical",
+    "max_power": 2583,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "sireso.webp"
+  },
+  {
+    "name": "Sucreso",
+    "wielder": "Gustave/Verso",
+    "element": "Earth",
+    "max_power": 3713,
+    "scaling_stats": ["Vitality", "Defense"],
+    "image": "sucreso.webp"
+  },
+  {
+    "name": "Tireso",
+    "wielder": "Gustave/Verso",
+    "element": "Earth",
+    "max_power": 3713,
+    "scaling_stats": ["Vitality", "Defense"],
+    "image": "tireso.webp"
+  },
+  {
+    "name": "Verleso",
+    "wielder": "Gustave/Verso",
+    "element": "Physical",
+    "max_power": 3454,
+    "scaling_stats": ["Vitality"],
+    "image": "verleso.webp"
+  },
+  {
+    "name": "Angerim",
+    "wielder": "Lune",
+    "element": "Fire",
+    "max_power": 3293,
+    "scaling_stats": ["Defense", "Luck"],
+    "image": "angerim.webp"
+  },
+  {
+    "name": "Benisim",
+    "wielder": "Lune",
+    "element": "Earth",
+    "max_power": 2744,
+    "scaling_stats": ["Vitality", "Defense"],
+    "image": "benisim.webp"
+  },
+  {
+    "name": "Betelim",
+    "wielder": "Lune",
+    "element": "Earth",
+    "max_power": 3228,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "betelim.webp"
+  },
+  {
+    "name": "Bonbim",
+    "wielder": "Lune",
+    "element": "Lightning",
+    "max_power": 3810,
+    "scaling_stats": ["Vitality", "Defense"],
+    "image": "bonbim.webp"
+  },
+  {
+    "name": "Braselim",
+    "wielder": "Lune",
+    "element": "Fire",
+    "max_power": 3390,
+    "scaling_stats": ["Vitality", "Luck"],
+    "image": "braselim.webp"
+  },
+  {
+    "name": "Chapelim",
+    "wielder": "Lune",
+    "element": "Earth",
+    "max_power": 3164,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "chapelim.webp"
+  },
+  {
+    "name": "Choralim",
+    "wielder": "Lune",
+    "element": "Fire",
+    "max_power": 3551,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "choralim.webp"
+  },
+  {
+    "name": "Cleim",
+    "wielder": "Lune",
+    "element": "Light",
+    "max_power": 3551,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "cleim.webp"
+  },
+  {
+    "name": "Colim",
+    "wielder": "Lune",
+    "element": "Light",
+    "max_power": 2583,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "colim.webp"
+  },
+  {
+    "name": "Coralim",
+    "wielder": "Lune",
+    "element": "Ice",
+    "max_power": 2744,
+    "scaling_stats": ["Vitality", "Defense"],
+    "image": "coralim.webp"
+  },
+  {
+    "name": "Deminerim",
+    "wielder": "Lune",
+    "element": "Lightning",
+    "max_power": 2744,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "deminerim.webp"
+  },
+  {
+    "name": "Elerim",
+    "wielder": "Lune",
+    "element": "Earth",
+    "max_power": 3551,
+    "scaling_stats": ["Vitality", "Defense"],
+    "image": "elerim.webp"
+  },
+  {
+    "name": "Esquim",
+    "wielder": "Lune",
+    "element": "Dark",
+    "max_power": 3616,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "esquim.webp"
+  },
+  {
+    "name": "Kralim",
+    "wielder": "Lune",
+    "element": "Lightning",
+    "max_power": 3390,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "kralim.webp"
+  },
+  {
+    "name": "Lighterim",
+    "wielder": "Lune",
+    "element": "Fire",
+    "max_power": 2744,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "lighterim.webp"
+  },
+  {
+    "name": "Lithelim",
+    "wielder": "Lune",
+    "element": "Void",
+    "max_power": 3099,
+    "scaling_stats": ["Vitality", "Luck"],
+    "image": "lithelim.webp"
+  },
+  {
+    "name": "Lunerim",
+    "wielder": "Lune",
+    "element": "Fire",
+    "max_power": 2421,
+    "scaling_stats": ["Vitality", "Luck"],
+    "image": "lunerim.webp"
+  },
+  {
+    "name": "Painerim",
+    "wielder": "Lune",
+    "element": "Earth",
+    "max_power": 2744,
+    "scaling_stats": ["Vitality", "Luck"],
+    "image": "painerim.webp"
+  },
+  {
+    "name": "Potierim",
+    "wielder": "Lune",
+    "element": "Ice",
+    "max_power": 2906,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "potierim.webp"
+  },
+  {
+    "name": "Redalim",
+    "wielder": "Lune",
+    "element": "Ice",
+    "max_power": 2583,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "redalim.webp"
+  },
+  {
+    "name": "Saperim",
+    "wielder": "Lune",
+    "element": "Lightning",
+    "max_power": 3067,
+    "scaling_stats": ["Defense", "Luck"],
+    "image": "saperim.webp"
+  },
+  {
+    "name": "Scaverim",
+    "wielder": "Lune",
+    "element": "Dark",
+    "max_power": 4197,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "scaverim.webp"
+  },
+  {
+    "name": "Snowim",
+    "wielder": "Lune",
+    "element": "Ice",
+    "max_power": 3874,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "snowim.webp"
+  },
+  {
+    "name": "Trebuchim",
+    "wielder": "Lune",
+    "element": "Lightning",
+    "max_power": 3067,
+    "scaling_stats": ["Vitality", "Luck"],
+    "image": "trebuchim.webp"
+  },
+  {
+    "name": "Troubadim",
+    "wielder": "Lune",
+    "element": "Physical",
+    "max_power": 3067,
+    "scaling_stats": ["Vitality", "Defense"],
+    "image": "troubadim.webp"
+  },
+  {
+    "name": "Barrier Breaker",
+    "wielder": "Maelle",
+    "element": "Void",
+    "max_power": 3616,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "barrier-breaker.webp"
+  },
+  {
+    "name": "Battlum",
+    "wielder": "Maelle",
+    "element": "Physical",
+    "max_power": 3067,
+    "scaling_stats": ["Defense", "Luck"],
+    "image": "battlum.webp"
+  },
+  {
+    "name": "Brulerum",
+    "wielder": "Maelle",
+    "element": "Fire",
+    "max_power": 2744,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "brulerum.webp"
+  },
+  {
+    "name": "Chalium",
+    "wielder": "Maelle",
+    "element": "Light",
+    "max_power": 3422,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "chalium.webp"
+  },
+  {
+    "name": "Chantenum",
+    "wielder": "Maelle",
+    "element": "Fire",
+    "max_power": 2841,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "chantenum.webp"
+  },
+  {
+    "name": "Clierum",
+    "wielder": "Maelle",
+    "element": "Lightning",
+    "max_power": 3196,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "clierum.webp"
+  },
+  {
+    "name": "Coldum",
+    "wielder": "Maelle",
+    "element": "Ice",
+    "max_power": 2583,
+    "scaling_stats": ["Vitality", "Defense"],
+    "image": "coldum.webp"
+  },
+  {
+    "name": "Duenum",
+    "wielder": "Maelle",
+    "element": "Physical",
+    "max_power": 2421,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "duenum.webp"
+  },
+  {
+    "name": "Esqium",
+    "wielder": "Maelle",
+    "element": "Fire",
+    "max_power": 3680,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "esqium.webp"
+  },
+  {
+    "name": "Facesum",
+    "wielder": "Maelle",
+    "element": "Physical",
+    "max_power": 3519,
+    "scaling_stats": ["Vitality", "Luck"],
+    "image": "facesum.webp"
+  },
+  {
+    "name": "Glaisum",
+    "wielder": "Maelle",
+    "element": "Physical",
+    "max_power": 3713,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "glaisum.webp"
+  },
+  {
+    "name": "Jarum",
+    "wielder": "Maelle",
+    "element": "Physical",
+    "max_power": 2583,
+    "scaling_stats": ["Defense", "Luck"],
+    "image": "jarum.webp"
+  },
+  {
+    "name": "Licorum",
+    "wielder": "Maelle",
+    "element": "Physical",
+    "max_power": 3551,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "licorum.webp"
+  },
+  {
+    "name": "Lithum",
+    "wielder": "Maelle",
+    "element": "Void",
+    "max_power": 3228,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "lithum.webp"
+  },
+  {
+    "name": "Maellum",
+    "wielder": "Maelle",
+    "element": "Physical",
+    "max_power": 3228,
+    "scaling_stats": ["Vitality"],
+    "image": "maellum.webp"
+  },
+  {
+    "name": "Medalum",
+    "wielder": "Maelle",
+    "element": "Physical",
+    "max_power": 2906,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "medalum.webp"
+  },
+  {
+    "name": "Melarum",
+    "wielder": "Maelle",
+    "element": "Physical",
+    "max_power": 3584,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "melarum.webp"
+  },
+  {
+    "name": "Plenum",
+    "wielder": "Maelle",
+    "element": "Ice",
+    "max_power": 3035,
+    "scaling_stats": ["Defense", "Luck"],
+    "image": "plenum.webp"
+  },
+  {
+    "name": "Seashelum",
+    "wielder": "Maelle",
+    "element": "Fire",
+    "max_power": 3003,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "seashelum.webp"
+  },
+  {
+    "name": "Sekarum",
+    "wielder": "Maelle",
+    "element": "Physical",
+    "max_power": 3390,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "sekarum.webp"
+  },
+  {
+    "name": "Stalum",
+    "wielder": "Maelle",
+    "element": "Fire",
+    "max_power": 3228,
+    "scaling_stats": ["Defense", "Luck"],
+    "image": "stalum.webp"
+  },
+  {
+    "name": "Tissenum",
+    "wielder": "Maelle",
+    "element": "Earth",
+    "max_power": 3874,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "tissenum.webp"
+  },
+  {
+    "name": "Veremum",
+    "wielder": "Maelle",
+    "element": "Physical",
+    "max_power": 3293,
+    "scaling_stats": ["Vitality", "Luck"],
+    "image": "veremum.webp"
+  },
+  {
+    "name": "Volesterum",
+    "wielder": "Maelle",
+    "element": "Physical",
+    "max_power": 3293,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "volesterum.webp"
+  },
+  {
+    "name": "Yeverum",
+    "wielder": "Maelle",
+    "element": "Physical",
+    "max_power": 3358,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "yeverum.webp"
+  },
+  {
+    "name": "Algueron",
+    "wielder": "Sciel",
+    "element": "Ice",
+    "max_power": 3228,
+    "scaling_stats": ["Vitality", "Luck"],
+    "image": "algueron.webp"
+  },
+  {
+    "name": "Blizzon",
+    "wielder": "Sciel",
+    "element": "Ice",
+    "max_power": 4197,
+    "scaling_stats": ["Defense", "Luck"],
+    "image": "blizzon.webp"
+  },
+  {
+    "name": "Bourgelon",
+    "wielder": "Sciel",
+    "element": "Light",
+    "max_power": 3099,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "bourgelon.webp"
+  },
+  {
+    "name": "Charnon",
+    "wielder": "Sciel",
+    "element": "Void",
+    "max_power": 2970,
+    "scaling_stats": ["Defense", "Luck"],
+    "image": "charnon.webp"
+  },
+  {
+    "name": "Chation",
+    "wielder": "Sciel",
+    "element": "Dark",
+    "max_power": 3551,
+    "scaling_stats": ["Vitality", "Luck"],
+    "image": "chation.webp"
+  },
+  {
+    "name": "Corderon",
+    "wielder": "Sciel",
+    "element": "Dark",
+    "max_power": 2744,
+    "scaling_stats": ["Defense", "Luck"],
+    "image": "corderon.webp"
+  },
+  {
+    "name": "Direton",
+    "wielder": "Sciel",
+    "element": "Earth",
+    "max_power": 4035,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "direton.webp"
+  },
+  {
+    "name": "Duollison",
+    "wielder": "Sciel",
+    "element": "Physical",
+    "max_power": 3680,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "duollison.webp"
+  },
+  {
+    "name": "Esquion",
+    "wielder": "Sciel",
+    "element": "Physical",
+    "max_power": 3842,
+    "scaling_stats": ["Vitality", "Luck"],
+    "image": "esquion.webp"
+  },
+  {
+    "name": "Garganon",
+    "wielder": "Sciel",
+    "element": "Fire",
+    "max_power": 3132,
+    "scaling_stats": ["Vitality", "Defense"],
+    "image": "garganon.webp"
+  },
+  {
+    "name": "Gobluson",
+    "wielder": "Sciel",
+    "element": "Fire",
+    "max_power": 3358,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "gobluson.webp"
+  },
+  {
+    "name": "Guleson",
+    "wielder": "Sciel",
+    "element": "Lightning",
+    "max_power": 3132,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "guleson.webp"
+  },
+  {
+    "name": "Hevasson",
+    "wielder": "Sciel",
+    "element": "Physical",
+    "max_power": 3454,
+    "scaling_stats": ["Vitality", "Defense"],
+    "image": "hevasson.webp"
+  },
+  {
+    "name": "Litheson",
+    "wielder": "Sciel",
+    "element": "Physical",
+    "max_power": 2809,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "litheson.webp"
+  },
+  {
+    "name": "Lusteson",
+    "wielder": "Sciel",
+    "element": "Dark",
+    "max_power": 3422,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "lusteson.webp"
+  },
+  {
+    "name": "Martenon",
+    "wielder": "Sciel",
+    "element": "Earth",
+    "max_power": 3874,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "martenon.webp"
+  },
+  {
+    "name": "Minason",
+    "wielder": "Sciel",
+    "element": "Physical",
+    "max_power": 2809,
+    "scaling_stats": ["Vitality", "Luck"],
+    "image": "minason.webp"
+  },
+  {
+    "name": "Moisson",
+    "wielder": "Sciel",
+    "element": "Physical",
+    "max_power": 3325,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "moisson.webp"
+  },
+  {
+    "name": "Ramasson",
+    "wielder": "Sciel",
+    "element": "Physical",
+    "max_power": 3519,
+    "scaling_stats": ["Vitality", "Luck"],
+    "image": "ramasson.webp"
+  },
+  {
+    "name": "Rangeson",
+    "wielder": "Sciel",
+    "element": "Dark",
+    "max_power": 3132,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "rangeson.webp"
+  },
+  {
+    "name": "Sadon",
+    "wielder": "Sciel",
+    "element": "Light",
+    "max_power": 2583,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "sadon.webp"
+  },
+  {
+    "name": "Scieleson",
+    "wielder": "Sciel",
+    "element": "Physical",
+    "max_power": 3454,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "scieleson.webp"
+  },
+  {
+    "name": "Sucetton",
+    "wielder": "Sciel",
+    "element": "Fire",
+    "max_power": 5948,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "sucetton.webp"
+  },
+  {
+    "name": "Tisseron",
+    "wielder": "Sciel",
+    "element": "Lightning",
+    "max_power": 3067,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "tisseron.webp"
+  },
+  {
+    "name": "Baguettaro",
+    "wielder": "Monoco",
+    "element": "Fire",
+    "max_power": 3745,
+    "scaling_stats": ["Defense", "Luck"],
+    "image": "baguettaro.webp"
+  },
+  {
+    "name": "Ballaro",
+    "wielder": "Monoco",
+    "element": "Light",
+    "max_power": 3067,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "ballaro.webp"
+  },
+  {
+    "name": "Boucharo",
+    "wielder": "Monoco",
+    "element": "Fire",
+    "max_power": 3228,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "boucharo.webp"
+  },
+  {
+    "name": "Brumaro",
+    "wielder": "Monoco",
+    "element": "Physical",
+    "max_power": 3390,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "brumaro.webp"
+  },
+  {
+    "name": "Cannaro",
+    "wielder": "Monoco",
+    "element": "Light",
+    "max_power": 3648,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "cannaro.webp"
+  },
+  {
+    "name": "Chromaro",
+    "wielder": "Monoco",
+    "element": "Ice",
+    "max_power": 3390,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "chromaro.webp"
+  },
+  {
+    "name": "Esquiaro",
+    "wielder": "Monoco",
+    "element": "Earth",
+    "max_power": 3745,
+    "scaling_stats": ["Vitality", "Defense"],
+    "image": "esquiaro.webp"
+  },
+  {
+    "name": "Fragaro",
+    "wielder": "Monoco",
+    "element": "Lightning",
+    "max_power": 4197,
+    "scaling_stats": ["Defense", "Luck"],
+    "image": "fragaro.webp"
+  },
+  {
+    "name": "Grandaro",
+    "wielder": "Monoco",
+    "element": "Earth",
+    "max_power": 3551,
+    "scaling_stats": ["Vitality", "Defense"],
+    "image": "grandaro.webp"
+  },
+  {
+    "name": "Joyaro",
+    "wielder": "Monoco",
+    "element": "Lightning",
+    "max_power": 3713,
+    "scaling_stats": ["Agility", "Defense"],
+    "image": "joyaro.webp"
+  },
+  {
+    "name": "Monocaro",
+    "wielder": "Monoco",
+    "element": "Physical",
+    "max_power": 2744,
+    "scaling_stats": ["Agility", "Luck"],
+    "image": "monocaro.webp"
+  },
+  {
+    "name": "Nusaro",
+    "wielder": "Monoco",
+    "element": "Dark",
+    "max_power": 4197,
+    "scaling_stats": ["Vitality", "Agility"],
+    "image": "nusaro.webp"
+  },
+  {
+    "name": "Sidaro",
+    "wielder": "Monoco",
+    "element": "Dark",
+    "max_power": 3035,
+    "scaling_stats": ["Might", "Luck"],
+    "image": "sidaro.webp"
+  },
+  {
+    "name": "Urnaro",
+    "wielder": "Monoco",
+    "element": "Earth",
+    "max_power": 3422,
+    "scaling_stats": ["Vitality", "Luck"],
+    "image": "urnaro.webp"
+  }
+]
