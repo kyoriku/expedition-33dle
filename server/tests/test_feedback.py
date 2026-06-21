@@ -10,7 +10,7 @@ from app.services.compare import classic_feedback
 # A complete, valid baseline; tests override only the fields under test.
 BASE = dict(
     name="Base",
-    gender="female",
+    gender="Female",
     role="Playable",
     weapon="Staff",
     element=["Fire"],
@@ -38,7 +38,7 @@ def test_identical_characters_all_match():
 
 
 def test_scalar_mismatches():
-    guess = make(gender="male", role="Boss", weapon="Sword",
+    guess = make(gender="Male", role="Boss", weapon="Sword",
                  category="Nevron", affiliation=["Independent"], zone="The Manor")
     answer = make()
     fb = classic_feedback(guess, answer)
