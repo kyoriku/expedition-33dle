@@ -32,8 +32,12 @@ export function fetchToday(): Promise<ClassicTodayResponse> {
   return request<ClassicTodayResponse>("/api/classic/today");
 }
 
-export function revealAnswer(): Promise<Entity> {
-  return request<Entity>("/api/classic/reveal");
+export function revealAnswer(guessIds: number[]): Promise<Entity> {
+  return request<Entity>("/api/classic/reveal", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ guess_ids: guessIds }),
+  });
 }
 
 export function submitGuess(entityId: number): Promise<ClassicGuessResponse> {
@@ -50,8 +54,12 @@ export function getPictosToday(): Promise<PictoTodayResponse> {
   return request<PictoTodayResponse>("/api/pictos/today");
 }
 
-export function revealPicto(): Promise<Picto> {
-  return request<Picto>("/api/pictos/reveal");
+export function revealPicto(guessIds: number[]): Promise<Picto> {
+  return request<Picto>("/api/pictos/reveal", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ guess_ids: guessIds }),
+  });
 }
 
 export function submitPictoGuess(pictoId: number): Promise<PictoGuessResponse> {

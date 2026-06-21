@@ -144,7 +144,7 @@ function Game({ today }: { today: PictoTodayResponse }) {
   // keeps the result fresh forever, so the enabled query never refetches.
   const revealQuery = useQuery({
     queryKey: ["pictos-reveal", today.puzzle_date],
-    queryFn: revealPicto,
+    queryFn: () => revealPicto(guesses.map((g) => g.guess.id)),
     enabled: status === "lost" && storedAnswer === null,
     staleTime: Infinity,
     retry: 1,

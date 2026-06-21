@@ -70,6 +70,13 @@ DirectionFeedback = Literal["match", "higher", "lower"]
 ElementFeedback = Literal["match", "partial", "miss"]
 
 
+class RevealRequest(BaseModel):
+    """Body for POST /api/<mode>/reveal: the ids the player has guessed. Shared by
+    both modes; the answer is returned only on a proven solve/loss (see routers)."""
+
+    guess_ids: list[int]
+
+
 class ClassicGuessRequest(BaseModel):
     """Request body for POST /api/classic/guess."""
 

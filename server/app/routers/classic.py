@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.constants import CLASSIC_MAX_GUESSES
 from app.db import get_db
 from app.models import Entity
 from app.schemas import (
@@ -11,6 +12,7 @@ from app.schemas import (
     ClassicGuessResponse,
     ClassicTodayResponse,
     EntityRead,
+    RevealRequest,
 )
 from app.services.compare import classic_feedback
 from app.services.scheduling import PuzzleNotYetAvailable, get_puzzle_for_date
@@ -74,15 +76,24 @@ async def today(db: AsyncSession = Depends(get_db)) -> ClassicTodayResponse:
     )
 
 
-@router.get("/reveal", response_model=EntityRead)
-async def reveal(db: AsyncSession = Depends(get_db)) -> EntityRead:
-    """Return today's answer entity.
+@router.post("/reveal", response_model=EntityRead)
+async def reveal(
+    body: RevealRequest, db: AsyncSession = Depends(get_db)
+) -> EntityRead:
+    """Return today's answer only once the caller proves the game is over.
 
-    Intentionally unauthenticated: called by the client to complete the lose
-    UX; the theoretical cheating risk is an accepted product decision.
+    Stateless proof-of-completion: the client submits the ids it has guessed; we
+    reveal only if today's answer is among them (solved) or it made
+    CLASSIC_MAX_GUESSES distinct valid guesses (lost). 403 otherwise. Still
+    bypassable by scripting MAX wrong guesses — an accepted genre risk — but the
+    answer is no longer one unauthenticated GET away.
     """
-    _, today, _, _ = await _today_puzzle(db)
-    return EntityRead.model_validate(today)
+    all_entities, answer, _, _ = await _today_puzzle(db)
+    roster_ids = {e.id for e in all_entities}
+    valid = {gid for gid in body.guess_ids if gid in roster_ids}
+    if answer.id not in valid and len(valid) < CLASSIC_MAX_GUESSES:
+        raise HTTPException(status_code=403, detail="Puzzle not yet completed")
+    return EntityRead.model_validate(answer)
 
 
 @router.post("/guess", response_model=ClassicGuessResponse)
