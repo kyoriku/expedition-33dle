@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { buildPictosShareString, buildShareString } from "./share";
 import type {
-  Entity,
+  Character,
   ClassicGuessFeedback,
   ClassicGuessResponse,
   Picto,
@@ -9,7 +9,7 @@ import type {
   PictoGuessResponse,
 } from "./types";
 
-const ENTITY: Entity = {
+const CHARACTER: Character = {
   id: 1,
   name: "X",
   gender: "male",
@@ -25,7 +25,7 @@ const ENTITY: Entity = {
 
 function row(feedback: Partial<ClassicGuessFeedback>, is_correct = false): ClassicGuessResponse {
   return {
-    guess: ENTITY,
+    guess: CHARACTER,
     is_correct,
     feedback: {
       gender: "miss",

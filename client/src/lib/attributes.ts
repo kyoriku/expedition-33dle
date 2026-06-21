@@ -6,7 +6,7 @@
 
 import type {
   ClassicGuessFeedback,
-  Entity,
+  Character,
   Picto,
   PictoGuessFeedback,
 } from "./types";
@@ -37,25 +37,25 @@ export interface AttributeDescriptor<T, F> {
 }
 
 export const ATTRIBUTES = [
-  { key: "gender", label: "Gender", kind: "scalar", format: (e: Entity) => e.gender },
-  { key: "role", label: "Role", kind: "scalar", format: (e: Entity) => e.role },
-  { key: "weapon", label: "Weapon", kind: "scalar", format: (e: Entity) => e.weapon },
+  { key: "gender", label: "Gender", kind: "scalar", format: (c: Character) => c.gender },
+  { key: "role", label: "Role", kind: "scalar", format: (c: Character) => c.role },
+  { key: "weapon", label: "Weapon", kind: "scalar", format: (c: Character) => c.weapon },
   {
     key: "element",
     label: "Element",
     kind: "element",
-    format: (e: Entity) => (e.element.length ? e.element.join(", ") : "—"),
+    format: (c: Character) => (c.element.length ? c.element.join(", ") : "—"),
   },
   {
     key: "act_introduced",
     label: "Act",
     kind: "direction",
-    format: (e: Entity) => String(e.act_introduced),
+    format: (c: Character) => String(c.act_introduced),
   },
-  { key: "category", label: "Category", kind: "scalar", format: (e: Entity) => e.category },
-  { key: "affiliation", label: "Affiliation", kind: "array", format: (e: Entity) => e.affiliation.join(" • ") },
-  { key: "zone", label: "Zone", kind: "scalar", format: (e: Entity) => e.zone },
-] as const satisfies readonly AttributeDescriptor<Entity, ClassicGuessFeedback>[];
+  { key: "category", label: "Category", kind: "scalar", format: (c: Character) => c.category },
+  { key: "affiliation", label: "Affiliation", kind: "array", format: (c: Character) => c.affiliation.join(" • ") },
+  { key: "zone", label: "Zone", kind: "scalar", format: (c: Character) => c.zone },
+] as const satisfies readonly AttributeDescriptor<Character, ClassicGuessFeedback>[];
 
 /** Column order for the share grid (feedback keys only). */
 export const FIELD_ORDER = ATTRIBUTES.map((a) => a.key);

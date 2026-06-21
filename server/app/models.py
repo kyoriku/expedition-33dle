@@ -9,13 +9,13 @@ from sqlalchemy.orm import Mapped, mapped_column
 from app.db import Base
 
 
-class Entity(Base):
+class Character(Base):
     """A guessable character that can also be a daily answer."""
 
-    __tablename__ = "entities"
+    __tablename__ = "characters"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(128), unique=True)
+    name: Mapped[str] = mapped_column(String(64), unique=True)
     gender: Mapped[str] = mapped_column(String(16))  # male | female | unknown
     role: Mapped[str] = mapped_column(String(64))  # class/role; avoids `class` keyword
     weapon: Mapped[str] = mapped_column(String(64))
@@ -42,7 +42,7 @@ class Picto(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(64), unique=True)  # unique => unique index
     type: Mapped[str] = mapped_column(String(16))  # Offensive | Defensive | Support
-    # Set-comparison field, like Entity.affiliation; room to evolve without a migration.
+    # Set-comparison field, like Character.affiliation; room to evolve without a migration.
     stats: Mapped[list[str]] = mapped_column(
         ARRAY(String(8)), nullable=False, server_default="{}"
     )

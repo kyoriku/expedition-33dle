@@ -1,5 +1,5 @@
 import { ATTRIBUTES, STATE_VISUAL } from "../lib/attributes";
-import type { Entity } from "../lib/types";
+import type { Character } from "../lib/types";
 import Portrait from "./Portrait";
 import {
   CELL_BASE,
@@ -10,7 +10,7 @@ import {
 } from "./GuessRow";
 
 interface AnswerRevealProps {
-  answer: Entity | null; // null while loading
+  answer: Character | null; // null while loading
   isError: boolean;
   onRetry: () => void;
 }

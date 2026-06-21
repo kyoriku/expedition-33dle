@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router-dom";
 import ClassicPage from "./ClassicPage";
 import type {
-  Entity,
+  Character,
   ClassicGuessResponse,
   ClassicTodayResponse,
 } from "../lib/types";
@@ -19,7 +19,7 @@ vi.mock("../lib/api", () => ({
 }));
 import { fetchToday, submitGuess } from "../lib/api";
 
-const ent = (id: number, name: string, over: Partial<Entity> = {}): Entity => ({
+const ent = (id: number, name: string, over: Partial<Character> = {}): Character => ({
   id,
   name,
   gender: "male",
@@ -37,7 +37,7 @@ const ent = (id: number, name: string, over: Partial<Entity> = {}): Entity => ({
 const TODAY: ClassicTodayResponse = {
   puzzle_date: "2026-06-17",
   puzzle_number: 4,
-  entities: [ent(1, "Gustave"), ent(2, "Maelle", { gender: "female" })],
+  characters: [ent(1, "Gustave"), ent(2, "Maelle", { gender: "female" })],
   yesterday: null,
 };
 

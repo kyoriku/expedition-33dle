@@ -1,5 +1,5 @@
 import type {
-  Entity,
+  Character,
   ClassicGuessResponse,
   ClassicTodayResponse,
   Picto,
@@ -32,19 +32,19 @@ export function fetchToday(): Promise<ClassicTodayResponse> {
   return request<ClassicTodayResponse>("/api/classic/today");
 }
 
-export function revealAnswer(guessIds: number[]): Promise<Entity> {
-  return request<Entity>("/api/classic/reveal", {
+export function revealAnswer(guessIds: number[]): Promise<Character> {
+  return request<Character>("/api/classic/reveal", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ guess_ids: guessIds }),
   });
 }
 
-export function submitGuess(entityId: number): Promise<ClassicGuessResponse> {
+export function submitGuess(characterId: number): Promise<ClassicGuessResponse> {
   return request<ClassicGuessResponse>("/api/classic/guess", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ entity_id: entityId }),
+    body: JSON.stringify({ character_id: characterId }),
   });
 }
 

@@ -18,7 +18,7 @@ function monogram(name: string): string {
 /**
  * Square portrait window. Renders the image from the given public dir (default
  * /portraits) when set and loadable; otherwise a Cinzel gold monogram. Decorative
- * (aria-hidden) — the guess row's rowheader already names the entity to assistive tech.
+ * (aria-hidden) — the guess row's rowheader already names the item to assistive tech.
  */
 export default function Portrait({
   name,

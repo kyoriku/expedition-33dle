@@ -23,7 +23,7 @@ from sqlalchemy import delete, literal_column
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 
 from app.db import engine
-from app.models import Entity, Picto
+from app.models import Character, Picto
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
@@ -34,7 +34,7 @@ def load_category(name: str) -> list[dict]:
         return json.load(f)
 
 
-ENTITIES: list[dict] = load_category("characters")
+CHARACTERS: list[dict] = load_category("characters")
 PICTOS: list[dict] = load_category("pictos")
 # `image` is optional in pictos.json and populated incrementally (R5b). Default it
 # to None so every row carries the key — pg_insert().values() requires a consistent
@@ -43,22 +43,22 @@ for _p in PICTOS:
     _p.setdefault("image", None)
 
 
-async def prune_removed(conn) -> int:
-    """Delete DB entities no longer present in the JSON.
+async def prune_characters(conn) -> int:
+    """Delete DB characters no longer present in the JSON.
 
     Keeps the seed idempotent for removals as well as additions: re-running
     after trimming the roster brings the DB back to exactly the JSON set.
     """
-    names = [e["name"] for e in ENTITIES]
-    result = await conn.execute(delete(Entity).where(Entity.name.notin_(names)))
+    names = [c["name"] for c in CHARACTERS]
+    result = await conn.execute(delete(Character).where(Character.name.notin_(names)))
     return result.rowcount
 
 
-async def upsert_entities(conn) -> dict[str, int]:
-    """UPSERT all entities by name; return a name -> id map."""
-    stmt = pg_insert(Entity).values(ENTITIES)
+async def upsert_characters(conn) -> dict[str, int]:
+    """UPSERT all characters by name; return a name -> id map."""
+    stmt = pg_insert(Character).values(CHARACTERS)
     stmt = stmt.on_conflict_do_update(
-        index_elements=[Entity.name],
+        index_elements=[Character.name],
         set_={
             "gender": stmt.excluded.gender,
             "role": stmt.excluded.role,
@@ -70,13 +70,13 @@ async def upsert_entities(conn) -> dict[str, int]:
             "zone": stmt.excluded.zone,
             "image": stmt.excluded.image,
         },
-    ).returning(Entity.name, Entity.id)
+    ).returning(Character.name, Character.id)
     rows = (await conn.execute(stmt)).all()
     return {name: id_ for name, id_ in rows}
 
 
 async def prune_pictos(conn) -> int:
-    """Delete DB pictos no longer present in the JSON (mirrors prune_removed)."""
+    """Delete DB pictos no longer present in the JSON (mirrors prune_characters)."""
     names = [p["name"] for p in PICTOS]
     result = await conn.execute(delete(Picto).where(Picto.name.notin_(names)))
     return result.rowcount
@@ -114,11 +114,11 @@ async def upsert_pictos(conn) -> tuple[int, int]:
 
 async def main() -> None:
     async with engine.begin() as conn:
-        pruned = await prune_removed(conn)
-        name_to_id = await upsert_entities(conn)
+        pruned = await prune_characters(conn)
+        name_to_id = await upsert_characters(conn)
         pictos_pruned = await prune_pictos(conn)
         p_ins, p_upd = await upsert_pictos(conn)
-    print(f"entities pruned: {pruned}, upserted: {len(name_to_id)}")
+    print(f"characters pruned: {pruned}, upserted: {len(name_to_id)}")
     print(
         f"pictos pruned: {pictos_pruned}, inserted: {p_ins}, "
         f"updated: {p_upd}, total: {p_ins + p_upd}"

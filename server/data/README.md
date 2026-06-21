@@ -12,7 +12,7 @@ references live in their own files.
 
 | File | Doc | Roster | Mode | Model (`app/models.py`) |
 |---|---|---|---|---|
-| `characters.json` | [characters.md](characters.md) | 33 entities | Classic | `Entity` |
+| `characters.json` | [characters.md](characters.md) | 33 characters | Classic | `Character` |
 | `pictos.json` | [pictos.md](pictos.md) | 201 pictos | Pictos | `Picto` |
 
 ## Seeding model
