@@ -425,7 +425,7 @@
     "effect_category": "Shield",
     "source": "Boss Drop",
     "zone_obtained": "The Chosen Path",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "7-pictos.webp"
   },
   {
@@ -810,7 +810,7 @@
     "effect_category": "Critical",
     "source": "Pickup",
     "zone_obtained": "Endless Tower",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "7-pictos.webp"
   },
   {
@@ -1129,7 +1129,7 @@
     "effect_category": "AP",
     "source": "Pickup",
     "zone_obtained": "Endless Tower",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "1-pictos.webp"
   },
   {
@@ -1382,7 +1382,7 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Endless Tower",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "11-pictos.webp"
   },
   {
@@ -1921,7 +1921,7 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Endless Tower",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "4-pictos.webp"
   },
   {

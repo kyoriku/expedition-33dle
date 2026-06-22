@@ -80,6 +80,42 @@ export interface PictoTodayResponse {
   yesterday: Picto | null; // previous day's answer (no longer a spoiler)
 }
 
+// Weapons mode — parallels the Classic*/Picto* shapes (server/app/schemas.py).
+
+export interface Weapon {
+  id: number;
+  name: string;
+  wielder: string[]; // Gustave & Verso share weapons, so this is a set
+  element: string;
+  max_power: number;
+  scaling_stats: string[];
+  source: string;
+  act_introduced: number;
+  image: string | null; // weapon icon filename in /weapons, or null for monogram
+}
+
+export interface WeaponGuessFeedback {
+  wielder: ElementFeedback; // multi-value set comparison (match/partial/miss)
+  element: ScalarFeedback;
+  max_power: DirectionFeedback;
+  scaling_stats: ElementFeedback;
+  source: ScalarFeedback;
+  act_introduced: DirectionFeedback;
+}
+
+export interface WeaponGuessResponse {
+  guess: Weapon;
+  feedback: WeaponGuessFeedback;
+  is_correct: boolean;
+}
+
+export interface WeaponTodayResponse {
+  puzzle_date: string; // ISO date
+  puzzle_number: number;
+  weapons: Weapon[];
+  yesterday: Weapon | null; // previous day's answer (no longer a spoiler)
+}
+
 // Client-only state.
 
 export type GameStatus = "in_progress" | "won" | "lost";
@@ -99,6 +135,15 @@ export interface PictoStoredGameState {
   puzzle_number: number;
   stats_recorded: boolean; // prevents double-counting stats on refresh
   revealed_answer?: Picto | null; // optional: pre-reveal states lack it
+}
+
+// Weapons game state — parallels StoredGameState.
+export interface WeaponStoredGameState {
+  guesses: WeaponGuessResponse[];
+  status: GameStatus;
+  puzzle_number: number;
+  stats_recorded: boolean; // prevents double-counting stats on refresh
+  revealed_answer?: Weapon | null; // optional: pre-reveal states lack it
 }
 
 export interface Stats {

@@ -1,4 +1,9 @@
-import type { PictoStoredGameState, Stats, StoredGameState } from "./types";
+import type {
+  PictoStoredGameState,
+  Stats,
+  StoredGameState,
+  WeaponStoredGameState,
+} from "./types";
 
 export interface MenuStatus {
   /** One-line summary for the mode's menu card. */
@@ -8,7 +13,7 @@ export interface MenuStatus {
 /** Derive a mode's menu-card status from its stored daily state and cumulative
  *  stats. Pure — both inputs come from localStorage, read once on the menu. */
 export function formatMenuStatus(
-  state: StoredGameState | PictoStoredGameState | null,
+  state: StoredGameState | PictoStoredGameState | WeaponStoredGameState | null,
   stats: Stats,
   maxGuesses: number,
 ): MenuStatus {

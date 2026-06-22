@@ -20,10 +20,8 @@ import LastTry from "../components/LastTry";
 import {
   loadState,
   loadStats,
-  loadTutorialSeen,
   saveState,
   saveStats,
-  saveTutorialSeen,
 } from "../lib/storage";
 import type {
   Character,
@@ -54,9 +52,21 @@ function describeGuess(
 
 function Centered({ children }: { children: React.ReactNode }) {
   return (
-    <div className="text-parchment flex flex-1 items-center justify-center px-4 text-center text-sm italic">
+    <div className="text-parchment flex flex-1 items-center justify-center px-4 text-center italic">
       {children}
     </div>
+  );
+}
+
+/** Pre-game chrome: the header bar (without the puzzle/stats cluster, which needs
+ *  loaded data) above a centered status message — keeps the header visible during
+ *  the loading and error states. */
+function Shell({ children }: { children: React.ReactNode }) {
+  return (
+    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 py-8 md:py-12 md:max-w-3xl md:px-6 lg:max-w-6xl">
+      <Header />
+      <Centered>{children}</Centered>
+    </main>
   );
 }
 
@@ -86,7 +96,7 @@ function useDailyRollover(puzzleDate: string | undefined, refetch: () => void) {
 }
 
 export default function ClassicPage() {
-  usePageTitle("Daily Character | Expedition33dle");
+  usePageTitle("Daily Character | Expedition 33dle");
   // Server state only; game state lives in <Game> + localStorage.
   const { data: today, isPending, error, refetch } = useQuery({
     queryKey: ["today"],
@@ -96,14 +106,14 @@ export default function ClassicPage() {
   });
   useDailyRollover(today?.puzzle_date, refetch);
 
-  if (isPending) return <Centered>Loading today’s puzzle…</Centered>;
+  if (isPending) return <Shell>Loading today’s puzzle…</Shell>;
   if (error) {
     return (
-      <Centered>
+      <Shell>
         {error instanceof ApiError
           ? error.message
           : "Could not reach the server — refresh to retry"}
-      </Centered>
+      </Shell>
     );
   }
   // Key by puzzle_number so a rollover refetch remounts <Game> fresh for the
@@ -146,8 +156,8 @@ function Game({ today }: { today: ClassicTodayResponse }) {
       ? (stored.revealed_answer ?? null)
       : null;
   });
-  // Auto-show the tutorial on first visit (Wordle convention)
-  const [showHowTo, setShowHowTo] = useState(() => !loadTutorialSeen());
+  // How-to is opt-in via the header "?" button — not shown automatically.
+  const [showHowTo, setShowHowTo] = useState(false);
   const [showStats, setShowStats] = useState(false);
 
   // Fires only on a lost game with no persisted answer. staleTime: Infinity
@@ -231,7 +241,6 @@ function Game({ today }: { today: ClassicTodayResponse }) {
 
   function closeHowTo() {
     setShowHowTo(false);
-    saveTutorialSeen();
   }
 
   function handleGuess(character: Character) {

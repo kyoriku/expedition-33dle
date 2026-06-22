@@ -1,0 +1,292 @@
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { MemoryRouter } from "react-router-dom";
+import WeaponsPage from "./WeaponsPage";
+import type { Weapon, WeaponGuessResponse, WeaponTodayResponse } from "../lib/types";
+
+// Mock the network layer so the full component tree mounts without a server.
+vi.mock("../lib/api", () => ({
+  ApiError: class ApiError extends Error {},
+  getWeaponsToday: vi.fn(),
+  submitWeaponGuess: vi.fn(),
+  revealWeapon: vi.fn(),
+}));
+import { getWeaponsToday, submitWeaponGuess, revealWeapon } from "../lib/api";
+
+const wpn = (id: number, name: string, over: Partial<Weapon> = {}): Weapon => ({
+  id,
+  name,
+  wielder: ["Gustave", "Verso"],
+  element: "Physical",
+  max_power: 3000,
+  scaling_stats: ["Vitality"],
+  source: "Pickup",
+  act_introduced: 1,
+  image: null,
+  ...over,
+});
+
+/** An all-miss/lower feedback guess response (every key present + valid). */
+const missResponse = (w: Weapon): WeaponGuessResponse => ({
+  guess: w,
+  is_correct: false,
+  feedback: {
+    wielder: "miss",
+    element: "miss",
+    max_power: "lower",
+    scaling_stats: "miss",
+    source: "miss",
+    act_introduced: "lower",
+  },
+});
+
+/** An all-match winning guess response. */
+const winResponse = (w: Weapon): WeaponGuessResponse => ({
+  guess: w,
+  is_correct: true,
+  feedback: {
+    wielder: "match",
+    element: "match",
+    max_power: "match",
+    scaling_stats: "match",
+    source: "match",
+    act_introduced: "match",
+  },
+});
+
+const TODAY: WeaponTodayResponse = {
+  puzzle_date: "2026-06-17",
+  puzzle_number: 4,
+  weapons: [
+    wpn(1, "Abysseram"),
+    wpn(2, "Blodam", { wielder: ["Lune"], max_power: 3487 }),
+  ],
+  yesterday: null,
+};
+
+const STATE_KEY = "expedition33dle:weapons:state:2026-06-17";
+
+function renderPage() {
+  const qc = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+  return render(
+    <QueryClientProvider client={qc}>
+      <MemoryRouter>
+        <WeaponsPage />
+      </MemoryRouter>
+    </QueryClientProvider>,
+  );
+}
+
+beforeEach(() => {
+  localStorage.clear();
+  vi.mocked(getWeaponsToday).mockResolvedValue(TODAY);
+  vi.mocked(submitWeaponGuess).mockReset();
+  vi.mocked(revealWeapon).mockReset();
+});
+
+describe("WeaponsPage", () => {
+  it("loads today's puzzle and shows the input (grid appears after the first guess)", async () => {
+    renderPage();
+    expect(await screen.findByRole("combobox")).toBeInTheDocument();
+    expect(screen.queryByRole("table")).toBeNull();
+  });
+
+  it("scores a guess and exposes scalar + directional feedback to assistive tech", async () => {
+    vi.mocked(submitWeaponGuess).mockResolvedValue({
+      guess: wpn(2, "Blodam", { wielder: ["Lune"], max_power: 3487 }),
+      is_correct: false,
+      feedback: {
+        wielder: "miss",
+        element: "miss",
+        max_power: "higher",
+        scaling_stats: "partial",
+        source: "miss",
+        act_introduced: "match",
+      },
+    });
+    const user = userEvent.setup();
+    renderPage();
+
+    await user.type(await screen.findByRole("combobox"), "blod");
+    await user.click(screen.getByRole("option", { name: "Blodam" }));
+
+    expect(
+      await screen.findByRole("rowheader", { name: /Your guess: Blodam/ }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("table", { name: /guesses/i })).toBeInTheDocument();
+    expect(screen.getByRole("columnheader", { name: "Wielder" })).toBeInTheDocument();
+    // Scalar miss announces its state, not just a color.
+    expect(
+      screen.getByRole("cell", { name: /Wielder: Lune, no match/ }),
+    ).toBeInTheDocument();
+    // Directional cell announces higher/lower.
+    expect(
+      screen.getByRole("cell", { name: /Max Power: 3487, answer is higher/ }),
+    ).toBeInTheDocument();
+  });
+
+  it("wins when the correct weapon is guessed", async () => {
+    vi.mocked(submitWeaponGuess).mockResolvedValue(winResponse(wpn(1, "Abysseram")));
+    const user = userEvent.setup();
+    renderPage();
+
+    await user.type(await screen.findByRole("combobox"), "abys");
+    await user.click(screen.getByRole("option", { name: "Abysseram" }));
+
+    // Exact string targets the banner only (the sr-only announcement also
+    // contains "Solved in 1 guess." as part of a longer sentence).
+    expect(await screen.findByText("Solved in 1 guess")).toBeInTheDocument();
+    expect(screen.getByText(/next puzzle in/i)).toBeInTheDocument();
+    // Game over → input is gone.
+    expect(screen.queryByRole("combobox")).toBeNull();
+    expect(
+      screen.getByRole("rowheader", { name: /correct answer/ }),
+    ).toBeInTheDocument();
+  });
+
+  it("loses after the guess cap and reveals the answer", async () => {
+    // Seed MAX_GUESSES-1 (8) prior guesses so one more wrong guess loses.
+    const prior = Array.from({ length: 8 }, (_, i) =>
+      missResponse(wpn(11 + i, `Filler ${i}`)),
+    );
+    localStorage.setItem(
+      STATE_KEY,
+      JSON.stringify({ guesses: prior, status: "in_progress", puzzle_number: 4 }),
+    );
+    vi.mocked(submitWeaponGuess).mockResolvedValue(missResponse(wpn(2, "Blodam")));
+    vi.mocked(revealWeapon).mockResolvedValue(wpn(1, "Abysseram"));
+    const user = userEvent.setup();
+    renderPage();
+
+    await user.type(await screen.findByRole("combobox"), "blod");
+    await user.click(screen.getByRole("option", { name: "Blodam" }));
+
+    expect(await screen.findByText(/Game over/)).toBeInTheDocument();
+    expect(
+      await screen.findByRole("rowheader", { name: /Answer: Abysseram/ }),
+    ).toBeInTheDocument();
+    // Reveal is gated server-side on proof of loss; the client sends its guess ids.
+    expect(vi.mocked(revealWeapon)).toHaveBeenCalledWith(
+      expect.arrayContaining([2]),
+    );
+    // Share button is available on the loss screen too.
+    expect(screen.getByRole("button", { name: /share/i })).toBeInTheDocument();
+  });
+
+  it("restores in-progress state from localStorage on reload", async () => {
+    vi.mocked(submitWeaponGuess).mockResolvedValue(missResponse(wpn(2, "Blodam")));
+    const user = userEvent.setup();
+    renderPage();
+
+    await user.type(await screen.findByRole("combobox"), "blod");
+    await user.click(screen.getByRole("option", { name: "Blodam" }));
+    expect(
+      await screen.findByRole("rowheader", { name: /Your guess: Blodam/ }),
+    ).toBeInTheDocument();
+
+    // Remount (simulates a reload) — localStorage persists across cleanup.
+    cleanup();
+    renderPage();
+
+    expect(
+      await screen.findByRole("rowheader", { name: /Your guess: Blodam/ }),
+    ).toBeInTheDocument();
+    // The restored guess wasn't re-submitted.
+    expect(vi.mocked(submitWeaponGuess)).toHaveBeenCalledTimes(1);
+  });
+});
+
+const WEAPONS_STATS_KEY = "expedition33dle:weapons:stats";
+
+describe("WeaponsPage stats", () => {
+  it("opens the stats modal from the header (empty state)", async () => {
+    const user = userEvent.setup();
+    renderPage();
+    await user.click(await screen.findByRole("button", { name: "Statistics" }));
+    expect(
+      screen.getByRole("dialog", { name: /statistics/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/next puzzle in/i)).toBeInTheDocument();
+    // No game played yet.
+    expect(localStorage.getItem(WEAPONS_STATS_KEY)).toBeNull();
+  });
+
+  it("records a win and shows the inline stats section", async () => {
+    vi.mocked(submitWeaponGuess).mockResolvedValue(winResponse(wpn(1, "Abysseram")));
+    const user = userEvent.setup();
+    renderPage();
+
+    await user.type(await screen.findByRole("combobox"), "abys");
+    await user.click(screen.getByRole("option", { name: "Abysseram" }));
+    await screen.findByText("Solved in 1 guess");
+
+    // Inline stats render on the win screen.
+    expect(screen.getByText("Played")).toBeInTheDocument();
+    expect(screen.getByText(/guess distribution/i)).toBeInTheDocument();
+
+    const stored = JSON.parse(localStorage.getItem(WEAPONS_STATS_KEY)!);
+    expect(stored.played).toBe(1);
+    expect(stored.won).toBe(1);
+    expect(stored.current_streak).toBe(1);
+    expect(stored.guess_distribution).toHaveLength(9);
+    expect(stored.guess_distribution[0]).toBe(1); // won in 1 guess -> bucket 0
+  });
+
+  it("records the finished game exactly once across reloads", async () => {
+    vi.mocked(submitWeaponGuess).mockResolvedValue(winResponse(wpn(1, "Abysseram")));
+    const user = userEvent.setup();
+    renderPage();
+
+    await user.type(await screen.findByRole("combobox"), "abys");
+    await user.click(screen.getByRole("option", { name: "Abysseram" }));
+    await screen.findByText("Solved in 1 guess");
+    expect(JSON.parse(localStorage.getItem(WEAPONS_STATS_KEY)!).played).toBe(1);
+
+    // Reload the finished game — recording must not run again.
+    cleanup();
+    renderPage();
+    await screen.findByText("Solved in 1 guess");
+    expect(JSON.parse(localStorage.getItem(WEAPONS_STATS_KEY)!).played).toBe(1);
+  });
+
+  it("keeps weapons stats independent from classic stats", async () => {
+    vi.mocked(submitWeaponGuess).mockResolvedValue(winResponse(wpn(1, "Abysseram")));
+    const user = userEvent.setup();
+    renderPage();
+    await user.type(await screen.findByRole("combobox"), "abys");
+    await user.click(screen.getByRole("option", { name: "Abysseram" }));
+    await screen.findByText("Solved in 1 guess");
+
+    expect(localStorage.getItem(WEAPONS_STATS_KEY)).not.toBeNull();
+    expect(localStorage.getItem("expedition33dle:classic:stats")).toBeNull();
+  });
+});
+
+describe("WeaponsPage share", () => {
+  it("shows a share button on win that copies the weapons share text", async () => {
+    vi.mocked(submitWeaponGuess).mockResolvedValue(winResponse(wpn(1, "Abysseram")));
+    const user = userEvent.setup();
+    renderPage();
+    await user.type(await screen.findByRole("combobox"), "abys");
+    await user.click(screen.getByRole("option", { name: "Abysseram" }));
+    await screen.findByText("Solved in 1 guess");
+
+    // jsdom has no navigator.share, so ShareButton falls back to the clipboard.
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, "clipboard", {
+      value: { writeText },
+      configurable: true,
+    });
+
+    await user.click(screen.getByRole("button", { name: /share/i }));
+    expect(await screen.findByText(/copied to clipboard/i)).toBeInTheDocument();
+
+    expect(writeText).toHaveBeenCalledTimes(1);
+    const text = writeText.mock.calls[0][0] as string;
+    expect(text).toContain("Expedition 33dle Weapons #");
+    expect(text).toContain("1/9");
+    expect(text).toContain("https://expedition33dle.com/weapons");
+  });
+});

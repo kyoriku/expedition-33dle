@@ -1,5 +1,16 @@
-import { EMPTY_PICTO_STATS, EMPTY_STATS, PICTOS_MAX_GUESSES } from "./stats";
-import type { PictoStoredGameState, Stats, StoredGameState } from "./types";
+import {
+  EMPTY_PICTO_STATS,
+  EMPTY_STATS,
+  EMPTY_WEAPONS_STATS,
+  PICTOS_MAX_GUESSES,
+  WEAPONS_MAX_GUESSES,
+} from "./stats";
+import type {
+  PictoStoredGameState,
+  Stats,
+  StoredGameState,
+  WeaponStoredGameState,
+} from "./types";
 
 const keyFor = (date: string) => `expedition33dle:classic:state:${date}`;
 
@@ -80,6 +91,44 @@ export function savePictosState(date: string, state: PictoStoredGameState): void
   }
 }
 
+// Weapons game state — separate namespace from classic/pictos so the modes' daily
+// state never collide.
+const weaponsKeyFor = (date: string) => `expedition33dle:weapons:state:${date}`;
+
+/** Read stored weapons state for the given puzzle date. Returns null (fresh game)
+ *  on missing key, corrupt JSON, unexpected shape, or disabled storage. */
+export function loadWeaponsState(date: string): WeaponStoredGameState | null {
+  try {
+    const raw = localStorage.getItem(weaponsKeyFor(date));
+    if (!raw) return null;
+    const parsed: unknown = JSON.parse(raw);
+    if (typeof parsed !== "object" || parsed === null) return null;
+    const state = parsed as WeaponStoredGameState;
+    if (
+      !Array.isArray(state.guesses) ||
+      !STATUSES.includes(state.status) ||
+      typeof state.puzzle_number !== "number"
+    ) {
+      return null;
+    }
+    // States written before stats tracking lack the flag; false is safe.
+    state.stats_recorded = state.stats_recorded === true;
+    return state;
+  } catch {
+    return null;
+  }
+}
+
+/** Persist weapons state for the given puzzle date. Silently no-ops if storage is
+ *  unavailable. */
+export function saveWeaponsState(date: string, state: WeaponStoredGameState): void {
+  try {
+    localStorage.setItem(weaponsKeyFor(date), JSON.stringify(state));
+  } catch {
+    // ignore
+  }
+}
+
 /** Read cumulative stats. Returns EMPTY_STATS on missing key, corrupt JSON,
  *  unexpected shape, or disabled storage. */
 export function loadStats(): Stats {
@@ -151,39 +200,38 @@ export function savePictosStats(stats: Stats): void {
   }
 }
 
-// Whether the how-to-play modal has ever been dismissed (no date suffix).
-const CLASSIC_TUTORIAL_KEY = "expedition33dle:classic:tutorial_seen";
+// Weapons cumulative stats — separate namespace from classic/pictos; independent totals.
+const WEAPONS_STATS_KEY = "expedition33dle:weapons:stats";
 
-export function loadTutorialSeen(): boolean {
+/** Read cumulative weapons stats. Returns EMPTY_WEAPONS_STATS on missing key,
+ *  corrupt JSON, unexpected shape, or disabled storage. */
+export function loadWeaponsStats(): Stats {
   try {
-    return localStorage.getItem(CLASSIC_TUTORIAL_KEY) === "true";
+    const raw = localStorage.getItem(WEAPONS_STATS_KEY);
+    if (!raw) return EMPTY_WEAPONS_STATS;
+    const parsed: unknown = JSON.parse(raw);
+    if (typeof parsed !== "object" || parsed === null) return EMPTY_WEAPONS_STATS;
+    const stats = parsed as Stats;
+    if (
+      typeof stats.played !== "number" ||
+      typeof stats.won !== "number" ||
+      typeof stats.current_streak !== "number" ||
+      typeof stats.max_streak !== "number" ||
+      !Array.isArray(stats.guess_distribution) ||
+      stats.guess_distribution.length !== WEAPONS_MAX_GUESSES
+    ) {
+      return EMPTY_WEAPONS_STATS;
+    }
+    return stats;
   } catch {
-    return false;
+    return EMPTY_WEAPONS_STATS;
   }
 }
 
-export function saveTutorialSeen(): void {
+/** Persist cumulative weapons stats. Silently no-ops if storage is unavailable. */
+export function saveWeaponsStats(stats: Stats): void {
   try {
-    localStorage.setItem(CLASSIC_TUTORIAL_KEY, "true");
-  } catch {
-    // ignore
-  }
-}
-
-// Pictos has its own tutorial flag so first-visit how-to fires per mode.
-const PICTOS_TUTORIAL_KEY = "expedition33dle:pictos:tutorial_seen";
-
-export function loadPictosTutorialSeen(): boolean {
-  try {
-    return localStorage.getItem(PICTOS_TUTORIAL_KEY) === "true";
-  } catch {
-    return false;
-  }
-}
-
-export function savePictosTutorialSeen(): void {
-  try {
-    localStorage.setItem(PICTOS_TUTORIAL_KEY, "true");
+    localStorage.setItem(WEAPONS_STATS_KEY, JSON.stringify(stats));
   } catch {
     // ignore
   }
@@ -191,10 +239,12 @@ export function savePictosTutorialSeen(): void {
 
 // Daily-state keys accrue one per mode per day played; prune them on boot so
 // localStorage doesn't grow unbounded. ONLY :state:<date> keys are touched —
-// cumulative :stats and :tutorial_seen keys are intentionally preserved.
+// cumulative :stats keys (and any legacy keys, like the retired :tutorial_seen
+// flags) are intentionally preserved.
 const STATE_PREFIXES = [
   "expedition33dle:classic:state:",
   "expedition33dle:pictos:state:",
+  "expedition33dle:weapons:state:",
 ];
 
 /** Delete every daily-state key whose date isn't `today` (UTC ISO, e.g.

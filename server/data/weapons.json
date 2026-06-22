@@ -1,7 +1,7 @@
 [
   {
     "name": "Abysseram",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Physical",
     "max_power": 3228,
     "scaling_stats": ["Vitality", "Defense"],
@@ -11,7 +11,7 @@
   },
   {
     "name": "Blodam",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Light",
     "max_power": 3487,
     "scaling_stats": ["Agility", "Defense"],
@@ -21,7 +21,7 @@
   },
   {
     "name": "Chevalam",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Physical",
     "max_power": 3067,
     "scaling_stats": ["Agility", "Luck"],
@@ -31,7 +31,7 @@
   },
   {
     "name": "Confuso",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Light",
     "max_power": 3067,
     "scaling_stats": ["Agility", "Luck"],
@@ -41,7 +41,7 @@
   },
   {
     "name": "Contorso",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Lightning",
     "max_power": 2841,
     "scaling_stats": ["Agility", "Defense"],
@@ -51,7 +51,7 @@
   },
   {
     "name": "Corpeso",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Fire",
     "max_power": 3648,
     "scaling_stats": ["Vitality", "Agility"],
@@ -61,7 +61,7 @@
   },
   {
     "name": "Cruleram",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Ice",
     "max_power": 3454,
     "scaling_stats": ["Defense", "Luck"],
@@ -71,7 +71,7 @@
   },
   {
     "name": "Cultam",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Dark",
     "max_power": 3132,
     "scaling_stats": ["Agility", "Defense"],
@@ -81,7 +81,7 @@
   },
   {
     "name": "Danseso",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Fire",
     "max_power": 2970,
     "scaling_stats": ["Agility", "Luck"],
@@ -91,7 +91,7 @@
   },
   {
     "name": "Delaram",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Light",
     "max_power": 3390,
     "scaling_stats": ["Vitality", "Luck"],
@@ -101,7 +101,7 @@
   },
   {
     "name": "Demonam",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Light",
     "max_power": 2809,
     "scaling_stats": ["Agility", "Defense"],
@@ -111,7 +111,7 @@
   },
   {
     "name": "Dreameso",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Physical",
     "max_power": 3067,
     "scaling_stats": ["Agility", "Luck"],
@@ -121,7 +121,7 @@
   },
   {
     "name": "Dualiso",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Lightning",
     "max_power": 1776,
     "scaling_stats": ["Vitality", "Defense"],
@@ -131,7 +131,7 @@
   },
   {
     "name": "Esquiso",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Verso"],
     "element": "Light",
     "max_power": 3551,
     "scaling_stats": ["Agility", "Luck"],
@@ -141,7 +141,7 @@
   },
   {
     "name": "Gaulteram",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Earth",
     "max_power": 3261,
     "scaling_stats": ["Agility", "Luck"],
@@ -151,7 +151,7 @@
   },
   {
     "name": "Gesam",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Physical",
     "max_power": 3228,
     "scaling_stats": ["Vitality", "Agility"],
@@ -161,7 +161,7 @@
   },
   {
     "name": "Glaceso",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Ice",
     "max_power": 2873,
     "scaling_stats": ["Defense", "Luck"],
@@ -171,7 +171,7 @@
   },
   {
     "name": "Lanceram",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Physical",
     "max_power": 3713,
     "scaling_stats": ["Vitality", "Agility"],
@@ -181,7 +181,7 @@
   },
   {
     "name": "Liteso",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Physical",
     "max_power": 3551,
     "scaling_stats": ["Agility", "Defense"],
@@ -191,7 +191,7 @@
   },
   {
     "name": "Noahram",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Physical",
     "max_power": 2260,
     "scaling_stats": ["Vitality"],
@@ -201,17 +201,17 @@
   },
   {
     "name": "Nosaram",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Physical",
     "max_power": 3551,
     "scaling_stats": ["Agility", "Luck"],
     "source": "Merchant",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "nosaram.webp"
   },
   {
     "name": "Sakaram",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Physical",
     "max_power": 2938,
     "scaling_stats": ["Agility", "Luck"],
@@ -221,7 +221,7 @@
   },
   {
     "name": "Seeram",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Light",
     "max_power": 3713,
     "scaling_stats": ["Vitality", "Agility"],
@@ -231,17 +231,17 @@
   },
   {
     "name": "Simoso",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Light",
     "max_power": 3228,
     "scaling_stats": ["Vitality", "Agility"],
     "source": "Boss Drop",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "simoso.webp"
   },
   {
     "name": "Sireso",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Physical",
     "max_power": 2583,
     "scaling_stats": ["Vitality", "Agility"],
@@ -251,7 +251,7 @@
   },
   {
     "name": "Sucreso",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Verso"],
     "element": "Earth",
     "max_power": 3713,
     "scaling_stats": ["Vitality", "Defense"],
@@ -261,7 +261,7 @@
   },
   {
     "name": "Tireso",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Earth",
     "max_power": 3713,
     "scaling_stats": ["Vitality", "Defense"],
@@ -271,7 +271,7 @@
   },
   {
     "name": "Verleso",
-    "wielder": "Gustave/Verso",
+    "wielder": ["Gustave", "Verso"],
     "element": "Physical",
     "max_power": 3454,
     "scaling_stats": ["Vitality"],
@@ -281,7 +281,7 @@
   },
   {
     "name": "Angerim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Fire",
     "max_power": 3293,
     "scaling_stats": ["Defense", "Luck"],
@@ -291,7 +291,7 @@
   },
   {
     "name": "Benisim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Earth",
     "max_power": 2744,
     "scaling_stats": ["Vitality", "Defense"],
@@ -301,7 +301,7 @@
   },
   {
     "name": "Betelim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Earth",
     "max_power": 3228,
     "scaling_stats": ["Vitality", "Agility"],
@@ -311,7 +311,7 @@
   },
   {
     "name": "Bonbim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Lightning",
     "max_power": 3810,
     "scaling_stats": ["Vitality", "Defense"],
@@ -321,7 +321,7 @@
   },
   {
     "name": "Braselim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Fire",
     "max_power": 3390,
     "scaling_stats": ["Vitality", "Luck"],
@@ -331,7 +331,7 @@
   },
   {
     "name": "Chapelim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Earth",
     "max_power": 3164,
     "scaling_stats": ["Agility", "Defense"],
@@ -341,7 +341,7 @@
   },
   {
     "name": "Choralim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Fire",
     "max_power": 3551,
     "scaling_stats": ["Agility", "Defense"],
@@ -351,7 +351,7 @@
   },
   {
     "name": "Cleim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Light",
     "max_power": 3551,
     "scaling_stats": ["Agility", "Luck"],
@@ -361,7 +361,7 @@
   },
   {
     "name": "Colim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Light",
     "max_power": 2583,
     "scaling_stats": ["Agility", "Defense"],
@@ -371,7 +371,7 @@
   },
   {
     "name": "Coralim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Ice",
     "max_power": 2744,
     "scaling_stats": ["Vitality", "Defense"],
@@ -381,7 +381,7 @@
   },
   {
     "name": "Deminerim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Lightning",
     "max_power": 2744,
     "scaling_stats": ["Agility", "Luck"],
@@ -391,7 +391,7 @@
   },
   {
     "name": "Elerim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Earth",
     "max_power": 3551,
     "scaling_stats": ["Vitality", "Defense"],
@@ -401,7 +401,7 @@
   },
   {
     "name": "Esquim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Dark",
     "max_power": 3616,
     "scaling_stats": ["Agility", "Defense"],
@@ -411,7 +411,7 @@
   },
   {
     "name": "Kralim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Lightning",
     "max_power": 3390,
     "scaling_stats": ["Vitality", "Agility"],
@@ -421,7 +421,7 @@
   },
   {
     "name": "Lighterim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Fire",
     "max_power": 2744,
     "scaling_stats": ["Agility", "Defense"],
@@ -431,7 +431,7 @@
   },
   {
     "name": "Lithelim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Void",
     "max_power": 3099,
     "scaling_stats": ["Vitality", "Luck"],
@@ -441,7 +441,7 @@
   },
   {
     "name": "Lunerim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Fire",
     "max_power": 2421,
     "scaling_stats": ["Vitality", "Luck"],
@@ -451,17 +451,17 @@
   },
   {
     "name": "Painerim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Earth",
     "max_power": 2744,
     "scaling_stats": ["Vitality", "Luck"],
     "source": "Merchant",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "painerim.webp"
   },
   {
     "name": "Potierim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Ice",
     "max_power": 2906,
     "scaling_stats": ["Agility", "Defense"],
@@ -471,7 +471,7 @@
   },
   {
     "name": "Redalim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Ice",
     "max_power": 2583,
     "scaling_stats": ["Agility", "Defense"],
@@ -481,7 +481,7 @@
   },
   {
     "name": "Saperim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Lightning",
     "max_power": 3067,
     "scaling_stats": ["Defense", "Luck"],
@@ -491,7 +491,7 @@
   },
   {
     "name": "Scaverim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Dark",
     "max_power": 4197,
     "scaling_stats": ["Vitality", "Agility"],
@@ -501,7 +501,7 @@
   },
   {
     "name": "Snowim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Ice",
     "max_power": 3874,
     "scaling_stats": ["Vitality", "Agility"],
@@ -511,7 +511,7 @@
   },
   {
     "name": "Trebuchim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Lightning",
     "max_power": 3067,
     "scaling_stats": ["Vitality", "Luck"],
@@ -521,7 +521,7 @@
   },
   {
     "name": "Troubadim",
-    "wielder": "Lune",
+    "wielder": ["Lune"],
     "element": "Physical",
     "max_power": 3067,
     "scaling_stats": ["Vitality", "Defense"],
@@ -531,7 +531,7 @@
   },
   {
     "name": "Barrier Breaker",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Void",
     "max_power": 3616,
     "scaling_stats": ["Agility", "Defense"],
@@ -541,7 +541,7 @@
   },
   {
     "name": "Battlum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Physical",
     "max_power": 3067,
     "scaling_stats": ["Defense", "Luck"],
@@ -551,7 +551,7 @@
   },
   {
     "name": "Brulerum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Fire",
     "max_power": 2744,
     "scaling_stats": ["Agility", "Luck"],
@@ -561,7 +561,7 @@
   },
   {
     "name": "Chalium",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Light",
     "max_power": 3422,
     "scaling_stats": ["Vitality", "Agility"],
@@ -571,7 +571,7 @@
   },
   {
     "name": "Chantenum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Fire",
     "max_power": 2841,
     "scaling_stats": ["Agility", "Luck"],
@@ -581,7 +581,7 @@
   },
   {
     "name": "Clierum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Lightning",
     "max_power": 3196,
     "scaling_stats": ["Agility", "Defense"],
@@ -591,7 +591,7 @@
   },
   {
     "name": "Coldum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Ice",
     "max_power": 2583,
     "scaling_stats": ["Vitality", "Defense"],
@@ -601,7 +601,7 @@
   },
   {
     "name": "Duenum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Physical",
     "max_power": 2421,
     "scaling_stats": ["Agility", "Defense"],
@@ -611,7 +611,7 @@
   },
   {
     "name": "Esqium",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Fire",
     "max_power": 3680,
     "scaling_stats": ["Agility", "Defense"],
@@ -621,7 +621,7 @@
   },
   {
     "name": "Facesum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Physical",
     "max_power": 3519,
     "scaling_stats": ["Vitality", "Luck"],
@@ -631,7 +631,7 @@
   },
   {
     "name": "Glaisum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Physical",
     "max_power": 3713,
     "scaling_stats": ["Agility", "Defense"],
@@ -641,7 +641,7 @@
   },
   {
     "name": "Jarum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Physical",
     "max_power": 2583,
     "scaling_stats": ["Defense", "Luck"],
@@ -651,7 +651,7 @@
   },
   {
     "name": "Licorum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Physical",
     "max_power": 3551,
     "scaling_stats": ["Agility", "Luck"],
@@ -661,7 +661,7 @@
   },
   {
     "name": "Lithum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Void",
     "max_power": 3228,
     "scaling_stats": ["Agility", "Luck"],
@@ -671,7 +671,7 @@
   },
   {
     "name": "Maellum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Physical",
     "max_power": 3228,
     "scaling_stats": ["Vitality"],
@@ -681,7 +681,7 @@
   },
   {
     "name": "Medalum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Physical",
     "max_power": 2906,
     "scaling_stats": ["Agility", "Defense"],
@@ -691,7 +691,7 @@
   },
   {
     "name": "Melarum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Physical",
     "max_power": 3584,
     "scaling_stats": ["Vitality", "Agility"],
@@ -701,7 +701,7 @@
   },
   {
     "name": "Plenum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Ice",
     "max_power": 3035,
     "scaling_stats": ["Defense", "Luck"],
@@ -711,7 +711,7 @@
   },
   {
     "name": "Seashelum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Fire",
     "max_power": 3003,
     "scaling_stats": ["Agility", "Defense"],
@@ -721,7 +721,7 @@
   },
   {
     "name": "Sekarum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Physical",
     "max_power": 3390,
     "scaling_stats": ["Vitality", "Agility"],
@@ -731,7 +731,7 @@
   },
   {
     "name": "Stalum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Fire",
     "max_power": 3228,
     "scaling_stats": ["Defense", "Luck"],
@@ -741,7 +741,7 @@
   },
   {
     "name": "Tissenum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Earth",
     "max_power": 3874,
     "scaling_stats": ["Vitality", "Agility"],
@@ -751,7 +751,7 @@
   },
   {
     "name": "Veremum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Physical",
     "max_power": 3293,
     "scaling_stats": ["Vitality", "Luck"],
@@ -761,7 +761,7 @@
   },
   {
     "name": "Volesterum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Physical",
     "max_power": 3293,
     "scaling_stats": ["Vitality", "Agility"],
@@ -771,17 +771,17 @@
   },
   {
     "name": "Yeverum",
-    "wielder": "Maelle",
+    "wielder": ["Maelle"],
     "element": "Physical",
     "max_power": 3358,
     "scaling_stats": ["Agility", "Defense"],
     "source": "Merchant",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "yeverum.webp"
   },
   {
     "name": "Algueron",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Ice",
     "max_power": 3228,
     "scaling_stats": ["Vitality", "Luck"],
@@ -791,7 +791,7 @@
   },
   {
     "name": "Blizzon",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Ice",
     "max_power": 4197,
     "scaling_stats": ["Defense", "Luck"],
@@ -801,7 +801,7 @@
   },
   {
     "name": "Bourgelon",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Light",
     "max_power": 3099,
     "scaling_stats": ["Vitality", "Agility"],
@@ -811,17 +811,17 @@
   },
   {
     "name": "Charnon",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Void",
     "max_power": 2970,
     "scaling_stats": ["Defense", "Luck"],
     "source": "Merchant",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "charnon.webp"
   },
   {
     "name": "Chation",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Dark",
     "max_power": 3551,
     "scaling_stats": ["Vitality", "Luck"],
@@ -831,7 +831,7 @@
   },
   {
     "name": "Corderon",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Dark",
     "max_power": 2744,
     "scaling_stats": ["Defense", "Luck"],
@@ -841,7 +841,7 @@
   },
   {
     "name": "Direton",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Earth",
     "max_power": 4035,
     "scaling_stats": ["Agility", "Defense"],
@@ -851,7 +851,7 @@
   },
   {
     "name": "Duollison",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Physical",
     "max_power": 3680,
     "scaling_stats": ["Agility", "Luck"],
@@ -861,7 +861,7 @@
   },
   {
     "name": "Esquion",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Physical",
     "max_power": 3842,
     "scaling_stats": ["Vitality", "Luck"],
@@ -871,7 +871,7 @@
   },
   {
     "name": "Garganon",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Fire",
     "max_power": 3132,
     "scaling_stats": ["Vitality", "Defense"],
@@ -881,7 +881,7 @@
   },
   {
     "name": "Gobluson",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Fire",
     "max_power": 3358,
     "scaling_stats": ["Agility", "Defense"],
@@ -891,7 +891,7 @@
   },
   {
     "name": "Guleson",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Lightning",
     "max_power": 3132,
     "scaling_stats": ["Agility", "Luck"],
@@ -901,7 +901,7 @@
   },
   {
     "name": "Hevasson",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Physical",
     "max_power": 3454,
     "scaling_stats": ["Vitality", "Defense"],
@@ -911,7 +911,7 @@
   },
   {
     "name": "Litheson",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Physical",
     "max_power": 2809,
     "scaling_stats": ["Agility", "Luck"],
@@ -921,7 +921,7 @@
   },
   {
     "name": "Lusteson",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Dark",
     "max_power": 3422,
     "scaling_stats": ["Vitality", "Agility"],
@@ -931,7 +931,7 @@
   },
   {
     "name": "Martenon",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Earth",
     "max_power": 3874,
     "scaling_stats": ["Vitality", "Agility"],
@@ -941,7 +941,7 @@
   },
   {
     "name": "Minason",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Physical",
     "max_power": 2809,
     "scaling_stats": ["Vitality", "Luck"],
@@ -951,7 +951,7 @@
   },
   {
     "name": "Moisson",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Physical",
     "max_power": 3325,
     "scaling_stats": ["Agility", "Luck"],
@@ -961,7 +961,7 @@
   },
   {
     "name": "Ramasson",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Physical",
     "max_power": 3519,
     "scaling_stats": ["Vitality", "Luck"],
@@ -971,7 +971,7 @@
   },
   {
     "name": "Rangeson",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Dark",
     "max_power": 3132,
     "scaling_stats": ["Agility", "Defense"],
@@ -981,7 +981,7 @@
   },
   {
     "name": "Sadon",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Light",
     "max_power": 2583,
     "scaling_stats": ["Agility", "Defense"],
@@ -991,7 +991,7 @@
   },
   {
     "name": "Scieleson",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Physical",
     "max_power": 3454,
     "scaling_stats": ["Agility", "Luck"],
@@ -1001,7 +1001,7 @@
   },
   {
     "name": "Sucetton",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Fire",
     "max_power": 5948,
     "scaling_stats": ["Agility", "Luck"],
@@ -1011,7 +1011,7 @@
   },
   {
     "name": "Tisseron",
-    "wielder": "Sciel",
+    "wielder": ["Sciel"],
     "element": "Lightning",
     "max_power": 3067,
     "scaling_stats": ["Agility", "Defense"],
@@ -1021,7 +1021,7 @@
   },
   {
     "name": "Baguettaro",
-    "wielder": "Monoco",
+    "wielder": ["Monoco"],
     "element": "Fire",
     "max_power": 3745,
     "scaling_stats": ["Defense", "Luck"],
@@ -1031,7 +1031,7 @@
   },
   {
     "name": "Ballaro",
-    "wielder": "Monoco",
+    "wielder": ["Monoco"],
     "element": "Light",
     "max_power": 3067,
     "scaling_stats": ["Agility", "Defense"],
@@ -1041,7 +1041,7 @@
   },
   {
     "name": "Boucharo",
-    "wielder": "Monoco",
+    "wielder": ["Monoco"],
     "element": "Fire",
     "max_power": 3228,
     "scaling_stats": ["Agility", "Luck"],
@@ -1051,7 +1051,7 @@
   },
   {
     "name": "Brumaro",
-    "wielder": "Monoco",
+    "wielder": ["Monoco"],
     "element": "Physical",
     "max_power": 3390,
     "scaling_stats": ["Vitality", "Agility"],
@@ -1061,7 +1061,7 @@
   },
   {
     "name": "Cannaro",
-    "wielder": "Monoco",
+    "wielder": ["Monoco"],
     "element": "Light",
     "max_power": 3648,
     "scaling_stats": ["Agility", "Luck"],
@@ -1071,17 +1071,17 @@
   },
   {
     "name": "Chromaro",
-    "wielder": "Monoco",
+    "wielder": ["Monoco"],
     "element": "Ice",
     "max_power": 3390,
     "scaling_stats": ["Agility", "Defense"],
     "source": "Merchant",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "chromaro.webp"
   },
   {
     "name": "Esquiaro",
-    "wielder": "Monoco",
+    "wielder": ["Monoco"],
     "element": "Earth",
     "max_power": 3745,
     "scaling_stats": ["Vitality", "Defense"],
@@ -1091,7 +1091,7 @@
   },
   {
     "name": "Fragaro",
-    "wielder": "Monoco",
+    "wielder": ["Monoco"],
     "element": "Lightning",
     "max_power": 4197,
     "scaling_stats": ["Defense", "Luck"],
@@ -1101,7 +1101,7 @@
   },
   {
     "name": "Grandaro",
-    "wielder": "Monoco",
+    "wielder": ["Monoco"],
     "element": "Earth",
     "max_power": 3551,
     "scaling_stats": ["Vitality", "Defense"],
@@ -1111,7 +1111,7 @@
   },
   {
     "name": "Joyaro",
-    "wielder": "Monoco",
+    "wielder": ["Monoco"],
     "element": "Lightning",
     "max_power": 3713,
     "scaling_stats": ["Agility", "Defense"],
@@ -1121,7 +1121,7 @@
   },
   {
     "name": "Monocaro",
-    "wielder": "Monoco",
+    "wielder": ["Monoco"],
     "element": "Physical",
     "max_power": 2744,
     "scaling_stats": ["Agility", "Luck"],
@@ -1131,7 +1131,7 @@
   },
   {
     "name": "Nusaro",
-    "wielder": "Monoco",
+    "wielder": ["Monoco"],
     "element": "Dark",
     "max_power": 4197,
     "scaling_stats": ["Vitality", "Agility"],
@@ -1141,7 +1141,7 @@
   },
   {
     "name": "Sidaro",
-    "wielder": "Monoco",
+    "wielder": ["Monoco"],
     "element": "Dark",
     "max_power": 3035,
     "scaling_stats": ["Might", "Luck"],
@@ -1151,7 +1151,7 @@
   },
   {
     "name": "Urnaro",
-    "wielder": "Monoco",
+    "wielder": ["Monoco"],
     "element": "Earth",
     "max_power": 3422,
     "scaling_stats": ["Vitality", "Luck"],

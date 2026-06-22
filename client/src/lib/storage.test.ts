@@ -92,13 +92,15 @@ describe("pictos stats storage", () => {
 });
 
 describe("pruneOldDailyState", () => {
-  it("deletes only non-today :state keys; keeps today + :stats + :tutorial_seen", () => {
+  it("deletes only non-today :state keys; keeps today + :stats + legacy keys", () => {
     const today = "2026-06-20";
     const keep = [
       "expedition33dle:classic:state:2026-06-20",
       "expedition33dle:pictos:state:2026-06-20",
       "expedition33dle:classic:stats",
       "expedition33dle:pictos:stats",
+      // Retired tutorial_seen flags still linger in existing users' storage;
+      // prune must leave any non-:state: key untouched.
       "expedition33dle:classic:tutorial_seen",
       "expedition33dle:pictos:tutorial_seen",
     ];

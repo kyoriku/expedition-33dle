@@ -22,7 +22,7 @@ from app.services.scheduling import get_puzzle_for_date
 
 def _weapon(id_: int, name: str, **kw) -> Weapon:
     base = dict(
-        wielder="Gustave/Verso",
+        wielder=["Gustave", "Verso"],
         element="Physical",
         max_power=3000,
         scaling_stats=["Vitality", "Defense"],
@@ -34,10 +34,10 @@ def _weapon(id_: int, name: str, **kw) -> Weapon:
 
 ROSTER = [
     _weapon(1, "Abysseram", scaling_stats=["Vitality", "Defense"]),
-    _weapon(2, "Blodam", wielder="Lune", element="Light", max_power=3487,
+    _weapon(2, "Blodam", wielder=["Lune"], element="Light", max_power=3487,
             scaling_stats=["Agility", "Defense"], source="Boss Drop"),
     _weapon(3, "Carderam", element="Fire", scaling_stats=["Vitality", "Agility"]),
-    _weapon(4, "Direulam", wielder="Sciel", element="Ice", scaling_stats=["Luck"],
+    _weapon(4, "Direulam", wielder=["Sciel"], element="Ice", scaling_stats=["Luck"],
             source="Merchant"),
 ]
 
@@ -134,7 +134,7 @@ def test_reveal_incomplete_is_403():
 
 
 def test_reveal_loss_unlocks_with_max_distinct_guesses():
-    # MAX (8) exceeds the shared 4-weapon ROSTER, so build one large enough.
+    # MAX (9) exceeds the shared 4-weapon ROSTER, so build one large enough.
     roster = [_weapon(i, f"W{i}") for i in range(1, WEAPONS_MAX_GUESSES + 2)]
     answer = _todays_answer(roster)
     wrong_ids = [w.id for w in roster if w.id !=

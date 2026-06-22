@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import MenuPage from "./pages/MenuPage";
 import ClassicPage from "./pages/ClassicPage";
 import PictosPage from "./pages/PictosPage";
+import WeaponsPage from "./pages/WeaponsPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import TermsPage from "./pages/TermsPage";
 import ScrollToTop from "./components/ScrollToTop";
@@ -27,6 +28,7 @@ export default function App() {
             <Route path="/" element={<MenuPage />} />
             <Route path="/classic" element={<ClassicPage />} />
             <Route path="/pictos" element={<PictosPage />} />
+            <Route path="/weapons" element={<WeaponsPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
           </Routes>

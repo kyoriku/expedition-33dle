@@ -31,6 +31,7 @@ describe("MenuPage", () => {
     renderMenu();
     expect(card(/classic/i)).toHaveAttribute("href", "/classic");
     expect(card(/pictos/i)).toHaveAttribute("href", "/pictos");
+    expect(card(/weapons/i)).toHaveAttribute("href", "/weapons");
   });
 
   it("shows each mode's heading", () => {
@@ -39,20 +40,22 @@ describe("MenuPage", () => {
       screen.getByRole("heading", { name: "Classic" }),
     ).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Pictos" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Weapons" })).toBeInTheDocument();
   });
 
   it("renders a decorative icon in each card", () => {
     renderMenu();
     expect(card(/classic/i).querySelector("svg")).toBeInTheDocument();
     expect(card(/pictos/i).querySelector("svg")).toBeInTheDocument();
+    expect(card(/weapons/i).querySelector("svg")).toBeInTheDocument();
   });
 
-  it("shows 'Not yet played' on both cards with empty storage", () => {
+  it("shows 'Not yet played' on every card with empty storage", () => {
     renderMenu();
-    expect(screen.getAllByText("Not yet played")).toHaveLength(2);
+    expect(screen.getAllByText("Not yet played")).toHaveLength(3);
   });
 
-  it("reflects an in-progress classic game, leaving pictos untouched", () => {
+  it("reflects an in-progress classic game, leaving pictos and weapons untouched", () => {
     saveState(today, {
       guesses: guesses(2),
       status: "in_progress",
@@ -64,6 +67,7 @@ describe("MenuPage", () => {
       within(card(/classic/i)).getByText("In progress · 2/6 guesses used"),
     ).toBeInTheDocument();
     expect(within(card(/pictos/i)).getByText("Not yet played")).toBeInTheDocument();
+    expect(within(card(/weapons/i)).getByText("Not yet played")).toBeInTheDocument();
   });
 
   it("shows a win with guess count and streak on the classic card", () => {
