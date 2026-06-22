@@ -84,7 +84,6 @@ function renderPage() {
 
 beforeEach(() => {
   localStorage.clear();
-  localStorage.setItem("expedition33dle:pictos:tutorial_seen", "true"); // skip auto-modal
   vi.mocked(getPictosToday).mockResolvedValue(TODAY);
   vi.mocked(submitPictoGuess).mockReset();
   vi.mocked(revealPicto).mockReset();

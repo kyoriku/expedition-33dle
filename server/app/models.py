@@ -63,7 +63,11 @@ class Weapon(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(64), unique=True)  # unique => unique index
-    wielder: Mapped[str] = mapped_column(String(32))  # 5 closed values; Gustave/Verso share a bucket
+    # Set-comparison field, like scaling_stats; Gustave & Verso are two wielders
+    # who share weapons, so a shared weapon carries both names.
+    wielder: Mapped[list[str]] = mapped_column(
+        ARRAY(String(16)), nullable=False, server_default="{}"
+    )
     element: Mapped[str] = mapped_column(String(16))  # 8 closed values (scalar, not a set)
     max_power: Mapped[int] = mapped_column(Integer)
     # Set-comparison field, like Picto.stats; 1–2 values, order not meaningful.

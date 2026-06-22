@@ -9,6 +9,8 @@ import type {
   Character,
   Picto,
   PictoGuessFeedback,
+  Weapon,
+  WeaponGuessFeedback,
 } from "./types";
 
 /** Comparison outcome a single attribute cell can show. "neutral" is the name
@@ -92,6 +94,43 @@ export const PICTOS_ATTRIBUTES = [
 
 /** Column order for the pictos share grid (feedback keys only). */
 export const PICTOS_FIELD_ORDER = PICTOS_ATTRIBUTES.map((a) => a.key);
+
+/** Weapons-mode comparison columns (the future-mode seam). Same descriptor shape
+ *  as ATTRIBUTES, keyed to Weapon. element is scalar here (single value), unlike
+ *  Classic's multi-valued element; only scaling_stats is set-compared. */
+export const WEAPONS_ATTRIBUTES = [
+  {
+    key: "wielder",
+    label: "Wielder",
+    kind: "array",
+    format: (w: Weapon) => (w.wielder.length ? w.wielder.join(" • ") : "—"),
+  },
+  { key: "element", label: "Element", kind: "scalar", format: (w: Weapon) => w.element },
+  {
+    key: "max_power",
+    label: "Max Power",
+    kind: "direction",
+    format: (w: Weapon) => String(w.max_power),
+  },
+  {
+    key: "scaling_stats",
+    label: "Scaling",
+    kind: "array",
+    format: (w: Weapon) => (w.scaling_stats.length ? w.scaling_stats.join(" • ") : "—"),
+  },
+  { key: "source", label: "Source", kind: "scalar", format: (w: Weapon) => w.source },
+  {
+    key: "act_introduced",
+    label: "Act",
+    kind: "direction",
+    // Act 4 is DLC / Verso's Drafts content; show "DLC" (mirrors pictos). Numeric
+    // value is kept for the higher/lower directional comparison.
+    format: (w: Weapon) => (w.act_introduced === 4 ? "DLC" : String(w.act_introduced)),
+  },
+] as const satisfies readonly AttributeDescriptor<Weapon, WeaponGuessFeedback>[];
+
+/** Column order for the weapons share grid (feedback keys only). */
+export const WEAPONS_FIELD_ORDER = WEAPONS_ATTRIBUTES.map((a) => a.key);
 
 /** Always-visible glyph per state. Distinguishing match/partial/miss by glyph —
  *  not just by green/gold/red — keeps the grid legible without color (WCAG 1.4.1,

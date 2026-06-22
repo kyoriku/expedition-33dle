@@ -80,11 +80,12 @@ def weapon_feedback(guess: Weapon, answer: Weapon) -> WeaponGuessFeedback:
     """Compare a guess weapon to the answer weapon, attribute by attribute.
 
     Pure function of the two rows — no I/O. Scalar equality for the closed-set
-    fields, set_feedback() for the multi-value scaling_stats, direction_feedback()
-    for the numeric fields (max_power and the ordinal act_introduced).
+    fields (element, source), set_feedback() for the multi-value wielder and
+    scaling_stats, direction_feedback() for the numeric fields (max_power and the
+    ordinal act_introduced).
     """
     return WeaponGuessFeedback(
-        wielder="match" if guess.wielder == answer.wielder else "miss",
+        wielder=set_feedback(guess.wielder, answer.wielder),
         element="match" if guess.element == answer.element else "miss",
         max_power=direction_feedback(guess.max_power, answer.max_power),
         scaling_stats=set_feedback(guess.scaling_stats, answer.scaling_stats),

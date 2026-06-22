@@ -1,8 +1,8 @@
 """Unit tests for weapon_feedback — the per-attribute scoring core for weapons.
 
 Pure function over two weapon rows; no DB or async. Covers every branch of the
-non-trivial fields (scaling_stats, the two directional fields) plus the scalar
-equals/not-equals fields.
+non-trivial fields (wielder, scaling_stats, the two directional fields) plus the
+scalar equals/not-equals fields.
 """
 
 from app.models import Weapon
@@ -11,7 +11,7 @@ from app.services.compare import weapon_feedback
 # A complete, valid baseline; tests override only the fields under test.
 BASE = dict(
     name="Base",
-    wielder="Gustave/Verso",
+    wielder=["Gustave", "Verso"],
     element="Physical",
     max_power=3000,
     scaling_stats=["Vitality", "Defense"],
@@ -35,11 +35,22 @@ def test_identical_weapons_all_match():
 
 
 def test_scalar_mismatches():
-    guess = make(wielder="Lune", element="Fire", source="Merchant")
+    guess = make(element="Fire", source="Merchant")
     fb = weapon_feedback(guess, make())
-    assert fb.wielder == "miss"
     assert fb.element == "miss"
     assert fb.source == "miss"
+
+
+def test_wielder_match_partial_miss():
+    # equal sets (order-independent) -> match
+    assert weapon_feedback(make(wielder=["Gustave", "Verso"]),
+                           make(wielder=["Verso", "Gustave"])).wielder == "match"
+    # overlapping but unequal -> partial
+    assert weapon_feedback(make(wielder=["Gustave"]),
+                           make(wielder=["Gustave", "Verso"])).wielder == "partial"
+    # disjoint -> miss
+    assert weapon_feedback(make(wielder=["Lune"]),
+                           make(wielder=["Maelle"])).wielder == "miss"
 
 
 def test_scaling_stats_match_partial_miss():

@@ -20,10 +20,8 @@ import { PICTOS_MAX_GUESSES as MAX_GUESSES, recordGame } from "../lib/stats";
 import {
   loadPictosState,
   loadPictosStats,
-  loadPictosTutorialSeen,
   savePictosState,
   savePictosStats,
-  savePictosTutorialSeen,
 } from "../lib/storage";
 import type {
   GameStatus as Status,
@@ -54,9 +52,21 @@ function describeGuess(
 
 function Centered({ children }: { children: React.ReactNode }) {
   return (
-    <div className="text-parchment flex flex-1 items-center justify-center px-4 text-center text-sm italic">
+    <div className="text-parchment flex flex-1 items-center justify-center px-4 text-center italic">
       {children}
     </div>
+  );
+}
+
+/** Pre-game chrome: the header bar (without the puzzle/stats cluster, which needs
+ *  loaded data) above a centered status message — keeps the header visible during
+ *  the loading and error states. */
+function Shell({ children }: { children: React.ReactNode }) {
+  return (
+    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 py-8 md:py-12 md:max-w-3xl md:px-6 lg:max-w-6xl">
+      <Header />
+      <Centered>{children}</Centered>
+    </main>
   );
 }
 
@@ -84,7 +94,7 @@ function usePictosRollover(puzzleDate: string | undefined, refetch: () => void) 
 }
 
 export default function PictosPage() {
-  usePageTitle("Daily Picto | Expedition33dle");
+  usePageTitle("Daily Picto | Expedition 33dle");
   const { data: today, isPending, error, refetch } = useQuery({
     queryKey: ["pictos-today"],
     queryFn: getPictosToday,
@@ -93,14 +103,14 @@ export default function PictosPage() {
   });
   usePictosRollover(today?.puzzle_date, refetch);
 
-  if (isPending) return <Centered>Loading today’s puzzle…</Centered>;
+  if (isPending) return <Shell>Loading today’s puzzle…</Shell>;
   if (error) {
     return (
-      <Centered>
+      <Shell>
         {error instanceof ApiError
           ? error.message
           : "Could not reach the server — refresh to retry"}
-      </Centered>
+      </Shell>
     );
   }
   // Key by puzzle_number so a rollover refetch remounts <Game> fresh for the
@@ -130,7 +140,8 @@ function Game({ today }: { today: PictoTodayResponse }) {
       ? (stored.revealed_answer ?? null)
       : null;
   });
-  const [showHowTo, setShowHowTo] = useState(() => !loadPictosTutorialSeen());
+  // How-to is opt-in via the header "?" button — not shown automatically.
+  const [showHowTo, setShowHowTo] = useState(false);
   const [stats, setStats] = useState(loadPictosStats);
   const [statsRecorded, setStatsRecorded] = useState(() => {
     const stored = loadPictosState(today.puzzle_date);
@@ -217,7 +228,6 @@ function Game({ today }: { today: PictoTodayResponse }) {
 
   function closeHowTo() {
     setShowHowTo(false);
-    savePictosTutorialSeen();
   }
 
   function handleGuess(picto: Picto) {

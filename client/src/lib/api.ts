@@ -5,6 +5,9 @@ import type {
   Picto,
   PictoGuessResponse,
   PictoTodayResponse,
+  Weapon,
+  WeaponGuessResponse,
+  WeaponTodayResponse,
 } from "./types";
 
 export class ApiError extends Error {
@@ -67,5 +70,27 @@ export function submitPictoGuess(pictoId: number): Promise<PictoGuessResponse> {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ picto_id: pictoId }),
+  });
+}
+
+// Weapons mode — parallels the classic/pictos functions above.
+
+export function getWeaponsToday(): Promise<WeaponTodayResponse> {
+  return request<WeaponTodayResponse>("/api/weapons/today");
+}
+
+export function revealWeapon(guessIds: number[]): Promise<Weapon> {
+  return request<Weapon>("/api/weapons/reveal", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ guess_ids: guessIds }),
+  });
+}
+
+export function submitWeaponGuess(weaponId: number): Promise<WeaponGuessResponse> {
+  return request<WeaponGuessResponse>("/api/weapons/guess", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ weapon_id: weaponId }),
   });
 }

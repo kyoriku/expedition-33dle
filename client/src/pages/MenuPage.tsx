@@ -2,19 +2,36 @@ import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import { formatMenuStatus, type MenuStatus } from "../lib/menuStatus";
-import { CLASSIC_MAX_GUESSES, PICTOS_MAX_GUESSES } from "../lib/stats";
+import {
+  CLASSIC_MAX_GUESSES,
+  PICTOS_MAX_GUESSES,
+  WEAPONS_MAX_GUESSES,
+} from "../lib/stats";
 import {
   loadPictosState,
   loadPictosStats,
   loadState,
   loadStats,
+  loadWeaponsState,
+  loadWeaponsStats,
 } from "../lib/storage";
 import { todayUtcISO } from "../lib/time";
 import { usePageTitle } from "../lib/usePageTitle";
 
-/** Crossed sword — the combat-flavored Classic (character) mode. Decorative;
- *  the <h2> names the mode for assistive tech. */
+/** Bust silhouette — the character-flavored Classic mode. Decorative; the <h2>
+ *  names the mode for assistive tech. */
 function ClassicIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5" fill="currentColor">
+      <circle cx="12" cy="8" r="4.2" />
+      <path d="M3.5 21 C3.5 16.3 7.3 14 12 14 C16.7 14 20.5 16.3 20.5 21 Z" />
+    </svg>
+  );
+}
+
+/** Upright sword — the armory-flavored Weapons mode (the blade that previously
+ *  marked Classic; weapons own it now). Decorative. */
+function WeaponsIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5" fill="currentColor">
       <polygon points="12 1 13.2 4 13.2 14 10.8 14 10.8 4" />
@@ -84,7 +101,7 @@ function ModeCard({
 }
 
 export default function MenuPage() {
-  usePageTitle("Expedition33dle");
+  usePageTitle("Expedition 33dle");
   // Status is read once from localStorage — no API call on menu load. The menu
   // remounts on navigation, so returning from a game reflects the new state.
   const today = todayUtcISO();
@@ -93,6 +110,11 @@ export default function MenuPage() {
     loadPictosState(today),
     loadPictosStats(),
     PICTOS_MAX_GUESSES,
+  );
+  const weaponsStatus = formatMenuStatus(
+    loadWeaponsState(today),
+    loadWeaponsStats(),
+    WEAPONS_MAX_GUESSES,
   );
 
   return (
@@ -109,7 +131,7 @@ export default function MenuPage() {
           <ModeCard
             to="/classic"
             name="Classic"
-            desc="Guess today's Clair Obscur: Expedition 33 character."
+            desc="Guess today's Clair Obscur: Expedition 33 Character."
             icon={<ClassicIcon />}
             status={classicStatus}
           />
@@ -119,6 +141,13 @@ export default function MenuPage() {
             desc="Guess today's Clair Obscur: Expedition 33 Picto."
             icon={<PictosIcon />}
             status={pictosStatus}
+          />
+          <ModeCard
+            to="/weapons"
+            name="Weapons"
+            desc="Guess today's Clair Obscur: Expedition 33 Weapon."
+            icon={<WeaponsIcon />}
+            status={weaponsStatus}
           />
         </div>
       </div>

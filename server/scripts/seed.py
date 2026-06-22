@@ -76,13 +76,21 @@ def validate_weapons(rows: list[dict]) -> None:
     elements = set(get_args(Element))
     sources = set(get_args(WeaponSource))
     scaling = set(get_args(WeaponScalingStat))
-    enums = {"wielder": wielders, "element": elements, "source": sources}
+    enums = {"element": elements, "source": sources}
 
     for r in rows:
         name = r.get("name", "<unnamed>")
         for field, allowed in enums.items():
             if r[field] not in allowed:
                 raise ValueError(f"{name}: invalid {field}={r[field]!r}")
+        wielder = r["wielder"]  # non-empty + distinct + in-set (like scaling_stats)
+        if not wielder or len(set(wielder)) != len(wielder):
+            raise ValueError(
+                f"{name}: wielder must be 1+ distinct values, got {wielder!r}"
+            )
+        for w in wielder:
+            if w not in wielders:
+                raise ValueError(f"{name}: invalid wielder={w!r}")
         stats = r["scaling_stats"]
         if not 1 <= len(stats) <= 2 or len(set(stats)) != len(stats):
             raise ValueError(

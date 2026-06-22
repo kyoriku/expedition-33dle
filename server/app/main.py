@@ -19,7 +19,7 @@ async def lifespan(app: FastAPI):
     await engine.dispose()
 
 
-app = FastAPI(title="Expedition33dle API", lifespan=lifespan)
+app = FastAPI(title="Expedition 33dle API", lifespan=lifespan)
 app.include_router(classic.router)
 app.include_router(pictos.router)
 app.include_router(weapons.router)
