@@ -58,6 +58,36 @@ function Centered({ children }: { children: React.ReactNode }) {
   );
 }
 
+// ── PROTOTYPE: constraint-propagation autocomplete (greens-only) ─────────────
+// Narrow the suggestion roster to weapons consistent with every confirmed
+// EXACT-match (green) column. Display-only over data the page already holds —
+// the answer always satisfies its own greens, so this can never hide it. Only the
+// equality columns: wielder (green = full set match), element, source. NOT the
+// directional (max_power/act) or set/partial (scaling_stats) columns. To revert:
+// delete this block + the suggestItems memo and restore items={today.weapons}.
+type WeaponConstraints = { wielder?: string[]; element?: string; source?: string };
+
+function deriveConstraints(guesses: WeaponGuessResponse[]): WeaponConstraints {
+  const c: WeaponConstraints = {};
+  for (const { guess, feedback } of guesses) {
+    if (feedback.wielder === "match") c.wielder = guess.wielder; // exact set
+    if (feedback.element === "match") c.element = guess.element;
+    if (feedback.source === "match") c.source = guess.source;
+  }
+  return c;
+}
+
+const sameSet = (a: string[], b: string[]) =>
+  a.length === b.length && [...a].sort().join(" ") === [...b].sort().join(" ");
+
+function matchesConstraints(w: Weapon, c: WeaponConstraints): boolean {
+  if (c.element !== undefined && w.element !== c.element) return false;
+  if (c.source !== undefined && w.source !== c.source) return false;
+  if (c.wielder !== undefined && !sameSet(w.wielder, c.wielder)) return false;
+  return true;
+}
+// ── end PROTOTYPE ────────────────────────────────────────────────────────────
+
 /** Pre-game chrome: the header bar (without the puzzle/stats cluster, which needs
  *  loaded data) above a centered status message — keeps the header visible during
  *  the loading and error states. */
@@ -218,6 +248,16 @@ function Game({ today }: { today: WeaponTodayResponse }) {
     [guesses],
   );
 
+  // PROTOTYPE (see deriveConstraints above): filter suggestions to weapons that
+  // satisfy every green so far. Defensive fallback to the full roster if that ever
+  // empties mid-game (shouldn't — the answer satisfies its own greens).
+  const suggestItems = useMemo(() => {
+    const filtered = today.weapons.filter((w) =>
+      matchesConstraints(w, deriveConstraints(guesses)),
+    );
+    return filtered.length ? filtered : today.weapons;
+  }, [guesses, today.weapons]);
+
   const shareText = useMemo(
     () =>
       status === "in_progress"
@@ -301,7 +341,7 @@ function Game({ today }: { today: WeaponTodayResponse }) {
             {remaining} {remaining === 1 ? "guess" : "guesses"} left
           </p>
           <GuessInput
-            items={today.weapons}
+            items={suggestItems}
             guessedIds={guessedIds}
             disabled={guessMutation.isPending}
             onSubmit={handleGuess}

@@ -116,7 +116,7 @@
     "act_introduced": 1,
     "category": "Painted Human",
     "affiliation": ["Painted Dessendre Family", "Expedition Zero"],
-    "zone": "Landing Beach",
+    "zone": "Stone Wave Cliffs",
     "image": "renoir.webp"
   },
   {
@@ -125,7 +125,7 @@
     "role": "Boss",
     "weapon": "Paintbrush",
     "element": ["Void"],
-    "act_introduced": 1,
+    "act_introduced": 2,
     "category": "Painted Human",
     "affiliation": ["Painted Dessendre Family"],
     "zone": "The Monolith",

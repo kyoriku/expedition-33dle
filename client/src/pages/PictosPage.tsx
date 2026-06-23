@@ -58,6 +58,40 @@ function Centered({ children }: { children: React.ReactNode }) {
   );
 }
 
+// ── PROTOTYPE: constraint-propagation autocomplete (greens-only) ─────────────
+// Narrow the suggestion roster to pictos consistent with every confirmed
+// EXACT-match (green) column. Display-only over data the page already holds —
+// the answer always satisfies its own greens, so this can never hide it. Only the
+// equality columns: type, effect_category, source, zone_obtained (all scalar). NOT the directional
+// (lumina_cost/act) or set (stats) columns. To revert: delete this block + the
+// suggestItems memo and restore items={today.pictos}.
+type PictoConstraints = {
+  type?: string;
+  effect_category?: string;
+  source?: string;
+  zone_obtained?: string;
+};
+
+function deriveConstraints(guesses: PictoGuessResponse[]): PictoConstraints {
+  const c: PictoConstraints = {};
+  for (const { guess, feedback } of guesses) {
+    if (feedback.type === "match") c.type = guess.type;
+    if (feedback.effect_category === "match") c.effect_category = guess.effect_category;
+    if (feedback.source === "match") c.source = guess.source;
+    if (feedback.zone_obtained === "match") c.zone_obtained = guess.zone_obtained;
+  }
+  return c;
+}
+
+function matchesConstraints(p: Picto, c: PictoConstraints): boolean {
+  if (c.type !== undefined && p.type !== c.type) return false;
+  if (c.effect_category !== undefined && p.effect_category !== c.effect_category) return false;
+  if (c.source !== undefined && p.source !== c.source) return false;
+  if (c.zone_obtained !== undefined && p.zone_obtained !== c.zone_obtained) return false;
+  return true;
+}
+// ── end PROTOTYPE ────────────────────────────────────────────────────────────
+
 /** Pre-game chrome: the header bar (without the puzzle/stats cluster, which needs
  *  loaded data) above a centered status message — keeps the header visible during
  *  the loading and error states. */
@@ -218,6 +252,16 @@ function Game({ today }: { today: PictoTodayResponse }) {
     [guesses],
   );
 
+  // PROTOTYPE (see deriveConstraints above): filter suggestions to pictos that
+  // satisfy every green so far. Defensive fallback to the full roster if that ever
+  // empties mid-game (shouldn't — the answer satisfies its own greens).
+  const suggestItems = useMemo(() => {
+    const filtered = today.pictos.filter((p) =>
+      matchesConstraints(p, deriveConstraints(guesses)),
+    );
+    return filtered.length ? filtered : today.pictos;
+  }, [guesses, today.pictos]);
+
   const shareText = useMemo(
     () =>
       status === "in_progress"
@@ -301,7 +345,7 @@ function Game({ today }: { today: PictoTodayResponse }) {
             {remaining} {remaining === 1 ? "guess" : "guesses"} left
           </p>
           <GuessInput
-            items={today.pictos}
+            items={suggestItems}
             guessedIds={guessedIds}
             disabled={guessMutation.isPending}
             onSubmit={handleGuess}

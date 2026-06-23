@@ -13,7 +13,7 @@ Live at **[expedition33dle.com](https://expedition33dle.com)**.
 |---|---|---|---|---|
 | **Classic** | a character | 33 | 6 | [`server/data/characters.md`](server/data/characters.md) |
 | **Pictos** | a Picto | 201 | 8 | [`server/data/pictos.md`](server/data/pictos.md) |
-| **Weapon** | a weapon | _in progress_ | — | `server/data/weapons.json` |
+| **Weapons** | a weapon | 116 | 8 | [`server/data/weapons.md`](server/data/weapons.md) |
 
 Each mode picks an uncorrelated answer for the same day; see [Daily puzzle](#daily-puzzle).
 
@@ -40,7 +40,7 @@ references live in [`server/data/`](server/data/README.md).
 
 ## API
 
-All endpoints are under `/api`. Each mode (`classic`, `pictos`) exposes:
+All endpoints are under `/api`. Each mode (`classic`, `pictos`, `weapons`) exposes:
 
 | Method | Path | Purpose |
 |---|---|---|

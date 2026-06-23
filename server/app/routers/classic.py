@@ -17,6 +17,13 @@ from app.schemas import (
 from app.services.compare import classic_feedback
 from app.services.scheduling import PuzzleNotYetAvailable, get_puzzle_for_date
 
+# Salt namespacing the classic schedule so its daily answer is independent of the
+# other modes on the same day — and so a future mode that forgets its own salt
+# can't collide with classic by default. Must be passed to EVERY
+# get_puzzle_for_date call in this module (today's answer AND the yesterday lookup
+# below). Mirrors PICTOS_SALT / WEAPONS_SALT in their routers.
+CLASSIC_SALT = "classic"
+
 router = APIRouter(prefix="/api/classic", tags=["classic"])
 
 
@@ -40,7 +47,9 @@ async def _today_character(
         )
     names = tuple(c.name for c in all_characters)
     try:
-        today_name, puzzle_number = get_puzzle_for_date(today_date, names)
+        today_name, puzzle_number = get_puzzle_for_date(
+            today_date, names, salt=CLASSIC_SALT
+        )
     except PuzzleNotYetAvailable:
         raise HTTPException(
             status_code=404,
@@ -60,10 +69,14 @@ async def today(db: AsyncSession = Depends(get_db)) -> ClassicTodayResponse:
     all_characters, _, puzzle_number, today_date = await _today_character(db)
 
     # Yesterday's answer is over, so it's safe to surface (nice daily-game touch).
+    # NOTE: this lookup must also pass salt=CLASSIC_SALT — otherwise yesterday
+    # resolves against the unsalted schedule and leaks the wrong name.
     names = tuple(c.name for c in all_characters)
     yesterday: CharacterRead | None = None
     try:
-        y_name, _ = get_puzzle_for_date(today_date - timedelta(days=1), names)
+        y_name, _ = get_puzzle_for_date(
+            today_date - timedelta(days=1), names, salt=CLASSIC_SALT
+        )
         y_character = next(c for c in all_characters if c.name == y_name)
         yesterday = CharacterRead.model_validate(y_character)
     except PuzzleNotYetAvailable:

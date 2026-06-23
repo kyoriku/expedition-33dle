@@ -24,12 +24,11 @@ export const EMPTY_PICTO_STATS: Stats = {
   guess_distribution: Array(PICTOS_MAX_GUESSES).fill(0),
 };
 
-// Weapons guess cap — single source of truth. Drives the win/lose check in
-// WeaponsPage, the HowToPlay copy, the empty-stats bucket count, the stored-stats
-// length validation, and the menu card. One more than pictos: weapons has the
-// fewest feedback columns (6) and hard-to-recall names. The backend does NOT ship
-// this in /today — keep it in sync with WEAPONS_MAX_GUESSES on the server.
-export const WEAPONS_MAX_GUESSES = 9;
+// Weapons guess cap — single source of truth (mirrors PICTOS_MAX_GUESSES). Drives
+// the win/lose check in WeaponsPage, the HowToPlay copy, the empty-stats bucket
+// count, the stored-stats length validation, and the menu card. The backend does
+// NOT ship this in /today — keep it in sync with WEAPONS_MAX_GUESSES on the server.
+export const WEAPONS_MAX_GUESSES = 8;
 
 export const EMPTY_WEAPONS_STATS: Stats = {
   ...EMPTY_STATS,

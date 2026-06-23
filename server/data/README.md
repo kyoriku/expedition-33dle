@@ -1,7 +1,7 @@
 # Seed data
 
 Each game mode's seed data lives here as JSON, loaded by `scripts/seed.py` via
-`load_category("<name>")`. To add a future category (weapons, bosses), drop
+`load_category("<name>")`. To add a future category (e.g. bosses), drop
 `<name>.json` in this directory and wire a `load_category("<name>")` call into the
 seed script.
 
@@ -14,6 +14,7 @@ references live in their own files.
 |---|---|---|---|---|
 | `characters.json` | [characters.md](characters.md) | 33 characters | Classic | `Character` |
 | `pictos.json` | [pictos.md](pictos.md) | 201 pictos | Pictos | `Picto` |
+| `weapons.json` | [weapons.md](weapons.md) | 116 weapons | Weapons | `Weapon` |
 
 ## Seeding model
 
@@ -31,9 +32,9 @@ roster, `SHUFFLE_SEED`, and a per-mode **salt**). There is no puzzles table to
 freeze or hot-fix.
 
 The salt namespaces each mode's schedule so their answers are uncorrelated on the
-same day: Classic uses `""` (the original schedule), Pictos uses `"pictos"`
-(`PICTOS_SALT` in `app/routers/pictos.py`). `puzzle_number` is shared across modes
-— it's just date math: days since `LAUNCH_DATE` (2026-06-14) + 1.
+same day: Classic uses `"classic"`, Pictos `"pictos"`, Weapons `"weapons"` — each a
+`*_SALT` constant at the top of its router in `app/routers/`. `puzzle_number` is
+shared across modes — it's just date math: days since `LAUNCH_DATE` (2026-06-14) + 1.
 
 The flip side: changing a roster (add/remove/rename) or `SHUFFLE_SEED` reshuffles
 the date→answer mapping for *every* day, past and future (`puzzle_number` stays
@@ -43,7 +44,7 @@ the rosters and seed as frozen.
 ## Images
 
 `image` is a filename served from `client/public/<dir>/<image>` — `portraits/`
-for characters, `pictos/` for pictos. The column is nullable: a missing, unset, or
-failed-to-load image renders a gold-monogram fallback, so each mode works without
-art. Multiple entries may reference the same icon file (common for pictos). Use
-art you have the rights to; do not commit ripped game assets.
+for characters, `pictos/` for pictos, `weapons/` for weapons. The column is nullable:
+a missing, unset, or failed-to-load image renders a gold-monogram fallback, so each
+mode works without art. Multiple entries may reference the same icon file (common for
+pictos). Use art you have the rights to; do not commit ripped game assets.

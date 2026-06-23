@@ -134,7 +134,7 @@ def test_reveal_incomplete_is_403():
 
 
 def test_reveal_loss_unlocks_with_max_distinct_guesses():
-    # MAX (9) exceeds the shared 4-weapon ROSTER, so build one large enough.
+    # MAX (8) exceeds the shared 4-weapon ROSTER, so build one large enough.
     roster = [_weapon(i, f"W{i}") for i in range(1, WEAPONS_MAX_GUESSES + 2)]
     answer = _todays_answer(roster)
     wrong_ids = [w.id for w in roster if w.id !=

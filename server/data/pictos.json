@@ -7,7 +7,7 @@
     "effect_category": "Critical",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "2-pictos.webp"
   },
   {
@@ -18,7 +18,7 @@
     "effect_category": "AP",
     "source": "Merchant",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "4-pictos.webp"
   },
   {
@@ -29,7 +29,7 @@
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
     "zone_obtained": "Endless Tower",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "4-pictos.webp"
   },
   {
@@ -40,7 +40,7 @@
     "effect_category": "Damage",
     "source": "Merchant",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "5-pictos.webp"
   },
   {
@@ -51,7 +51,7 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "5-pictos.webp"
   },
   {
@@ -62,7 +62,7 @@
     "effect_category": "Damage",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "7-pictos.webp"
   },
   {
@@ -73,7 +73,7 @@
     "effect_category": "Damage",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "9-pictos.webp"
   },
   {
@@ -84,7 +84,7 @@
     "effect_category": "Damage",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "1-pictos.webp"
   },
   {
@@ -95,7 +95,7 @@
     "effect_category": "Damage",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "10-pictos.webp"
   },
   {
@@ -106,7 +106,7 @@
     "effect_category": "Death/Revive",
     "source": "Boss Drop",
     "zone_obtained": "Endless Tower",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "3-pictos.webp"
   },
   {
@@ -117,7 +117,7 @@
     "effect_category": "Damage",
     "source": "Boss Drop",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "7-pictos.webp"
   },
   {
@@ -128,7 +128,7 @@
     "effect_category": "Damage",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "3-pictos.webp"
   },
   {
@@ -139,7 +139,7 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "2-pictos.webp"
   },
   {
@@ -150,7 +150,7 @@
     "effect_category": "Break",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "6-pictos.webp"
   },
   {
@@ -161,7 +161,7 @@
     "effect_category": "Heal",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "1-pictos.webp"
   },
   {
@@ -172,7 +172,7 @@
     "effect_category": "Free Aim / Other",
     "source": "Pickup",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "8-pictos.webp"
   },
   {
@@ -183,7 +183,7 @@
     "effect_category": "AP",
     "source": "Boss Drop",
     "zone_obtained": "Verso's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "11-pictos.webp"
   },
   {
@@ -205,7 +205,7 @@
     "effect_category": "Status",
     "source": "Boss Drop",
     "zone_obtained": "Hidden Gestral Arena",
-    "act_introduced": 2,
+    "act_introduced": 1,
     "image": "4-pictos.webp"
   },
   {
@@ -238,7 +238,7 @@
     "effect_category": "Shield",
     "source": "Merchant",
     "zone_obtained": "Renoir's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "4-pictos.webp"
   },
   {
@@ -370,7 +370,7 @@
     "effect_category": "Death/Revive",
     "source": "Merchant",
     "zone_obtained": "Yellow Harvest",
-    "act_introduced": 2,
+    "act_introduced": 1,
     "image": "8-pictos.webp"
   },
   {
@@ -612,7 +612,7 @@
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
     "zone_obtained": "Renoir's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "8-pictos.webp"
   },
   {
@@ -634,7 +634,7 @@
     "effect_category": "Critical",
     "source": "Merchant",
     "zone_obtained": "Renoir's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "6-pictos.webp"
   },
   {
@@ -788,7 +788,7 @@
     "effect_category": "Critical",
     "source": "Merchant",
     "zone_obtained": "Sacred River",
-    "act_introduced": 2,
+    "act_introduced": 3,
     "image": "9-pictos.webp"
   },
   {
@@ -832,7 +832,7 @@
     "effect_category": "Death/Revive",
     "source": "Pickup",
     "zone_obtained": "Yellow Harvest",
-    "act_introduced": 2,
+    "act_introduced": 1,
     "image": "8-pictos.webp"
   },
   {
@@ -865,7 +865,7 @@
     "effect_category": "Burn",
     "source": "Merchant",
     "zone_obtained": "Sacred River",
-    "act_introduced": 2,
+    "act_introduced": 3,
     "image": "7-pictos.webp"
   },
   {
@@ -953,7 +953,7 @@
     "effect_category": "Status",
     "source": "Boss Drop",
     "zone_obtained": "Hidden Gestral Arena",
-    "act_introduced": 2,
+    "act_introduced": 1,
     "image": "2-pictos.webp"
   },
   {
@@ -997,7 +997,7 @@
     "effect_category": "AP",
     "source": "Merchant",
     "zone_obtained": "Yellow Harvest",
-    "act_introduced": 2,
+    "act_introduced": 1,
     "image": "3-pictos.webp"
   },
   {
@@ -1272,7 +1272,7 @@
     "effect_category": "Damage",
     "source": "Boss Drop",
     "zone_obtained": "Abbest Cave",
-    "act_introduced": 2,
+    "act_introduced": 1,
     "image": "3-pictos.webp"
   },
   {
@@ -1415,7 +1415,7 @@
     "effect_category": "Status",
     "source": "Pickup",
     "zone_obtained": "Sky Island",
-    "act_introduced": 2,
+    "act_introduced": 3,
     "image": "3-pictos.webp"
   },
   {
@@ -1558,7 +1558,7 @@
     "effect_category": "Critical",
     "source": "Boss Drop",
     "zone_obtained": "Hidden Gestral Arena",
-    "act_introduced": 2,
+    "act_introduced": 1,
     "image": "7-pictos.webp"
   },
   {
@@ -1800,7 +1800,7 @@
     "effect_category": "Status",
     "source": "Boss Drop",
     "zone_obtained": "Hidden Gestral Arena",
-    "act_introduced": 2,
+    "act_introduced": 1,
     "image": "3-pictos.webp"
   },
   {
@@ -1855,7 +1855,7 @@
     "effect_category": "Heal",
     "source": "Quest",
     "zone_obtained": "Red Woods",
-    "act_introduced": 2,
+    "act_introduced": 1,
     "image": "5-pictos.webp"
   },
   {
@@ -1899,7 +1899,7 @@
     "effect_category": "AP",
     "source": "Merchant",
     "zone_obtained": "Sacred River",
-    "act_introduced": 2,
+    "act_introduced": 3,
     "image": "3-pictos.webp"
   },
   {
@@ -2031,7 +2031,7 @@
     "effect_category": "Free Aim / Other",
     "source": "Merchant",
     "zone_obtained": "Renoir's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "7-pictos.webp"
   },
   {
@@ -2064,7 +2064,7 @@
     "effect_category": "Shield",
     "source": "Merchant",
     "zone_obtained": "Sacred River",
-    "act_introduced": 2,
+    "act_introduced": 3,
     "image": "7-pictos.webp"
   },
   {
@@ -2075,7 +2075,7 @@
     "effect_category": "Damage",
     "source": "Merchant",
     "zone_obtained": "Hidden Gestral Arena",
-    "act_introduced": 2,
+    "act_introduced": 1,
     "image": "11-pictos.webp"
   },
   {
@@ -2108,7 +2108,7 @@
     "effect_category": "Damage",
     "source": "Merchant",
     "zone_obtained": "Sacred River",
-    "act_introduced": 2,
+    "act_introduced": 3,
     "image": "5-pictos.webp"
   },
   {
@@ -2130,7 +2130,7 @@
     "effect_category": "Heal",
     "source": "Merchant",
     "zone_obtained": "Renoir's Drafts",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "8-pictos.webp"
   },
   {
@@ -2152,7 +2152,7 @@
     "effect_category": "Damage",
     "source": "Merchant",
     "zone_obtained": "Yellow Harvest",
-    "act_introduced": 2,
+    "act_introduced": 1,
     "image": "3-pictos.webp"
   },
   {
