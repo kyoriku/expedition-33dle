@@ -86,9 +86,7 @@ export const PICTOS_ATTRIBUTES = [
     key: "act_introduced",
     label: "Act",
     kind: "direction",
-    // Act 4 is DLC / Verso's Drafts content; show "DLC". Numeric value is kept
-    // for the higher/lower directional comparison.
-    format: (p: Picto) => (p.act_introduced === 4 ? "DLC" : String(p.act_introduced)),
+    format: (p: Picto) => String(p.act_introduced),
   },
 ] as const satisfies readonly AttributeDescriptor<Picto, PictoGuessFeedback>[];
 
@@ -123,9 +121,7 @@ export const WEAPONS_ATTRIBUTES = [
     key: "act_introduced",
     label: "Act",
     kind: "direction",
-    // Act 4 is DLC / Verso's Drafts content; show "DLC" (mirrors pictos). Numeric
-    // value is kept for the higher/lower directional comparison.
-    format: (w: Weapon) => (w.act_introduced === 4 ? "DLC" : String(w.act_introduced)),
+    format: (w: Weapon) => String(w.act_introduced),
   },
 ] as const satisfies readonly AttributeDescriptor<Weapon, WeaponGuessFeedback>[];
 

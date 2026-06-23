@@ -135,9 +135,9 @@ describe("PICTOS_ATTRIBUTES config", () => {
     expect(byKey.act_introduced).toBe("2");
   });
 
-  it("maps act 4 to DLC, other acts to the number", () => {
+  it("renders act as the number", () => {
     const act = PICTOS_ATTRIBUTES.find((a) => a.key === "act_introduced")!;
-    expect(act.format({ ...SPARSE_PICTO, act_introduced: 4 })).toBe("DLC");
+    expect(act.format({ ...SPARSE_PICTO, act_introduced: 1 })).toBe("1");
     expect(act.format({ ...SPARSE_PICTO, act_introduced: 3 })).toBe("3");
   });
 });

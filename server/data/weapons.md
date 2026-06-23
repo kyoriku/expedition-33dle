@@ -26,7 +26,7 @@ Fields appear in schema order:
   a set, like picto `stats` / character `affiliation`.
 - `element` (8): Physical, Fire, Ice, Lightning, Earth, Light, Dark, Void.
 - `source` (6): Starting, Boss Drop, Merchant, Pickup, Paint Cage, Quest.
-- `act_introduced` (4): 1 · 2 · 3 · 4 — **Act 4 = DLC**.
+- `act_introduced` (3): 1 · 2 · 3.
 - `scaling_stats` components (**array** — 1–2 per weapon): Vitality, Might, Agility,
   Defense, Luck. Scored as a set.
 - `max_power` (numeric) — integer attack power; the current roster spans 1776–5948,

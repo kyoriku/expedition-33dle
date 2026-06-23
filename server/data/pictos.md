@@ -26,7 +26,7 @@ Fields appear in schema order:
 - `effect_category` (10): AP, Break, Burn, Critical, Damage, Death/Revive,
   Free Aim / Other, Heal, Shield, Status
 - `source` (5): Boss Drop, Merchant, Paint Cage, Pickup, Quest
-- `act_introduced` (4): 1 · 2 · 3 · 4 — **Act 4 = DLC**.
+- `act_introduced` (3): 1 · 2 · 3.
 - `stats` components (**array** — a picto can boost several): HP, SPD, Crit, DEF.
   Scored as a set like character `element` / `affiliation`.
 - `lumina_cost` (numeric) — values present in the roster: 1, 2, 3, 5, 7, 10, 15,

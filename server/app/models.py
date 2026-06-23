@@ -50,7 +50,7 @@ class Picto(Base):
     effect_category: Mapped[str] = mapped_column(String(32))  # one of 10 closed values
     source: Mapped[str] = mapped_column(String(16))  # categorical: 5 distinct values
     zone_obtained: Mapped[str] = mapped_column(String(64))  # str, not enum: room for DLC
-    act_introduced: Mapped[int] = mapped_column(Integer)  # 1 | 2 | 3 | 4 (4 = DLC)
+    act_introduced: Mapped[int] = mapped_column(Integer)  # 1 | 2 | 3
     # Icon filename served from client/public/pictos/<image>; nullable so the UI
     # falls back to a monogram when art is missing. Pictos may share an icon file.
     image: Mapped[Optional[str]] = mapped_column(String(128), nullable=True)
@@ -75,7 +75,7 @@ class Weapon(Base):
         ARRAY(String(16)), nullable=False, server_default="{}"
     )
     source: Mapped[str] = mapped_column(String(16))  # categorical: 6 distinct values
-    act_introduced: Mapped[int] = mapped_column(Integer)  # 1 | 2 | 3 | 4
+    act_introduced: Mapped[int] = mapped_column(Integer)  # 1 | 2 | 3
     # Filename served from client/public/weapons/<image>; nullable so the UI falls
     # back to a monogram when art is missing (mirrors Picto.image / Character.image).
     image: Mapped[Optional[str]] = mapped_column(String(128), nullable=True)
