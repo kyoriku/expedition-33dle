@@ -1,0 +1,502 @@
+[
+  {
+    "name": "Alicia",
+    "weakness": [],
+    "resistance": ["Light"],
+    "category": "Painted Human",
+    "location": "The Reacher",
+    "encounter": "Optional",
+    "act_introduced": 3,
+    "image": null
+  },
+  {
+    "name": "Bourgeon",
+    "weakness": ["Lightning"],
+    "resistance": [],
+    "category": "Nevron",
+    "location": "Flying Waters",
+    "encounter": "Optional",
+    "act_introduced": 1,
+    "image": null
+  },
+  {
+    "name": "Clair Obscur",
+    "weakness": [],
+    "resistance": [],
+    "category": "Nevron",
+    "location": "The Monolith",
+    "encounter": "Optional",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "Clea",
+    "weakness": ["Void", "Light"],
+    "resistance": ["Physical"],
+    "category": "Painted Human",
+    "location": "Flying Manor",
+    "encounter": "Optional",
+    "act_introduced": 3,
+    "image": null
+  },
+  {
+    "name": "Clea Unleashed",
+    "weakness": [],
+    "resistance": [],
+    "category": "Painted Human",
+    "location": "Endless Tower",
+    "encounter": "Optional",
+    "act_introduced": 3,
+    "image": null
+  },
+  {
+    "name": "Creation",
+    "weakness": [],
+    "resistance": ["Light"],
+    "category": "Nevron",
+    "location": "Lumière",
+    "encounter": "Required",
+    "act_introduced": 3,
+    "image": null
+  },
+  {
+    "name": "Dualliste",
+    "weakness": ["Light"],
+    "resistance": ["Fire", "Dark"],
+    "category": "Nevron",
+    "location": "Forgotten Battlefield",
+    "encounter": "Required",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "Duollistes",
+    "weakness": [],
+    "resistance": [],
+    "category": "Nevron",
+    "location": "Endless Tower",
+    "encounter": "Optional",
+    "act_introduced": 3,
+    "image": null
+  },
+  {
+    "name": "Flame Évêque",
+    "weakness": ["Ice"],
+    "resistance": ["Physical", "Lightning", "Earth", "Dark", "Light"],
+    "category": "Nevron",
+    "location": "Endless Tower",
+    "encounter": "Optional",
+    "act_introduced": 3,
+    "image": null
+  },
+  {
+    "name": "François",
+    "weakness": ["Dark"],
+    "resistance": [],
+    "category": "Mythical Creature",
+    "location": "Esquie's Nest",
+    "encounter": "Required",
+    "act_introduced": 1,
+    "image": null
+  },
+  {
+    "name": "Frost Évêque",
+    "weakness": ["Lightning"],
+    "resistance": ["Physical", "Fire", "Earth", "Dark", "Light"],
+    "category": "Nevron",
+    "location": "The Continent",
+    "encounter": "Optional",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "Gargant",
+    "weakness": ["Fire", "Ice"],
+    "resistance": [],
+    "category": "Nevron",
+    "location": "Frozen Hearts",
+    "encounter": "Required",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "Giant Sapling",
+    "weakness": [],
+    "resistance": [],
+    "category": "Nevron",
+    "location": "Crushing Cavern",
+    "encounter": "Optional",
+    "act_introduced": 1,
+    "image": null
+  },
+  {
+    "name": "Glaise",
+    "weakness": [],
+    "resistance": [],
+    "category": "Nevron",
+    "location": "Yellow Harvest",
+    "encounter": "Optional",
+    "act_introduced": 1,
+    "image": null
+  },
+  {
+    "name": "Glissando",
+    "weakness": ["Ice", "Dark"],
+    "resistance": ["Earth", "Light"],
+    "category": "Nevron",
+    "location": "Sirène",
+    "encounter": "Required",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "Goblu",
+    "weakness": ["Lightning"],
+    "resistance": ["Ice"],
+    "category": "Nevron",
+    "location": "Flying Waters",
+    "encounter": "Required",
+    "act_introduced": 1,
+    "image": null
+  },
+  {
+    "name": "Golgra",
+    "weakness": [],
+    "resistance": [],
+    "category": "Gestral",
+    "location": "Gestral Village",
+    "encounter": "Optional",
+    "act_introduced": 1,
+    "image": null
+  },
+  {
+    "name": "Grosse Tete",
+    "weakness": ["Ice", "Dark"],
+    "resistance": ["Fire"],
+    "category": "Nevron",
+    "location": "Coastal Cave",
+    "encounter": "Optional",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "Grown Bourgeon",
+    "weakness": ["Lightning"],
+    "resistance": [],
+    "category": "Nevron",
+    "location": "The Small Bourgeon",
+    "encounter": "Optional",
+    "act_introduced": 1,
+    "image": null
+  },
+  {
+    "name": "Half-Baked Gestral",
+    "weakness": [],
+    "resistance": [],
+    "category": "Gestral",
+    "location": "Verso's Drafts",
+    "encounter": "Optional",
+    "act_introduced": 3,
+    "image": null
+  },
+  {
+    "name": "Jovial Moissonneuse",
+    "weakness": ["Fire", "Dark"],
+    "resistance": ["Ice"],
+    "category": "Nevron",
+    "location": "Visages",
+    "encounter": "Required",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "Julien Tiny Head",
+    "weakness": [],
+    "resistance": [],
+    "category": "Gestral",
+    "location": "Hidden Gestral Arena",
+    "encounter": "Optional",
+    "act_introduced": 1,
+    "image": null
+  },
+  {
+    "name": "Lampmaster",
+    "weakness": [],
+    "resistance": ["Light"],
+    "category": "Nevron",
+    "location": "Stone Wave Cliffs",
+    "encounter": "Required",
+    "act_introduced": 1,
+    "image": null
+  },
+  {
+    "name": "Licornapieds",
+    "weakness": ["Earth"],
+    "resistance": [],
+    "category": "Nevron",
+    "location": "Verso's Drafts",
+    "encounter": "Optional",
+    "act_introduced": 3,
+    "image": null
+  },
+  {
+    "name": "Mask Keeper",
+    "weakness": ["Fire", "Dark"],
+    "resistance": ["Ice"],
+    "category": "Nevron",
+    "location": "Visages",
+    "encounter": "Required",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "Mime",
+    "weakness": [],
+    "resistance": [],
+    "category": "Nevron",
+    "location": "Lumière",
+    "encounter": "Optional",
+    "act_introduced": 1,
+    "image": null
+  },
+  {
+    "name": "Monoco",
+    "weakness": [],
+    "resistance": [],
+    "category": "Gestral",
+    "location": "Monoco's Station",
+    "encounter": "Required",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "Monsieur Frappe",
+    "weakness": [],
+    "resistance": [],
+    "category": "Nevron",
+    "location": "Verso's Drafts",
+    "encounter": "Optional",
+    "act_introduced": 3,
+    "image": null
+  },
+  {
+    "name": "Osquio",
+    "weakness": [],
+    "resistance": [],
+    "category": "Mythical Creature",
+    "location": "Root of All Evil",
+    "encounter": "Optional",
+    "act_introduced": 3,
+    "image": null
+  },
+  {
+    "name": "Painted Love",
+    "weakness": [],
+    "resistance": [],
+    "category": "Painted Human",
+    "location": "Endless Tower",
+    "encounter": "Optional",
+    "act_introduced": 3,
+    "image": null
+  },
+  {
+    "name": "Pétank",
+    "weakness": [],
+    "resistance": [],
+    "category": "Nevron",
+    "location": "Ancient Sanctuary",
+    "encounter": "Optional",
+    "act_introduced": 1,
+    "image": null
+  },
+  {
+    "name": "Reacher",
+    "weakness": [],
+    "resistance": [],
+    "category": "Axon",
+    "location": "The Reacher",
+    "encounter": "Required",
+    "act_introduced": 3,
+    "image": null
+  },
+  {
+    "name": "Renoir",
+    "weakness": [],
+    "resistance": [],
+    "category": "Painted Human",
+    "location": "Stone Wave Cliffs",
+    "encounter": "Required",
+    "act_introduced": 1,
+    "image": null
+  },
+  {
+    "name": "Scavenger",
+    "weakness": ["Light"],
+    "resistance": ["Fire", "Ice", "Earth", "Lightning"],
+    "category": "Nevron",
+    "location": "Falling Leaves",
+    "encounter": "Optional",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "Sciel",
+    "weakness": [],
+    "resistance": [],
+    "category": "Human",
+    "location": "Gestral Village",
+    "encounter": "Required",
+    "act_introduced": 1,
+    "image": null
+  },
+  {
+    "name": "Seething Boucheclier",
+    "weakness": ["Fire", "Dark"],
+    "resistance": ["Ice"],
+    "category": "Nevron",
+    "location": "Visages",
+    "encounter": "Required",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "Serpenphare",
+    "weakness": ["Lightning"],
+    "resistance": ["Fire", "Ice"],
+    "category": "Nevron",
+    "location": "White Sands",
+    "encounter": "Optional",
+    "act_introduced": 3,
+    "image": null
+  },
+  {
+    "name": "Simon",
+    "weakness": [],
+    "resistance": [],
+    "category": "Human",
+    "location": "The Abyss",
+    "encounter": "Optional",
+    "act_introduced": 3,
+    "image": null
+  },
+  {
+    "name": "Simon the Divergent Star",
+    "weakness": [],
+    "resistance": [],
+    "category": "Human",
+    "location": "Endless Tower",
+    "encounter": "Optional",
+    "act_introduced": 3,
+    "image": null
+  },
+  {
+    "name": "Sirène",
+    "weakness": ["Ice", "Dark"],
+    "resistance": ["Earth", "Light"],
+    "category": "Axon",
+    "location": "Sirène",
+    "encounter": "Required",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "Sorrowful Chapelier",
+    "weakness": ["Fire", "Dark"],
+    "resistance": ["Ice"],
+    "category": "Nevron",
+    "location": "Visages",
+    "encounter": "Required",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "Sprong",
+    "weakness": [],
+    "resistance": [],
+    "category": "Nevron",
+    "location": "The Continent",
+    "encounter": "Optional",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "Stalact",
+    "weakness": ["Fire", "Ice"],
+    "resistance": [],
+    "category": "Nevron",
+    "location": "Monoco's Station",
+    "encounter": "Required",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "The Curator",
+    "weakness": [],
+    "resistance": [],
+    "category": "Painted Human",
+    "location": "The Manor",
+    "encounter": "Required",
+    "act_introduced": 1,
+    "image": null
+  },
+  {
+    "name": "The Paintress",
+    "weakness": [],
+    "resistance": [],
+    "category": "Painted Human",
+    "location": "The Monolith",
+    "encounter": "Required",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "Thunder Évêque",
+    "weakness": ["Earth"],
+    "resistance": ["Physical", "Fire", "Ice", "Dark", "Light"],
+    "category": "Nevron",
+    "location": "The Continent",
+    "encounter": "Optional",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "Tisseur",
+    "weakness": ["Light", "Fire"],
+    "resistance": ["Ice", "Earth", "Dark"],
+    "category": "Nevron",
+    "location": "Sirène",
+    "encounter": "Required",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "Ultimate Sakapatate",
+    "weakness": ["Fire"],
+    "resistance": ["Lightning"],
+    "category": "Gestral",
+    "location": "Ancient Sanctuary",
+    "encounter": "Required",
+    "act_introduced": 1,
+    "image": null
+  },
+  {
+    "name": "Visages",
+    "weakness": ["Fire", "Dark"],
+    "resistance": ["Ice"],
+    "category": "Axon",
+    "location": "Visages",
+    "encounter": "Required",
+    "act_introduced": 2,
+    "image": null
+  },
+  {
+    "name": "Évêque",
+    "weakness": ["Ice"],
+    "resistance": ["Earth"],
+    "category": "Nevron",
+    "location": "Spring Meadows",
+    "encounter": "Required",
+    "act_introduced": 1,
+    "image": null
+  }
+]

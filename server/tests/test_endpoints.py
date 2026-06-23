@@ -65,7 +65,9 @@ def run(coro):
 
 def _todays_answer(characters) -> Character:
     names = tuple(c.name for c in characters)
-    name, _ = get_puzzle_for_date(datetime.now(timezone.utc).date(), names)
+    name, _ = get_puzzle_for_date(
+        datetime.now(timezone.utc).date(), names, salt="classic"
+    )
     return next(c for c in characters if c.name == name)
 
 

@@ -136,7 +136,7 @@
     "max_power": 3551,
     "scaling_stats": ["Agility", "Luck"],
     "source": "Boss Drop",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "esquiso.webp"
   },
   {
@@ -256,7 +256,7 @@
     "max_power": 3713,
     "scaling_stats": ["Vitality", "Defense"],
     "source": "Pickup",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "sucreso.webp"
   },
   {
@@ -316,7 +316,7 @@
     "max_power": 3810,
     "scaling_stats": ["Vitality", "Defense"],
     "source": "Merchant",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "bonbim.webp"
   },
   {
@@ -356,7 +356,7 @@
     "max_power": 3551,
     "scaling_stats": ["Agility", "Luck"],
     "source": "Boss Drop",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "cleim.webp"
   },
   {
@@ -406,7 +406,7 @@
     "max_power": 3616,
     "scaling_stats": ["Agility", "Defense"],
     "source": "Paint Cage",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "esquim.webp"
   },
   {
@@ -616,7 +616,7 @@
     "max_power": 3680,
     "scaling_stats": ["Agility", "Defense"],
     "source": "Boss Drop",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "esqium.webp"
   },
   {
@@ -656,7 +656,7 @@
     "max_power": 3551,
     "scaling_stats": ["Agility", "Luck"],
     "source": "Boss Drop",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "licorum.webp"
   },
   {
@@ -856,7 +856,7 @@
     "max_power": 3680,
     "scaling_stats": ["Agility", "Luck"],
     "source": "Boss Drop",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "duollison.webp"
   },
   {
@@ -866,7 +866,7 @@
     "max_power": 3842,
     "scaling_stats": ["Vitality", "Luck"],
     "source": "Pickup",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "esquion.webp"
   },
   {
@@ -1006,7 +1006,7 @@
     "max_power": 5948,
     "scaling_stats": ["Agility", "Luck"],
     "source": "Boss Drop",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "sucetton.webp"
   },
   {
@@ -1026,7 +1026,7 @@
     "max_power": 3745,
     "scaling_stats": ["Defense", "Luck"],
     "source": "Boss Drop",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "baguettaro.webp"
   },
   {
@@ -1066,7 +1066,7 @@
     "max_power": 3648,
     "scaling_stats": ["Agility", "Luck"],
     "source": "Boss Drop",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "cannaro.webp"
   },
   {
@@ -1086,7 +1086,7 @@
     "max_power": 3745,
     "scaling_stats": ["Vitality", "Defense"],
     "source": "Pickup",
-    "act_introduced": 4,
+    "act_introduced": 3,
     "image": "esquiaro.webp"
   },
   {

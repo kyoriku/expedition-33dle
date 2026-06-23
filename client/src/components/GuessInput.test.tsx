@@ -37,6 +37,23 @@ function setup(props: Partial<React.ComponentProps<typeof GuessInput>> = {}) {
 }
 
 describe("GuessInput", () => {
+  it("opens on focus and lists all valid items before typing", async () => {
+    const { user } = setup({ guessedIds: new Set([1]) }); // Lune already guessed
+    // No typing — just focus the empty input.
+    await user.click(screen.getByRole("combobox"));
+    const options = screen.getAllByRole("option");
+    // Shows the full pool minus already-guessed, in items order; no name filter yet.
+    expect(options.map((o) => o.textContent)).toEqual(["Sirène", "Gustave"]);
+  });
+
+  it("closes on Escape", async () => {
+    const { user } = setup();
+    await user.click(screen.getByRole("combobox"));
+    expect(screen.getAllByRole("option").length).toBeGreaterThan(0);
+    await user.keyboard("{Escape}");
+    expect(screen.queryByRole("option")).toBeNull();
+  });
+
   it("filters suggestions as you type", async () => {
     const { user } = setup();
     await user.type(screen.getByRole("combobox"), "lun");

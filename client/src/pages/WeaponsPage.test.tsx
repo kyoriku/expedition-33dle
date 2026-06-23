@@ -147,8 +147,8 @@ describe("WeaponsPage", () => {
   });
 
   it("loses after the guess cap and reveals the answer", async () => {
-    // Seed MAX_GUESSES-1 (8) prior guesses so one more wrong guess loses.
-    const prior = Array.from({ length: 8 }, (_, i) =>
+    // Seed MAX_GUESSES-1 (7) prior guesses so one more wrong guess loses.
+    const prior = Array.from({ length: 7 }, (_, i) =>
       missResponse(wpn(11 + i, `Filler ${i}`)),
     );
     localStorage.setItem(
@@ -230,7 +230,7 @@ describe("WeaponsPage stats", () => {
     expect(stored.played).toBe(1);
     expect(stored.won).toBe(1);
     expect(stored.current_streak).toBe(1);
-    expect(stored.guess_distribution).toHaveLength(9);
+    expect(stored.guess_distribution).toHaveLength(8);
     expect(stored.guess_distribution[0]).toBe(1); // won in 1 guess -> bucket 0
   });
 
@@ -286,7 +286,7 @@ describe("WeaponsPage share", () => {
     expect(writeText).toHaveBeenCalledTimes(1);
     const text = writeText.mock.calls[0][0] as string;
     expect(text).toContain("Expedition 33dle Weapons #");
-    expect(text).toContain("1/9");
+    expect(text).toContain("1/8");
     expect(text).toContain("https://expedition33dle.com/weapons");
   });
 });

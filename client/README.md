@@ -43,7 +43,7 @@ src/
   main.tsx          Entry: QueryClientProvider + App
   App.tsx           Routes
   pages/            Route components: MenuPage, ClassicPage, PictosPage,
-                    PrivacyPage, TermsPage
+                    WeaponsPage, PrivacyPage, TermsPage
   components/       UI: Header, GuessGrid/Row, GuessInput, Modal, ShareButton,
                     StatsBlock, Portrait, Countdown, How-To/Legend, etc.
   lib/              Non-UI logic:
@@ -59,13 +59,14 @@ src/
   index.css         Tailwind import, design tokens (@theme), @font-face
 public/
   fonts/            self-hosted woff2 (preloaded in index.html)
-  portraits/        character art   pictos/ Picto icons
+  portraits/        character art   pictos/ Picto icons   weapons/ weapon icons
   og-image.png      social card (source: og/og-image.html)
 ```
 
 ## Routes
 
-`/` menu · `/classic` Classic mode · `/pictos` Pictos mode · `/privacy` · `/terms`
+`/` menu · `/classic` Classic mode · `/pictos` Pictos mode · `/weapons` Weapons mode
+· `/privacy` · `/terms`
 
 ## State & persistence
 

@@ -19,6 +19,4 @@ SHUFFLE_SEED = 33
 # distinct valid guesses.
 CLASSIC_MAX_GUESSES = 6
 PICTOS_MAX_GUESSES = 8
-# Weapons gets one more than pictos: it has the fewest feedback columns (6) and
-# its naming is hard to recall, so the extra guess keeps the win rate fair.
-WEAPONS_MAX_GUESSES = 9
+WEAPONS_MAX_GUESSES = 8

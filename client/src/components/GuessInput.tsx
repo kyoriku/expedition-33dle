@@ -37,11 +37,15 @@ export default function GuessInput<T extends NamedItem>({
   const [activeIndex, setActiveIndex] = useState(-1);
 
   const trimmed = query.trim();
-  const suggestions = trimmed
-    ? items.filter(
-        (item) => !guessedIds.has(item.id) && norm(item.name).includes(norm(query)),
-      )
-    : [];
+  // The dropdown opens on focus (not only on typing), so an empty query shows the
+  // full still-valid candidate pool — exactly the `items` passed in (e.g. Weapons'
+  // constraint-narrowed list), with already-guessed excluded. Typing narrows by
+  // name on top.
+  const suggestions = items.filter(
+    (item) =>
+      !guessedIds.has(item.id) &&
+      (trimmed === "" || norm(item.name).includes(norm(query))),
+  );
   const showList = open && suggestions.length > 0;
   const showEmpty = open && trimmed !== "" && suggestions.length === 0;
 
@@ -96,6 +100,11 @@ export default function GuessInput<T extends NamedItem>({
           aria-busy={disabled}
           aria-label={`Guess a ${noun}`}
           className="font-serif text-parchment placeholder-muted w-full bg-transparent text-base outline-none disabled:opacity-50"
+          // Open on focus AND click so tapping the input (incl. an already-focused
+          // one after a selection) reveals the current list immediately. Dismissal
+          // stays via onBlur (click-outside), Escape, and submit().
+          onFocus={() => setOpen(true)}
+          onClick={() => setOpen(true)}
           onChange={(e) => {
             setQuery(e.target.value);
             setOpen(true);
