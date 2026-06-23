@@ -24,6 +24,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from sqlalchemy import delete, literal_column
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 
+from app.constants import VALID_ACTS
 from app.db import engine
 from app.models import Character, Picto, Weapon
 from app.schemas import (
@@ -99,7 +100,7 @@ def validate_weapons(rows: list[dict]) -> None:
         for s in stats:
             if s not in scaling:
                 raise ValueError(f"{name}: invalid scaling_stat={s!r}")
-        if r["act_introduced"] not in (1, 2, 3, 4):
+        if r["act_introduced"] not in VALID_ACTS:
             raise ValueError(
                 f"{name}: invalid act_introduced={r['act_introduced']!r}"
             )
@@ -129,7 +130,7 @@ def validate_pictos(rows: list[dict]) -> None:
         for s in stats:
             if s not in stats_allowed:
                 raise ValueError(f"{name}: invalid stat={s!r}")
-        if r["act_introduced"] not in (1, 2, 3, 4):
+        if r["act_introduced"] not in VALID_ACTS:
             raise ValueError(
                 f"{name}: invalid act_introduced={r['act_introduced']!r}"
             )
@@ -168,7 +169,7 @@ def validate_characters(rows: list[dict]) -> None:
         for a in affiliation:
             if a not in affiliations:
                 raise ValueError(f"{name}: invalid affiliation={a!r}")
-        if r["act_introduced"] not in (1, 2, 3, 4):
+        if r["act_introduced"] not in VALID_ACTS:
             raise ValueError(
                 f"{name}: invalid act_introduced={r['act_introduced']!r}"
             )

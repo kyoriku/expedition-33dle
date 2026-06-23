@@ -81,8 +81,8 @@ def test_lumina_cost_higher_lower_match():
 
 def test_act_introduced_higher_lower_match():
     assert picto_feedback(make(act_introduced=1), make(
-        act_introduced=4)).act_introduced == "higher"
-    assert picto_feedback(make(act_introduced=4), make(
+        act_introduced=3)).act_introduced == "higher"
+    assert picto_feedback(make(act_introduced=3), make(
         act_introduced=1)).act_introduced == "lower"
     assert picto_feedback(make(act_introduced=2), make(
         act_introduced=2)).act_introduced == "match"
