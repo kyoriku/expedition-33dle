@@ -79,3 +79,26 @@ class Weapon(Base):
     # Filename served from client/public/weapons/<image>; nullable so the UI falls
     # back to a monogram when art is missing (mirrors Picto.image / Character.image).
     image: Mapped[Optional[str]] = mapped_column(String(128), nullable=True)
+
+
+class Boss(Base):
+    """A guessable Boss for the Bosses daily-puzzle mode."""
+
+    __tablename__ = "bosses"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(64), unique=True)  # unique => unique index
+    # Set-comparison fields, like Weapon.scaling_stats; 0+ elements (may be empty).
+    weakness: Mapped[list[str]] = mapped_column(
+        ARRAY(String(16)), nullable=False, server_default="{}"
+    )
+    resistance: Mapped[list[str]] = mapped_column(
+        ARRAY(String(16)), nullable=False, server_default="{}"
+    )
+    category: Mapped[str] = mapped_column(String(32))  # 6 closed values (scalar)
+    location: Mapped[str] = mapped_column(String(64))  # str, not enum: free-form zone
+    encounter: Mapped[str] = mapped_column(String(16))  # Required | Optional
+    act_introduced: Mapped[int] = mapped_column(Integer)  # 1 | 2 | 3
+    # Filename served from client/public/bosses/<image>; nullable so the UI falls
+    # back to a monogram when art is missing (mirrors the other modes' image).
+    image: Mapped[Optional[str]] = mapped_column(String(128), nullable=True)

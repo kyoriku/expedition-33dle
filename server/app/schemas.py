@@ -268,3 +268,84 @@ class WeaponGuessResponse(BaseModel):
     guess: WeaponRead
     feedback: WeaponGuessFeedback
     is_correct: bool
+
+
+# Boss closed-set scalars. weakness/resistance reuse the shared Element taxonomy
+# (set-compared like scaling_stats), validated in the seed via get_args. category
+# duplicates CharacterCategory's values intentionally — a separate Literal keeps
+# the modes decoupled (like the per-mode sources, unlike the shared Element).
+BossCategory = Literal[
+    "Axon", "Gestral", "Human", "Mythical Creature", "Nevron", "Painted Human"
+]
+BossEncounter = Literal["Required", "Optional"]
+
+
+class BossRead(BaseModel):
+    """Public view of a Boss. Built from ORM rows via from_attributes.
+
+    The DB columns are plain strings, but the closed-set scalar fields (category,
+    encounter) are constrained here with Literal so invalid values surface at the
+    schema layer. location stays open (str) for free-form zones. weakness and
+    resistance stay open (list[str]) — multi-valued, with their closed sets
+    enforced in the seed via get_args.
+    """
+
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    name: str
+    weakness: list[str]
+    resistance: list[str]
+    category: BossCategory
+    location: str
+    encounter: BossEncounter
+    act_introduced: int
+    image: Optional[str] = None
+
+
+class BossTodayResponse(BaseModel):
+    """Response for GET /api/bosses/today.
+
+    Mirrors WeaponTodayResponse: the answer boss is never singled out; the full
+    boss list is included so the frontend can do autocomplete.
+    """
+
+    puzzle_date: date
+    puzzle_number: int
+    bosses: list[BossRead]
+    yesterday: Optional[BossRead] = None  # previous day's answer (over, so public)
+
+
+class BossGuessRequest(BaseModel):
+    """Request body for POST /api/bosses/guess."""
+
+    boss_id: int
+
+
+class BossGuessFeedback(BaseModel):
+    """Per-attribute comparison of a boss guess against today's answer.
+
+    Reuses the shared feedback atoms: ElementFeedback (match/partial/miss) for the
+    multi-value weakness/resistance, scalar (match/miss) for the closed-set and
+    free-form scalar fields, and DirectionFeedback (match/higher/lower) for the
+    ordinal act_introduced.
+    """
+
+    weakness: ElementFeedback
+    resistance: ElementFeedback
+    category: ScalarFeedback
+    location: ScalarFeedback
+    encounter: ScalarFeedback
+    act_introduced: DirectionFeedback
+
+
+class BossGuessResponse(BaseModel):
+    """Response for POST /api/bosses/guess.
+
+    Echoes the guessed boss plus feedback. The answer boss never appears here in
+    any form — name is not compared per-attribute; is_correct covers it.
+    """
+
+    guess: BossRead
+    feedback: BossGuessFeedback
+    is_correct: bool

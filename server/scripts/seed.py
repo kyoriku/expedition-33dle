@@ -7,9 +7,9 @@ re-run, and rows removed from the JSON are pruned from the DB. This script no
 longer schedules puzzles: the daily answer is computed on demand by
 app.services.scheduling as a pure function of the date and roster.
 
-Seeds three modes: Classic characters (server/data/characters.json), Pictos
-(server/data/pictos.json), and Weapons (server/data/weapons.json); see
-server/data/README.md for sourcing conventions.
+Seeds four modes: Classic characters (server/data/characters.json), Pictos
+(server/data/pictos.json), Weapons (server/data/weapons.json), and Bosses
+(server/data/bosses.json); see server/data/README.md for sourcing conventions.
 """
 
 import asyncio
@@ -26,8 +26,10 @@ from sqlalchemy.dialects.postgresql import insert as pg_insert
 
 from app.constants import VALID_ACTS
 from app.db import engine
-from app.models import Character, Picto, Weapon
+from app.models import Boss, Character, Picto, Weapon
 from app.schemas import (
+    BossCategory,
+    BossEncounter,
     CharacterAffiliation,
     CharacterCategory,
     CharacterGender,
@@ -63,6 +65,11 @@ WEAPONS: list[dict] = load_category("weapons")
 # Mirror the pictos image default so every row carries the key.
 for _w in WEAPONS:
     _w.setdefault("image", None)
+
+BOSSES: list[dict] = load_category("bosses")
+# Mirror the pictos/weapons image default so every row carries the key.
+for _b in BOSSES:
+    _b.setdefault("image", None)
 
 
 def validate_weapons(rows: list[dict]) -> None:
@@ -100,6 +107,40 @@ def validate_weapons(rows: list[dict]) -> None:
         for s in stats:
             if s not in scaling:
                 raise ValueError(f"{name}: invalid scaling_stat={s!r}")
+        if r["act_introduced"] not in VALID_ACTS:
+            raise ValueError(
+                f"{name}: invalid act_introduced={r['act_introduced']!r}"
+            )
+
+
+def validate_bosses(rows: list[dict]) -> None:
+    """Fail LOUDLY on any enum/shape violation before the upsert (mirrors
+    validate_weapons). category/encounter reuse their Literals; weakness/resistance
+    reuse the shared Element taxonomy. weakness/resistance may be empty (the columns
+    server-default to {}), so only distinctness + membership are enforced. location
+    is free-form (open set), so it is not checked. Names must be unique.
+    """
+    elements = set(get_args(Element))
+    categories = set(get_args(BossCategory))
+    encounters = set(get_args(BossEncounter))
+
+    seen: set[str] = set()
+    for r in rows:
+        name = r.get("name", "<unnamed>")
+        if name in seen:
+            raise ValueError(f"{name}: duplicate boss name")
+        seen.add(name)
+        for field in ("weakness", "resistance"):
+            vals = r[field]
+            if len(set(vals)) != len(vals):
+                raise ValueError(f"{name}: {field} has duplicates, got {vals!r}")
+            for v in vals:
+                if v not in elements:
+                    raise ValueError(f"{name}: invalid {field} element={v!r}")
+        if r["category"] not in categories:
+            raise ValueError(f"{name}: invalid category={r['category']!r}")
+        if r["encounter"] not in encounters:
+            raise ValueError(f"{name}: invalid encounter={r['encounter']!r}")
         if r["act_introduced"] not in VALID_ACTS:
             raise ValueError(
                 f"{name}: invalid act_introduced={r['act_introduced']!r}"
@@ -278,12 +319,47 @@ async def upsert_weapons(conn) -> tuple[int, int]:
     return inserted, len(rows) - inserted
 
 
+async def prune_bosses(conn) -> int:
+    """Delete DB bosses no longer present in the JSON (mirrors prune_weapons)."""
+    names = [b["name"] for b in BOSSES]
+    result = await conn.execute(delete(Boss).where(Boss.name.notin_(names)))
+    return result.rowcount
+
+
+async def upsert_bosses(conn) -> tuple[int, int]:
+    """UPSERT all bosses by name; return (inserted, updated) counts.
+
+    Same `(xmax = 0)` trick as upsert_weapons to report both counts in one
+    round-trip: freshly inserted rows have xmax 0, DO UPDATE rows have nonzero.
+    """
+    stmt = pg_insert(Boss).values(BOSSES)
+    stmt = stmt.on_conflict_do_update(
+        index_elements=[Boss.name],
+        set_={
+            c: stmt.excluded[c]
+            for c in (
+                "weakness",
+                "resistance",
+                "category",
+                "location",
+                "encounter",
+                "act_introduced",
+                "image",
+            )
+        },
+    ).returning(Boss.name, literal_column("(xmax = 0)").label("inserted"))
+    rows = (await conn.execute(stmt)).all()
+    inserted = sum(1 for _, ins in rows if ins)
+    return inserted, len(rows) - inserted
+
+
 async def main() -> None:
     # Validate every roster up front: any enum/shape violation aborts loudly
     # before a single row is written (no silent coercion, no partial seed).
     validate_characters(CHARACTERS)
     validate_pictos(PICTOS)
     validate_weapons(WEAPONS)
+    validate_bosses(BOSSES)
     async with engine.begin() as conn:
         pruned = await prune_characters(conn)
         name_to_id = await upsert_characters(conn)
@@ -291,6 +367,8 @@ async def main() -> None:
         p_ins, p_upd = await upsert_pictos(conn)
         weapons_pruned = await prune_weapons(conn)
         w_ins, w_upd = await upsert_weapons(conn)
+        bosses_pruned = await prune_bosses(conn)
+        b_ins, b_upd = await upsert_bosses(conn)
     print(f"characters pruned: {pruned}, upserted: {len(name_to_id)}")
     print(
         f"pictos pruned: {pictos_pruned}, inserted: {p_ins}, "
@@ -299,6 +377,10 @@ async def main() -> None:
     print(
         f"weapons pruned: {weapons_pruned}, inserted: {w_ins}, "
         f"updated: {w_upd}, total: {w_ins + w_upd}"
+    )
+    print(
+        f"bosses pruned: {bosses_pruned}, inserted: {b_ins}, "
+        f"updated: {b_upd}, total: {b_ins + b_upd}"
     )
     await engine.dispose()
 
