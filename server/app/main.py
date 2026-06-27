@@ -6,7 +6,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.db import engine
-from app.routers import classic, pictos, weapons
+from app.routers import bosses, classic, pictos, weapons
 
 # repo/client/dist — built SPA (absolute, so it resolves regardless of CWD).
 CLIENT_DIST = Path(__file__).resolve().parents[2] / "client" / "dist"
@@ -23,6 +23,7 @@ app = FastAPI(title="Expedition 33dle API", lifespan=lifespan)
 app.include_router(classic.router)
 app.include_router(pictos.router)
 app.include_router(weapons.router)
+app.include_router(bosses.router)
 
 
 @app.get("/api/health")
