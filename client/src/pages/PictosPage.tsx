@@ -5,10 +5,12 @@ import Legend from "../components/Legend";
 import Modal from "../components/Modal";
 import Countdown from "../components/Countdown";
 import GuessInput from "../components/GuessInput";
-import PictosGuessGrid from "../components/PictosGuessGrid";
+import GuessGridBase from "../components/GuessGridBase";
 import PictosLastTry from "../components/PictosLastTry";
-import PictosAnswerReveal from "../components/PictosAnswerReveal";
-import PictosHowToPlay from "../components/PictosHowToPlay";
+import AnswerRevealBase from "../components/AnswerRevealBase";
+import HowToPlayBase from "../components/HowToPlayBase";
+import { PICTOS_GRID_TEMPLATE } from "../components/gridTemplates";
+import { PICTOS_ATTRIBUTES } from "../lib/attributes";
 import StatsBlock from "../components/StatsBlock";
 import Histogram from "../components/Histogram";
 import ShareButton from "../components/ShareButton";
@@ -26,9 +28,37 @@ import {
 import type {
   GameStatus as Status,
   Picto,
+  PictoGuessFeedback,
   PictoGuessResponse,
   PictoTodayResponse,
 } from "../lib/types";
+
+// Synthetic example — fabricated feedback tied to no real puzzle, chosen to
+// demonstrate every color state plus a directional arrow. (Drives the How-to grid.)
+const EXAMPLE_GUESS: PictoGuessResponse = {
+  guess: {
+    id: 0,
+    name: "Energising Start",
+    type: "Support",
+    stats: ["SPD"],
+    lumina_cost: 10,
+    effect_category: "AP",
+    source: "Pickup",
+    zone_obtained: "Spring Meadows",
+    act_introduced: 1,
+    image: "9-pictos.webp"
+  },
+  feedback: {
+    type: "match",
+    stats: "partial",
+    lumina_cost: "higher",
+    effect_category: "miss",
+    source: "miss",
+    zone_obtained: "miss",
+    act_introduced: "match",
+  },
+  is_correct: false,
+};
 
 /** Spoken summary of a guess outcome for the screen-reader live region. */
 function describeGuess(
@@ -364,16 +394,33 @@ function Game({ today }: { today: PictoTodayResponse }) {
               <PictosLastTry guess={guesses[guesses.length - 1]} />
             </>
           )}
-          <PictosGuessGrid guesses={guesses} animateId={animateId} />
+          <GuessGridBase<Picto, PictoGuessFeedback>
+            guesses={guesses}
+            attributes={PICTOS_ATTRIBUTES}
+            gridTemplate={PICTOS_GRID_TEMPLATE}
+            dir="pictos"
+            noun="Picto"
+            animateId={animateId}
+          />
         </>
       ) : (
         <>
           <Legend />
-          <PictosGuessGrid guesses={guesses} animateId={animateId} />
+          <GuessGridBase<Picto, PictoGuessFeedback>
+            guesses={guesses}
+            attributes={PICTOS_ATTRIBUTES}
+            gridTemplate={PICTOS_GRID_TEMPLATE}
+            dir="pictos"
+            noun="Picto"
+            animateId={animateId}
+          />
           <div className="rule" aria-hidden="true" />
           {status === "lost" && (
-            <PictosAnswerReveal
+            <AnswerRevealBase<Picto, PictoGuessFeedback>
               answer={revealedAnswer}
+              attributes={PICTOS_ATTRIBUTES}
+              gridTemplate={PICTOS_GRID_TEMPLATE}
+              dir="pictos"
               isError={revealQuery.isError}
               onRetry={() => revealQuery.refetch()}
             />
@@ -414,7 +461,17 @@ function Game({ today }: { today: PictoTodayResponse }) {
         title="How to Play"
         widthClass="sm:max-w-4xl lg:max-w-6xl"
       >
-        <PictosHowToPlay onClose={closeHowTo} />
+        <HowToPlayBase<Picto, PictoGuessFeedback>
+          exampleGuess={EXAMPLE_GUESS}
+          attributes={PICTOS_ATTRIBUTES}
+          gridTemplate={PICTOS_GRID_TEMPLATE}
+          dir="pictos"
+          noun="Picto"
+          maxGuesses={MAX_GUESSES}
+          partialHint="shares some stats"
+          directionalHint="Lumina/Act"
+          onClose={closeHowTo}
+        />
       </Modal>
 
       <Modal

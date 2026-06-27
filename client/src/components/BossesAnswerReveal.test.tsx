@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { render } from "@testing-library/react";
-import BossesAnswerReveal from "./BossesAnswerReveal";
+import AnswerRevealBase from "./AnswerRevealBase";
+import { BOSSES_ATTRIBUTES } from "../lib/attributes";
+import { BOSSES_GRID_TEMPLATE } from "./gridTemplates";
 import type { Boss } from "../lib/types";
 
 const boss = (image: string | null): Boss => ({
@@ -20,8 +22,11 @@ const noop = () => {};
 describe("BossesAnswerReveal", () => {
   it("renders the answer's boss icon from /bosses", () => {
     const { container } = render(
-      <BossesAnswerReveal
+      <AnswerRevealBase
         answer={boss("dualliste.webp")}
+        attributes={BOSSES_ATTRIBUTES}
+        gridTemplate={BOSSES_GRID_TEMPLATE}
+        dir="bosses"
         isError={false}
         onRetry={noop}
       />,
@@ -34,7 +39,14 @@ describe("BossesAnswerReveal", () => {
 
   it("falls back to a monogram when the answer has no image", () => {
     const { container, getByText } = render(
-      <BossesAnswerReveal answer={boss(null)} isError={false} onRetry={noop} />,
+      <AnswerRevealBase
+        answer={boss(null)}
+        attributes={BOSSES_ATTRIBUTES}
+        gridTemplate={BOSSES_GRID_TEMPLATE}
+        dir="bosses"
+        isError={false}
+        onRetry={noop}
+      />,
     );
     expect(container.querySelector("img")).toBeNull();
     expect(getByText("D")).toBeInTheDocument(); // monogram, not the name span

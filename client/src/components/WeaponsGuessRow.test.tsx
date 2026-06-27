@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { render } from "@testing-library/react";
-import WeaponsGuessRow from "./WeaponsGuessRow";
+import GuessRowBase from "./GuessRowBase";
+import { WEAPONS_ATTRIBUTES } from "../lib/attributes";
+import { WEAPONS_GRID_TEMPLATE } from "./gridTemplates";
 import type { WeaponGuessResponse } from "../lib/types";
 
 const response = (image: string | null): WeaponGuessResponse => ({
@@ -29,7 +31,12 @@ const response = (image: string | null): WeaponGuessResponse => ({
 describe("WeaponsGuessRow", () => {
   it("renders the weapon icon from /weapons when an image is set", () => {
     const { container } = render(
-      <WeaponsGuessRow result={response("blodam.webp")} />,
+      <GuessRowBase
+        result={response("blodam.webp")}
+        attributes={WEAPONS_ATTRIBUTES}
+        gridTemplate={WEAPONS_GRID_TEMPLATE}
+        dir="weapons"
+      />,
     );
     expect(container.querySelector("img")).toHaveAttribute(
       "src",
@@ -39,7 +46,12 @@ describe("WeaponsGuessRow", () => {
 
   it("falls back to a monogram when the weapon has no image", () => {
     const { container, getByText } = render(
-      <WeaponsGuessRow result={response(null)} />,
+      <GuessRowBase
+        result={response(null)}
+        attributes={WEAPONS_ATTRIBUTES}
+        gridTemplate={WEAPONS_GRID_TEMPLATE}
+        dir="weapons"
+      />,
     );
     expect(container.querySelector("img")).toBeNull();
     expect(getByText("B")).toBeInTheDocument(); // monogram, not the name span
