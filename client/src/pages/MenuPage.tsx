@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import { formatMenuStatus, type MenuStatus } from "../lib/menuStatus";
 import {
+  BOSSES_MAX_GUESSES,
   CLASSIC_MAX_GUESSES,
   PICTOS_MAX_GUESSES,
   WEAPONS_MAX_GUESSES,
 } from "../lib/stats";
 import {
+  loadBossesState,
+  loadBossesStats,
   loadPictosState,
   loadPictosStats,
   loadState,
@@ -52,6 +55,21 @@ function PictosIcon() {
         d="M12 2.5 L21.5 12 L12 21.5 L2.5 12 Z M12 6 L18 12 L12 18 L6 12 Z"
       />
       <polygon points="12 8 13.1 10.9 16 12 13.1 13.1 12 16 10.9 13.1 8 12 10.9 10.9" />
+    </svg>
+  );
+}
+
+/** Skull — the boss-fight motif of the Bosses mode. Cranium + jaw with two teeth
+ *  notches, eye sockets and a nose knocked out via fillRule. Decorative; the <h2>
+ *  names the mode for assistive tech. */
+function BossIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5" fill="currentColor">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12 2C7.6 2 4 5.4 4 9.6c0 2.6 1.4 4.9 3.5 6.3V19c0 .6.4 1 1 1h1.2v-2h1.1v2h2.4v-2h1.1v2h1.2c.6 0 1-.4 1-1v-3.1c2.1-1.4 3.5-3.7 3.5-6.3C20 5.4 16.4 2 12 2ZM9 8.4a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8Zm6 0a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8Zm-3 4.1 1 2.2h-2l1-2.2Z"
+      />
     </svg>
   );
 }
@@ -116,6 +134,11 @@ export default function MenuPage() {
     loadWeaponsStats(),
     WEAPONS_MAX_GUESSES,
   );
+  const bossesStatus = formatMenuStatus(
+    loadBossesState(today),
+    loadBossesStats(),
+    BOSSES_MAX_GUESSES,
+  );
 
   return (
     <main className="mx-auto flex w-full max-w-xl flex-1 flex-col  px-4 py-8 md:py-12 md:max-w-3xl md:px-6 lg:max-w-6xl">
@@ -148,6 +171,13 @@ export default function MenuPage() {
             desc="Guess today's Clair Obscur: Expedition 33 Weapon."
             icon={<WeaponsIcon />}
             status={weaponsStatus}
+          />
+          <ModeCard
+            to="/bosses"
+            name="Bosses"
+            desc="Guess today's Clair Obscur: Expedition 33 Boss."
+            icon={<BossIcon />}
+            status={bossesStatus}
           />
         </div>
       </div>

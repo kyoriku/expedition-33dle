@@ -1,4 +1,6 @@
 import {
+  BOSSES_MAX_GUESSES,
+  EMPTY_BOSSES_STATS,
   EMPTY_PICTO_STATS,
   EMPTY_STATS,
   EMPTY_WEAPONS_STATS,
@@ -6,6 +8,7 @@ import {
   WEAPONS_MAX_GUESSES,
 } from "./stats";
 import type {
+  BossStoredGameState,
   PictoStoredGameState,
   Stats,
   StoredGameState,
@@ -129,6 +132,44 @@ export function saveWeaponsState(date: string, state: WeaponStoredGameState): vo
   }
 }
 
+// Bosses game state — separate namespace from classic/pictos/weapons so the modes'
+// daily state never collide.
+const bossesKeyFor = (date: string) => `expedition33dle:bosses:state:${date}`;
+
+/** Read stored bosses state for the given puzzle date. Returns null (fresh game)
+ *  on missing key, corrupt JSON, unexpected shape, or disabled storage. */
+export function loadBossesState(date: string): BossStoredGameState | null {
+  try {
+    const raw = localStorage.getItem(bossesKeyFor(date));
+    if (!raw) return null;
+    const parsed: unknown = JSON.parse(raw);
+    if (typeof parsed !== "object" || parsed === null) return null;
+    const state = parsed as BossStoredGameState;
+    if (
+      !Array.isArray(state.guesses) ||
+      !STATUSES.includes(state.status) ||
+      typeof state.puzzle_number !== "number"
+    ) {
+      return null;
+    }
+    // States written before stats tracking lack the flag; false is safe.
+    state.stats_recorded = state.stats_recorded === true;
+    return state;
+  } catch {
+    return null;
+  }
+}
+
+/** Persist bosses state for the given puzzle date. Silently no-ops if storage is
+ *  unavailable. */
+export function saveBossesState(date: string, state: BossStoredGameState): void {
+  try {
+    localStorage.setItem(bossesKeyFor(date), JSON.stringify(state));
+  } catch {
+    // ignore
+  }
+}
+
 /** Read cumulative stats. Returns EMPTY_STATS on missing key, corrupt JSON,
  *  unexpected shape, or disabled storage. */
 export function loadStats(): Stats {
@@ -237,6 +278,43 @@ export function saveWeaponsStats(stats: Stats): void {
   }
 }
 
+// Bosses cumulative stats — separate namespace from classic/pictos/weapons; independent totals.
+const BOSSES_STATS_KEY = "expedition33dle:bosses:stats";
+
+/** Read cumulative bosses stats. Returns EMPTY_BOSSES_STATS on missing key,
+ *  corrupt JSON, unexpected shape, or disabled storage. */
+export function loadBossesStats(): Stats {
+  try {
+    const raw = localStorage.getItem(BOSSES_STATS_KEY);
+    if (!raw) return EMPTY_BOSSES_STATS;
+    const parsed: unknown = JSON.parse(raw);
+    if (typeof parsed !== "object" || parsed === null) return EMPTY_BOSSES_STATS;
+    const stats = parsed as Stats;
+    if (
+      typeof stats.played !== "number" ||
+      typeof stats.won !== "number" ||
+      typeof stats.current_streak !== "number" ||
+      typeof stats.max_streak !== "number" ||
+      !Array.isArray(stats.guess_distribution) ||
+      stats.guess_distribution.length !== BOSSES_MAX_GUESSES
+    ) {
+      return EMPTY_BOSSES_STATS;
+    }
+    return stats;
+  } catch {
+    return EMPTY_BOSSES_STATS;
+  }
+}
+
+/** Persist cumulative bosses stats. Silently no-ops if storage is unavailable. */
+export function saveBossesStats(stats: Stats): void {
+  try {
+    localStorage.setItem(BOSSES_STATS_KEY, JSON.stringify(stats));
+  } catch {
+    // ignore
+  }
+}
+
 // Daily-state keys accrue one per mode per day played; prune them on boot so
 // localStorage doesn't grow unbounded. ONLY :state:<date> keys are touched —
 // cumulative :stats keys (and any legacy keys, like the retired :tutorial_seen
@@ -245,6 +323,7 @@ const STATE_PREFIXES = [
   "expedition33dle:classic:state:",
   "expedition33dle:pictos:state:",
   "expedition33dle:weapons:state:",
+  "expedition33dle:bosses:state:",
 ];
 
 /** Delete every daily-state key whose date isn't `today` (UTC ISO, e.g.
