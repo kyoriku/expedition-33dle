@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import AnswerReveal from "../components/AnswerReveal";
+import AnswerRevealBase from "../components/AnswerRevealBase";
 import GameStatus from "../components/GameStatus";
 import Header from "../components/Header";
 import Legend from "../components/Legend";
-import GuessGrid from "../components/GuessGrid";
+import GuessGridBase from "../components/GuessGridBase";
 import GuessInput from "../components/GuessInput";
-import HowToPlay from "../components/HowToPlay";
+import HowToPlayBase from "../components/HowToPlayBase";
+import { CLASSIC_GRID_TEMPLATE } from "../components/gridTemplates";
+import { ATTRIBUTES } from "../lib/attributes";
 import Modal from "../components/Modal";
 import { ApiError, fetchToday, revealAnswer, submitGuess } from "../lib/api";
 import { buildShareString } from "../lib/share";
@@ -25,10 +27,40 @@ import {
 } from "../lib/storage";
 import type {
   Character,
+  ClassicGuessFeedback,
   GameStatus as Status,
   ClassicGuessResponse,
   ClassicTodayResponse,
 } from "../lib/types";
+
+// Synthetic example — fabricated feedback tied to no real puzzle, chosen to
+// demonstrate every color state plus a directional arrow. (Drives the How-to grid.)
+const EXAMPLE_GUESS: ClassicGuessResponse = {
+  guess: {
+    id: 0,
+    name: "Gustave",
+    gender: "Male",
+    role: "Playable",
+    weapon: "Sword & Pistol",
+    element: ["Lightning"],
+    act_introduced: 1,
+    category: "Human",
+    affiliation: ["Expedition 33"],
+    zone: "Lumière",
+    image: "gustave.webp",
+  },
+  feedback: {
+    gender: "match",
+    role: "miss",
+    weapon: "miss",
+    element: "partial",
+    act_introduced: "higher",
+    category: "match",
+    affiliation: "miss",
+    zone: "miss",
+  },
+  is_correct: false,
+};
 
 /** Spoken summary of a guess outcome for the screen-reader live region. */
 function describeGuess(
@@ -335,16 +367,33 @@ function Game({ today }: { today: ClassicTodayResponse }) {
               <LastTry guess={guesses[guesses.length - 1]} />
             </>
           )}
-          <GuessGrid guesses={guesses} animateId={animateId} />
+          <GuessGridBase<Character, ClassicGuessFeedback>
+            guesses={guesses}
+            attributes={ATTRIBUTES}
+            gridTemplate={CLASSIC_GRID_TEMPLATE}
+            dir="portraits"
+            noun="Character"
+            animateId={animateId}
+          />
         </>
       ) : (
         <>
           <Legend />
-          <GuessGrid guesses={guesses} animateId={animateId} />
+          <GuessGridBase<Character, ClassicGuessFeedback>
+            guesses={guesses}
+            attributes={ATTRIBUTES}
+            gridTemplate={CLASSIC_GRID_TEMPLATE}
+            dir="portraits"
+            noun="Character"
+            animateId={animateId}
+          />
           <div className="rule" aria-hidden="true" />
           {status === "lost" && (
-            <AnswerReveal
+            <AnswerRevealBase<Character, ClassicGuessFeedback>
               answer={revealedAnswer}
+              attributes={ATTRIBUTES}
+              gridTemplate={CLASSIC_GRID_TEMPLATE}
+              dir="portraits"
               isError={revealQuery.isError}
               onRetry={() => revealQuery.refetch()}
             />
@@ -373,7 +422,17 @@ function Game({ today }: { today: ClassicTodayResponse }) {
         title="How to Play"
         widthClass="sm:max-w-4xl lg:max-w-6xl"
       >
-        <HowToPlay onClose={closeHowTo} />
+        <HowToPlayBase<Character, ClassicGuessFeedback>
+          exampleGuess={EXAMPLE_GUESS}
+          attributes={ATTRIBUTES}
+          gridTemplate={CLASSIC_GRID_TEMPLATE}
+          dir="portraits"
+          noun="Character"
+          maxGuesses={MAX_GUESSES}
+          partialHint="shares some elements"
+          directionalHint="Act"
+          onClose={closeHowTo}
+        />
       </Modal>
 
       <Modal

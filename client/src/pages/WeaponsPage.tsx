@@ -5,10 +5,12 @@ import Legend from "../components/Legend";
 import Modal from "../components/Modal";
 import Countdown from "../components/Countdown";
 import GuessInput from "../components/GuessInput";
-import WeaponsGuessGrid from "../components/WeaponsGuessGrid";
+import GuessGridBase from "../components/GuessGridBase";
 import WeaponsLastTry from "../components/WeaponsLastTry";
-import WeaponsAnswerReveal from "../components/WeaponsAnswerReveal";
-import WeaponsHowToPlay from "../components/WeaponsHowToPlay";
+import AnswerRevealBase from "../components/AnswerRevealBase";
+import HowToPlayBase from "../components/HowToPlayBase";
+import { WEAPONS_GRID_TEMPLATE } from "../components/gridTemplates";
+import { WEAPONS_ATTRIBUTES } from "../lib/attributes";
 import StatsBlock from "../components/StatsBlock";
 import Histogram from "../components/Histogram";
 import ShareButton from "../components/ShareButton";
@@ -26,9 +28,35 @@ import {
 import type {
   GameStatus as Status,
   Weapon,
+  WeaponGuessFeedback,
   WeaponGuessResponse,
   WeaponTodayResponse,
 } from "../lib/types";
+
+// Synthetic example — fabricated feedback tied to no real puzzle, chosen to
+// demonstrate every color state plus a directional arrow. (Drives the How-to grid.)
+const EXAMPLE_GUESS: WeaponGuessResponse = {
+  guess: {
+    id: 0,
+    name: "Abysseram",
+    wielder: ["Gustave", "Verso"],
+    element: "Physical",
+    max_power: 3000,
+    scaling_stats: ["Vitality"],
+    source: "Pickup",
+    act_introduced: 1,
+    image: "abysseram.webp",
+  },
+  feedback: {
+    wielder: "match",
+    element: "miss",
+    max_power: "higher",
+    scaling_stats: "partial",
+    source: "miss",
+    act_introduced: "match",
+  },
+  is_correct: false,
+};
 
 /** Spoken summary of a guess outcome for the screen-reader live region. */
 function describeGuess(
@@ -360,16 +388,33 @@ function Game({ today }: { today: WeaponTodayResponse }) {
               <WeaponsLastTry guess={guesses[guesses.length - 1]} />
             </>
           )}
-          <WeaponsGuessGrid guesses={guesses} animateId={animateId} />
+          <GuessGridBase<Weapon, WeaponGuessFeedback>
+            guesses={guesses}
+            attributes={WEAPONS_ATTRIBUTES}
+            gridTemplate={WEAPONS_GRID_TEMPLATE}
+            dir="weapons"
+            noun="Weapon"
+            animateId={animateId}
+          />
         </>
       ) : (
         <>
           <Legend />
-          <WeaponsGuessGrid guesses={guesses} animateId={animateId} />
+          <GuessGridBase<Weapon, WeaponGuessFeedback>
+            guesses={guesses}
+            attributes={WEAPONS_ATTRIBUTES}
+            gridTemplate={WEAPONS_GRID_TEMPLATE}
+            dir="weapons"
+            noun="Weapon"
+            animateId={animateId}
+          />
           <div className="rule" aria-hidden="true" />
           {status === "lost" && (
-            <WeaponsAnswerReveal
+            <AnswerRevealBase<Weapon, WeaponGuessFeedback>
               answer={revealedAnswer}
+              attributes={WEAPONS_ATTRIBUTES}
+              gridTemplate={WEAPONS_GRID_TEMPLATE}
+              dir="weapons"
               isError={revealQuery.isError}
               onRetry={() => revealQuery.refetch()}
             />
@@ -410,7 +455,17 @@ function Game({ today }: { today: WeaponTodayResponse }) {
         title="How to Play"
         widthClass="sm:max-w-4xl lg:max-w-6xl"
       >
-        <WeaponsHowToPlay onClose={closeHowTo} />
+        <HowToPlayBase<Weapon, WeaponGuessFeedback>
+          exampleGuess={EXAMPLE_GUESS}
+          attributes={WEAPONS_ATTRIBUTES}
+          gridTemplate={WEAPONS_GRID_TEMPLATE}
+          dir="weapons"
+          noun="Weapon"
+          maxGuesses={MAX_GUESSES}
+          partialHint="shares some scaling stats"
+          directionalHint="Max Power/Act"
+          onClose={closeHowTo}
+        />
       </Modal>
 
       <Modal

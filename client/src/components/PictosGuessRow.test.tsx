@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { render } from "@testing-library/react";
-import PictosGuessRow from "./PictosGuessRow";
+import GuessRowBase from "./GuessRowBase";
+import { PICTOS_ATTRIBUTES } from "../lib/attributes";
+import { PICTOS_GRID_TEMPLATE } from "./gridTemplates";
 import type { PictoGuessResponse } from "../lib/types";
 
 const response = (image: string | null): PictoGuessResponse => ({
@@ -31,7 +33,12 @@ const response = (image: string | null): PictoGuessResponse => ({
 describe("PictosGuessRow", () => {
   it("renders the picto icon from /pictos when an image is set", () => {
     const { container } = render(
-      <PictosGuessRow result={response("glass-cannon.webp")} />,
+      <GuessRowBase
+        result={response("glass-cannon.webp")}
+        attributes={PICTOS_ATTRIBUTES}
+        gridTemplate={PICTOS_GRID_TEMPLATE}
+        dir="pictos"
+      />,
     );
     expect(container.querySelector("img")).toHaveAttribute(
       "src",
@@ -41,7 +48,12 @@ describe("PictosGuessRow", () => {
 
   it("falls back to a monogram when the picto has no image", () => {
     const { container, getByText } = render(
-      <PictosGuessRow result={response(null)} />,
+      <GuessRowBase
+        result={response(null)}
+        attributes={PICTOS_ATTRIBUTES}
+        gridTemplate={PICTOS_GRID_TEMPLATE}
+        dir="pictos"
+      />,
     );
     expect(container.querySelector("img")).toBeNull();
     expect(getByText("G")).toBeInTheDocument(); // monogram, not the name span

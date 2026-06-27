@@ -5,10 +5,12 @@ import Legend from "../components/Legend";
 import Modal from "../components/Modal";
 import Countdown from "../components/Countdown";
 import GuessInput from "../components/GuessInput";
-import BossesGuessGrid from "../components/BossesGuessGrid";
+import GuessGridBase from "../components/GuessGridBase";
 import BossesLastTry from "../components/BossesLastTry";
-import BossesAnswerReveal from "../components/BossesAnswerReveal";
-import BossesHowToPlay from "../components/BossesHowToPlay";
+import AnswerRevealBase from "../components/AnswerRevealBase";
+import HowToPlayBase from "../components/HowToPlayBase";
+import { BOSSES_GRID_TEMPLATE } from "../components/gridTemplates";
+import { BOSSES_ATTRIBUTES } from "../lib/attributes";
 import StatsBlock from "../components/StatsBlock";
 import Histogram from "../components/Histogram";
 import ShareButton from "../components/ShareButton";
@@ -26,9 +28,36 @@ import {
 import type {
   GameStatus as Status,
   Boss,
+  BossGuessFeedback,
   BossGuessResponse,
   BossTodayResponse,
 } from "../lib/types";
+
+// Synthetic example — real boss (Goblu) with fabricated feedback tied to no real
+// puzzle, chosen to demonstrate every color state plus a directional arrow.
+// (Drives the How-to grid.)
+const EXAMPLE_GUESS: BossGuessResponse = {
+  guess: {
+    id: 0,
+    name: "Goblu",
+    weakness: ["Lightning"],
+    resistance: ["Ice", "Dark"],
+    category: "Nevron",
+    location: "Flying Waters",
+    encounter: "Required",
+    act_introduced: 1,
+    image: null,
+  },
+  feedback: {
+    weakness: "match",
+    resistance: "partial",
+    category: "match",
+    location: "miss",
+    encounter: "miss",
+    act_introduced: "higher",
+  },
+  is_correct: false,
+};
 
 /** Spoken summary of a guess outcome for the screen-reader live region. */
 function describeGuess(
@@ -357,16 +386,33 @@ function Game({ today }: { today: BossTodayResponse }) {
               <BossesLastTry guess={guesses[guesses.length - 1]} />
             </>
           )}
-          <BossesGuessGrid guesses={guesses} animateId={animateId} />
+          <GuessGridBase<Boss, BossGuessFeedback>
+            guesses={guesses}
+            attributes={BOSSES_ATTRIBUTES}
+            gridTemplate={BOSSES_GRID_TEMPLATE}
+            dir="bosses"
+            noun="Boss"
+            animateId={animateId}
+          />
         </>
       ) : (
         <>
           <Legend />
-          <BossesGuessGrid guesses={guesses} animateId={animateId} />
+          <GuessGridBase<Boss, BossGuessFeedback>
+            guesses={guesses}
+            attributes={BOSSES_ATTRIBUTES}
+            gridTemplate={BOSSES_GRID_TEMPLATE}
+            dir="bosses"
+            noun="Boss"
+            animateId={animateId}
+          />
           <div className="rule" aria-hidden="true" />
           {status === "lost" && (
-            <BossesAnswerReveal
+            <AnswerRevealBase<Boss, BossGuessFeedback>
               answer={revealedAnswer}
+              attributes={BOSSES_ATTRIBUTES}
+              gridTemplate={BOSSES_GRID_TEMPLATE}
+              dir="bosses"
               isError={revealQuery.isError}
               onRetry={() => revealQuery.refetch()}
             />
@@ -407,7 +453,17 @@ function Game({ today }: { today: BossTodayResponse }) {
         title="How to Play"
         widthClass="sm:max-w-4xl lg:max-w-6xl"
       >
-        <BossesHowToPlay onClose={closeHowTo} />
+        <HowToPlayBase<Boss, BossGuessFeedback>
+          exampleGuess={EXAMPLE_GUESS}
+          attributes={BOSSES_ATTRIBUTES}
+          gridTemplate={BOSSES_GRID_TEMPLATE}
+          dir="bosses"
+          noun="Boss"
+          maxGuesses={MAX_GUESSES}
+          partialHint="shares some weaknesses/resistances"
+          directionalHint="Act"
+          onClose={closeHowTo}
+        />
       </Modal>
 
       <Modal
