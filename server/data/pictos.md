@@ -17,7 +17,7 @@ Fields appear in schema order:
 | `effect_category` | string (closed set) | `pictos.effect_category` — `String(32)` |
 | `source` | string (closed set) | `pictos.source` — `String(16)` |
 | `zone_obtained` | string (open set) | `pictos.zone_obtained` — `String(64)` (not an enum — see below) |
-| `act_introduced` | int | `pictos.act_introduced` — `Integer` (1–4; scored by direction) |
+| `act_introduced` | int | `pictos.act_introduced` — `Integer` (1–3; scored by direction) |
 | `image` | string or null | `pictos.image` — `String(128)`, **nullable** — icon filename (see [README.md](README.md#images)) |
 
 ## Closed value sets

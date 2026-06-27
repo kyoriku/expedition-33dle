@@ -3,7 +3,7 @@
 The route handlers are awaited directly with a fake session (via asyncio.run),
 so these exercise the real wiring — schedule lookup (salted to "pictos"), answer
 selection, scoring, error paths — without a database or an HTTP client. Mirrors
-test_endpoints.py for the classic mode.
+test_characters_endpoints.py for the classic mode.
 """
 
 import asyncio
