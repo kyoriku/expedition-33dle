@@ -1,7 +1,13 @@
-import { FIELD_ORDER, PICTOS_FIELD_ORDER, WEAPONS_FIELD_ORDER } from "./attributes";
-import { PICTOS_MAX_GUESSES, WEAPONS_MAX_GUESSES } from "./stats";
+import {
+  BOSSES_FIELD_ORDER,
+  FIELD_ORDER,
+  PICTOS_FIELD_ORDER,
+  WEAPONS_FIELD_ORDER,
+} from "./attributes";
+import { BOSSES_MAX_GUESSES, PICTOS_MAX_GUESSES, WEAPONS_MAX_GUESSES } from "./stats";
 import type {
   GameStatus,
+  BossGuessResponse,
   ClassicGuessResponse,
   PictoGuessResponse,
   WeaponGuessResponse,
@@ -56,6 +62,20 @@ export function buildWeaponsShareString(
     .join("\n");
   // "Weapons" labels the mode; URL points recipients at /weapons.
   return `Expedition 33dle Weapons #${puzzleNumber} ${score}/${WEAPONS_MAX_GUESSES}\n\n${grid}\n\nhttps://expedition33dle.com/weapons`;
+}
+
+export function buildBossesShareString(
+  guesses: BossGuessResponse[],
+  puzzleNumber: number,
+  status: GameStatus,
+): string {
+  const score = status === "won" ? String(guesses.length) : "X";
+  // Oldest-on-top, newest at the bottom — matches the on-screen grid order.
+  const grid = guesses
+    .map((g) => BOSSES_FIELD_ORDER.map((f) => EMOJI[g.feedback[f]]).join(""))
+    .join("\n");
+  // "Bosses" labels the mode; URL points recipients at /bosses.
+  return `Expedition 33dle Bosses #${puzzleNumber} ${score}/${BOSSES_MAX_GUESSES}\n\n${grid}\n\nhttps://expedition33dle.com/bosses`;
 }
 
 export type ShareResult = "shared" | "copied" | "cancelled" | "failed";

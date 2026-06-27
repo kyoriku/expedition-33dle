@@ -1,4 +1,7 @@
 import type {
+  Boss,
+  BossGuessResponse,
+  BossTodayResponse,
   Character,
   ClassicGuessResponse,
   ClassicTodayResponse,
@@ -92,5 +95,27 @@ export function submitWeaponGuess(weaponId: number): Promise<WeaponGuessResponse
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ weapon_id: weaponId }),
+  });
+}
+
+// Bosses mode — parallels the classic/pictos/weapons functions above.
+
+export function getBossesToday(): Promise<BossTodayResponse> {
+  return request<BossTodayResponse>("/api/bosses/today");
+}
+
+export function revealBoss(guessIds: number[]): Promise<Boss> {
+  return request<Boss>("/api/bosses/reveal", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ guess_ids: guessIds }),
+  });
+}
+
+export function submitBossGuess(bossId: number): Promise<BossGuessResponse> {
+  return request<BossGuessResponse>("/api/bosses/guess", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ boss_id: bossId }),
   });
 }

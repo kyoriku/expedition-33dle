@@ -116,6 +116,42 @@ export interface WeaponTodayResponse {
   yesterday: Weapon | null; // previous day's answer (no longer a spoiler)
 }
 
+// Bosses mode — parallels the Classic*/Picto*/Weapon* shapes (server/app/schemas.py).
+
+export interface Boss {
+  id: number;
+  name: string;
+  weakness: string[]; // 0+ elements, set-compared
+  resistance: string[]; // 0+ elements, set-compared
+  category: string;
+  location: string; // free-form zone, not a closed set
+  encounter: string;
+  act_introduced: number;
+  image: string | null; // boss icon filename in /bosses, or null for monogram
+}
+
+export interface BossGuessFeedback {
+  weakness: ElementFeedback; // multi-value set comparison (match/partial/miss)
+  resistance: ElementFeedback;
+  category: ScalarFeedback;
+  location: ScalarFeedback;
+  encounter: ScalarFeedback;
+  act_introduced: DirectionFeedback;
+}
+
+export interface BossGuessResponse {
+  guess: Boss;
+  feedback: BossGuessFeedback;
+  is_correct: boolean;
+}
+
+export interface BossTodayResponse {
+  puzzle_date: string; // ISO date
+  puzzle_number: number;
+  bosses: Boss[];
+  yesterday: Boss | null; // previous day's answer (no longer a spoiler)
+}
+
 // Client-only state.
 
 export type GameStatus = "in_progress" | "won" | "lost";
@@ -144,6 +180,15 @@ export interface WeaponStoredGameState {
   puzzle_number: number;
   stats_recorded: boolean; // prevents double-counting stats on refresh
   revealed_answer?: Weapon | null; // optional: pre-reveal states lack it
+}
+
+// Bosses game state — parallels StoredGameState.
+export interface BossStoredGameState {
+  guesses: BossGuessResponse[];
+  status: GameStatus;
+  puzzle_number: number;
+  stats_recorded: boolean; // prevents double-counting stats on refresh
+  revealed_answer?: Boss | null; // optional: pre-reveal states lack it
 }
 
 export interface Stats {

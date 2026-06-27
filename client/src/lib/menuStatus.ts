@@ -1,4 +1,5 @@
 import type {
+  BossStoredGameState,
   PictoStoredGameState,
   Stats,
   StoredGameState,
@@ -13,7 +14,12 @@ export interface MenuStatus {
 /** Derive a mode's menu-card status from its stored daily state and cumulative
  *  stats. Pure — both inputs come from localStorage, read once on the menu. */
 export function formatMenuStatus(
-  state: StoredGameState | PictoStoredGameState | WeaponStoredGameState | null,
+  state:
+    | StoredGameState
+    | PictoStoredGameState
+    | WeaponStoredGameState
+    | BossStoredGameState
+    | null,
   stats: Stats,
   maxGuesses: number,
 ): MenuStatus {

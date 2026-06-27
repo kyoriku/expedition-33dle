@@ -5,6 +5,8 @@
 // the seam a future mode (Weapons, Pictos) would swap out.
 
 import type {
+  Boss,
+  BossGuessFeedback,
   ClassicGuessFeedback,
   Character,
   Picto,
@@ -127,6 +129,36 @@ export const WEAPONS_ATTRIBUTES = [
 
 /** Column order for the weapons share grid (feedback keys only). */
 export const WEAPONS_FIELD_ORDER = WEAPONS_ATTRIBUTES.map((a) => a.key);
+
+/** Bosses-mode comparison columns (the future-mode seam). Same descriptor shape
+ *  as ATTRIBUTES, keyed to Boss. weakness/resistance are set-compared (may be
+ *  empty); category/location/encounter are scalar; act_introduced is directional. */
+export const BOSSES_ATTRIBUTES = [
+  {
+    key: "weakness",
+    label: "Weakness",
+    kind: "array",
+    format: (b: Boss) => (b.weakness.length ? b.weakness.join(" • ") : "—"),
+  },
+  {
+    key: "resistance",
+    label: "Resistance",
+    kind: "array",
+    format: (b: Boss) => (b.resistance.length ? b.resistance.join(" • ") : "—"),
+  },
+  { key: "category", label: "Category", kind: "scalar", format: (b: Boss) => b.category },
+  { key: "location", label: "Location", kind: "scalar", format: (b: Boss) => b.location },
+  { key: "encounter", label: "Encounter", kind: "scalar", format: (b: Boss) => b.encounter },
+  {
+    key: "act_introduced",
+    label: "Act",
+    kind: "direction",
+    format: (b: Boss) => String(b.act_introduced),
+  },
+] as const satisfies readonly AttributeDescriptor<Boss, BossGuessFeedback>[];
+
+/** Column order for the bosses share grid (feedback keys only). */
+export const BOSSES_FIELD_ORDER = BOSSES_ATTRIBUTES.map((a) => a.key);
 
 /** Always-visible glyph per state. Distinguishing match/partial/miss by glyph —
  *  not just by green/gold/red — keeps the grid legible without color (WCAG 1.4.1,

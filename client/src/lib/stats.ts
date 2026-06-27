@@ -35,6 +35,17 @@ export const EMPTY_WEAPONS_STATS: Stats = {
   guess_distribution: Array(WEAPONS_MAX_GUESSES).fill(0),
 };
 
+// Bosses guess cap — single source of truth (mirrors WEAPONS_MAX_GUESSES). Drives
+// the win/lose check in BossesPage, the HowToPlay copy, the empty-stats bucket
+// count, the stored-stats length validation, and the menu card. The backend does
+// NOT ship this in /today — keep it in sync with BOSSES_MAX_GUESSES on the server.
+export const BOSSES_MAX_GUESSES = 7;
+
+export const EMPTY_BOSSES_STATS: Stats = {
+  ...EMPTY_STATS,
+  guess_distribution: Array(BOSSES_MAX_GUESSES).fill(0),
+};
+
 /** True when `today` is exactly one calendar day after `prev` (both YYYY-MM-DD, UTC). */
 export function isPreviousDay(today: string, prev: string): boolean {
   const t = new Date(today + "T00:00:00Z");

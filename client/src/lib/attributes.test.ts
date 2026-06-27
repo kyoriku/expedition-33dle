@@ -1,13 +1,14 @@
 import { describe, expect, it } from "vitest";
 import {
   ATTRIBUTES,
+  BOSSES_ATTRIBUTES,
   cellAriaLabel,
   describeState,
   FIELD_ORDER,
   PICTOS_ATTRIBUTES,
   STATE_GLYPH,
 } from "./attributes";
-import type { Character, Picto } from "./types";
+import type { Boss, Character, Picto } from "./types";
 
 const SPARSE: Character = {
   id: 1,
@@ -139,5 +140,62 @@ describe("PICTOS_ATTRIBUTES config", () => {
     const act = PICTOS_ATTRIBUTES.find((a) => a.key === "act_introduced")!;
     expect(act.format({ ...SPARSE_PICTO, act_introduced: 1 })).toBe("1");
     expect(act.format({ ...SPARSE_PICTO, act_introduced: 3 })).toBe("3");
+  });
+});
+
+const SPARSE_BOSS: Boss = {
+  id: 1,
+  name: "X",
+  weakness: [],
+  resistance: [],
+  category: "Nevron",
+  location: "Flying Manor",
+  encounter: "Required",
+  act_introduced: 1,
+  image: null,
+};
+
+describe("BOSSES_ATTRIBUTES config", () => {
+  it("lists the 6 comparison columns in order", () => {
+    expect(BOSSES_ATTRIBUTES.map((a) => a.key)).toEqual([
+      "weakness",
+      "resistance",
+      "category",
+      "location",
+      "encounter",
+      "act_introduced",
+    ]);
+  });
+
+  it("formats sparse weakness/resistance with an em dash", () => {
+    const byKey = Object.fromEntries(
+      BOSSES_ATTRIBUTES.map((a) => [a.key, a.format(SPARSE_BOSS)]),
+    );
+    expect(byKey.weakness).toBe("—");
+    expect(byKey.resistance).toBe("—");
+    expect(byKey.category).toBe("Nevron");
+  });
+
+  it("formats present multi-value and scalar values", () => {
+    const b: Boss = {
+      ...SPARSE_BOSS,
+      weakness: ["Fire", "Light"],
+      resistance: ["Ice"],
+      act_introduced: 2,
+    };
+    const byKey = Object.fromEntries(
+      BOSSES_ATTRIBUTES.map((a) => [a.key, a.format(b)]),
+    );
+    expect(byKey.weakness).toBe("Fire • Light");
+    expect(byKey.resistance).toBe("Ice");
+    expect(byKey.location).toBe("Flying Manor");
+    expect(byKey.encounter).toBe("Required");
+    expect(byKey.act_introduced).toBe("2");
+  });
+
+  it("renders act as the number", () => {
+    const act = BOSSES_ATTRIBUTES.find((a) => a.key === "act_introduced")!;
+    expect(act.format({ ...SPARSE_BOSS, act_introduced: 1 })).toBe("1");
+    expect(act.format({ ...SPARSE_BOSS, act_introduced: 3 })).toBe("3");
   });
 });
