@@ -16,7 +16,7 @@ Fields appear in schema order:
 | `max_power` | int | `weapons.max_power` — `Integer` (numeric, scored by direction) |
 | `scaling_stats` | array of strings (closed set) | `weapons.scaling_stats` — `ARRAY(String(16))`, NOT NULL, default `{}` |
 | `source` | string (closed set) | `weapons.source` — `String(16)` |
-| `act_introduced` | int | `weapons.act_introduced` — `Integer` (1–4; scored by direction) |
+| `act_introduced` | int | `weapons.act_introduced` — `Integer` (1–3; scored by direction) |
 | `image` | string or null | `weapons.image` — `String(128)`, **nullable** — icon filename (see [README.md](README.md#images)) |
 
 ## Closed value sets
