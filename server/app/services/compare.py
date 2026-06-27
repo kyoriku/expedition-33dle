@@ -1,12 +1,17 @@
 """Per-attribute guess scoring, shared across game modes.
 
 Pure functions over ORM rows — no I/O — so they are unit-testable. Each mode
-has its own `*_feedback()` (classic now; pictos later) that builds on the
+has its own `*_feedback()` (classic, pictos, weapon, boss) that builds on the
 shared `set_feedback()` set-comparison primitive.
 """
 
-from app.models import Character, Picto, Weapon
-from app.schemas import ClassicGuessFeedback, PictoGuessFeedback, WeaponGuessFeedback
+from app.models import Boss, Character, Picto, Weapon
+from app.schemas import (
+    BossGuessFeedback,
+    ClassicGuessFeedback,
+    PictoGuessFeedback,
+    WeaponGuessFeedback,
+)
 
 
 def set_feedback(guess_values, answer_values) -> str:
@@ -90,5 +95,24 @@ def weapon_feedback(guess: Weapon, answer: Weapon) -> WeaponGuessFeedback:
         max_power=direction_feedback(guess.max_power, answer.max_power),
         scaling_stats=set_feedback(guess.scaling_stats, answer.scaling_stats),
         source="match" if guess.source == answer.source else "miss",
+        act_introduced=direction_feedback(guess.act_introduced, answer.act_introduced),
+    )
+
+
+def boss_feedback(guess: Boss, answer: Boss) -> BossGuessFeedback:
+    """Compare a guess boss to the answer boss, attribute by attribute.
+
+    Pure function of the two rows — no I/O. set_feedback() for the multi-value
+    weakness and resistance (which may be empty on either side — empty-vs-empty is
+    a match, empty-vs-nonempty a miss, with no special-casing), scalar equality for
+    the closed-set and free-form scalar fields (category, location, encounter), and
+    direction_feedback() for the ordinal act_introduced.
+    """
+    return BossGuessFeedback(
+        weakness=set_feedback(guess.weakness, answer.weakness),
+        resistance=set_feedback(guess.resistance, answer.resistance),
+        category="match" if guess.category == answer.category else "miss",
+        location="match" if guess.location == answer.location else "miss",
+        encounter="match" if guess.encounter == answer.encounter else "miss",
         act_introduced=direction_feedback(guess.act_introduced, answer.act_introduced),
     )
