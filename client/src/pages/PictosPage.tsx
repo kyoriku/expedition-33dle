@@ -6,10 +6,10 @@ import Modal from "../components/Modal";
 import Countdown from "../components/Countdown";
 import GuessInput from "../components/GuessInput";
 import GuessGridBase from "../components/GuessGridBase";
-import PictosLastTry from "../components/PictosLastTry";
+import LastTryBase from "../components/LastTryBase";
 import AnswerRevealBase from "../components/AnswerRevealBase";
 import HowToPlayBase from "../components/HowToPlayBase";
-import { PICTOS_GRID_TEMPLATE } from "../components/gridTemplates";
+import { PICTOS_GRID_TEMPLATE } from "../lib/gridTemplates";
 import { PICTOS_ATTRIBUTES } from "../lib/attributes";
 import StatsBlock from "../components/StatsBlock";
 import Histogram from "../components/Histogram";
@@ -391,7 +391,10 @@ function Game({ today }: { today: PictoTodayResponse }) {
           {guesses.length > 0 && (
             <>
               <Legend />
-              <PictosLastTry guess={guesses[guesses.length - 1]} />
+              <LastTryBase<Picto, PictoGuessFeedback>
+                guess={guesses[guesses.length - 1]}
+                attributes={PICTOS_ATTRIBUTES}
+              />
             </>
           )}
           <GuessGridBase<Picto, PictoGuessFeedback>

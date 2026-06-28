@@ -6,10 +6,10 @@ import Modal from "../components/Modal";
 import Countdown from "../components/Countdown";
 import GuessInput from "../components/GuessInput";
 import GuessGridBase from "../components/GuessGridBase";
-import WeaponsLastTry from "../components/WeaponsLastTry";
+import LastTryBase from "../components/LastTryBase";
 import AnswerRevealBase from "../components/AnswerRevealBase";
 import HowToPlayBase from "../components/HowToPlayBase";
-import { WEAPONS_GRID_TEMPLATE } from "../components/gridTemplates";
+import { WEAPONS_GRID_TEMPLATE } from "../lib/gridTemplates";
 import { WEAPONS_ATTRIBUTES } from "../lib/attributes";
 import StatsBlock from "../components/StatsBlock";
 import Histogram from "../components/Histogram";
@@ -385,7 +385,10 @@ function Game({ today }: { today: WeaponTodayResponse }) {
           {guesses.length > 0 && (
             <>
               <Legend />
-              <WeaponsLastTry guess={guesses[guesses.length - 1]} />
+              <LastTryBase<Weapon, WeaponGuessFeedback>
+                guess={guesses[guesses.length - 1]}
+                attributes={WEAPONS_ATTRIBUTES}
+              />
             </>
           )}
           <GuessGridBase<Weapon, WeaponGuessFeedback>
