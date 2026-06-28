@@ -1,12 +1,19 @@
-import { WEAPONS_ATTRIBUTES } from "../lib/attributes";
-import type { WeaponGuessResponse } from "../lib/types";
+import type { AttributeDescriptor, CellState } from "../lib/attributes";
+import type { GuessResult } from "./GuessCells";
 
 /** Segmented bar summarizing how many attributes the most recent guess matched
- *  exactly — a quick "getting warmer" read above the grid. */
-export default function WeaponsLastTry({ guess }: { guess: WeaponGuessResponse }) {
-  const total = WEAPONS_ATTRIBUTES.length;
-  const exact = WEAPONS_ATTRIBUTES.filter(
-    (a) => guess.feedback[a.key] === "match",
+ *  exactly — a quick "getting warmer" read above the grid. Generic over the mode's
+ *  attribute config (every page passes its own); replaces the four per-mode copies. */
+export default function LastTryBase<T, F>({
+  guess,
+  attributes,
+}: {
+  guess: GuessResult<T, F>;
+  attributes: readonly AttributeDescriptor<T, F>[];
+}) {
+  const total = attributes.length;
+  const exact = attributes.filter(
+    (a) => (guess.feedback[a.key] as CellState) === "match",
   ).length;
   return (
     <div className="mx-auto mt-2.5 mb-1 flex w-fit max-w-full items-center gap-3">

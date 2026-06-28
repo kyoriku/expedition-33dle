@@ -7,7 +7,7 @@ import Legend from "../components/Legend";
 import GuessGridBase from "../components/GuessGridBase";
 import GuessInput from "../components/GuessInput";
 import HowToPlayBase from "../components/HowToPlayBase";
-import { CLASSIC_GRID_TEMPLATE } from "../components/gridTemplates";
+import { CLASSIC_GRID_TEMPLATE } from "../lib/gridTemplates";
 import { ATTRIBUTES } from "../lib/attributes";
 import Modal from "../components/Modal";
 import { ApiError, fetchToday, revealAnswer, submitGuess } from "../lib/api";
@@ -18,7 +18,7 @@ import { usePageTitle } from "../lib/usePageTitle";
 import StatsBlock from "../components/StatsBlock";
 import Histogram from "../components/Histogram";
 import Countdown from "../components/Countdown";
-import LastTry from "../components/LastTry";
+import LastTryBase from "../components/LastTryBase";
 import {
   loadState,
   loadStats,
@@ -364,7 +364,10 @@ function Game({ today }: { today: ClassicTodayResponse }) {
           {guesses.length > 0 && (
             <>
               <Legend />
-              <LastTry guess={guesses[guesses.length - 1]} />
+              <LastTryBase<Character, ClassicGuessFeedback>
+                guess={guesses[guesses.length - 1]}
+                attributes={ATTRIBUTES}
+              />
             </>
           )}
           <GuessGridBase<Character, ClassicGuessFeedback>

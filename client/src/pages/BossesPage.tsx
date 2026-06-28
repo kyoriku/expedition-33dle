@@ -6,10 +6,10 @@ import Modal from "../components/Modal";
 import Countdown from "../components/Countdown";
 import GuessInput from "../components/GuessInput";
 import GuessGridBase from "../components/GuessGridBase";
-import BossesLastTry from "../components/BossesLastTry";
+import LastTryBase from "../components/LastTryBase";
 import AnswerRevealBase from "../components/AnswerRevealBase";
 import HowToPlayBase from "../components/HowToPlayBase";
-import { BOSSES_GRID_TEMPLATE } from "../components/gridTemplates";
+import { BOSSES_GRID_TEMPLATE } from "../lib/gridTemplates";
 import { BOSSES_ATTRIBUTES } from "../lib/attributes";
 import StatsBlock from "../components/StatsBlock";
 import Histogram from "../components/Histogram";
@@ -383,7 +383,10 @@ function Game({ today }: { today: BossTodayResponse }) {
           {guesses.length > 0 && (
             <>
               <Legend />
-              <BossesLastTry guess={guesses[guesses.length - 1]} />
+              <LastTryBase<Boss, BossGuessFeedback>
+                guess={guesses[guesses.length - 1]}
+                attributes={BOSSES_ATTRIBUTES}
+              />
             </>
           )}
           <GuessGridBase<Boss, BossGuessFeedback>
