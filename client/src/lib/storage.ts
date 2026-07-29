@@ -1,5 +1,6 @@
 import {
   BOSSES_MAX_GUESSES,
+  CLASSIC_MAX_GUESSES,
   EMPTY_BOSSES_STATS,
   EMPTY_PICTO_STATS,
   EMPTY_STATS,
@@ -15,315 +16,137 @@ import type {
   WeaponStoredGameState,
 } from "./types";
 
-const keyFor = (date: string) => `expedition33dle:classic:state:${date}`;
-
-// Cumulative across days — intentionally NO date suffix, unlike game-state keys.
-const STATS_KEY = "expedition33dle:classic:stats";
-
 const STATUSES = ["in_progress", "won", "lost"];
 
-/** Read stored state for the given puzzle date. Returns null (fresh game) on
- *  missing key, corrupt JSON, unexpected shape, or disabled storage. */
-export function loadState(date: string): StoredGameState | null {
-  try {
-    const raw = localStorage.getItem(keyFor(date));
-    if (!raw) return null;
-    const parsed: unknown = JSON.parse(raw);
-    if (typeof parsed !== "object" || parsed === null) return null;
-    const state = parsed as StoredGameState;
-    if (
-      !Array.isArray(state.guesses) ||
-      !STATUSES.includes(state.status) ||
-      typeof state.puzzle_number !== "number"
-    ) {
+/** Common shape of every mode's stored daily state — the fields loadState validates. */
+interface StoredGameLike {
+  guesses: unknown[];
+  status: string;
+  puzzle_number: number;
+  stats_recorded: boolean;
+}
+
+/** Build one mode's localStorage accessors. The mode `name` is the ONLY thing in
+ *  the key strings, so `expedition33dle:${name}:state:${date}` and `:stats` stay
+ *  byte-identical to the hand-written per-mode keys. `maxGuesses` gates the
+ *  stored-stats distribution length; `emptyStats` is the fallback returned on a
+ *  miss/corruption. Each mode gets its own namespace so daily state never collides. */
+function makeModeStorage<TState extends StoredGameLike>(
+  name: string,
+  maxGuesses: number,
+  emptyStats: Stats,
+) {
+  const statePrefix = `expedition33dle:${name}:state:`;
+  const keyFor = (date: string) => `${statePrefix}${date}`;
+  const statsKey = `expedition33dle:${name}:stats`;
+
+  /** Read stored state for the given puzzle date. Returns null (fresh game) on
+   *  missing key, corrupt JSON, unexpected shape, or disabled storage. */
+  function loadState(date: string): TState | null {
+    try {
+      const raw = localStorage.getItem(keyFor(date));
+      if (!raw) return null;
+      const parsed: unknown = JSON.parse(raw);
+      if (typeof parsed !== "object" || parsed === null) return null;
+      const state = parsed as TState;
+      if (
+        !Array.isArray(state.guesses) ||
+        !STATUSES.includes(state.status) ||
+        typeof state.puzzle_number !== "number"
+      ) {
+        return null;
+      }
+      // States written before stats tracking lack the flag; false is safe.
+      state.stats_recorded = state.stats_recorded === true;
+      return state;
+    } catch {
       return null;
     }
-    // States written before the stats feature lack the flag; false is safe.
-    state.stats_recorded = state.stats_recorded === true;
-    return state;
-  } catch {
-    return null;
   }
-}
 
-/** Persist state for the given puzzle date. Silently no-ops if storage is
- *  unavailable (e.g. private mode). */
-export function saveState(date: string, state: StoredGameState): void {
-  try {
-    localStorage.setItem(keyFor(date), JSON.stringify(state));
-  } catch {
-    // ignore
-  }
-}
-
-// Pictos game state — separate namespace from classic so the two modes' daily
-// state never collide.
-const pictosKeyFor = (date: string) => `expedition33dle:pictos:state:${date}`;
-
-/** Read stored pictos state for the given puzzle date. Returns null (fresh game)
- *  on missing key, corrupt JSON, unexpected shape, or disabled storage. */
-export function loadPictosState(date: string): PictoStoredGameState | null {
-  try {
-    const raw = localStorage.getItem(pictosKeyFor(date));
-    if (!raw) return null;
-    const parsed: unknown = JSON.parse(raw);
-    if (typeof parsed !== "object" || parsed === null) return null;
-    const state = parsed as PictoStoredGameState;
-    if (
-      !Array.isArray(state.guesses) ||
-      !STATUSES.includes(state.status) ||
-      typeof state.puzzle_number !== "number"
-    ) {
-      return null;
+  /** Persist state for the given puzzle date. Silently no-ops if storage is
+   *  unavailable (e.g. private mode). */
+  function saveState(date: string, state: TState): void {
+    try {
+      localStorage.setItem(keyFor(date), JSON.stringify(state));
+    } catch {
+      // ignore
     }
-    // States written before stats tracking lack the flag; false is safe.
-    state.stats_recorded = state.stats_recorded === true;
-    return state;
-  } catch {
-    return null;
   }
-}
 
-/** Persist pictos state for the given puzzle date. Silently no-ops if storage is
- *  unavailable. */
-export function savePictosState(date: string, state: PictoStoredGameState): void {
-  try {
-    localStorage.setItem(pictosKeyFor(date), JSON.stringify(state));
-  } catch {
-    // ignore
-  }
-}
-
-// Weapons game state — separate namespace from classic/pictos so the modes' daily
-// state never collide.
-const weaponsKeyFor = (date: string) => `expedition33dle:weapons:state:${date}`;
-
-/** Read stored weapons state for the given puzzle date. Returns null (fresh game)
- *  on missing key, corrupt JSON, unexpected shape, or disabled storage. */
-export function loadWeaponsState(date: string): WeaponStoredGameState | null {
-  try {
-    const raw = localStorage.getItem(weaponsKeyFor(date));
-    if (!raw) return null;
-    const parsed: unknown = JSON.parse(raw);
-    if (typeof parsed !== "object" || parsed === null) return null;
-    const state = parsed as WeaponStoredGameState;
-    if (
-      !Array.isArray(state.guesses) ||
-      !STATUSES.includes(state.status) ||
-      typeof state.puzzle_number !== "number"
-    ) {
-      return null;
+  /** Read cumulative stats. Returns emptyStats on missing key, corrupt JSON,
+   *  unexpected shape, or disabled storage. */
+  function loadStats(): Stats {
+    try {
+      const raw = localStorage.getItem(statsKey);
+      if (!raw) return emptyStats;
+      const parsed: unknown = JSON.parse(raw);
+      if (typeof parsed !== "object" || parsed === null) return emptyStats;
+      const stats = parsed as Stats;
+      if (
+        typeof stats.played !== "number" ||
+        typeof stats.won !== "number" ||
+        typeof stats.current_streak !== "number" ||
+        typeof stats.max_streak !== "number" ||
+        !Array.isArray(stats.guess_distribution) ||
+        stats.guess_distribution.length !== maxGuesses
+      ) {
+        return emptyStats;
+      }
+      return stats;
+    } catch {
+      return emptyStats;
     }
-    // States written before stats tracking lack the flag; false is safe.
-    state.stats_recorded = state.stats_recorded === true;
-    return state;
-  } catch {
-    return null;
   }
-}
 
-/** Persist weapons state for the given puzzle date. Silently no-ops if storage is
- *  unavailable. */
-export function saveWeaponsState(date: string, state: WeaponStoredGameState): void {
-  try {
-    localStorage.setItem(weaponsKeyFor(date), JSON.stringify(state));
-  } catch {
-    // ignore
-  }
-}
-
-// Bosses game state — separate namespace from classic/pictos/weapons so the modes'
-// daily state never collide.
-const bossesKeyFor = (date: string) => `expedition33dle:bosses:state:${date}`;
-
-/** Read stored bosses state for the given puzzle date. Returns null (fresh game)
- *  on missing key, corrupt JSON, unexpected shape, or disabled storage. */
-export function loadBossesState(date: string): BossStoredGameState | null {
-  try {
-    const raw = localStorage.getItem(bossesKeyFor(date));
-    if (!raw) return null;
-    const parsed: unknown = JSON.parse(raw);
-    if (typeof parsed !== "object" || parsed === null) return null;
-    const state = parsed as BossStoredGameState;
-    if (
-      !Array.isArray(state.guesses) ||
-      !STATUSES.includes(state.status) ||
-      typeof state.puzzle_number !== "number"
-    ) {
-      return null;
+  /** Persist cumulative stats. Silently no-ops if storage is unavailable. */
+  function saveStats(stats: Stats): void {
+    try {
+      localStorage.setItem(statsKey, JSON.stringify(stats));
+    } catch {
+      // ignore
     }
-    // States written before stats tracking lack the flag; false is safe.
-    state.stats_recorded = state.stats_recorded === true;
-    return state;
-  } catch {
-    return null;
   }
+
+  return { keyFor, statePrefix, statsKey, loadState, saveState, loadStats, saveStats };
 }
 
-/** Persist bosses state for the given puzzle date. Silently no-ops if storage is
- *  unavailable. */
-export function saveBossesState(date: string, state: BossStoredGameState): void {
-  try {
-    localStorage.setItem(bossesKeyFor(date), JSON.stringify(state));
-  } catch {
-    // ignore
-  }
-}
+// One isolated namespace per mode; the public functions below keep their original
+// names so every call site is unchanged.
+const classic = makeModeStorage<StoredGameState>("classic", CLASSIC_MAX_GUESSES, EMPTY_STATS);
+const pictos = makeModeStorage<PictoStoredGameState>("pictos", PICTOS_MAX_GUESSES, EMPTY_PICTO_STATS);
+const weapons = makeModeStorage<WeaponStoredGameState>("weapons", WEAPONS_MAX_GUESSES, EMPTY_WEAPONS_STATS);
+const bosses = makeModeStorage<BossStoredGameState>("bosses", BOSSES_MAX_GUESSES, EMPTY_BOSSES_STATS);
 
-/** Read cumulative stats. Returns EMPTY_STATS on missing key, corrupt JSON,
- *  unexpected shape, or disabled storage. */
-export function loadStats(): Stats {
-  try {
-    const raw = localStorage.getItem(STATS_KEY);
-    if (!raw) return EMPTY_STATS;
-    const parsed: unknown = JSON.parse(raw);
-    if (typeof parsed !== "object" || parsed === null) return EMPTY_STATS;
-    const stats = parsed as Stats;
-    if (
-      typeof stats.played !== "number" ||
-      typeof stats.won !== "number" ||
-      typeof stats.current_streak !== "number" ||
-      typeof stats.max_streak !== "number" ||
-      !Array.isArray(stats.guess_distribution) ||
-      stats.guess_distribution.length !== 6
-    ) {
-      return EMPTY_STATS;
-    }
-    return stats;
-  } catch {
-    return EMPTY_STATS;
-  }
-}
-
-/** Persist cumulative stats. Silently no-ops if storage is unavailable. */
-export function saveStats(stats: Stats): void {
-  try {
-    localStorage.setItem(STATS_KEY, JSON.stringify(stats));
-  } catch {
-    // ignore
-  }
-}
-
-// Pictos cumulative stats — separate namespace from classic; independent totals.
-const PICTOS_STATS_KEY = "expedition33dle:pictos:stats";
-
-/** Read cumulative pictos stats. Returns EMPTY_PICTO_STATS on missing key,
- *  corrupt JSON, unexpected shape, or disabled storage. */
-export function loadPictosStats(): Stats {
-  try {
-    const raw = localStorage.getItem(PICTOS_STATS_KEY);
-    if (!raw) return EMPTY_PICTO_STATS;
-    const parsed: unknown = JSON.parse(raw);
-    if (typeof parsed !== "object" || parsed === null) return EMPTY_PICTO_STATS;
-    const stats = parsed as Stats;
-    if (
-      typeof stats.played !== "number" ||
-      typeof stats.won !== "number" ||
-      typeof stats.current_streak !== "number" ||
-      typeof stats.max_streak !== "number" ||
-      !Array.isArray(stats.guess_distribution) ||
-      stats.guess_distribution.length !== PICTOS_MAX_GUESSES
-    ) {
-      return EMPTY_PICTO_STATS;
-    }
-    return stats;
-  } catch {
-    return EMPTY_PICTO_STATS;
-  }
-}
-
-/** Persist cumulative pictos stats. Silently no-ops if storage is unavailable. */
-export function savePictosStats(stats: Stats): void {
-  try {
-    localStorage.setItem(PICTOS_STATS_KEY, JSON.stringify(stats));
-  } catch {
-    // ignore
-  }
-}
-
-// Weapons cumulative stats — separate namespace from classic/pictos; independent totals.
-const WEAPONS_STATS_KEY = "expedition33dle:weapons:stats";
-
-/** Read cumulative weapons stats. Returns EMPTY_WEAPONS_STATS on missing key,
- *  corrupt JSON, unexpected shape, or disabled storage. */
-export function loadWeaponsStats(): Stats {
-  try {
-    const raw = localStorage.getItem(WEAPONS_STATS_KEY);
-    if (!raw) return EMPTY_WEAPONS_STATS;
-    const parsed: unknown = JSON.parse(raw);
-    if (typeof parsed !== "object" || parsed === null) return EMPTY_WEAPONS_STATS;
-    const stats = parsed as Stats;
-    if (
-      typeof stats.played !== "number" ||
-      typeof stats.won !== "number" ||
-      typeof stats.current_streak !== "number" ||
-      typeof stats.max_streak !== "number" ||
-      !Array.isArray(stats.guess_distribution) ||
-      stats.guess_distribution.length !== WEAPONS_MAX_GUESSES
-    ) {
-      return EMPTY_WEAPONS_STATS;
-    }
-    return stats;
-  } catch {
-    return EMPTY_WEAPONS_STATS;
-  }
-}
-
-/** Persist cumulative weapons stats. Silently no-ops if storage is unavailable. */
-export function saveWeaponsStats(stats: Stats): void {
-  try {
-    localStorage.setItem(WEAPONS_STATS_KEY, JSON.stringify(stats));
-  } catch {
-    // ignore
-  }
-}
-
-// Bosses cumulative stats — separate namespace from classic/pictos/weapons; independent totals.
-const BOSSES_STATS_KEY = "expedition33dle:bosses:stats";
-
-/** Read cumulative bosses stats. Returns EMPTY_BOSSES_STATS on missing key,
- *  corrupt JSON, unexpected shape, or disabled storage. */
-export function loadBossesStats(): Stats {
-  try {
-    const raw = localStorage.getItem(BOSSES_STATS_KEY);
-    if (!raw) return EMPTY_BOSSES_STATS;
-    const parsed: unknown = JSON.parse(raw);
-    if (typeof parsed !== "object" || parsed === null) return EMPTY_BOSSES_STATS;
-    const stats = parsed as Stats;
-    if (
-      typeof stats.played !== "number" ||
-      typeof stats.won !== "number" ||
-      typeof stats.current_streak !== "number" ||
-      typeof stats.max_streak !== "number" ||
-      !Array.isArray(stats.guess_distribution) ||
-      stats.guess_distribution.length !== BOSSES_MAX_GUESSES
-    ) {
-      return EMPTY_BOSSES_STATS;
-    }
-    return stats;
-  } catch {
-    return EMPTY_BOSSES_STATS;
-  }
-}
-
-/** Persist cumulative bosses stats. Silently no-ops if storage is unavailable. */
-export function saveBossesStats(stats: Stats): void {
-  try {
-    localStorage.setItem(BOSSES_STATS_KEY, JSON.stringify(stats));
-  } catch {
-    // ignore
-  }
-}
+export const { loadState, saveState, loadStats, saveStats } = classic;
+export const {
+  loadState: loadPictosState,
+  saveState: savePictosState,
+  loadStats: loadPictosStats,
+  saveStats: savePictosStats,
+} = pictos;
+export const {
+  loadState: loadWeaponsState,
+  saveState: saveWeaponsState,
+  loadStats: loadWeaponsStats,
+  saveStats: saveWeaponsStats,
+} = weapons;
+export const {
+  loadState: loadBossesState,
+  saveState: saveBossesState,
+  loadStats: loadBossesStats,
+  saveStats: saveBossesStats,
+} = bosses;
 
 // Daily-state keys accrue one per mode per day played; prune them on boot so
 // localStorage doesn't grow unbounded. ONLY :state:<date> keys are touched —
 // cumulative :stats keys (and any legacy keys, like the retired :tutorial_seen
 // flags) are intentionally preserved.
 const STATE_PREFIXES = [
-  "expedition33dle:classic:state:",
-  "expedition33dle:pictos:state:",
-  "expedition33dle:weapons:state:",
-  "expedition33dle:bosses:state:",
+  classic.statePrefix,
+  pictos.statePrefix,
+  weapons.statePrefix,
+  bosses.statePrefix,
 ];
 
 /** Delete every daily-state key whose date isn't `today` (UTC ISO, e.g.

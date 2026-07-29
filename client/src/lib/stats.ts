@@ -10,6 +10,12 @@ export const EMPTY_STATS: Stats = {
   last_played_date: null,
 };
 
+/** EMPTY_STATS with an n-bucket guess distribution (n = the mode's max guesses). */
+const emptyStatsFor = (n: number): Stats => ({
+  ...EMPTY_STATS,
+  guess_distribution: Array(n).fill(0),
+});
+
 // Classic guess cap — single source of truth (mirrors PICTOS_MAX_GUESSES below),
 // shared by ClassicPage's win/lose check, the HowToPlay copy, and the menu card.
 export const CLASSIC_MAX_GUESSES = 6;
@@ -19,10 +25,7 @@ export const CLASSIC_MAX_GUESSES = 6;
 // the stored-stats length validation, so they can't drift.
 export const PICTOS_MAX_GUESSES = 8;
 
-export const EMPTY_PICTO_STATS: Stats = {
-  ...EMPTY_STATS,
-  guess_distribution: Array(PICTOS_MAX_GUESSES).fill(0),
-};
+export const EMPTY_PICTO_STATS: Stats = emptyStatsFor(PICTOS_MAX_GUESSES);
 
 // Weapons guess cap — single source of truth (mirrors PICTOS_MAX_GUESSES). Drives
 // the win/lose check in WeaponsPage, the HowToPlay copy, the empty-stats bucket
@@ -30,10 +33,7 @@ export const EMPTY_PICTO_STATS: Stats = {
 // NOT ship this in /today — keep it in sync with WEAPONS_MAX_GUESSES on the server.
 export const WEAPONS_MAX_GUESSES = 8;
 
-export const EMPTY_WEAPONS_STATS: Stats = {
-  ...EMPTY_STATS,
-  guess_distribution: Array(WEAPONS_MAX_GUESSES).fill(0),
-};
+export const EMPTY_WEAPONS_STATS: Stats = emptyStatsFor(WEAPONS_MAX_GUESSES);
 
 // Bosses guess cap — single source of truth (mirrors WEAPONS_MAX_GUESSES). Drives
 // the win/lose check in BossesPage, the HowToPlay copy, the empty-stats bucket
@@ -41,10 +41,7 @@ export const EMPTY_WEAPONS_STATS: Stats = {
 // NOT ship this in /today — keep it in sync with BOSSES_MAX_GUESSES on the server.
 export const BOSSES_MAX_GUESSES = 7;
 
-export const EMPTY_BOSSES_STATS: Stats = {
-  ...EMPTY_STATS,
-  guess_distribution: Array(BOSSES_MAX_GUESSES).fill(0),
-};
+export const EMPTY_BOSSES_STATS: Stats = emptyStatsFor(BOSSES_MAX_GUESSES);
 
 /** True when `today` is exactly one calendar day after `prev` (both YYYY-MM-DD, UTC). */
 export function isPreviousDay(today: string, prev: string): boolean {
