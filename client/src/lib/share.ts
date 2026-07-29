@@ -4,13 +4,18 @@ import {
   PICTOS_FIELD_ORDER,
   WEAPONS_FIELD_ORDER,
 } from "./attributes";
-import { BOSSES_MAX_GUESSES, PICTOS_MAX_GUESSES, WEAPONS_MAX_GUESSES } from "./stats";
+import {
+  BOSSES_MAX_GUESSES,
+  CLASSIC_MAX_GUESSES,
+  PICTOS_MAX_GUESSES,
+  WEAPONS_MAX_GUESSES,
+} from "./stats";
 import type {
   GameStatus,
-  BossGuessResponse,
-  ClassicGuessResponse,
-  PictoGuessResponse,
-  WeaponGuessResponse,
+  BossGuessFeedback,
+  ClassicGuessFeedback,
+  PictoGuessFeedback,
+  WeaponGuessFeedback,
 } from "./types";
 
 // Spoiler-free by construction: higher/lower fold into the same square as
@@ -23,60 +28,50 @@ const EMOJI: Record<string, string> = {
   lower: "🟥",
 };
 
-export function buildShareString(
-  guesses: ClassicGuessResponse[],
-  puzzleNumber: number,
-  status: GameStatus,
-): string {
-  const score = status === "won" ? String(guesses.length) : "X";
-  // Oldest-on-top, newest at the bottom — matches the on-screen grid order.
-  const grid = guesses
-    .map((g) => FIELD_ORDER.map((f) => EMOJI[g.feedback[f]]).join(""))
-    .join("\n");
-  return `Expedition 33dle Classic #${puzzleNumber} ${score}/6\n\n${grid}\n\nhttps://expedition33dle.com/classic`;
+/** Build one mode's share-string formatter. `name` gives both the label
+ *  (capitalized) and the URL slug; `fieldOrder` is the column/emoji order;
+ *  `maxGuesses` is the score denominator. Output is byte-identical to the
+ *  hand-written per-mode builders (oldest row on top). */
+function makeShareBuilder<F>(
+  name: string,
+  fieldOrder: readonly (keyof F & string)[],
+  maxGuesses: number,
+) {
+  const label = name[0].toUpperCase() + name.slice(1);
+  return (
+    guesses: readonly { feedback: F }[],
+    puzzleNumber: number,
+    status: GameStatus,
+  ): string => {
+    const score = status === "won" ? String(guesses.length) : "X";
+    // Oldest-on-top, newest at the bottom — matches the on-screen grid order.
+    const grid = guesses
+      .map((g) => fieldOrder.map((f) => EMOJI[String(g.feedback[f])]).join(""))
+      .join("\n");
+    return `Expedition 33dle ${label} #${puzzleNumber} ${score}/${maxGuesses}\n\n${grid}\n\nhttps://expedition33dle.com/${name}`;
+  };
 }
 
-export function buildPictosShareString(
-  guesses: PictoGuessResponse[],
-  puzzleNumber: number,
-  status: GameStatus,
-): string {
-  const score = status === "won" ? String(guesses.length) : "X";
-  // Oldest-on-top, newest at the bottom — matches the on-screen grid order.
-  const grid = guesses
-    .map((g) => PICTOS_FIELD_ORDER.map((f) => EMOJI[g.feedback[f]]).join(""))
-    .join("\n");
-  // "Pictos" labels the mode; URL points recipients at /pictos.
-  return `Expedition 33dle Pictos #${puzzleNumber} ${score}/${PICTOS_MAX_GUESSES}\n\n${grid}\n\nhttps://expedition33dle.com/pictos`;
-}
-
-export function buildWeaponsShareString(
-  guesses: WeaponGuessResponse[],
-  puzzleNumber: number,
-  status: GameStatus,
-): string {
-  const score = status === "won" ? String(guesses.length) : "X";
-  // Oldest-on-top, newest at the bottom — matches the on-screen grid order.
-  const grid = guesses
-    .map((g) => WEAPONS_FIELD_ORDER.map((f) => EMOJI[g.feedback[f]]).join(""))
-    .join("\n");
-  // "Weapons" labels the mode; URL points recipients at /weapons.
-  return `Expedition 33dle Weapons #${puzzleNumber} ${score}/${WEAPONS_MAX_GUESSES}\n\n${grid}\n\nhttps://expedition33dle.com/weapons`;
-}
-
-export function buildBossesShareString(
-  guesses: BossGuessResponse[],
-  puzzleNumber: number,
-  status: GameStatus,
-): string {
-  const score = status === "won" ? String(guesses.length) : "X";
-  // Oldest-on-top, newest at the bottom — matches the on-screen grid order.
-  const grid = guesses
-    .map((g) => BOSSES_FIELD_ORDER.map((f) => EMOJI[g.feedback[f]]).join(""))
-    .join("\n");
-  // "Bosses" labels the mode; URL points recipients at /bosses.
-  return `Expedition 33dle Bosses #${puzzleNumber} ${score}/${BOSSES_MAX_GUESSES}\n\n${grid}\n\nhttps://expedition33dle.com/bosses`;
-}
+export const buildShareString = makeShareBuilder<ClassicGuessFeedback>(
+  "classic",
+  FIELD_ORDER,
+  CLASSIC_MAX_GUESSES,
+);
+export const buildPictosShareString = makeShareBuilder<PictoGuessFeedback>(
+  "pictos",
+  PICTOS_FIELD_ORDER,
+  PICTOS_MAX_GUESSES,
+);
+export const buildWeaponsShareString = makeShareBuilder<WeaponGuessFeedback>(
+  "weapons",
+  WEAPONS_FIELD_ORDER,
+  WEAPONS_MAX_GUESSES,
+);
+export const buildBossesShareString = makeShareBuilder<BossGuessFeedback>(
+  "bosses",
+  BOSSES_FIELD_ORDER,
+  BOSSES_MAX_GUESSES,
+);
 
 export type ShareResult = "shared" | "copied" | "cancelled" | "failed";
 

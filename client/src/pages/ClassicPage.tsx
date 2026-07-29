@@ -5,6 +5,7 @@ import GameStatus from "../components/GameStatus";
 import Header from "../components/Header";
 import Legend from "../components/Legend";
 import GuessGridBase from "../components/GuessGridBase";
+import GuessError from "../components/GuessError";
 import GuessInput from "../components/GuessInput";
 import HowToPlayBase from "../components/HowToPlayBase";
 import { CLASSIC_GRID_TEMPLATE } from "../lib/gridTemplates";
@@ -354,13 +355,7 @@ function Game({ today }: { today: ClassicTodayResponse }) {
             disabled={guessMutation.isPending}
             onSubmit={handleGuess}
           />
-          {guessMutation.isError && (
-            <p className="mt-2 rounded-md bg-red-900/60 p-2 text-center text-xs text-red-200">
-              {guessMutation.error instanceof ApiError
-                ? guessMutation.error.message
-                : "Guess failed — check your connection and try again"}
-            </p>
-          )}
+          {guessMutation.isError && <GuessError error={guessMutation.error} />}
           {guesses.length > 0 && (
             <>
               <Legend />
