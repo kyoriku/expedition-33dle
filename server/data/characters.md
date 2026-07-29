@@ -31,15 +31,15 @@ away — but several attributes intentionally carry singletons (see below).
 - `affiliation` (**array** — a character can belong to several): Expedition 33,
   Lumière, Expedition Zero, Dessendre Family, Painted Dessendre Family, Gestrals,
   Independent. Scored as a set like `element` (exact / partial overlap / miss).
-- `zone` (20 values): Lumière, Spring Meadows, Flying Waters, Ancient Sanctuary,
+- `zone` (19 values): Lumière, Spring Meadows, Flying Waters, Ancient Sanctuary,
   Esquie's Nest, Gestral Village, Stone Wave Cliffs, Forgotten Battlefield,
-  Landing Beach, Sirène, Visages, The Reacher, The Monolith, White Sands,
+  Sirène, Visages, The Reacher, The Monolith, White Sands,
   Falling Leaves, The Manor, The Abyss, Flying Manor, Frozen Hearts,
   Monoco's Station
 
   Distribution across the 33-character roster: Lumière 6 · The Manor 5 ·
-  Stone Wave Cliffs 2 · Flying Waters 2 · Esquie's Nest 2 · Sirène 2; the
-  remaining 14 zones (Gestral Village [Golgra only], Landing Beach, Monoco's
+  Stone Wave Cliffs 3 · Flying Waters 2 · Esquie's Nest 2 · Sirène 2; the
+  remaining 13 zones (Gestral Village [Golgra only], Monoco's
   Station, The Reacher, Visages, The Monolith, The Abyss, Flying Manor, Spring
   Meadows, Ancient Sanctuary, Forgotten Battlefield, White Sands, Falling Leaves,
   Frozen Hearts) have a single character each.
@@ -64,7 +64,7 @@ Dessendres carry `Dessendre Family` / `Painted Dessendre Family`; their creation
 fight for. Scored as a set: full overlap = match, partial overlap = partial,
 none = miss.
 
-**act_introduced** — party members get the act they become playable (Verso 2,
+**act_introduced** — party members get the act they become playable (Verso 1,
 Monoco 2). NPCs and bosses get the act of first appearance. The Prologue
 counts as Act 1.
 
