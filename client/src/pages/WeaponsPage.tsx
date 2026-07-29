@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Legend from "../components/Legend";
 import Modal from "../components/Modal";
 import Countdown from "../components/Countdown";
+import GuessError from "../components/GuessError";
 import GuessInput from "../components/GuessInput";
 import GuessGridBase from "../components/GuessGridBase";
 import LastTryBase from "../components/LastTryBase";
@@ -375,13 +376,7 @@ function Game({ today }: { today: WeaponTodayResponse }) {
             onSubmit={handleGuess}
             noun="Weapon"
           />
-          {guessMutation.isError && (
-            <p className="mt-2 rounded-md bg-red-900/60 p-2 text-center text-xs text-red-200">
-              {guessMutation.error instanceof ApiError
-                ? guessMutation.error.message
-                : "Guess failed — check your connection and try again"}
-            </p>
-          )}
+          {guessMutation.isError && <GuessError error={guessMutation.error} />}
           {guesses.length > 0 && (
             <>
               <Legend />

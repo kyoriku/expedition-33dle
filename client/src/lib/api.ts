@@ -25,9 +25,14 @@ export class ApiError extends Error {
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(path, init);
   if (!res.ok) {
+    // Only a string detail is player-facing copy. FastAPI's 422 body carries a
+    // list of validation objects, which String() would render as
+    // "[object Object]" straight into the guess-error banner.
     const detail = await res
       .json()
-      .then((body: { detail?: unknown }) => String(body.detail ?? res.statusText))
+      .then((body: { detail?: unknown }) =>
+        typeof body.detail === "string" && body.detail ? body.detail : res.statusText,
+      )
       .catch(() => res.statusText);
     throw new ApiError(res.status, detail);
   }

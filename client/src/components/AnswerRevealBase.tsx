@@ -69,19 +69,21 @@ export default function AnswerRevealBase<T extends NamedEntity, F>({
         </div>
       ) : isError ? (
         <div>
-          <p className="text-muted text-center text-xs italic">
+          <p className="font-serif text-muted text-center text-sm italic md:text-base">
             Could not load answer
           </p>
           <button
             type="button"
             onClick={onRetry}
-            className="border-gold text-gold hover:text-gold-bright hover:border-gold-bright mx-auto mt-1 block rounded-md border px-3 py-1 text-xs font-semibold"
+            className="border-gold text-gold hover:text-gold-bright hover:border-gold-bright font-label mx-auto mt-2 block border px-4 py-1.5 text-sm tracking-[0.18em] uppercase"
           >
             Retry
           </button>
         </div>
       ) : (
-        <p className="text-muted text-center text-xs italic">Revealing…</p>
+        <p className="font-serif text-muted text-center text-sm italic md:text-base">
+          Revealing…
+        </p>
       )}
     </section>
   );
