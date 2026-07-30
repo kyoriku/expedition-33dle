@@ -2,6 +2,6 @@
   "$schema": "https://railway.app/railway.schema.json",
   "deploy": {
     "healthcheckPath": "/api/health",
-    "preDeployCommand": "uv run --no-sync alembic upgrade head && uv run --no-sync python scripts/seed.py"
+    "preDeployCommand": "sh scripts/predeploy.sh"
   }
 }

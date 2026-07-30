@@ -15,11 +15,13 @@ automatable lives in `Dockerfile` / `railway.json` / `scripts/seed.py`.
    no need to hand-compose the URL.)
 4. App service → Settings → Networking → **Generate Domain** for a
    `*.up.railway.app` URL to test against before DNS.
-5. **Positive confirmation after the first deploy** (railway.json is silently
+5. **Positive confirmation after every deploy** (railway.json is silently
    ignored if malformed — verify, don't assume):
    - Settings shows healthcheck path `/api/health` populated.
-   - Deploy logs show the pre-deploy command running **alembic** then **seed**,
-     with the seed guard passing (`bosses ... total: 50`).
+   - Deploy logs show all three `predeploy:` banners — `alembic upgrade head`,
+     `seeding` (followed by the four seed count lines, `bosses ... total: 50`),
+     and `complete`. A missing `predeploy: complete` means seed did not run —
+     do not point DNS at a deploy without it.
    - Note: Railway private networking takes a few seconds to come up at
      container start — a first-attempt alembic connection failure in
      pre-deploy is that, not the URL scheme.
