@@ -26,6 +26,18 @@ automatable lives in `Dockerfile` / `railway.json` / `scripts/seed.py`.
      container start — a first-attempt alembic connection failure in
      pre-deploy is that, not the URL scheme.
 
+### CI gate (tests must pass before deploy)
+
+`.github/workflows/tests.yml` runs both suites (pytest + vitest) on every
+push to main and every PR. To make a red run **block the deploy**: Railway →
+app service → Settings → enable **Wait for CI**. Railway then holds the
+build until the commit's GitHub checks succeed. Optional extra: GitHub
+branch protection on `main` requiring the `tests` checks before merge.
+
+Until 2026-08-01 UTC the 28 wall-clock endpoint tests are red by choice
+(pre-launch, routers correctly raise PuzzleNotYetAvailable) — the first
+green run happens on launch day.
+
 ### Verify on the Railway domain (before DNS)
 
 - `curl https://<app>.up.railway.app/api/health` → `{"status":"ok"}`
