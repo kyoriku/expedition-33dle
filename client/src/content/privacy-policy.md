@@ -1,6 +1,6 @@
 # Privacy Policy
 
-Effective: [DATE BEFORE LAUNCH]
+Effective: August 1, 2026
 
 ## 1. About this site
 

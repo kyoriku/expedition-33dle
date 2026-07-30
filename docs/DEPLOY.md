@@ -38,7 +38,7 @@ automatable lives in `Dockerfile` / `railway.json` / `scripts/seed.py`.
 
 > **LAUNCH_DATE is only truly frozen once real players hold local streak
 > state — the Cloudflare CNAME cutover is the last point at which it can
-> still be changed.** If launch slips past 2026-07-30: bump `LAUNCH_DATE`
+> still be changed.** If launch slips past 2026-08-01: bump `LAUNCH_DATE`
 > in `server/app/constants.py`, redeploy, *then* point DNS — that gives a
 > clean puzzle #1 on the real launch day.
 
@@ -85,7 +85,7 @@ edge caching and no browser caching.
 - Second fetch of an image URL → `cf-cache-status: HIT`
 - `/api/classic/today` → `cf-cache-status: BYPASS` (or `DYNAMIC`)
 - `http://` and `www.` both 301 to the `https://` apex
-- Full game end-to-end on launch day (2026-07-30 UTC = puzzle #1)
+- Full game end-to-end on launch day (2026-08-01 UTC = puzzle #1)
 
 ## Standing rules
 
