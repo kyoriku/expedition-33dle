@@ -314,10 +314,10 @@ async def prune_all(conn, allow: bool) -> dict[str, int]:
     candidates = await collect_prune_candidates(conn)
     messages = gate_prunes(candidates, allow)
     if messages:
-        print("SEED PRUNE BLOCKED — no writes performed:")
+        print("SEED PRUNE BLOCKED — no writes performed:", file=sys.stderr)
         for msg in messages:
-            print(f"  {msg}")
-        print(COUNT_GATE_RESOLUTION)
+            print(f"  {msg}", file=sys.stderr)
+        print(COUNT_GATE_RESOLUTION, file=sys.stderr)
         sys.exit(1)
     return await apply_prunes(conn, candidates)
 
@@ -439,10 +439,10 @@ async def main() -> None:
         {mode: len(rows) for mode, _, rows in MODES}
     )
     if mismatches:
-        print("SEED COUNT GATE FAILED — no writes performed:")
+        print("SEED COUNT GATE FAILED — no writes performed:", file=sys.stderr)
         for msg in mismatches:
-            print(f"  {msg}")
-        print(COUNT_GATE_RESOLUTION)
+            print(f"  {msg}", file=sys.stderr)
+        print(COUNT_GATE_RESOLUTION, file=sys.stderr)
         sys.exit(1)
     allow_prune = os.environ.get("ALLOW_SEED_PRUNE") == "1"
     async with engine.begin() as conn:
@@ -453,18 +453,21 @@ async def main() -> None:
         p_ins, p_upd = await upsert_pictos(conn)
         w_ins, w_upd = await upsert_weapons(conn)
         b_ins, b_upd = await upsert_bosses(conn)
-    print(f"characters pruned: {pruned['characters']}, upserted: {len(name_to_id)}")
+    print(f"characters pruned: {pruned['characters']}, upserted: {len(name_to_id)}", file=sys.stderr)
     print(
         f"pictos pruned: {pruned['pictos']}, inserted: {p_ins}, "
-        f"updated: {p_upd}, total: {p_ins + p_upd}"
+        f"updated: {p_upd}, total: {p_ins + p_upd}",
+        file=sys.stderr,
     )
     print(
         f"weapons pruned: {pruned['weapons']}, inserted: {w_ins}, "
-        f"updated: {w_upd}, total: {w_ins + w_upd}"
+        f"updated: {w_upd}, total: {w_ins + w_upd}",
+        file=sys.stderr,
     )
     print(
         f"bosses pruned: {pruned['bosses']}, inserted: {b_ins}, "
-        f"updated: {b_upd}, total: {b_ins + b_upd}"
+        f"updated: {b_upd}, total: {b_ins + b_upd}",
+        file=sys.stderr,
     )
     await engine.dispose()
 
