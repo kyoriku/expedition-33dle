@@ -143,9 +143,8 @@ export default function MenuPage() {
   return (
     <main className="mx-auto flex w-full max-w-xl flex-1 flex-col  px-4 py-8 md:py-12 md:max-w-3xl md:px-6 lg:max-w-6xl">
       <Header />
-      {/* <main> widens to max-w-6xl at lg (matching the game pages, so the header
-          self-constrains to the same 768px offset); keep the menu content at that
-          width so it stays aligned with the header. */}
+      {/* The header spans the full lg:max-w-6xl frame (same as the game pages);
+          menu content stays a narrower centered column beneath it. */}
       <div className="mx-auto w-full max-w-xl md:max-w-3xl">
         <p className="font-serif text-muted mt-2 mb-1 text-center text-base italic md:text-lg">
           Choose a daily puzzle.

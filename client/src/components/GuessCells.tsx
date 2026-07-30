@@ -33,9 +33,10 @@ export const CELL_BASE =
   "text-center text-sm leading-snug break-words font-serif lg:min-h-24 " +
   "shadow-[inset_0_1px_0_rgba(255,255,255,.08)]";
 
-// Name cell geometry (left-aligned, holds the portrait).
+// Name cell geometry (left-aligned, holds the portrait). px-2 matches the 8px
+// vertical inset the 80px portrait gets naturally inside the 96px row.
 export const NAME_CELL_BASE =
-  "relative flex h-23 items-center gap-2.5 overflow-hidden px-2.5 lg:min-h-24 " +
+  "relative flex h-23 items-center gap-2.5 overflow-hidden px-2 lg:min-h-24 " +
   "shadow-[inset_0_1px_0_rgba(255,255,255,.08)]";
 
 // Correct guess: the name cell becomes the gold brand moment.
@@ -43,7 +44,7 @@ export const WIN_NAME =
   "bg-panneau border border-gold-bright text-gold-bright " +
   "shadow-[inset_0_0_12px_rgba(217,169,63,.15)]";
 
-export const PORTRAIT_SIZE = "h-12 w-12 md:h-14 md:w-14 lg:h-16 lg:w-16";
+export const PORTRAIT_SIZE = "h-14 w-14 md:h-16 md:w-16 lg:h-20 lg:w-20";
 
 // Value text: semibold EB Garamond. (No drop-shadow — the gradients already
 // meet AA contrast, and a shadow muddied the dark text on the gold cells.)
