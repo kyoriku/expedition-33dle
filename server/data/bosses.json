@@ -7,7 +7,7 @@
     "location": "The Reacher",
     "encounter": "Optional",
     "act_introduced": 3,
-    "image": null
+    "image": "alicia.webp"
   },
   {
     "name": "Bourgeon",
@@ -17,7 +17,7 @@
     "location": "Flying Waters",
     "encounter": "Optional",
     "act_introduced": 1,
-    "image": null
+    "image": "bourgeon.webp"
   },
   {
     "name": "Clair Obscur",
@@ -27,7 +27,7 @@
     "location": "The Monolith",
     "encounter": "Optional",
     "act_introduced": 2,
-    "image": null
+    "image": "clair-obscur.webp"
   },
   {
     "name": "Clea",
@@ -37,7 +37,7 @@
     "location": "Flying Manor",
     "encounter": "Optional",
     "act_introduced": 3,
-    "image": null
+    "image": "clea.webp"
   },
   {
     "name": "Clea Unleashed",
@@ -47,7 +47,7 @@
     "location": "Endless Tower",
     "encounter": "Optional",
     "act_introduced": 3,
-    "image": null
+    "image": "clea-unleashed.webp"
   },
   {
     "name": "Creation",
@@ -57,7 +57,7 @@
     "location": "Lumière",
     "encounter": "Required",
     "act_introduced": 3,
-    "image": null
+    "image": "creation.webp"
   },
   {
     "name": "Dualliste",
@@ -67,7 +67,7 @@
     "location": "Forgotten Battlefield",
     "encounter": "Required",
     "act_introduced": 2,
-    "image": null
+    "image": "dualliste.webp"
   },
   {
     "name": "Duollistes",
@@ -77,7 +77,7 @@
     "location": "Endless Tower",
     "encounter": "Optional",
     "act_introduced": 3,
-    "image": null
+    "image": "duollistes.webp"
   },
   {
     "name": "Flame Évêque",
@@ -87,7 +87,7 @@
     "location": "Endless Tower",
     "encounter": "Optional",
     "act_introduced": 3,
-    "image": null
+    "image": "flame-eveque.webp"
   },
   {
     "name": "François",
@@ -97,7 +97,7 @@
     "location": "Esquie's Nest",
     "encounter": "Required",
     "act_introduced": 1,
-    "image": null
+    "image": "francois.webp"
   },
   {
     "name": "Frost Évêque",
@@ -107,7 +107,7 @@
     "location": "The Continent",
     "encounter": "Optional",
     "act_introduced": 2,
-    "image": null
+    "image": "frost-eveque.webp"
   },
   {
     "name": "Gargant",
@@ -117,7 +117,7 @@
     "location": "Frozen Hearts",
     "encounter": "Required",
     "act_introduced": 2,
-    "image": null
+    "image": "gargant.webp"
   },
   {
     "name": "Giant Sapling",
@@ -127,7 +127,7 @@
     "location": "Crushing Cavern",
     "encounter": "Optional",
     "act_introduced": 1,
-    "image": null
+    "image": "giant-sapling.webp"
   },
   {
     "name": "Glaise",
@@ -137,7 +137,7 @@
     "location": "Yellow Harvest",
     "encounter": "Optional",
     "act_introduced": 1,
-    "image": null
+    "image": "glaise.webp"
   },
   {
     "name": "Glissando",
@@ -147,7 +147,7 @@
     "location": "Sirène",
     "encounter": "Required",
     "act_introduced": 2,
-    "image": null
+    "image": "glissando.webp"
   },
   {
     "name": "Goblu",
@@ -157,7 +157,7 @@
     "location": "Flying Waters",
     "encounter": "Required",
     "act_introduced": 1,
-    "image": null
+    "image": "goblu.webp"
   },
   {
     "name": "Golgra",
@@ -167,7 +167,7 @@
     "location": "Gestral Village",
     "encounter": "Optional",
     "act_introduced": 1,
-    "image": null
+    "image": "golgra.webp"
   },
   {
     "name": "Grosse Tete",
@@ -177,7 +177,7 @@
     "location": "Coastal Cave",
     "encounter": "Optional",
     "act_introduced": 2,
-    "image": null
+    "image": "grosse-tete.webp"
   },
   {
     "name": "Grown Bourgeon",
@@ -187,7 +187,7 @@
     "location": "The Small Bourgeon",
     "encounter": "Optional",
     "act_introduced": 1,
-    "image": null
+    "image": "grown-bourgeon.webp"
   },
   {
     "name": "Half-Baked Gestral",
@@ -197,7 +197,7 @@
     "location": "Verso's Drafts",
     "encounter": "Optional",
     "act_introduced": 3,
-    "image": null
+    "image": "half-baked-gestral.webp"
   },
   {
     "name": "Jovial Moissonneuse",
@@ -207,7 +207,7 @@
     "location": "Visages",
     "encounter": "Required",
     "act_introduced": 2,
-    "image": null
+    "image": "jovial-moissonneuse.webp"
   },
   {
     "name": "Julien Tiny Head",
@@ -217,7 +217,7 @@
     "location": "Hidden Gestral Arena",
     "encounter": "Optional",
     "act_introduced": 1,
-    "image": null
+    "image": "julien-tiny-head.webp"
   },
   {
     "name": "Lampmaster",
@@ -227,7 +227,7 @@
     "location": "Stone Wave Cliffs",
     "encounter": "Required",
     "act_introduced": 1,
-    "image": null
+    "image": "lampmaster.webp"
   },
   {
     "name": "Licornapieds",
@@ -237,7 +237,7 @@
     "location": "Verso's Drafts",
     "encounter": "Optional",
     "act_introduced": 3,
-    "image": null
+    "image": "licornapieds.webp"
   },
   {
     "name": "Mask Keeper",
@@ -247,7 +247,7 @@
     "location": "Visages",
     "encounter": "Required",
     "act_introduced": 2,
-    "image": null
+    "image": "mask-keeper.webp"
   },
   {
     "name": "Mime",
@@ -257,7 +257,7 @@
     "location": "Lumière",
     "encounter": "Optional",
     "act_introduced": 1,
-    "image": null
+    "image": "mime.webp"
   },
   {
     "name": "Monoco",
@@ -267,7 +267,7 @@
     "location": "Monoco's Station",
     "encounter": "Required",
     "act_introduced": 2,
-    "image": null
+    "image": "monoco.webp"
   },
   {
     "name": "Monsieur Frappe",
@@ -277,7 +277,7 @@
     "location": "Verso's Drafts",
     "encounter": "Optional",
     "act_introduced": 3,
-    "image": null
+    "image": "monsieur-frappe.webp"
   },
   {
     "name": "Osquio",
@@ -287,7 +287,7 @@
     "location": "Root of All Evil",
     "encounter": "Optional",
     "act_introduced": 3,
-    "image": null
+    "image": "osquio.webp"
   },
   {
     "name": "Painted Love",
@@ -297,7 +297,7 @@
     "location": "Endless Tower",
     "encounter": "Optional",
     "act_introduced": 3,
-    "image": null
+    "image": "painted-love.webp"
   },
   {
     "name": "Pétank",
@@ -307,7 +307,7 @@
     "location": "Ancient Sanctuary",
     "encounter": "Optional",
     "act_introduced": 1,
-    "image": null
+    "image": "petank.webp"
   },
   {
     "name": "Reacher",
@@ -317,7 +317,7 @@
     "location": "The Reacher",
     "encounter": "Required",
     "act_introduced": 3,
-    "image": null
+    "image": "reacher.webp"
   },
   {
     "name": "Renoir",
@@ -327,7 +327,7 @@
     "location": "Stone Wave Cliffs",
     "encounter": "Required",
     "act_introduced": 1,
-    "image": null
+    "image": "renoir.webp"
   },
   {
     "name": "Scavenger",
@@ -337,7 +337,7 @@
     "location": "Falling Leaves",
     "encounter": "Optional",
     "act_introduced": 2,
-    "image": null
+    "image": "scavenger.webp"
   },
   {
     "name": "Sciel",
@@ -347,7 +347,7 @@
     "location": "Gestral Village",
     "encounter": "Required",
     "act_introduced": 1,
-    "image": null
+    "image": "sciel.webp"
   },
   {
     "name": "Seething Boucheclier",
@@ -357,7 +357,7 @@
     "location": "Visages",
     "encounter": "Required",
     "act_introduced": 2,
-    "image": null
+    "image": "seething-boucheclier.webp"
   },
   {
     "name": "Serpenphare",
@@ -367,7 +367,7 @@
     "location": "White Sands",
     "encounter": "Optional",
     "act_introduced": 3,
-    "image": null
+    "image": "serpenphare.webp"
   },
   {
     "name": "Simon",
@@ -377,7 +377,7 @@
     "location": "The Abyss",
     "encounter": "Optional",
     "act_introduced": 3,
-    "image": null
+    "image": "simon.webp"
   },
   {
     "name": "Simon the Divergent Star",
@@ -387,7 +387,7 @@
     "location": "Endless Tower",
     "encounter": "Optional",
     "act_introduced": 3,
-    "image": null
+    "image": "simon-the-divergent-star.webp"
   },
   {
     "name": "Sirène",
@@ -397,7 +397,7 @@
     "location": "Sirène",
     "encounter": "Required",
     "act_introduced": 2,
-    "image": null
+    "image": "sirene.webp"
   },
   {
     "name": "Sorrowful Chapelier",
@@ -407,7 +407,7 @@
     "location": "Visages",
     "encounter": "Required",
     "act_introduced": 2,
-    "image": null
+    "image": "sorrowful-chapelier.webp"
   },
   {
     "name": "Sprong",
@@ -417,7 +417,7 @@
     "location": "The Continent",
     "encounter": "Optional",
     "act_introduced": 2,
-    "image": null
+    "image": "sprong.webp"
   },
   {
     "name": "Stalact",
@@ -427,7 +427,7 @@
     "location": "Monoco's Station",
     "encounter": "Required",
     "act_introduced": 2,
-    "image": null
+    "image": "stalact.webp"
   },
   {
     "name": "The Curator",
@@ -437,7 +437,7 @@
     "location": "The Manor",
     "encounter": "Required",
     "act_introduced": 1,
-    "image": null
+    "image": "the-curator.webp"
   },
   {
     "name": "The Paintress",
@@ -447,7 +447,7 @@
     "location": "The Monolith",
     "encounter": "Required",
     "act_introduced": 2,
-    "image": null
+    "image": "the-paintress.webp"
   },
   {
     "name": "Thunder Évêque",
@@ -457,7 +457,7 @@
     "location": "The Continent",
     "encounter": "Optional",
     "act_introduced": 2,
-    "image": null
+    "image": "thunder-eveque.webp"
   },
   {
     "name": "Tisseur",
@@ -467,7 +467,7 @@
     "location": "Sirène",
     "encounter": "Required",
     "act_introduced": 2,
-    "image": null
+    "image": "tisseur.webp"
   },
   {
     "name": "Ultimate Sakapatate",
@@ -477,7 +477,7 @@
     "location": "Ancient Sanctuary",
     "encounter": "Required",
     "act_introduced": 1,
-    "image": null
+    "image": "ultimate-sakapatate.webp"
   },
   {
     "name": "Visages",
@@ -487,7 +487,7 @@
     "location": "Visages",
     "encounter": "Required",
     "act_introduced": 2,
-    "image": null
+    "image": "visages.webp"
   },
   {
     "name": "Évêque",
@@ -497,6 +497,6 @@
     "location": "Spring Meadows",
     "encounter": "Required",
     "act_introduced": 1,
-    "image": null
+    "image": "eveque.webp"
   }
 ]
