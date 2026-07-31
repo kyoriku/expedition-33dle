@@ -47,7 +47,7 @@ const EXAMPLE_GUESS: BossGuessResponse = {
     location: "Flying Waters",
     encounter: "Required",
     act_introduced: 1,
-    image: null,
+    image: "goblu.webp",
   },
   feedback: {
     weakness: "match",
@@ -120,7 +120,7 @@ function matchesConstraints(b: Boss, c: BossConstraints): boolean {
  *  the loading and error states. */
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 py-8 md:py-12 md:max-w-3xl md:px-6 lg:max-w-6xl">
+    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-8 md:px-6 md:py-12">
       <Header />
       <Centered>{children}</Centered>
     </main>
@@ -311,7 +311,7 @@ function Game({ today }: { today: BossTodayResponse }) {
   const remaining = MAX_GUESSES - guesses.length;
 
   return (
-    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 py-8 md:py-12 md:max-w-3xl md:px-6 lg:max-w-6xl">
+    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-8 md:px-6 md:py-12">
       <Header
         right={
           <span className="flex items-center gap-2">

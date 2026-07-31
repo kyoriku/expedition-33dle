@@ -141,7 +141,7 @@ export default function MenuPage() {
   );
 
   return (
-    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col  px-4 py-8 md:py-12 md:max-w-3xl md:px-6 lg:max-w-6xl">
+    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-8 md:px-6 md:py-12">
       <Header />
       {/* The header spans the full lg:max-w-6xl frame (same as the game pages);
           menu content stays a narrower centered column beneath it. */}

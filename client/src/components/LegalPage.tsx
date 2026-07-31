@@ -48,7 +48,7 @@ export default function LegalPage({ source }: LegalPageProps) {
   return (
     <main className="flex-1 py-8 md:py-12">
       {/* Header spans the same width as the homepage header. */}
-      <div className="mx-auto w-full max-w-xl px-4 md:max-w-3xl md:px-6 lg:max-w-6xl">
+      <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
         <Header brandAs="div" />
       </div>
       {/* Body stays at a comfortable reading width. */}

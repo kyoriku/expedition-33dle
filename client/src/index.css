@@ -78,6 +78,7 @@
 /* EB Garamond as the default body face. */
 body {
   font-family: var(--font-serif);
+  background: var(--color-ink);
 }
 
 /* Subtle paper grain over everything; fixed so it doesn't scroll. */
