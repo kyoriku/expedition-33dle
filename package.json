@@ -1,6 +1,7 @@
 {
   "name": "expedition33dle",
   "version": "1.0.0",
+  "private": true,
   "description": "Daily character guessing game for Clair Obscur: Expedition 33. React/TypeScript frontend, Python/FastAPI backend, PostgreSQL database.",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",

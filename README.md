@@ -104,3 +104,14 @@ seeding model.
 cd server && uv run pytest      # backend: feedback, scheduling, endpoints
 cd client && npm test           # frontend: Vitest + Testing Library
 ```
+
+## Use and attribution
+
+This repository is source-available for review. It is not licensed for reuse,
+redistribution, or deployment.
+
+Clair Obscur: Expedition 33 and all associated characters, artwork, and game data
+are the property of Sandfall Interactive and Kepler Interactive. This is an
+unofficial, non-commercial fan project with no affiliation to or endorsement by
+either. Game data is used for identification under fair use; do not commit ripped
+game assets.
