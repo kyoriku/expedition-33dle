@@ -43,7 +43,8 @@ src/
   main.tsx          Entry: QueryClientProvider + App
   App.tsx           Routes
   pages/            Route components: MenuPage, ClassicPage, PictosPage,
-                    WeaponsPage, BossesPage, PrivacyPage, TermsPage
+                    WeaponsPage, BossesPage, PrivacyPage, TermsPage,
+                    NotFoundPage
   components/       UI: Header, GuessGrid/Row, GuessInput, Modal, ShareButton,
                     StatsBlock, Portrait, Countdown, How-To/Legend, etc.
   lib/              Non-UI logic:
@@ -66,7 +67,7 @@ public/
 ## Routes
 
 `/` menu · `/classic` Classic mode · `/pictos` Pictos mode · `/weapons` Weapons mode
-· `/bosses` Bosses mode · `/privacy` · `/terms`
+· `/bosses` Bosses mode · `/privacy` · `/terms` · `*` NotFound (any other path)
 
 ## State & persistence
 
