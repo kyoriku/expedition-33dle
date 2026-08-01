@@ -12,26 +12,27 @@ We do not request or collect your name, email address, mailing address, phone nu
 
 ## 3. Information collected automatically
 
-When you visit the site, our hosting provider (Railway) processes standard server access information including your IP address, browser type, operating system, referrer, and the pages you visit. This processing is used to operate the site, prevent abuse, and maintain service reliability. We do not link this information to any persistent user identity on our servers.
+When you visit the site, our infrastructure providers process standard server access information including your IP address, browser type, operating system, referrer, and the pages you visit: Cloudflare delivers and protects the site at the network edge, and Railway hosts the application. This processing is used to operate the site, prevent abuse, and maintain service reliability. We do not link this information to any persistent user identity on our servers.
+
+If a server error occurs, technical details of the failing request — the URL, browser type, and the submitted guess — are sent to Sentry, our error-monitoring service, so we can diagnose and fix the fault; IP addresses and cookies are excluded from these reports.
 
 ## 4. Local storage on your device
 
-The site uses your browser's localStorage to keep your in-game state: today's guesses, win/loss history, streak count, and game statistics. This information remains on your device, is not transmitted to our servers, and you can clear it at any time through your browser settings.
+The site uses your browser's localStorage to keep your in-game state: today's guesses, win/loss history, streak count, and game statistics. This stored state remains on your device, is never uploaded or linked to you, and you can clear it at any time through your browser settings. (Each guess you submit is sent to our server to compute the feedback for that guess, but it is not stored there and is not associated with any identity.)
 
 ## 5. Cookies and advertising
 
 **Essential storage** — localStorage entries described in Section 4 are necessary for the game to function and are always active.
 
-**Advertising cookies** — the site is supported by display advertising through Google AdSense. AdSense and its advertising partners may use cookies, web beacons, and similar technologies to serve and measure advertisements. In regions where consent is legally required (EU, EEA, UK, Switzerland, and other jurisdictions with equivalent requirements), advertising cookies are only set after you provide consent through the consent management notice shown on your first visit.
-
-You can learn more about how Google uses information from sites that use its services at https://policies.google.com/technologies/partner-sites.
+**No advertising, analytics, or tracking** — the site shows no advertisements and sets no cookies of its own. No advertising, analytics, or tracking scripts run in your browser. Cloudflare may set strictly operational security cookies when protecting the site from automated abuse (for example, during a security challenge); these are not used for advertising or cross-site tracking.
 
 ## 6. Third-party services
 
 The site relies on the following third parties:
 
+- **Cloudflare** — content delivery, DNS, and security
 - **Railway** — hosting and infrastructure
-- **Google AdSense** — display advertising
+- **Sentry** — server-side error monitoring
 - **Porkbun** — domain registration
 
 Each of these providers has its own privacy policy and data handling practices that apply to data they process on their own infrastructure.
@@ -40,12 +41,13 @@ Each of these providers has its own privacy policy and data handling practices t
 
 For visitors in the EU, EEA, or UK:
 
-- **Essential site operation** is processed under our legitimate interest in providing and securing the service
-- **Advertising cookies** are processed only with your explicit consent, which you may withdraw at any time through the consent management interface
+- **Essential site operation, security, and error monitoring** are processed under our legitimate interest in providing, securing, and maintaining the service
+
+No processing on this site is based on consent, because no advertising or tracking takes place.
 
 ## 8. Data retention
 
-We do not retain personal data on our servers. Game progress is stored locally in your browser and remains under your control. Server access information is retained by our hosting provider in accordance with their standard retention policies.
+We do not retain personal data on our servers. Game progress is stored locally in your browser and remains under your control. Server access information is retained by our infrastructure providers in accordance with their standard retention policies, and error reports are retained by Sentry on the same basis.
 
 ## 9. Your rights
 

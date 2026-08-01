@@ -8,7 +8,7 @@ By accessing or using expedition33dle.com ("the site"), you agree to be bound by
 
 ## 2. Description of service
 
-expedition33dle is a free, browser-based daily guessing game inspired by *Clair Obscur: Expedition 33*. No account is required to play. The service is supported by display advertising. We reserve the right to modify, suspend, or discontinue any aspect of the service at any time, with or without notice.
+expedition33dle is a free, browser-based daily guessing game inspired by *Clair Obscur: Expedition 33*. No account is required to play, and the site shows no advertising. We reserve the right to modify, suspend, or discontinue any aspect of the service at any time, with or without notice.
 
 ## 3. Intellectual property disclaimer
 
@@ -30,7 +30,7 @@ You agree not to:
 
 ## 5. Third-party services
 
-The site uses third-party services including hosting (Railway), display advertising (Google AdSense), and other providers as described in the Privacy Policy. Your use of those services through the site is also subject to their own terms and policies.
+The site uses third-party services including hosting (Railway), content delivery and security (Cloudflare), server-side error monitoring (Sentry), and other providers as described in the Privacy Policy. Your use of those services through the site is also subject to their own terms and policies.
 
 ## 6. Disclaimer of warranties
 
