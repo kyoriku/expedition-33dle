@@ -148,17 +148,18 @@ origin bypass you need if something goes wrong mid-cutover.
 
 ## False signals (looks broken, isn't)
 
-During cutover the authoritative check is always a curl or dig against a
-known-good resolver, never a provider dashboard — Railway's domain status,
-Cloudflare's cache labels, and the local resolver all reported states that
-contradicted what the site was actually serving. The rows below are the
-instances that cost real time.
+During cutover and the day-2 edge work, the authoritative check is always a
+curl or dig against a known-good resolver, never a provider dashboard —
+Railway's domain status, Cloudflare's cache labels, and the local resolver
+all reported states that contradicted what the site was actually serving.
+The rows below are the instances that cost real time.
 
 | Symptom | Actual cause | Verify with |
 | --- | --- | --- |
 | Railway shows "Waiting for DNS update" / "Incorrect DNS setup" indefinitely while both domains serve fine | Railway resolves the hostname expecting its own CNAME target and gets Cloudflare's anycast IPs through the proxy | `curl -sD - -o /dev/null --resolve <host>:443:<cf-ip> https://<host>/api/health` — curl is authoritative, the dashboard label is not |
 | Command line gets the registrar's parking page (openresty / an l.ink redirect) while browsers load the site fine | The system resolver keeps serving pre-delegation records long after delegation is live; browsers on DNS-over-HTTPS already see the new ones. Not a misconfiguration | `dig @1.1.1.1 expedition33dle.com` (or `@8.8.8.8`), or force the connection: `curl --resolve` |
 | `/api/*` returns `cf-cache-status: DYNAMIC`, not `BYPASS`, with the bypass rule correctly applied and deployed | Both mean uncached — DYNAMIC is simply Cloudflare's label for this configuration | Nothing to fix; confirm repeat fetches never show `HIT` |
+| A sequential curl loop against `/api/*` returns all 200s and never trips the rate limit, suggesting the rule isn't working | Each curl is a fresh TLS handshake, so 60 sequential requests take well over the 10-second window — the threshold is never exceeded within one period. The rule is fine | `seq 1 200 \| xargs -P 20 -I{} curl -s -o /dev/null -w '%{http_code}\n' https://<host>/api/health \| sort \| uniq -c` — expect a mix of 200 and 429 (real run: 60/140). Tripping it blocks your own IP for 10 s; that is the rule working |
 
 ## Standing rules
 
@@ -188,7 +189,20 @@ the SPA shell like any unknown path. Habit: register any future internal
 route with `include_in_schema=False` anyway — belt and braces even with the
 schema unserved.
 
-## Day-2 TODO
+## Edge protection (as configured)
 
-- Cloudflare rate-limiting rule on `/api/*` (one rule on Free).
-- Bot Fight Mode.
+**Rate limiting** (Security → Rate limiting rules — the free plan allows
+exactly one rule, and this is the one that gets it):
+
+- Expression: `starts_with(http.request.uri.path, "/api/")`
+- Characteristic: IP
+- Threshold: 50 requests / 10 seconds
+- Action: Block, duration 10 seconds
+
+Threshold rationale: a full page load fires roughly five API calls, so
+50/10s is generous for real play while still stopping a scraper hammering
+`/api/<mode>/today`.
+
+**Bot Fight Mode** (Security → Bots): on. Verified search crawlers are
+exempt — but if indexing ever looks wrong, this is the first thing to
+check.
