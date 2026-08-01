@@ -5,7 +5,10 @@ one answer, shared by all players and rolled over at midnight UTC. You narrow it
 down from per-attribute feedback — green for a match, amber for a partial/close,
 and up/down arrows for numeric hints — within a fixed number of guesses.
 
-Live at **[expedition33dle.com](https://expedition33dle.com)**.
+Live at **[expedition33dle.com](https://expedition33dle.com)** ·
+React 19 + TypeScript · FastAPI + Python 3.12 · PostgreSQL · Railway + Cloudflare
+
+![The mode menu at expedition33dle.com](docs/screenshots/expedition33dle-home.png)
 
 ## Modes
 
@@ -16,7 +19,13 @@ Live at **[expedition33dle.com](https://expedition33dle.com)**.
 | **Weapons** | a weapon | 116 | 8 | [`server/data/weapons.md`](server/data/weapons.md) |
 | **Bosses** | a boss | 50 | 7 | [`server/data/bosses.md`](server/data/bosses.md) |
 
-Each mode picks an uncorrelated answer for the same day; see [Daily puzzle](#daily-puzzle).
+Each mode picks an uncorrelated answer for the same day. The answer is never
+stored anywhere — it's computed on demand as a pure function of the date, the
+sorted roster, and a fixed seed, which is why roster membership is frozen and
+enforced by a gate at deploy time. Full mechanic in
+[`server/data/README.md`](server/data/README.md).
+
+![A solved Classic board showing per-attribute feedback](docs/screenshots/expedition33dle-classic.png)
 
 ## Tech stack
 
@@ -27,38 +36,39 @@ Each mode picks an uncorrelated answer for the same day; see [Daily puzzle](#dai
   [`server/README.md`](server/README.md).
 - **Database** — PostgreSQL 16 (asyncpg driver).
 
-## Repository layout
+## Architecture
 
 ```
 client/              React SPA (see client/README.md)
 server/              FastAPI backend (see server/README.md)
+docs/                deployment runbook (DEPLOY.md) + README screenshots
 .devcontainer/       Docker Compose dev environment (dev + postgres)
+.github/             CI — tests.yml runs both suites on every push / PR
+Dockerfile           2-stage production image: build the SPA, serve it via FastAPI
+railway.json         healthcheck + pre-deploy (migrate, then the gated seed)
 package.json         root scripts that orchestrate client + server
 ```
 
-The per-app READMEs document their own structure; the seed-data field
-references live in [`server/data/`](server/data/README.md).
+One request path: the SPA calls `/api/...` and FastAPI computes feedback from
+Postgres. In production the same FastAPI process serves the built SPA — an
+unknown non-`/api` path gets the shell (the client renders its own 404 page),
+an unknown `/api/*` path gets a JSON 404. Unhandled server errors report to
+Sentry when `SENTRY_DSN` is set, and the auto-generated API docs endpoints are
+closed (see [`docs/DEPLOY.md`](docs/DEPLOY.md)).
 
-## API
+### API surface
 
-All endpoints are under `/api`. Each mode (`classic`, `pictos`, `weapons`, `bosses`) exposes:
-
-| Method | Path | Purpose |
-|---|---|---|
-| `GET` | `/api/<mode>/today` | Today's puzzle metadata (number, guessable roster) |
-| `POST` | `/api/<mode>/guess` | Submit a guess; returns per-attribute feedback |
-| `POST` | `/api/<mode>/reveal` | Reveal the answer (gated: only after a solve or the guess cap) |
-| `GET` | `/api/health` | Liveness check |
-
-In production, FastAPI also serves the built SPA from `client/dist` — any non-`/api`
-path falls back to `index.html` so client-side routes work on direct navigation.
+Each mode (`classic`, `pictos`, `weapons`, `bosses`) exposes `GET /today`,
+`POST /guess`, and `POST /reveal` under `/api/<mode>/`, plus `GET /api/health`.
+The answer never appears in any response until the game is provably over. Full
+contract in [`server/README.md`](server/README.md).
 
 ## Getting started
 
 The repo ships a **Dev Container** (Docker Compose: a dev container + Postgres).
 In VS Code, run **"Dev Containers: Reopen in Container."** `postCreateCommand`
-installs the JS and Python dependencies, and `DATABASE_URL` / `CORS_ORIGINS` are
-injected automatically.
+installs the JS and Python dependencies, and `DATABASE_URL` is injected
+automatically.
 
 Once inside the container, set up the database and start both servers:
 
@@ -84,26 +94,30 @@ Open **http://localhost:3001**. Vite proxies `/api` to the backend on `:8001`.
 | `npm run dev` | Run backend + frontend together (via `concurrently`) |
 | `npm run server` | Backend only — Uvicorn with reload on `:8001` |
 | `npm run client` | Frontend only — Vite dev server on `:3001` |
-| `npm run seed` | Sync `server/data/*.json` into the DB (idempotent) |
+| `npm run seed` | Sync `server/data/*.json` into the DB (idempotent; membership gated) |
+| `npm run install` | Install the client's JS dependencies |
 | `npm run build` | Production build of the client into `client/dist` |
 | `npm start` | Run the backend without reload (serves the built SPA) |
-
-## Daily puzzle
-
-The daily answer is **not stored** — `app/services/scheduling.py` computes it on
-demand as a pure function of (date, sorted roster, `SHUFFLE_SEED`, and a per-mode
-salt). `puzzle_number` is `(date − LAUNCH_DATE).days + 1`. Because selection is
-derived from the roster and seed, changing either reshuffles the date→answer map
-for every day — harmless pre-launch, but treat both as frozen once live. See
-[`server/data/README.md`](server/data/README.md) for the full mechanic and the
-seeding model.
 
 ## Testing
 
 ```bash
-cd server && uv run pytest      # backend: feedback, scheduling, endpoints
-cd client && npm test           # frontend: Vitest + Testing Library
+cd server && uv run pytest      # feedback, scheduling, endpoints, seed gates, sentry, settings
+cd client && npm test           # components, lib logic, pages (Vitest + Testing Library)
 ```
+
+CI ([`.github/workflows/tests.yml`](.github/workflows/tests.yml)) runs both
+suites on every push to `main` and every pull request.
+
+## Deployment
+
+A single Railway service built from the `Dockerfile` — stage 1 builds the SPA,
+stage 2 serves the API and the built SPA via Uvicorn — with Postgres alongside
+and Cloudflare in front (DNS, edge cache, rate limiting). `railway.json` wires
+the `/api/health` healthcheck and a pre-deploy that migrates and then runs the
+membership-gated seed. Sentry receives unhandled server errors. The full
+runbook — DNS cutover, cache rules, environment variables, verification
+rituals — is [`docs/DEPLOY.md`](docs/DEPLOY.md).
 
 ## Use and attribution
 
