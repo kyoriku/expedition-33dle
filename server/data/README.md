@@ -1,9 +1,10 @@
 # Seed data
 
-Each game mode's seed data lives here as JSON, loaded by `scripts/seed.py` via
-`load_category("<name>")`. To add a future category, drop
-`<name>.json` in this directory and wire a `load_category("<name>")` call into the
-seed script.
+Each game mode's seed data lives here as JSON, loaded by `scripts/seed.py`. A
+new category needs more than a JSON file: inside the seed script, a
+`load_category` constant plus entries in `MODES` and `EXPECTED_COUNTS` and a
+hand-written validator and upserter (only pruning generalizes over `MODES`);
+outside it, a model, migration, schemas, a router, and a compare function.
 
 This README covers the mechanics shared by every category; the per-category field
 references live in their own files.
@@ -19,11 +20,26 @@ references live in their own files.
 
 ## Seeding model
 
-Edits here propagate on the next `npm run seed`. Each category UPSERTs by `name`
-and prunes rows no longer present in its JSON, so every table mirrors its file
-exactly. **Renaming an entry creates a new row** rather than updating the old one,
-so treat `name` as the identity key. (See `upsert_*` / `prune_*` in
-`scripts/seed.py`.)
+Attribute and image edits propagate on the next `npm run seed` — each category
+UPSERTs by `name`, and a re-run with unchanged JSON leaves every row and id as
+it was.
+
+**Membership changes (add / remove / rename) are gated.** The seed aborts
+before touching the database if a roster's JSON entry count differs from
+`EXPECTED_COUNTS` in `scripts/seed.py` — no env var bypasses that check — and
+aborts before deleting anything when DB rows are missing from the JSON, unless
+`ALLOW_SEED_PRUNE=1` is set. **A rename is a membership change dressed as an
+edit**: the entry count stays the same, so only the prune gate catches it —
+and with `ALLOW_SEED_PRUNE=1` set it silently becomes a delete-plus-insert
+under a new id. Treat `name` as the identity key.
+
+Why the gate exists: the daily answer is a pure function of the sorted roster
+(see below), so an unguarded automatic prune on every deploy could silently
+reshuffle every historical puzzle. Deliberate roster changes follow the escape
+path in [`docs/DEPLOY.md`](../../docs/DEPLOY.md) (Standing rules): pin elapsed
+days' answers, update `EXPECTED_COUNTS`, and only then `ALLOW_SEED_PRUNE=1` if
+the change also removes entries. (See the `upsert_<category>` functions and
+the `MODES`-driven `prune_all` in `scripts/seed.py`.)
 
 ## Daily puzzle
 
@@ -40,7 +56,8 @@ shared across modes — it's just date math: days since `LAUNCH_DATE` (2026-08-0
 The flip side: changing a roster (add/remove/rename) or `SHUFFLE_SEED` reshuffles
 the date→answer mapping for *every* day, past and future (`puzzle_number` stays
 put, but which entry it resolves to shifts). Harmless pre-launch; once live, treat
-the rosters and seed as frozen.
+the rosters and seed as frozen — the seed script enforces this (see
+[Seeding model](#seeding-model)).
 
 ## Images
 

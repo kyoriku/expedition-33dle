@@ -10,14 +10,17 @@ SPA. See the root README for the project overview and the dev-container setup.
 - **SQLAlchemy 2.0** (async, `asyncpg` driver) + **Alembic** migrations
 - **Uvicorn** ASGI server
 - **PostgreSQL 16**
+- **sentry-sdk** error reporting — inert unless `SENTRY_DSN` is set
 - Managed with [uv](https://docs.astral.sh/uv/); tested with **pytest**
 
 ## Layout
 
 ```
 app/
-  main.py          FastAPI app: includes routers, /api/health, serves client/dist
-  settings.py      env-sourced settings (DATABASE_URL); pydantic-settings
+  main.py          FastAPI app: SENTRY_DSN-gated Sentry init, routers, /api/health,
+                   env-gated /api/_boom, serves client/dist; auto-docs closed
+  settings.py      env-sourced settings (DATABASE_URL, SENTRY_DSN, SENTRY_ENVIRONMENT,
+                   BOOM_ENABLED); normalizes postgres:// to +asyncpg; pydantic-settings
   db.py            async engine, session factory, get_db() dependency, Base
   constants.py     LAUNCH_DATE, SHUFFLE_SEED, VALID_ACTS, CLASSIC/PICTOS/WEAPONS/BOSSES_MAX_GUESSES
   models.py        SQLAlchemy models: Character, Picto, Weapon, Boss
@@ -33,7 +36,8 @@ app/
 data/              JSON seed data + per-mode field docs (see data/README.md)
 alembic/           migrations (versions/) + env.py
 scripts/
-  seed.py          sync data/*.json into the DB (idempotent)
+  seed.py          sync data/*.json into the DB (idempotent; membership gated — see Data & migrations)
+  predeploy.sh     Railway pre-deploy: alembic upgrade head, then seed
   inspect_db.py    debug: print tables and columns
 tests/             pytest suite
 pyproject.toml     dependencies + pytest config
@@ -70,6 +74,13 @@ All routes are under `/api`. All four modes share the same shape:
 `client/dist`: any non-`/api` path falls back to `index.html` (so client routes
 work on refresh), while unmatched `/api/*` paths still return a JSON 404.
 
+Outside the table: `GET /api/_boom` is an env-gated Sentry pipeline check
+(`BOOM_ENABLED=1` arms it; disarmed it answers with the same JSON 404 as any
+unknown `/api/` path — see [`docs/DEPLOY.md`](../docs/DEPLOY.md)). The FastAPI
+auto-docs endpoints (`/docs`, `/redoc`, `/openapi.json`) are closed
+unconditionally (`docs_url=None` etc.); register future internal routes with
+`include_in_schema=False` anyway, as a habit.
+
 ### Answer protection
 
 The answer is never present in `/today` or `/guess` responses. `/reveal` uses a
@@ -84,8 +95,10 @@ Scoring lives in [`app/services/compare.py`](app/services/compare.py) — pure
 functions of the two rows, so they're directly unit-testable. Per attribute:
 
 - **Scalar** closed-set fields → `match` / `miss`
-- **Set** fields (`element`, `affiliation`, `stats`, `wielder`, `scaling_stats`, `weakness`, `resistance`) →
-  `match` / `partial` / `miss` (full overlap / any overlap / disjoint)
+- **Set** fields (`affiliation`, `stats`, `wielder`, `scaling_stats`, `weakness`,
+  `resistance`, and Classic's `element`) → `match` / `partial` / `miss`
+  (full overlap / any overlap / disjoint). Weapons' `element` is a **scalar** —
+  match/miss only, no partial.
 - **Numeric** fields (`act_introduced`, `lumina_cost`, `max_power`) → `match` /
   `higher` / `lower`, answer-relative ("higher" = the answer's value is larger than
   the guess)
@@ -107,9 +120,17 @@ date→answer map for every day — freeze both once live. Full details in
 ## Data & migrations
 
 Game data is JSON in [`data/`](data/README.md). `scripts/seed.py` UPSERTs each
-category by `name` and prunes rows no longer in the JSON, so the tables mirror the
-files exactly (it does **not** create tables — run `alembic upgrade head` first).
-Schema changes are Alembic migrations in `alembic/versions/`:
+category by `name` — attribute and image edits propagate freely on the next
+seed. **Membership is gated**: the count gate aborts the run before any
+database contact if a roster's JSON entry count deviates from
+`EXPECTED_COUNTS` (no env var bypasses it), and DB rows missing from the JSON
+abort the run instead of being pruned unless `ALLOW_SEED_PRUNE=1` is set. The
+gate exists because roster membership determines the daily answer mapping —
+an unguarded prune on deploy could silently reshuffle every historical
+puzzle. Deliberate roster changes follow the escape path in
+[`docs/DEPLOY.md`](../docs/DEPLOY.md) (Standing rules). seed.py does **not**
+create tables — run `alembic upgrade head` first. Schema changes are Alembic
+migrations in `alembic/versions/`:
 
 ```bash
 uv run alembic revision --autogenerate -m "describe change"   # create
@@ -122,7 +143,6 @@ uv run alembic upgrade head                                    # apply
 uv run pytest
 ```
 
-Covers guess feedback (`test_character_feedback.py`, `test_picto_feedback.py`,
-`test_weapon_feedback.py`, `test_boss_feedback.py`), deterministic scheduling
-(`test_scheduling.py`), and the HTTP endpoints (`test_characters_endpoints.py`,
-`test_pictos_endpoints.py`, `test_weapons_endpoints.py`, `test_bosses_endpoints.py`).
+Covers guess feedback and deterministic scheduling for all four modes, the
+HTTP endpoints, the seed membership gates, Sentry gating and app startup, and
+settings parsing.

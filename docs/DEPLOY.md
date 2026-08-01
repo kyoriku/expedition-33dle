@@ -174,10 +174,6 @@ The seed guard enforces this at deploy time. Its escape path, in order:
 3. Set `ALLOW_SEED_PRUNE=1` on that deploy **only if the change also removes
    entries**. `ALLOW_SEED_PRUNE` does **not** bypass the count check.
 
-Known future trigger for this gate: the parked `characters.json` Alicia
-roster question — resolving it changes membership and requires the full
-path above.
-
 **Freely editable live**: every attribute value and every image — reseed
 (deploy) and, for a replaced image, purge its URL from Cloudflare's cache.
 
