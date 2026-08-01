@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import AnswerRevealBase from "../components/AnswerRevealBase";
 import GameStatus from "../components/GameStatus";
 import Header from "../components/Header";
+import LoadingSpinner from "../components/LoadingSpinner";
 import Legend from "../components/Legend";
 import GuessGridBase from "../components/GuessGridBase";
 import GuessError from "../components/GuessError";
@@ -139,7 +140,7 @@ export default function ClassicPage() {
   });
   useDailyRollover(today?.puzzle_date, refetch);
 
-  if (isPending) return <Shell>Loading today’s puzzle…</Shell>;
+  if (isPending) return <Shell><LoadingSpinner /></Shell>;
   if (error) {
     return (
       <Shell>

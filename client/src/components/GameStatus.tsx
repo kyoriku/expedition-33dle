@@ -36,7 +36,9 @@ export default function GameStatus({
         </p>
       ) : (
         <p className="bg-panneau border-line text-parchment font-display my-3 border p-3 text-center text-base tracking-[0.08em] uppercase md:text-lg">
-          Game over — try again tomorrow
+          Game over
+          <span className="hidden sm:inline"> — </span>
+          <span className="block sm:inline">try again tomorrow</span>
         </p>
       )}
       <StatsBlock stats={stats} />

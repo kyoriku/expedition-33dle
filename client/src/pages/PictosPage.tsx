@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import Header from "../components/Header";
+import LoadingSpinner from "../components/LoadingSpinner";
 import Legend from "../components/Legend";
 import Modal from "../components/Modal";
 import Countdown from "../components/Countdown";
@@ -11,6 +12,7 @@ import LastTryBase from "../components/LastTryBase";
 import AnswerRevealBase from "../components/AnswerRevealBase";
 import HowToPlayBase from "../components/HowToPlayBase";
 import { PICTOS_GRID_TEMPLATE } from "../lib/gridTemplates";
+import { inBounds, tightenBounds, type Bounds } from "../lib/constraints";
 import { PICTOS_ATTRIBUTES } from "../lib/attributes";
 import StatsBlock from "../components/StatsBlock";
 import Histogram from "../components/Histogram";
@@ -89,18 +91,22 @@ function Centered({ children }: { children: React.ReactNode }) {
   );
 }
 
-// ── PROTOTYPE: constraint-propagation autocomplete (greens-only) ─────────────
+// ── PROTOTYPE: constraint-propagation autocomplete ───────────────────────────
 // Narrow the suggestion roster to pictos consistent with every confirmed
-// EXACT-match (green) column. Display-only over data the page already holds —
-// the answer always satisfies its own greens, so this can never hide it. Only the
-// equality columns: type, effect_category, source, zone_obtained (all scalar). NOT the directional
-// (lumina_cost/act) or set (stats) columns. To revert: delete this block + the
-// suggestItems memo and restore items={today.pictos}.
+// EXACT-match (green) column and the coarse act window the ▲▼ Act feedback
+// implies. Display-only over data the page already holds — the answer always
+// satisfies its own feedback, so this can never hide it. NOT the set (stats)
+// column, and deliberately NOT the fine-grained lumina_cost window: acts are
+// three values a player tracks in their head, but auto-filtering 10 distinct
+// lumina costs did the deduction for them and made the game too easy. To
+// revert: delete this block + the suggestItems memo and restore
+// items={today.pictos}.
 type PictoConstraints = {
   type?: string;
   effect_category?: string;
   source?: string;
   zone_obtained?: string;
+  act_introduced?: Bounds;
 };
 
 function deriveConstraints(guesses: PictoGuessResponse[]): PictoConstraints {
@@ -110,6 +116,7 @@ function deriveConstraints(guesses: PictoGuessResponse[]): PictoConstraints {
     if (feedback.effect_category === "match") c.effect_category = guess.effect_category;
     if (feedback.source === "match") c.source = guess.source;
     if (feedback.zone_obtained === "match") c.zone_obtained = guess.zone_obtained;
+    c.act_introduced = tightenBounds(c.act_introduced, guess.act_introduced, feedback.act_introduced);
   }
   return c;
 }
@@ -119,6 +126,7 @@ function matchesConstraints(p: Picto, c: PictoConstraints): boolean {
   if (c.effect_category !== undefined && p.effect_category !== c.effect_category) return false;
   if (c.source !== undefined && p.source !== c.source) return false;
   if (c.zone_obtained !== undefined && p.zone_obtained !== c.zone_obtained) return false;
+  if (!inBounds(p.act_introduced, c.act_introduced)) return false;
   return true;
 }
 // ── end PROTOTYPE ────────────────────────────────────────────────────────────
@@ -168,7 +176,7 @@ export default function PictosPage() {
   });
   usePictosRollover(today?.puzzle_date, refetch);
 
-  if (isPending) return <Shell>Loading today’s puzzle…</Shell>;
+  if (isPending) return <Shell><LoadingSpinner /></Shell>;
   if (error) {
     return (
       <Shell>
@@ -432,7 +440,9 @@ function Game({ today }: { today: PictoTodayResponse }) {
               </p>
             ) : (
               <p className="bg-panneau border-line text-parchment font-display my-3 border p-3 text-center text-base tracking-[0.08em] uppercase md:text-lg">
-                Game over — try again tomorrow
+                Game over
+                <span className="hidden sm:inline"> — </span>
+                <span className="block sm:inline">try again tomorrow</span>
               </p>
             )}
             <StatsBlock stats={stats} />
