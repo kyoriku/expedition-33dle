@@ -12,9 +12,18 @@ automatable lives in `Dockerfile` / `railway.json` / `scripts/seed.py`.
 2. Add a **PostgreSQL** service to the same project. Enable **backups** on it.
 3. App service → Variables: `DATABASE_URL = ${{Postgres.DATABASE_URL}}`.
    (The scheme is normalized to `postgresql+asyncpg://` in `app/settings.py` —
-   no need to hand-compose the URL.)
+   no need to hand-compose the URL.) Also:
+   - `SENTRY_DSN` — Sentry → project → Settings → Client Keys. Unset or
+     blank disables Sentry entirely. A malformed (non-blank) DSN raises
+     BadDsn at import and fails the healthcheck — so a passing healthcheck
+     is itself proof the DSN parsed.
+   - `SENTRY_ENVIRONMENT=production` — the events' environment tag
+     (defaults to `development` everywhere else).
+   - `BOOM_ENABLED` — normally **unset**; see the Sentry pipeline check
+     below.
 4. App service → Settings → Networking → **Generate Domain** for a
-   `*.up.railway.app` URL to test against before DNS.
+   `*.up.railway.app` URL to test against before DNS (retired after
+   cutover — see §3).
 5. **Positive confirmation after every deploy** (railway.json is silently
    ignored if malformed — verify, don't assume):
    - Settings shows healthcheck path `/api/health` populated.
@@ -34,9 +43,9 @@ app service → Settings → enable **Wait for CI**. Railway then holds the
 build until the commit's GitHub checks succeed. Optional extra: GitHub
 branch protection on `main` requiring the `tests` checks before merge.
 
-Until 2026-08-01 UTC the 28 wall-clock endpoint tests are red by choice
-(pre-launch, routers correctly raise PuzzleNotYetAvailable) — the first
-green run happens on launch day.
+(Historical: runs before launch day 2026-08-01 showed 28 wall-clock endpoint
+tests red by design — pre-launch, the routers correctly raised
+PuzzleNotYetAvailable.)
 
 ### Verify on the Railway domain (before DNS)
 
@@ -45,24 +54,47 @@ green run happens on launch day.
 - Browser: play one mode start to finish; images render
 - Direct navigation to `/privacy` renders (SPA fallback)
 - `/api/nope` → JSON 404 (not the HTML shell)
+- `/docs` → the SPA shell, not Swagger (API docs are closed in prod — see
+  Standing rules)
+
+### Sentry pipeline check (`/api/_boom`)
+
+End-to-end proof the error pipeline works, on demand: set `BOOM_ENABLED=1`,
+redeploy, `curl -i https://<host>/api/_boom` → 500, confirm the
+`RuntimeError: sentry verification boom` event in Sentry (tagged
+`environment: production`, request context attached), remove the variable,
+redeploy, confirm `/api/_boom` is back to the same JSON 404 as any unknown
+`/api/` path.
 
 ## 2. DNS: Porkbun → Cloudflare → Railway
 
-> **LAUNCH_DATE is only truly frozen once real players hold local streak
-> state — the Cloudflare CNAME cutover is the last point at which it can
-> still be changed.** If launch slips past 2026-08-01: bump `LAUNCH_DATE`
-> in `server/app/constants.py`, redeploy, *then* point DNS — that gives a
-> clean puzzle #1 on the real launch day.
+> Historical: `LAUNCH_DATE` froze at the DNS cutover on 2026-08-01 — real
+> players hold streak state from that day on. It lives in the
+> frozen-forever list under Standing rules.
 
 1. Cloudflare → Add site → `expedition33dle.com` (Free plan). Discard any
    auto-imported DNS records. Note the two assigned nameservers.
-2. Porkbun → domain → Nameservers → replace with the Cloudflare pair
-   (WHOIS privacy stays on; nothing else at Porkbun matters after delegation).
+2. Porkbun → domain → **first confirm DNSSEC is off** (no DS records).
+   Delegating nameservers while stale DS records sit at the registrar
+   produces SERVFAIL — the domain goes down entirely, not partially. Then
+   Nameservers → replace with the Cloudflare pair (WHOIS privacy stays on;
+   nothing else at Porkbun matters after delegation).
 3. Railway → app service → Settings → Networking → add custom domains
-   `expedition33dle.com` **and** `www.expedition33dle.com`; copy the issued
-   CNAME targets.
+   `expedition33dle.com` **and** `www.expedition33dle.com`. Railway issues
+   **two records per domain** — a CNAME target and a TXT ownership
+   verification record. Copy all four.
 4. Cloudflare → DNS: `CNAME @ → <target>` and `CNAME www → <target>`, both
-   **Proxied** (Cloudflare flattens the apex CNAME).
+   **Proxied** (Cloudflare flattens the apex CNAME), **plus both TXT
+   verification records** exactly as issued. The TXTs are required: without
+   them the domain returns 404 indefinitely while Railway shows the domain
+   pending — which reads exactly like a propagation delay and isn't.
+
+   Alternative: Railway's one-click **Cloudflare integration (Domain
+   Connect)** writes all four records automatically. Caveats from the real
+   run: it writes a fixed 1 hr TTL rather than Auto, and re-running it on a
+   domain it already configured prompts to delete and recreate its own
+   records — which looks alarming and isn't. The manual path above stays
+   the primary one.
 5. Cloudflare → SSL/TLS: mode **Full (strict)**; enable **Always Use HTTPS**.
    If Railway's cert verification stalls behind the proxy: gray-cloud the
    records, wait for Railway to verify, re-enable the proxy.
@@ -78,7 +110,9 @@ ordering isn't load-bearing):
    at UTC midnight, and a cached response would serve a stale answer with no
    client-side signal.
 2. **The SPA document (`/`, `/classic`, … — i.e. everything serving
-   `index.html`) → Bypass cache.** A cached document pins an old bundle hash.
+   `index.html`) → Bypass cache.** A cached document pins an old bundle
+   hash. (Implemented as "path does not contain a dot" — the clause the
+   known gap below hinges on.)
 3. **`/assets/*` → Cache Eligible, Edge TTL 1 year, Browser TTL 1 year.**
    Content-hashed filenames; immutable.
 4. **`/portraits/*` OR `/pictos/*` OR `/weapons/*` OR `/bosses/*` OR
@@ -90,14 +124,41 @@ Browser TTL matters on 3 and 4 because FastAPI's static file responses send
 `etag`/`last-modified` but no `Cache-Control: max-age` — without it you get
 edge caching and no browser caching.
 
+Known gap: dotted paths at the root — `/openapi.json`, `/robots.txt`,
+`/sitemap.xml` and similar — match none of the four rules (rule 2's no-dot
+clause excludes them, and they aren't under `/api/`, `/assets/`, or the
+image dirs), so they fall through to Cloudflare defaults. Not currently a
+problem; noted so nobody goes hunting for a broken rule.
+
 ### Verify on the prod domain
 
 - `dig NS expedition33dle.com` → Cloudflare nameservers
 - `curl -I https://expedition33dle.com` → `cf-ray` header present
 - Second fetch of an image URL → `cf-cache-status: HIT`
-- `/api/classic/today` → `cf-cache-status: BYPASS` (or `DYNAMIC`)
+- `/api/classic/today` → `cf-cache-status: DYNAMIC` or `BYPASS` — both mean
+  uncached (see False signals below)
 - `http://` and `www.` both 301 to the `https://` apex
 - Full game end-to-end on launch day (2026-08-01 UTC = puzzle #1)
+
+After every check above passes: **retire the `*.up.railway.app` generated
+domain** (Railway → Settings → Networking → delete). It is duplicate
+content for SEO, and it bypasses Cloudflare entirely — no cache, no rate
+limiting, no Bot Fight Mode. Keep it until prod is verified: it is the
+origin bypass you need if something goes wrong mid-cutover.
+
+## False signals (looks broken, isn't)
+
+During cutover the authoritative check is always a curl or dig against a
+known-good resolver, never a provider dashboard — Railway's domain status,
+Cloudflare's cache labels, and the local resolver all reported states that
+contradicted what the site was actually serving. The rows below are the
+instances that cost real time.
+
+| Symptom | Actual cause | Verify with |
+| --- | --- | --- |
+| Railway shows "Waiting for DNS update" / "Incorrect DNS setup" indefinitely while both domains serve fine | Railway resolves the hostname expecting its own CNAME target and gets Cloudflare's anycast IPs through the proxy | `curl -sD - -o /dev/null --resolve <host>:443:<cf-ip> https://<host>/api/health` — curl is authoritative, the dashboard label is not |
+| Command line gets the registrar's parking page (openresty / an l.ink redirect) while browsers load the site fine | The system resolver keeps serving pre-delegation records long after delegation is live; browsers on DNS-over-HTTPS already see the new ones. Not a misconfiguration | `dig @1.1.1.1 expedition33dle.com` (or `@8.8.8.8`), or force the connection: `curl --resolve` |
+| `/api/*` returns `cf-cache-status: DYNAMIC`, not `BYPASS`, with the bypass rule correctly applied and deployed | Both mean uncached — DYNAMIC is simply Cloudflare's label for this configuration | Nothing to fix; confirm repeat fetches never show `HIT` |
 
 ## Standing rules
 
@@ -121,8 +182,13 @@ path above.
 
 **Additive any time**: logging, rate limiting, security headers.
 
-## Day-2 TODO (out of scope for this branch)
+**API docs are closed in prod** (`docs_url` / `redoc_url` / `openapi_url`
+all `None` in `app/main.py`): `/docs`, `/redoc`, and `/openapi.json` serve
+the SPA shell like any unknown path. Habit: register any future internal
+route with `include_in_schema=False` anyway — belt and braces even with the
+schema unserved.
+
+## Day-2 TODO
 
 - Cloudflare rate-limiting rule on `/api/*` (one rule on Free).
 - Bot Fight Mode.
-- Error reporting — a 500 in prod is currently invisible.
