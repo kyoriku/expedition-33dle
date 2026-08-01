@@ -33,7 +33,7 @@ app/
 data/              JSON seed data + per-mode field docs (see data/README.md)
 alembic/           migrations (versions/) + env.py
 scripts/
-  seed.py          sync data/*.json into the DB (idempotent)
+  seed.py          sync data/*.json into the DB (idempotent; membership gated — see Data & migrations)
   inspect_db.py    debug: print tables and columns
 tests/             pytest suite
 pyproject.toml     dependencies + pytest config
@@ -107,9 +107,17 @@ date→answer map for every day — freeze both once live. Full details in
 ## Data & migrations
 
 Game data is JSON in [`data/`](data/README.md). `scripts/seed.py` UPSERTs each
-category by `name` and prunes rows no longer in the JSON, so the tables mirror the
-files exactly (it does **not** create tables — run `alembic upgrade head` first).
-Schema changes are Alembic migrations in `alembic/versions/`:
+category by `name` — attribute and image edits propagate freely on the next
+seed. **Membership is gated**: the count gate aborts the run before any
+database contact if a roster's JSON entry count deviates from
+`EXPECTED_COUNTS` (no env var bypasses it), and DB rows missing from the JSON
+abort the run instead of being pruned unless `ALLOW_SEED_PRUNE=1` is set. The
+gate exists because roster membership determines the daily answer mapping —
+an unguarded prune on deploy could silently reshuffle every historical
+puzzle. Deliberate roster changes follow the escape path in
+[`docs/DEPLOY.md`](../docs/DEPLOY.md) (Standing rules). seed.py does **not**
+create tables — run `alembic upgrade head` first. Schema changes are Alembic
+migrations in `alembic/versions/`:
 
 ```bash
 uv run alembic revision --autogenerate -m "describe change"   # create
