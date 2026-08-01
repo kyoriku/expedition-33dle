@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     // Width + padding mirror the pages' <main> (and the header inside it), so the
     // top and bottom hairline rules frame the content at exactly the same edges.
-    <footer className="mx-auto w-full max-w-xl px-4 pt-8 pb-4 md:max-w-3xl md:px-6 lg:max-w-6xl lg:pt-10">
+    <footer className="mx-auto w-full max-w-6xl px-4 pt-8 pb-4 md:px-6 lg:pt-10">
       <div className="rule" aria-hidden="true" />
       <p className="text-muted mt-2 text-center text-[10px] tracking-[0.15em] uppercase">
         expedition33dle.com · an unofficial fan game

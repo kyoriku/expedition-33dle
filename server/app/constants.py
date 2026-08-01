@@ -7,7 +7,7 @@ from datetime import date
 # the same value for puzzle-number math. Set to the public launch day (puzzle
 # #1) — FROZEN once real players hold streak state: changing it reshuffles
 # every day's answer.
-LAUNCH_DATE = date(2026, 7, 30)
+LAUNCH_DATE = date(2026, 8, 1)
 
 # Deterministic schedule seed; shared by the scheduling service. Changing this
 # reshuffles all future puzzles, so treat it as frozen for the live roster.

@@ -61,7 +61,7 @@ export default function GuessRowBase<T extends NamedEntity, F>({
         />
         <span
           aria-hidden="true"
-          className={`font-display line-clamp-3 text-left text-sm leading-tight tracking-[0.02em] uppercase md:text-base lg:text-lg ${
+          className={`font-display line-clamp-3 text-left text-sm leading-tight tracking-[0.02em] uppercase md:text-base ${
             is_correct ? "text-gold-bright font-bold" : "text-gold"
           }`}
         >

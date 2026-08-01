@@ -26,6 +26,18 @@ automatable lives in `Dockerfile` / `railway.json` / `scripts/seed.py`.
      container start — a first-attempt alembic connection failure in
      pre-deploy is that, not the URL scheme.
 
+### CI gate (tests must pass before deploy)
+
+`.github/workflows/tests.yml` runs both suites (pytest + vitest) on every
+push to main and every PR. To make a red run **block the deploy**: Railway →
+app service → Settings → enable **Wait for CI**. Railway then holds the
+build until the commit's GitHub checks succeed. Optional extra: GitHub
+branch protection on `main` requiring the `tests` checks before merge.
+
+Until 2026-08-01 UTC the 28 wall-clock endpoint tests are red by choice
+(pre-launch, routers correctly raise PuzzleNotYetAvailable) — the first
+green run happens on launch day.
+
 ### Verify on the Railway domain (before DNS)
 
 - `curl https://<app>.up.railway.app/api/health` → `{"status":"ok"}`
@@ -38,7 +50,7 @@ automatable lives in `Dockerfile` / `railway.json` / `scripts/seed.py`.
 
 > **LAUNCH_DATE is only truly frozen once real players hold local streak
 > state — the Cloudflare CNAME cutover is the last point at which it can
-> still be changed.** If launch slips past 2026-07-30: bump `LAUNCH_DATE`
+> still be changed.** If launch slips past 2026-08-01: bump `LAUNCH_DATE`
 > in `server/app/constants.py`, redeploy, *then* point DNS — that gives a
 > clean puzzle #1 on the real launch day.
 
@@ -85,7 +97,7 @@ edge caching and no browser caching.
 - Second fetch of an image URL → `cf-cache-status: HIT`
 - `/api/classic/today` → `cf-cache-status: BYPASS` (or `DYNAMIC`)
 - `http://` and `www.` both 301 to the `https://` apex
-- Full game end-to-end on launch day (2026-07-30 UTC = puzzle #1)
+- Full game end-to-end on launch day (2026-08-01 UTC = puzzle #1)
 
 ## Standing rules
 

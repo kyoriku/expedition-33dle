@@ -22,11 +22,15 @@ export default function Legend() {
           {label}
         </span>
       ))}
-      <span className="flex items-center gap-1.5">
-        <span aria-hidden="true">▲▼</span> higher / lower
-      </span>
-      <span className="flex items-center gap-1.5">
-        <span aria-hidden="true">?</span> unknown
+      {/* Grouped so the pair wraps together — otherwise "? unknown" can strand
+          alone on its own line on phone widths. */}
+      <span className="flex items-center gap-x-3">
+        <span className="flex items-center gap-1.5">
+          <span aria-hidden="true">▲▼</span> higher / lower
+        </span>
+        <span className="flex items-center gap-1.5">
+          <span aria-hidden="true">?</span> unknown
+        </span>
       </span>
     </div>
   );
