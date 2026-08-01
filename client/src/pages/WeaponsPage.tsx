@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import Header from "../components/Header";
+import LoadingSpinner from "../components/LoadingSpinner";
 import Legend from "../components/Legend";
 import Modal from "../components/Modal";
 import Countdown from "../components/Countdown";
@@ -11,6 +12,7 @@ import LastTryBase from "../components/LastTryBase";
 import AnswerRevealBase from "../components/AnswerRevealBase";
 import HowToPlayBase from "../components/HowToPlayBase";
 import { WEAPONS_GRID_TEMPLATE } from "../lib/gridTemplates";
+import { inBounds, tightenBounds, type Bounds } from "../lib/constraints";
 import { WEAPONS_ATTRIBUTES } from "../lib/attributes";
 import StatsBlock from "../components/StatsBlock";
 import Histogram from "../components/Histogram";
@@ -87,14 +89,23 @@ function Centered({ children }: { children: React.ReactNode }) {
   );
 }
 
-// ── PROTOTYPE: constraint-propagation autocomplete (greens-only) ─────────────
+// ── PROTOTYPE: constraint-propagation autocomplete ───────────────────────────
 // Narrow the suggestion roster to weapons consistent with every confirmed
-// EXACT-match (green) column. Display-only over data the page already holds —
-// the answer always satisfies its own greens, so this can never hide it. Only the
-// equality columns: wielder (green = full set match), element, source. NOT the
-// directional (max_power/act) or set/partial (scaling_stats) columns. To revert:
-// delete this block + the suggestItems memo and restore items={today.weapons}.
-type WeaponConstraints = { wielder?: string[]; element?: string; source?: string };
+// EXACT-match (green) column and the coarse act window the ▲▼ Act feedback
+// implies. Display-only over data the page already holds — the answer always
+// satisfies its own feedback, so this can never hide it. Equality columns:
+// wielder (green = full set match), element, source. NOT the set/partial
+// (scaling_stats) column, and deliberately NOT the fine-grained max_power
+// window: acts are three values a player tracks in their head, but
+// auto-filtering 41 distinct power values did the deduction for them and made
+// the game too easy. To revert: delete this block + the suggestItems memo and
+// restore items={today.weapons}.
+type WeaponConstraints = {
+  wielder?: string[];
+  element?: string;
+  source?: string;
+  act_introduced?: Bounds;
+};
 
 function deriveConstraints(guesses: WeaponGuessResponse[]): WeaponConstraints {
   const c: WeaponConstraints = {};
@@ -102,6 +113,7 @@ function deriveConstraints(guesses: WeaponGuessResponse[]): WeaponConstraints {
     if (feedback.wielder === "match") c.wielder = guess.wielder; // exact set
     if (feedback.element === "match") c.element = guess.element;
     if (feedback.source === "match") c.source = guess.source;
+    c.act_introduced = tightenBounds(c.act_introduced, guess.act_introduced, feedback.act_introduced);
   }
   return c;
 }
@@ -113,6 +125,7 @@ function matchesConstraints(w: Weapon, c: WeaponConstraints): boolean {
   if (c.element !== undefined && w.element !== c.element) return false;
   if (c.source !== undefined && w.source !== c.source) return false;
   if (c.wielder !== undefined && !sameSet(w.wielder, c.wielder)) return false;
+  if (!inBounds(w.act_introduced, c.act_introduced)) return false;
   return true;
 }
 // ── end PROTOTYPE ────────────────────────────────────────────────────────────
@@ -122,7 +135,7 @@ function matchesConstraints(w: Weapon, c: WeaponConstraints): boolean {
  *  the loading and error states. */
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 py-8 md:py-12 md:max-w-3xl md:px-6 lg:max-w-6xl">
+    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-8 md:px-6 md:py-12">
       <Header />
       <Centered>{children}</Centered>
     </main>
@@ -162,7 +175,7 @@ export default function WeaponsPage() {
   });
   useWeaponsRollover(today?.puzzle_date, refetch);
 
-  if (isPending) return <Shell>Loading today’s puzzle…</Shell>;
+  if (isPending) return <Shell><LoadingSpinner /></Shell>;
   if (error) {
     return (
       <Shell>
@@ -313,7 +326,7 @@ function Game({ today }: { today: WeaponTodayResponse }) {
   const remaining = MAX_GUESSES - guesses.length;
 
   return (
-    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 py-8 md:py-12 md:max-w-3xl md:px-6 lg:max-w-6xl">
+    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-8 md:px-6 md:py-12">
       <Header
         right={
           <span className="flex items-center gap-2">
@@ -426,7 +439,9 @@ function Game({ today }: { today: WeaponTodayResponse }) {
               </p>
             ) : (
               <p className="bg-panneau border-line text-parchment font-display my-3 border p-3 text-center text-base tracking-[0.08em] uppercase md:text-lg">
-                Game over — try again tomorrow
+                Game over
+                <span className="hidden sm:inline"> — </span>
+                <span className="block sm:inline">try again tomorrow</span>
               </p>
             )}
             <StatsBlock stats={stats} />

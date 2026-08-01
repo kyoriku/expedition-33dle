@@ -48,7 +48,7 @@ export default function AnswerRevealBase<T extends NamedEntity, F>({
               />
               <span
                 aria-hidden="true"
-                className="text-gold-bright font-display line-clamp-3 text-left text-sm leading-tight font-bold tracking-[0.02em] uppercase md:text-base lg:text-lg"
+                className="text-gold-bright font-display line-clamp-3 text-left text-sm leading-tight font-bold tracking-[0.02em] uppercase md:text-base"
               >
                 {answer.name}
               </span>

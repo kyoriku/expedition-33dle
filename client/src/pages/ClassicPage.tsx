@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import AnswerRevealBase from "../components/AnswerRevealBase";
 import GameStatus from "../components/GameStatus";
 import Header from "../components/Header";
+import LoadingSpinner from "../components/LoadingSpinner";
 import Legend from "../components/Legend";
 import GuessGridBase from "../components/GuessGridBase";
 import GuessError from "../components/GuessError";
@@ -96,7 +97,7 @@ function Centered({ children }: { children: React.ReactNode }) {
  *  the loading and error states. */
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 py-8 md:py-12 md:max-w-3xl md:px-6 lg:max-w-6xl">
+    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-8 md:px-6 md:py-12">
       <Header />
       <Centered>{children}</Centered>
     </main>
@@ -139,7 +140,7 @@ export default function ClassicPage() {
   });
   useDailyRollover(today?.puzzle_date, refetch);
 
-  if (isPending) return <Shell>Loading today’s puzzle…</Shell>;
+  if (isPending) return <Shell><LoadingSpinner /></Shell>;
   if (error) {
     return (
       <Shell>
@@ -288,7 +289,7 @@ function Game({ today }: { today: ClassicTodayResponse }) {
   }
 
   return (
-    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 py-8 md:py-12 md:max-w-3xl md:px-6 lg:max-w-6xl">
+    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-8 md:px-6 md:py-12">
       <Header
         right={
           <span className="flex items-center gap-2">

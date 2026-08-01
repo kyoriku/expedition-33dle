@@ -6,12 +6,12 @@ error paths — without a database, an event-loop plugin, or an HTTP client.
 """
 
 import asyncio
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 import pytest
 from fastapi import HTTPException
 
-from app.constants import CLASSIC_MAX_GUESSES
+from app.constants import CLASSIC_MAX_GUESSES, LAUNCH_DATE
 from app.models import Character
 from app.routers.classic import guess, reveal, today
 from app.schemas import ClassicGuessRequest, RevealRequest
@@ -79,10 +79,31 @@ def test_today_lists_all_characters_and_hides_answer():
     assert "answer" not in resp.model_dump()
 
 
-def test_today_includes_yesterday():
+def _freeze_today(monkeypatch, target):
+    """Pin the router's UTC 'today' so date-relative behavior is deterministic
+    (the yesterday lookup flips at LAUNCH_DATE, and wall-clock tests would
+    change meaning as real days pass)."""
+
+    class _Frozen:
+        @staticmethod
+        def now(tz=None):
+            return datetime(target.year, target.month, target.day, 12, tzinfo=tz)
+
+    monkeypatch.setattr("app.routers.classic.datetime", _Frozen)
+
+
+def test_today_includes_yesterday(monkeypatch):
+    _freeze_today(monkeypatch, LAUNCH_DATE + timedelta(days=32))
     resp = run(today(db=FakeSession(ROSTER)))
     assert resp.yesterday is not None
     assert resp.yesterday.name in {c.name for c in ROSTER}
+
+
+def test_today_launch_day_has_no_yesterday(monkeypatch):
+    # Puzzle #1 has no predecessor by design (PuzzleNotYetAvailable -> None).
+    _freeze_today(monkeypatch, LAUNCH_DATE)
+    resp = run(today(db=FakeSession(ROSTER)))
+    assert resp.yesterday is None
 
 
 def test_today_503_when_no_characters():

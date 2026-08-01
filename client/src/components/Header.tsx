@@ -16,7 +16,7 @@ export default function Header({ right, brandAs = "h1" }: HeaderProps) {
     // Constrain the header to a consistent width on every page: the same frame
     // the game pages' guess grids fill at lg. Menu/legal content stays a narrower
     // column beneath it (wide masthead over a narrow column — not the reverse).
-    <div className="mx-auto w-full max-w-xl md:max-w-3xl lg:max-w-6xl">
+    <div className="mx-auto w-full max-w-6xl">
       <header className="mb-1.5 flex items-center justify-between gap-2">
         <Brand className="leading-none">
           <Link to="/" className="group block">

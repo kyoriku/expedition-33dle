@@ -1,6 +1,6 @@
 # Terms of Service
 
-Effective: [DATE BEFORE LAUNCH]
+Effective: August 1, 2026
 
 ## 1. Acceptance
 

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import Header from "../components/Header";
+import LoadingSpinner from "../components/LoadingSpinner";
 import Legend from "../components/Legend";
 import Modal from "../components/Modal";
 import Countdown from "../components/Countdown";
@@ -47,7 +48,7 @@ const EXAMPLE_GUESS: BossGuessResponse = {
     location: "Flying Waters",
     encounter: "Required",
     act_introduced: 1,
-    image: null,
+    image: "goblu.webp",
   },
   feedback: {
     weakness: "match",
@@ -91,10 +92,13 @@ function Centered({ children }: { children: React.ReactNode }) {
 // ── PROTOTYPE: constraint-propagation autocomplete (greens-only) ─────────────
 // Narrow the suggestion roster to bosses consistent with every confirmed
 // EXACT-match (green) column. Display-only over data the page already holds —
-// the answer always satisfies its own greens, so this can never hide it. Only the
-// equality columns: location, encounter, category. NOT the directional (act) or
-// set/partial (weakness/resistance) columns. To revert: delete this block + the
-// suggestItems memo and restore items={today.bosses}.
+// the answer always satisfies its own greens, so this can never hide it.
+// Equality columns: location, encounter, category. NOT the set/partial
+// (weakness/resistance) columns, and — unlike pictos/weapons — deliberately NOT
+// an act_introduced window: the roster is only 50 bosses, acts split it almost
+// evenly (one arrow halves the pool), and which act a boss appears in is
+// exactly the story knowledge this mode tests. To revert: delete this block +
+// the suggestItems memo and restore items={today.bosses}.
 type BossConstraints = { location?: string; encounter?: string; category?: string };
 
 function deriveConstraints(guesses: BossGuessResponse[]): BossConstraints {
@@ -120,7 +124,7 @@ function matchesConstraints(b: Boss, c: BossConstraints): boolean {
  *  the loading and error states. */
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 py-8 md:py-12 md:max-w-3xl md:px-6 lg:max-w-6xl">
+    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-8 md:px-6 md:py-12">
       <Header />
       <Centered>{children}</Centered>
     </main>
@@ -160,7 +164,7 @@ export default function BossesPage() {
   });
   useBossesRollover(today?.puzzle_date, refetch);
 
-  if (isPending) return <Shell>Loading today’s puzzle…</Shell>;
+  if (isPending) return <Shell><LoadingSpinner /></Shell>;
   if (error) {
     return (
       <Shell>
@@ -311,7 +315,7 @@ function Game({ today }: { today: BossTodayResponse }) {
   const remaining = MAX_GUESSES - guesses.length;
 
   return (
-    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col px-4 py-8 md:py-12 md:max-w-3xl md:px-6 lg:max-w-6xl">
+    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-8 md:px-6 md:py-12">
       <Header
         right={
           <span className="flex items-center gap-2">
@@ -424,7 +428,9 @@ function Game({ today }: { today: BossTodayResponse }) {
               </p>
             ) : (
               <p className="bg-panneau border-line text-parchment font-display my-3 border p-3 text-center text-base tracking-[0.08em] uppercase md:text-lg">
-                Game over — try again tomorrow
+                Game over
+                <span className="hidden sm:inline"> — </span>
+                <span className="block sm:inline">try again tomorrow</span>
               </p>
             )}
             <StatsBlock stats={stats} />

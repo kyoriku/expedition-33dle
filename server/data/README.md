@@ -35,7 +35,7 @@ freeze or hot-fix.
 The salt namespaces each mode's schedule so their answers are uncorrelated on the
 same day: Classic uses `"classic"`, Pictos `"pictos"`, Weapons `"weapons"`, Bosses
 `"bosses"` — each a `*_SALT` constant at the top of its router in `app/routers/`. `puzzle_number` is
-shared across modes — it's just date math: days since `LAUNCH_DATE` (2026-06-14) + 1.
+shared across modes — it's just date math: days since `LAUNCH_DATE` (2026-08-01) + 1.
 
 The flip side: changing a roster (add/remove/rename) or `SHUFFLE_SEED` reshuffles
 the date→answer mapping for *every* day, past and future (`puzzle_number` stays

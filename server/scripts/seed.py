@@ -10,10 +10,20 @@ app.services.scheduling as a pure function of the date and roster.
 Seeds four modes: Classic characters (server/data/characters.json), Pictos
 (server/data/pictos.json), Weapons (server/data/weapons.json), and Bosses
 (server/data/bosses.json); see server/data/README.md for sourcing conventions.
+
+Because this runs unattended as a deploy step, roster MEMBERSHIP is gated:
+the daily answer is a pure function of the sorted name list, so an accidental
+add/remove/rename reshuffles every historical answer. Two guards, both
+aborting before any write:
+- Entry counts must equal EXPECTED_COUNTS (no env var bypasses this).
+- A non-empty prune set (DB rows absent from the JSON) aborts unless
+  ALLOW_SEED_PRUNE=1 — the escape hatch for a deliberate, pinned migration.
+Attribute and image edits stay freely allowed; only membership is gated.
 """
 
 import asyncio
 import json
+import os
 import sys
 from pathlib import Path
 from typing import get_args
@@ -21,7 +31,7 @@ from typing import get_args
 # Make the `app` package importable when run as a standalone script
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from sqlalchemy import delete, literal_column
+from sqlalchemy import delete, literal_column, select
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 
 from app.constants import VALID_ACTS
@@ -70,6 +80,52 @@ BOSSES: list[dict] = load_category("bosses")
 # Mirror the pictos/weapons image default so every row carries the key.
 for _b in BOSSES:
     _b.setdefault("image", None)
+
+# One row per mode drives the guard + prune phases below: (mode, model, rows).
+MODES = (
+    ("characters", Character, CHARACTERS),
+    ("pictos", Picto, PICTOS),
+    ("weapons", Weapon, WEAPONS),
+    ("bosses", Boss, BOSSES),
+)
+
+# Roster sizes are FROZEN while live (see module docstring). Editing these
+# numbers is a deliberate act that belongs to the same change as pinning
+# elapsed days' answers.
+EXPECTED_COUNTS = {"characters": 33, "pictos": 201, "weapons": 116, "bosses": 50}
+
+COUNT_GATE_RESOLUTION = (
+    "Roster size is frozen while live: changing membership reshuffles every\n"
+    "historical daily answer. A deliberate roster change requires, in order:\n"
+    "  (a) pin elapsed days' answers first,\n"
+    "  (b) edit EXPECTED_COUNTS in scripts/seed.py,\n"
+    "  (c) set ALLOW_SEED_PRUNE=1 only if the change also removes entries.\n"
+    "ALLOW_SEED_PRUNE does NOT bypass this count check."
+)
+
+
+def check_expected_counts(counts: dict[str, int]) -> list[str]:
+    """Pure count gate: one message per mode whose parsed JSON entry count
+    differs from EXPECTED_COUNTS; empty list = pass."""
+    return [
+        f"{mode}: expected {EXPECTED_COUNTS[mode]} entries, found {n}"
+        for mode, n in counts.items()
+        if n != EXPECTED_COUNTS[mode]
+    ]
+
+
+def check_prune_allowed(
+    mode: str, candidates: list[str], allow: bool
+) -> str | None:
+    """Pure prune gate: an abort message when `candidates` (DB rows absent from
+    the JSON) is non-empty and pruning wasn't explicitly allowed; None = proceed.
+    An empty candidate list (the empty-DB first deploy included) always passes."""
+    if not candidates or allow:
+        return None
+    return (
+        f"{mode}: would delete {len(candidates)} DB row(s) not present in the "
+        f"JSON: {', '.join(sorted(candidates))}"
+    )
 
 
 def validate_weapons(rows: list[dict]) -> None:
@@ -216,15 +272,54 @@ def validate_characters(rows: list[dict]) -> None:
             )
 
 
-async def prune_characters(conn) -> int:
-    """Delete DB characters no longer present in the JSON.
+async def collect_prune_candidates(conn) -> dict[str, list[str]]:
+    """Phase A: per mode, the DB names absent from the JSON. Reads only."""
+    out: dict[str, list[str]] = {}
+    for mode, model, rows in MODES:
+        names = [r["name"] for r in rows]
+        result = await conn.execute(
+            select(model.name).where(model.name.notin_(names))
+        )
+        out[mode] = [name for (name,) in result.all()]
+    return out
 
-    Keeps the seed idempotent for removals as well as additions: re-running
-    after trimming the roster brings the DB back to exactly the JSON set.
-    """
-    names = [c["name"] for c in CHARACTERS]
-    result = await conn.execute(delete(Character).where(Character.name.notin_(names)))
-    return result.rowcount
+
+def gate_prunes(candidates: dict[str, list[str]], allow: bool) -> list[str]:
+    """Phase B (pure): every mode's abort message, so a bad state surfaces all
+    offending modes in one run; empty list = proceed."""
+    return [
+        msg
+        for mode, cands in candidates.items()
+        if (msg := check_prune_allowed(mode, cands, allow))
+    ]
+
+
+async def apply_prunes(conn, candidates: dict[str, list[str]]) -> dict[str, int]:
+    """Phase C: DELETE exactly the gated candidates. Only reached when Phase B
+    passed; keeps the seed idempotent for (deliberate) removals."""
+    counts: dict[str, int] = {}
+    for mode, model, _ in MODES:
+        doomed = candidates[mode]
+        if doomed:
+            result = await conn.execute(delete(model).where(model.name.in_(doomed)))
+            counts[mode] = result.rowcount
+        else:
+            counts[mode] = 0
+    return counts
+
+
+async def prune_all(conn, allow: bool) -> dict[str, int]:
+    """Read-all -> gate-all -> delete-all. The gate aborts before ANY write —
+    roster integrity must not depend on transaction rollback under SystemExit."""
+    candidates = await collect_prune_candidates(conn)
+    messages = gate_prunes(candidates, allow)
+    if messages:
+        print("SEED PRUNE BLOCKED — no writes performed:", file=sys.stderr)
+        for msg in messages:
+            print(f"  {msg}", file=sys.stderr)
+        print(COUNT_GATE_RESOLUTION, file=sys.stderr)
+        sys.exit(1)
+    return await apply_prunes(conn, candidates)
 
 
 async def upsert_characters(conn) -> dict[str, int]:
@@ -246,13 +341,6 @@ async def upsert_characters(conn) -> dict[str, int]:
     ).returning(Character.name, Character.id)
     rows = (await conn.execute(stmt)).all()
     return {name: id_ for name, id_ in rows}
-
-
-async def prune_pictos(conn) -> int:
-    """Delete DB pictos no longer present in the JSON (mirrors prune_characters)."""
-    names = [p["name"] for p in PICTOS]
-    result = await conn.execute(delete(Picto).where(Picto.name.notin_(names)))
-    return result.rowcount
 
 
 async def upsert_pictos(conn) -> tuple[int, int]:
@@ -285,13 +373,6 @@ async def upsert_pictos(conn) -> tuple[int, int]:
     return inserted, len(rows) - inserted
 
 
-async def prune_weapons(conn) -> int:
-    """Delete DB weapons no longer present in the JSON (mirrors prune_pictos)."""
-    names = [w["name"] for w in WEAPONS]
-    result = await conn.execute(delete(Weapon).where(Weapon.name.notin_(names)))
-    return result.rowcount
-
-
 async def upsert_weapons(conn) -> tuple[int, int]:
     """UPSERT all weapons by name; return (inserted, updated) counts.
 
@@ -317,13 +398,6 @@ async def upsert_weapons(conn) -> tuple[int, int]:
     rows = (await conn.execute(stmt)).all()
     inserted = sum(1 for _, ins in rows if ins)
     return inserted, len(rows) - inserted
-
-
-async def prune_bosses(conn) -> int:
-    """Delete DB bosses no longer present in the JSON (mirrors prune_weapons)."""
-    names = [b["name"] for b in BOSSES]
-    result = await conn.execute(delete(Boss).where(Boss.name.notin_(names)))
-    return result.rowcount
 
 
 async def upsert_bosses(conn) -> tuple[int, int]:
@@ -360,27 +434,40 @@ async def main() -> None:
     validate_pictos(PICTOS)
     validate_weapons(WEAPONS)
     validate_bosses(BOSSES)
+    # Count gate — before any DB work at all (no env var bypasses this).
+    mismatches = check_expected_counts(
+        {mode: len(rows) for mode, _, rows in MODES}
+    )
+    if mismatches:
+        print("SEED COUNT GATE FAILED — no writes performed:", file=sys.stderr)
+        for msg in mismatches:
+            print(f"  {msg}", file=sys.stderr)
+        print(COUNT_GATE_RESOLUTION, file=sys.stderr)
+        sys.exit(1)
+    allow_prune = os.environ.get("ALLOW_SEED_PRUNE") == "1"
     async with engine.begin() as conn:
-        pruned = await prune_characters(conn)
+        # prune_all reads + gates BEFORE its deletes; a blocked prune exits
+        # here having written nothing.
+        pruned = await prune_all(conn, allow_prune)
         name_to_id = await upsert_characters(conn)
-        pictos_pruned = await prune_pictos(conn)
         p_ins, p_upd = await upsert_pictos(conn)
-        weapons_pruned = await prune_weapons(conn)
         w_ins, w_upd = await upsert_weapons(conn)
-        bosses_pruned = await prune_bosses(conn)
         b_ins, b_upd = await upsert_bosses(conn)
-    print(f"characters pruned: {pruned}, upserted: {len(name_to_id)}")
+    print(f"characters pruned: {pruned['characters']}, upserted: {len(name_to_id)}", file=sys.stderr)
     print(
-        f"pictos pruned: {pictos_pruned}, inserted: {p_ins}, "
-        f"updated: {p_upd}, total: {p_ins + p_upd}"
+        f"pictos pruned: {pruned['pictos']}, inserted: {p_ins}, "
+        f"updated: {p_upd}, total: {p_ins + p_upd}",
+        file=sys.stderr,
     )
     print(
-        f"weapons pruned: {weapons_pruned}, inserted: {w_ins}, "
-        f"updated: {w_upd}, total: {w_ins + w_upd}"
+        f"weapons pruned: {pruned['weapons']}, inserted: {w_ins}, "
+        f"updated: {w_upd}, total: {w_ins + w_upd}",
+        file=sys.stderr,
     )
     print(
-        f"bosses pruned: {bosses_pruned}, inserted: {b_ins}, "
-        f"updated: {b_upd}, total: {b_ins + b_upd}"
+        f"bosses pruned: {pruned['bosses']}, inserted: {b_ins}, "
+        f"updated: {b_upd}, total: {b_ins + b_upd}",
+        file=sys.stderr,
     )
     await engine.dispose()
 
