@@ -56,11 +56,42 @@ def test_boom_disarmed_is_a_plain_404(monkeypatch):
 
 
 def test_boom_absent_from_openapi_schema():
-    # The public /openapi.json must not advertise the pipeline check —
-    # disarmed, the route has to look like it does not exist at all.
+    # The schema is no longer served (docs endpoints are closed) but stays
+    # generatable via app.openapi() — and even there the pipeline check must
+    # not appear: disarmed, the route has to look like it does not exist.
     import app.main
 
     assert "/api/_boom" not in app.main.app.openapi()["paths"]
+
+
+def test_docs_routes_not_registered():
+    # Auto-generated docs are closed (docs_url/redoc_url/openapi_url=None):
+    # none of the four routes FastAPI would otherwise register may exist.
+    import app.main
+
+    paths = {getattr(r, "path", None) for r in app.main.app.routes}
+    assert paths.isdisjoint(
+        {"/openapi.json", "/docs", "/docs/oauth2-redirect", "/redoc"}
+    )
+
+
+def test_docs_paths_indistinguishable_from_unknown_paths():
+    # With no docs routes registered, /docs etc. fall to the SPA catch-all
+    # and must behave exactly like any unknown non-API path: same 404 when
+    # no client build exists, same index.html when one does. Comparing the
+    # two calls' outcomes directly keeps the test build-independent.
+    from app.main import spa
+
+    def outcome(path):
+        try:
+            resp = asyncio.run(spa(path))
+        except HTTPException as exc:
+            return ("http_error", exc.status_code, exc.detail)
+        return ("file", resp.path)
+
+    baseline = outcome("zzz-no-such-page")
+    for path in ("docs", "redoc", "openapi.json", "docs/oauth2-redirect"):
+        assert outcome(path) == baseline
 
 
 def test_boom_armed_raises(monkeypatch):

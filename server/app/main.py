@@ -32,7 +32,17 @@ async def lifespan(app: FastAPI):
     await engine.dispose()
 
 
-app = FastAPI(title="Expedition 33dle API", lifespan=lifespan)
+# Docs endpoints closed on purpose: default-open publishing is how /api/_boom
+# leaked into the served schema, and nothing consumes /openapi.json (the
+# client API layer is hand-written). The schema stays generatable in-process
+# via app.openapi(), which the tests use.
+app = FastAPI(
+    title="Expedition 33dle API",
+    lifespan=lifespan,
+    docs_url=None,
+    redoc_url=None,
+    openapi_url=None,
+)
 app.include_router(classic.router)
 app.include_router(pictos.router)
 app.include_router(weapons.router)
@@ -49,9 +59,10 @@ def boom():
     """Sentry pipeline check: raises an unhandled error when armed.
 
     Without BOOM_ENABLED=1 this responds with the same JSON 404 as any
-    unknown /api/ path, and include_in_schema keeps it out of the public
-    /openapi.json, so disarmed it is externally indistinguishable from a
-    route that does not exist.
+    unknown /api/ path, and include_in_schema keeps it out of the OpenAPI
+    schema (no longer served, but still generatable via app.openapi()),
+    so disarmed it is externally indistinguishable from a route that does
+    not exist.
     """
     if settings.boom_enabled != "1":
         raise HTTPException(status_code=404, detail="Not found")
