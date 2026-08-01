@@ -104,9 +104,3 @@ seeding model.
 cd server && uv run pytest      # backend: feedback, scheduling, endpoints
 cd client && npm test           # frontend: Vitest + Testing Library
 ```
-
-## License
-
-[MIT](LICENSE). This is a fan-made project, not affiliated with or endorsed by the
-creators of Clair Obscur: Expedition 33. Game data is used for identification under
-fair use; do not commit ripped game assets.
