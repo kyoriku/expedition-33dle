@@ -11,3 +11,10 @@ import os
 os.environ.setdefault(
     "DATABASE_URL", "postgresql+asyncpg://test:test@localhost/test"
 )
+
+# Sentry must never activate under test: app.main initializes the SDK at
+# import time when SENTRY_DSN is set, so a DSN leaked from a shell would
+# patch the app and send real events. Overwrite with "" rather than pop —
+# env vars outrank the env_file source in pydantic-settings, so this also
+# shadows a DSN in a stray local server/.env; main.py treats "" as unset.
+os.environ["SENTRY_DSN"] = ""

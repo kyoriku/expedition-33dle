@@ -8,6 +8,7 @@ import WeaponsPage from "./pages/WeaponsPage";
 import BossesPage from "./pages/BossesPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import TermsPage from "./pages/TermsPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import ScrollToTop from "./components/ScrollToTop";
 import { pruneOldDailyState } from "./lib/storage";
 import { todayUtcISO } from "./lib/time";
@@ -33,6 +34,7 @@ export default function App() {
             <Route path="/bosses" element={<BossesPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
         <Footer />
