@@ -1,5 +1,5 @@
 {
-  "name": "expedition33dle",
+  "name": "expedition-33dle",
   "version": "1.0.0",
   "private": true,
   "description": "Daily character guessing game for Clair Obscur: Expedition 33. React/TypeScript frontend, Python/FastAPI backend, PostgreSQL database.",

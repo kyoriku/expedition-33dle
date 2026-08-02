@@ -22,12 +22,12 @@ services:
     volumes:
       # Bind-mount the repo. `cached` is a macOS optimization — host is the
       # source of truth, container reads are cached. Big perf win for hot reload.
-      - ..:/workspaces/expedition33dle:cached
+      - ..:/workspaces/expedition-33dle:cached
 
       # Named volumes for container-managed artifacts. Permissions fixed by
       # volume-init before this container starts.
-      - server-venv:/workspaces/expedition33dle/server/.venv
-      - client-node-modules:/workspaces/expedition33dle/client/node_modules
+      - server-venv:/workspaces/expedition-33dle/server/.venv
+      - client-node-modules:/workspaces/expedition-33dle/client/node_modules
 
     command: sleep infinity
 
