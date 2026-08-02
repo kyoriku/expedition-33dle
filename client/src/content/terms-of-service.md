@@ -1,6 +1,6 @@
 # Terms of Service
 
-Effective: August 1, 2026
+Effective: August 2, 2026
 
 ## 1. Acceptance
 
@@ -8,7 +8,7 @@ By accessing or using expedition33dle.com ("the site"), you agree to be bound by
 
 ## 2. Description of service
 
-expedition33dle is a free, browser-based daily guessing game inspired by *Clair Obscur: Expedition 33*. No account is required to play, and the site shows no advertising. We reserve the right to modify, suspend, or discontinue any aspect of the service at any time, with or without notice.
+expedition33dle is a free, browser-based daily guessing game inspired by *Clair Obscur: Expedition 33*. No account is required to play. The site currently shows no ads; advertising is planned. We reserve the right to modify, suspend, or discontinue any aspect of the service at any time, with or without notice.
 
 ## 3. Intellectual property disclaimer
 

@@ -1,6 +1,10 @@
+<!-- The AdSense dashboard (e.g. account-level Auto ads) can change what the
+     adsbygoogle script does in the browser without any code change here —
+     treat the dashboard as a second source of truth when editing this page. -->
+
 # Privacy Policy
 
-Effective: August 1, 2026
+Effective: August 2, 2026
 
 ## 1. About this site
 
@@ -24,7 +28,9 @@ The site uses your browser's localStorage to keep your in-game state: today's gu
 
 **Essential storage** — localStorage entries described in Section 4 are necessary for the game to function and are always active.
 
-**No advertising, analytics, or tracking** — the site shows no advertisements and sets no cookies of its own. No advertising, analytics, or tracking scripts run in your browser. Cloudflare may set strictly operational security cookies when protecting the site from automated abuse (for example, during a security challenge); these are not used for advertising or cross-site tracking.
+**Advertising (verification only)** — a Google AdSense script loads on every page while we verify the site with Google. No ads are served and no ad units exist on the site. Because your browser fetches the script from Google's servers, Google receives standard request information such as your IP address, and the script may set cookies or read device identifiers as part of Google's operation, under Google's own privacy policy. Advertising is planned: before any ads are served, consent controls will be in place for visitors in regions that require them.
+
+**No analytics or tracking** — the site sets no cookies of its own and runs no analytics or tracking scripts. Cloudflare may set strictly operational security cookies when protecting the site from automated abuse (for example, during a security challenge); these are not used for advertising or cross-site tracking.
 
 ## 6. Third-party services
 
@@ -34,6 +40,7 @@ The site relies on the following third parties:
 - **Railway** — hosting and infrastructure
 - **Sentry** — server-side error monitoring
 - **Porkbun** — domain registration
+- **Google AdSense** — site verification for planned advertising
 
 Each of these providers has its own privacy policy and data handling practices that apply to data they process on their own infrastructure.
 
@@ -41,9 +48,9 @@ Each of these providers has its own privacy policy and data handling practices t
 
 For visitors in the EU, EEA, or UK:
 
-- **Essential site operation, security, and error monitoring** are processed under our legitimate interest in providing, securing, and maintaining the service
+- **Essential site operation, security, error monitoring, and site verification** are processed under our legitimate interest in providing, securing, and maintaining the service
 
-No processing on this site is based on consent, because no advertising or tracking takes place.
+No processing on this site is currently based on consent. Consent will be requested before any advertising is served to visitors in regions that require it.
 
 ## 8. Data retention
 
