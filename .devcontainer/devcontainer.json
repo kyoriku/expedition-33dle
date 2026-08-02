@@ -6,11 +6,11 @@
 //
 // Schema reference: https://containers.dev/implementors/json_reference/
 {
-  "name": "expedition33dle-dev",
+  "name": "expedition-33dle-dev",
   // Use docker-compose to orchestrate dev + postgres.
   "dockerComposeFile": "docker-compose.yml",
   "service": "dev",
-  "workspaceFolder": "/workspaces/expedition33dle",
+  "workspaceFolder": "/workspaces/expedition-33dle",
   // Layer additional tooling onto the base Python image. Features are
   // pre-built scriptlets maintained by the devcontainers community.
   "features": {
@@ -75,7 +75,7 @@
         "anthropic.claude-code"
       ],
       "settings": {
-        "python.defaultInterpreterPath": "/workspaces/expedition33dle/server/.venv/bin/python"
+        "python.defaultInterpreterPath": "/workspaces/expedition-33dle/server/.venv/bin/python"
         // "terminal.integrated.defaultProfile.linux": "zsh"
       }
     }
