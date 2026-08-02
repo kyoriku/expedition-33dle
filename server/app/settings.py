@@ -5,8 +5,10 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     """Application settings, sourced from environment variables.
 
-    The dev container injects DATABASE_URL (and CORS_ORIGINS). `extra="ignore"`
-    is required so undeclared env vars like CORS_ORIGINS don't raise at startup.
+    The dev container injects DATABASE_URL. `extra="ignore"` is required so
+    undeclared entries in a stray local server/.env (say PORT=8001) don't raise
+    at startup — undeclared OS env vars (Railway's PORT, RAILWAY_*) never reach
+    validation either way.
     """
 
     model_config = SettingsConfigDict(
