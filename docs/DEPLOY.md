@@ -167,12 +167,26 @@ The rows below are the instances that cost real time.
 roster names (add/remove/rename in any mode), `SHUFFLE_SEED`, the per-mode
 salts, `LAUNCH_DATE`, the scheduling algorithm.
 
-The seed guard enforces this at deploy time. Its escape path, in order:
+The seed guard enforces the roster half at deploy time. Its escape path, in
+order:
 1. **Pin elapsed days' answers first** (a table of date → answer, served for
    past days; the pure function takes over going forward).
 2. Edit `EXPECTED_COUNTS` in `server/scripts/seed.py`.
 3. Set `ALLOW_SEED_PRUNE=1` on that deploy **only if the change also removes
    entries**. `ALLOW_SEED_PRUNE` does **not** bypass the count check.
+
+The scheduling fingerprint guard
+(`server/app/services/scheduling_guard.py`) enforces the rest —
+`SHUFFLE_SEED`, the per-mode salts, `LAUNCH_DATE`, the algorithm — at import
+time: a mismatch crashes the app before uvicorn binds, so `/api/health`
+fails and Railway holds the previous deploy. A deliberate change means
+recomputing `EXPECTED_SCHEDULING_FINGERPRINT` in the same commit (the dummy
+`DATABASE_URL` is required by imports only; nothing connects):
+
+```
+cd server && DATABASE_URL=postgresql+asyncpg://x:x@localhost/x \
+  uv run --no-sync python -c "from app.services.scheduling_guard import compute_scheduling_fingerprint as c; print(c())"
+```
 
 **Freely editable live**: every attribute value and every image — reseed
 (deploy) and, for a replaced image, purge its URL from Cloudflare's cache.

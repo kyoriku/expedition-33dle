@@ -8,6 +8,7 @@ from fastapi.staticfiles import StaticFiles
 
 from app.db import engine
 from app.routers import bosses, classic, pictos, weapons
+from app.services.scheduling_guard import assert_scheduling_fingerprint
 from app.settings import settings
 
 # Sentry — must run before FastAPI() is constructed so the auto-enabled
@@ -20,6 +21,12 @@ if _sentry_dsn:
         environment=settings.sentry_environment,
         traces_sample_rate=0,  # errors only — no performance tracing
     )
+
+# Frozen-schedule enforcement — crash at import time, before FastAPI() is
+# constructed and before uvicorn binds, so a bad deploy never serves traffic
+# and Railway's /api/health check holds the previous deploy (same failure
+# property as a malformed Sentry DSN above).
+assert_scheduling_fingerprint()
 
 # repo/client/dist — built SPA (absolute, so it resolves regardless of CWD).
 CLIENT_DIST = Path(__file__).resolve().parents[2] / "client" / "dist"
