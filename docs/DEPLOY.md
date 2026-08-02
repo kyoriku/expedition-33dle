@@ -127,8 +127,11 @@ edge caching and no browser caching.
 Known gap: dotted paths at the root — `/openapi.json`, `/robots.txt`,
 `/sitemap.xml` and similar — match none of the four rules (rule 2's no-dot
 clause excludes them, and they aren't under `/api/`, `/assets/`, or the
-image dirs), so they fall through to Cloudflare defaults. Not currently a
-problem; noted so nobody goes hunting for a broken rule.
+image dirs), so they fall through to Cloudflare defaults. No longer just
+theoretical: the fallthrough copy can be cached and outlive a deploy — see
+the robots.txt row in False signals. After changing any dotted root file
+(`robots.txt`, `sitemap.xml`, `ads.txt`), the first step is purging its
+exact URL.
 
 ### Verify on the prod domain
 
@@ -160,6 +163,7 @@ The rows below are the instances that cost real time.
 | Command line gets the registrar's parking page (openresty / an l.ink redirect) while browsers load the site fine | The system resolver keeps serving pre-delegation records long after delegation is live; browsers on DNS-over-HTTPS already see the new ones. Not a misconfiguration | `dig @1.1.1.1 expedition33dle.com` (or `@8.8.8.8`), or force the connection: `curl --resolve` |
 | `/api/*` returns `cf-cache-status: DYNAMIC`, not `BYPASS`, with the bypass rule correctly applied and deployed | Both mean uncached — DYNAMIC is simply Cloudflare's label for this configuration | Nothing to fix; confirm repeat fetches never show `HIT` |
 | A sequential curl loop against `/api/*` returns all 200s and never trips the rate limit, suggesting the rule isn't working | Each curl is a fresh TLS handshake, so 60 sequential requests take well over the 10-second window — the threshold is never exceeded within one period. The rule is fine | `seq 1 200 \| xargs -P 20 -I{} curl -s -o /dev/null -w '%{http_code}\n' https://<host>/api/health \| sort \| uniq -c` — expect a mix of 200 and 429 (real run: 60/140). Tripping it blocks your own IP for 10 s; that is the rule working |
+| `/robots.txt` still serves old content after deploying a change — in the real run, Cloudflare's managed block (see Edge protection) followed by raw `index.html`, long after the real file had merged and deployed | The dotted-root cache gap in §3: `/robots.txt` matches none of the four cache rules and falls through to Cloudflare defaults; the composite gets cached, and the cached copy can predate the origin file existing. Not a managed-robots.txt misconfiguration and not a bad deploy | Caching → Configuration → Purge Cache → Custom Purge → the exact URL `https://expedition33dle.com/robots.txt`; re-check after ~30 seconds |
 
 ## Standing rules
 
@@ -216,3 +220,14 @@ Threshold rationale: a full page load fires roughly five API calls, so
 **Bot Fight Mode** (Security → Bots): on. Verified search crawlers are
 exempt — but if indexing ever looks wrong, this is the first thing to
 check.
+
+**Managed robots.txt** (AI Crawl Control → Settings → "Manage your
+robots.txt"): set to **Instruct AI bots to not scrape content**. This does
+not replace the origin's robots.txt — Cloudflare prepends its own block
+(the Content-Signals framework plus Disallow rules for Amazonbot,
+Applebot-Extended, Bytespider, CCBot, ClaudeBot,
+CloudflareBrowserRenderingCrawler, Google-Extended, GPTBot,
+meta-externalagent) on top of whatever the origin returns, so the served
+`/robots.txt` is a composite. Before `client/public/robots.txt` existed,
+the origin answered `/robots.txt` with the SPA shell, so the served file
+was Cloudflare's block followed by a full HTML document.
