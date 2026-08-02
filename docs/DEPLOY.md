@@ -167,6 +167,12 @@ The rows below are the instances that cost real time.
 roster names (add/remove/rename in any mode), `SHUFFLE_SEED`, the per-mode
 salts, `LAUNCH_DATE`, the scheduling algorithm.
 
+**Also frozen forever**: the localStorage key prefix `expedition33dle:` in
+`client/src/lib/storage.ts`. Different mechanism, same finality — the data
+lives only in players' browsers under the old keys, so changing the prefix
+destroys every player's streaks and stat history with no recovery. Repo,
+folder, or domain renames must not touch it.
+
 The seed guard enforces the roster half at deploy time. Its escape path, in
 order:
 1. **Pin elapsed days' answers first** (a table of date → answer, served for
