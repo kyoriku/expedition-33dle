@@ -59,7 +59,9 @@ export default function LegalPage({ source }: LegalPageProps) {
         >
           ← Back to game
         </Link>
-        <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+        {/* skipHtml: react-markdown renders raw HTML nodes as literal text,
+            so without it editor comments in the .md files show on the page. */}
+        <ReactMarkdown remarkPlugins={[remarkGfm]} components={components} skipHtml>
           {source}
         </ReactMarkdown>
       </div>
