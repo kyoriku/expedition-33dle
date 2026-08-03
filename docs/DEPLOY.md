@@ -227,6 +227,26 @@ Threshold rationale: a full page load fires roughly five API calls, so
 exempt — but if indexing ever looks wrong, this is the first thing to
 check.
 
+**WAF custom rule: block common probe paths** (Security → WAF → Custom
+rules — the free plan allows five custom rules; this uses one):
+
+- Expression: `http.request.uri.path contains "/.env" or
+  http.request.uri.path contains "/.git" or http.request.uri.path
+  contains "/wp-" or http.request.uri.path eq "/xmlrpc.php" or
+  http.request.uri.path contains "/vendor/" or http.request.uri.path
+  contains "/lander/"`
+- Action: Block
+
+Why it exists: Railway logs showed two scanner families reaching the
+origin — a commodity `.env`/`.git` credential sweep (16 filename
+variants) and a Russian phishing operation probing for an
+already-compromised host to serve bank-scam landers. Every non-`/api/`
+probe was answered 200 with the SPA shell — not a leak, but each one
+consumes an origin request and fills the logs; blocked at the edge, they
+never reach Railway. Unmatched `/api/*` paths already return a JSON 404
+(`/api/.env` was the only 404 in the sampled logs) — that behavior needs
+no change.
+
 **Managed robots.txt** (AI Crawl Control → Settings → "Manage your
 robots.txt"): set to **Instruct AI bots to not scrape content**. This does
 not replace the origin's robots.txt — Cloudflare prepends its own block

@@ -5,12 +5,12 @@
   "description": "Daily character guessing game for Clair Obscur: Expedition 33. React/TypeScript frontend, Python/FastAPI backend, PostgreSQL database.",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd server && uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8001",
+    "server": "cd server && uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8001 --no-access-log",
     "client": "cd client && npm run dev",
     "seed": "cd server && uv run python scripts/seed.py",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "start": "cd server && uv run uvicorn app.main:app --host 0.0.0.0 --port 8001"
+    "start": "cd server && uv run uvicorn app.main:app --host 0.0.0.0 --port 8001 --no-access-log"
   },
   "keywords": [],
   "author": "",
