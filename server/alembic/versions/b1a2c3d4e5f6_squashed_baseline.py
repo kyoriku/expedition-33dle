@@ -6,8 +6,13 @@ Create Date: 2026-06-21 00:00:00.000000
 
 Single baseline that replaces the pre-launch migration history (initial schema,
 column redesigns, the puzzles-table add/drop, the pictos add, image columns, and
-the entities->characters rename). Collapsing them is safe because the project is
-still in development with no production database to migrate.
+the entities->characters rename). Collapsing them was safe at the time because
+no production database existed yet. That stopped being true at launch
+(2026-08-01): production is live with `alembic_version` at head
+(b1a2c3d4e5f6 -> dce72d846ab8 -> 747426247f87 -> e600e40823b7), so this history
+is now frozen — deleting, renaming, or re-squashing any revision file makes
+`alembic upgrade head` fail ("Can't locate revision") in scripts/predeploy.sh
+and fails the whole deploy.
 
 Creating the tables fresh in their final shape also cleans up three artifacts the
 incremental history left behind:
