@@ -23,5 +23,8 @@ dist/
 .DS_Store
 Thumbs.db
 
-# Claude (local-only session notes; see docs/DEPLOY.md for the public runbook)
+# Claude
 CLAUDE.md
+
+# Docs
+docs/public.md
