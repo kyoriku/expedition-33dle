@@ -7,6 +7,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.db import engine
+from app.middleware import SecurityHeadersMiddleware
 from app.routers import bosses, classic, pictos, weapons
 from app.services.scheduling_guard import assert_scheduling_fingerprint
 from app.settings import settings
@@ -50,6 +51,10 @@ app = FastAPI(
     redoc_url=None,
     openapi_url=None,
 )
+# Middleware wraps the whole ASGI stack, so unlike routes its registration
+# order relative to routers/mounts is irrelevant (the catch-all-last rule
+# below is about the route table only).
+app.add_middleware(SecurityHeadersMiddleware)
 app.include_router(classic.router)
 app.include_router(pictos.router)
 app.include_router(weapons.router)
