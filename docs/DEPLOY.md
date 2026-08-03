@@ -162,8 +162,9 @@ The rows below are the instances that cost real time.
 | Railway shows "Waiting for DNS update" / "Incorrect DNS setup" indefinitely while both domains serve fine | Railway resolves the hostname expecting its own CNAME target and gets Cloudflare's anycast IPs through the proxy | `curl -sD - -o /dev/null --resolve <host>:443:<cf-ip> https://<host>/api/health` — curl is authoritative, the dashboard label is not |
 | Command line gets the registrar's parking page (openresty / an l.ink redirect) while browsers load the site fine | The system resolver keeps serving pre-delegation records long after delegation is live; browsers on DNS-over-HTTPS already see the new ones. Not a misconfiguration | `dig @1.1.1.1 expedition33dle.com` (or `@8.8.8.8`), or force the connection: `curl --resolve` |
 | `/api/*` returns `cf-cache-status: DYNAMIC`, not `BYPASS`, with the bypass rule correctly applied and deployed | Both mean uncached — DYNAMIC is simply Cloudflare's label for this configuration | Nothing to fix; confirm repeat fetches never show `HIT` |
-| A sequential curl loop against `/api/*` returns all 200s and never trips the rate limit, suggesting the rule isn't working | Each curl is a fresh TLS handshake, so 60 sequential requests take well over the 10-second window — the threshold is never exceeded within one period. The rule is fine | `seq 1 200 \| xargs -P 20 -I{} curl -s -o /dev/null -w '%{http_code}\n' https://<host>/api/health \| sort \| uniq -c` — expect a mix of 200 and 429 (real run: 60/140). Tripping it blocks your own IP for 10 s; that is the rule working |
+| A sequential curl loop against `/api/*` returns all 200s and never trips the rate limit, suggesting the rule isn't working | Each curl is a fresh TLS handshake, so 60 sequential requests take well over the 10-second window — the threshold is never exceeded within one period. The rule is fine | `seq 1 200 \| xargs -P 20 -I{} curl -s -o /dev/null -w '%{http_code}\n' https://<host>/api/health \| sort \| uniq -c` — expect a mix of 200 and 429 (real run: 273 × 200, 27 × 429 out of 300 parallel requests). Tripping it blocks your own IP for 10 s; that is the rule working |
 | `/robots.txt` still serves old content after deploying a change — in the real run, Cloudflare's managed block (see Edge protection) followed by raw `index.html`, long after the real file had merged and deployed | The dotted-root cache gap in §3: `/robots.txt` matches none of the four cache rules and falls through to Cloudflare defaults; the composite gets cached, and the cached copy can predate the origin file existing. Not a managed-robots.txt misconfiguration and not a bad deploy | Caching → Configuration → Purge Cache → Custom Purge → the exact URL `https://expedition33dle.com/robots.txt`; re-check after ~30 seconds |
+| A newly added or extended WAF rule appears not to fire — the blocked path still returns 200 | A pre-rule 200 response for that exact URL is cached at Cloudflare's edge and served before the WAF evaluates. Most likely on dotted root paths, which match none of the four cache rules and fall through to Cloudflare defaults (the known gap in §3). The rule is fine | Request a path never requested before — `curl -s -o /dev/null -w '%{http_code}\n' https://expedition33dle.com/nonsense-test.sql` — or purge the exact URL and retry |
 
 ## Standing rules
 
@@ -214,14 +215,19 @@ schema unserved.
 **Rate limiting** (Security → Rate limiting rules — the free plan allows
 exactly one rule, and this is the one that gets it):
 
-- Expression: `starts_with(http.request.uri.path, "/api/")`
+- Expression: `http.host eq "expedition33dle.com"` (all paths)
 - Characteristic: IP
-- Threshold: 50 requests / 10 seconds
+- Threshold: 100 requests / 10 seconds
 - Action: Block, duration 10 seconds
 
-Threshold rationale: a full page load fires roughly five API calls, so
-50/10s is generous for real play while still stopping a scraper hammering
-`/api/<mode>/today`.
+Threshold rationale: non-API paths previously had no limit at all — which
+is how a 44-request secrets sweep (see the WAF rule below) completed
+unimpeded. A cold page load is roughly 12–18 requests and opening all
+four modes quickly might reach 40–50, so 100/10s is generous for real
+play while catching sequential scanners. The trade is losing the tighter
+50/10s specifically on `/api/*`; acceptable because the API serves
+read-only public data and the observed threat is broad path sweeping.
+Verified live: 300 parallel requests returned 273 200s and 27 429s.
 
 **Bot Fight Mode** (Security → Bots): on. Verified search crawlers are
 exempt — but if indexing ever looks wrong, this is the first thing to
@@ -234,7 +240,22 @@ rules — the free plan allows five custom rules; this uses one):
   http.request.uri.path contains "/.git" or http.request.uri.path
   contains "/wp-" or http.request.uri.path eq "/xmlrpc.php" or
   http.request.uri.path contains "/vendor/" or http.request.uri.path
-  contains "/lander/"`
+  contains "/lander/" or http.request.uri.path contains "/.ssh/" or
+  http.request.uri.path contains "/.svn/" or http.request.uri.path
+  contains "/.vscode/" or http.request.uri.path contains "/actuator/"
+  or ends_with(http.request.uri.path, ".php") or
+  ends_with(http.request.uri.path, ".sql") or
+  ends_with(http.request.uri.path, ".yml") or
+  ends_with(http.request.uri.path, ".yaml") or
+  ends_with(http.request.uri.path, ".log") or
+  ends_with(http.request.uri.path, ".key") or
+  ends_with(http.request.uri.path, ".pem") or
+  ends_with(http.request.uri.path, ".bak") or
+  ends_with(http.request.uri.path, ".db") or
+  ends_with(http.request.uri.path, ".ini") or
+  ends_with(http.request.uri.path, ".conf") or
+  ends_with(http.request.uri.path, ".zip") or
+  ends_with(http.request.uri.path, ".gz")`
 - Action: Block
 
 Why it exists: Railway logs showed two scanner families reaching the
@@ -246,6 +267,17 @@ consumes an origin request and fills the logs; blocked at the edge, they
 never reach Railway. Unmatched `/api/*` paths already return a JSON 404
 (`/api/.env` was the only 404 in the sampled logs) — that behavior needs
 no change.
+
+Why it was extended: the original prefix-based expression missed a
+~44-path secrets sweep (SSH keys, `.npmrc`, `secrets.json`, database
+dumps, `docker-compose.yml`, Spring Actuator heapdump, Laravel logs,
+`.vscode/sftp.json`, `.bash_history`) from a single IP running
+Go-http-client. The scan included randomized `zzcanary-*` control paths —
+those exist to detect hosts that return 200 for everything, so the SPA
+soft-404 fallback actually invalidated the scanner's whole result set.
+Nothing leaked; the cost was 44 origin requests and log noise. The rule
+remains a denylist and will keep missing new patterns — the rate limit
+above is the general defense.
 
 **Managed robots.txt** (AI Crawl Control → Settings → "Manage your
 robots.txt"): set to **Instruct AI bots to not scrape content**. This does
