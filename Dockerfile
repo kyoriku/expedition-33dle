@@ -21,4 +21,8 @@ COPY --from=build /client/dist /app/client/dist
 # Railway) would be passed to uvicorn as a literal string. --no-sync: the venv
 # was fully built above; without it, `uv run` re-syncs at every container
 # start — adding the dev group and a network dependency at boot.
-CMD uv run --no-sync uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}
+# --no-access-log: AccessLogMiddleware (app/middleware.py) is the request log
+# — it shows the real client IP where uvicorn's can only show Railway's
+# internal CGNAT peer. Removing the flag means two lines per request;
+# removing the middleware means no request log at all.
+CMD uv run --no-sync uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --no-access-log
