@@ -242,8 +242,9 @@ rules — the free plan allows five custom rules; this uses one):
   http.request.uri.path contains "/vendor/" or http.request.uri.path
   contains "/lander/" or http.request.uri.path contains "/.ssh/" or
   http.request.uri.path contains "/.svn/" or http.request.uri.path
-  contains "/.vscode/" or http.request.uri.path contains "/actuator/"
-  or ends_with(http.request.uri.path, ".php") or
+  contains "/.vscode/" or http.request.uri.path contains "/.aws/" or
+  http.request.uri.path contains "/.stripe/" or http.request.uri.path
+  contains "/actuator/" or ends_with(http.request.uri.path, ".php") or
   ends_with(http.request.uri.path, ".sql") or
   ends_with(http.request.uri.path, ".yml") or
   ends_with(http.request.uri.path, ".yaml") or
