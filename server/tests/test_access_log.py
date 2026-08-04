@@ -80,3 +80,66 @@ def test_query_string_is_included():
         request_headers=[(b"cf-connecting-ip", b"203.0.113.7")],
     )
     assert lines == ['203.0.113.7 - "GET /api/health?probe=1" 200 "-"']
+
+
+# Injection cases: path, query, User-Agent, and CF-Connecting-IP are
+# attacker-controlled, and uvicorn percent-decodes the request target, so
+# the path can contain any byte — including quotes and CRLF (a real prober
+# broke the line format with %22 before _clean() existed). The paths below
+# sit under /api/ because unmatched /api/* is a 404 in every environment,
+# keeping the exact-line assertions build-independent.
+
+
+def test_quotes_in_path_are_escaped():
+    lines = _capture(
+        '/api/"probe"',
+        request_headers=[(b"cf-connecting-ip", b"203.0.113.7")],
+    )
+    assert lines == ['203.0.113.7 - "GET /api/\\"probe\\"" 404 "-"']
+
+
+def test_crlf_in_path_cannot_forge_a_second_line():
+    lines = _capture(
+        "/api/x\r\n10.0.0.1 - \"GET /forged\" 200 \"-\"",
+        request_headers=[(b"cf-connecting-ip", b"203.0.113.7")],
+    )
+    assert len(lines) == 1
+    assert "\n" not in lines[0] and "\r" not in lines[0]
+    assert lines[0] == (
+        '203.0.113.7 - "GET /api/x\\x0d\\x0a10.0.0.1 - '
+        '\\"GET /forged\\" 200 \\"-\\"" 404 "-"'
+    )
+
+
+def test_overlong_user_agent_is_truncated():
+    lines = _capture(
+        "/api/health",
+        request_headers=[
+            (b"cf-connecting-ip", b"203.0.113.7"),
+            (b"user-agent", b"a" * 300),
+        ],
+    )
+    expected_ua = "a" * 256 + "[truncated]"
+    assert lines == [f'203.0.113.7 - "GET /api/health" 200 "{expected_ua}"']
+
+
+def test_crafted_cf_connecting_ip_cannot_forge_fields():
+    lines = _capture(
+        "/api/health",
+        request_headers=[(b"cf-connecting-ip", b'203.0.113.7" 200 "GET /fake')],
+    )
+    assert len(lines) == 1
+    assert lines[0] == (
+        '203.0.113.7\\"\\x20200\\x20\\"GET\\x20/fake'
+        ' - "GET /api/health" 200 "-"'
+    )
+
+
+def test_cf_connecting_ip_cannot_spoof_the_direct_marker():
+    # A space is escaped in the client field only — a real IP never contains
+    # one, so " (direct)" appended by the middleware stays unforgeable.
+    lines = _capture(
+        "/api/health",
+        request_headers=[(b"cf-connecting-ip", b"1.2.3.4 (direct)")],
+    )
+    assert lines == ['1.2.3.4\\x20(direct) - "GET /api/health" 200 "-"']

@@ -71,6 +71,31 @@ access_log.setLevel(logging.INFO)
 access_log.addHandler(logging.StreamHandler(sys.stdout))
 access_log.propagate = False
 
+# Path, query, User-Agent, and CF-Connecting-IP are attacker-controlled and
+# uvicorn percent-decodes the request target, so the path can contain ANY
+# byte (%22 arrives as a literal quote, %0d%0a as a literal CRLF) — enough
+# to forge fields or inject entire fake log lines. Escaped nginx-style
+# rather than replaced because this log exists for scanner forensics: the
+# probe payload is the part worth reading, and escaping preserves it while
+# keeping lines single-line and parseable. C1 controls included: latin-1
+# decoding maps bytes 0x80-0x9f onto them.
+_ESCAPES = {ord("\\"): "\\\\", ord('"'): '\\"'}
+_ESCAPES.update(
+    {c: f"\\x{c:02x}" for c in (*range(0x20), 0x7F, *range(0x80, 0xA0))}
+)
+# The client field also escapes spaces: a real IP never contains one, and an
+# unescaped space is what would let a spoofed header like "1.2.3.4 (direct)"
+# impersonate the genuine " (direct)" marker appended below — the one field
+# read as a signal, not just as text.
+_CLIENT_ESCAPES = {**_ESCAPES, 0x20: "\\x20"}
+
+
+def _clean(value, cap, escapes=_ESCAPES):
+    """Truncate to cap (raw), then escape — worst case 4x cap, still one line."""
+    if len(value) > cap:
+        value = value[:cap] + "[truncated]"
+    return value.translate(escapes)
+
 
 class AccessLogMiddleware:
     """One uvicorn-lookalike line per response, with the real client IP.
@@ -82,6 +107,10 @@ class AccessLogMiddleware:
     healthcheck, dev proxy, direct-to-origin) and gets the peer address
     tagged "(direct)". Log-only: never use this value for access control —
     nothing stops a direct-to-origin client from forging the header.
+
+    All attacker-controlled fields pass through _clean() before formatting;
+    the method needs no cleaning (the HTTP parser rejects non-token methods
+    before ASGI) and the status is server-generated.
     """
 
     def __init__(self, app):
@@ -95,15 +124,21 @@ class AccessLogMiddleware:
         headers = dict(scope["headers"])
         cf_ip = headers.get(b"cf-connecting-ip")
         if cf_ip is not None:
-            client = cf_ip.decode("latin-1")
+            client = _clean(cf_ip.decode("latin-1"), 64, _CLIENT_ESCAPES)
         else:
+            # Peer host is transport-provided, but cleaning it too means the
+            # marker appended here is the only unescaped "(direct)" possible.
             peer = scope.get("client")
-            client = f"{peer[0] if peer else '-'} (direct)"
+            host = _clean(peer[0] if peer else "-", 64, _CLIENT_ESCAPES)
+            client = f"{host} (direct)"
         target = scope["path"]
         query = scope.get("query_string", b"")
         if query:
             target = f"{target}?{query.decode('latin-1')}"
-        user_agent = headers.get(b"user-agent", b"-").decode("latin-1")
+        target = _clean(target, 500)
+        user_agent = _clean(
+            headers.get(b"user-agent", b"-").decode("latin-1"), 256
+        )
 
         async def send_and_log(message):
             if message["type"] == "http.response.start":
