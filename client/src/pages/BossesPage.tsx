@@ -19,7 +19,7 @@ import ShareButton from "../components/ShareButton";
 import { ApiError, getBossesToday, revealBoss, submitBossGuess } from "../lib/api";
 import { buildBossesShareString } from "../lib/share";
 import { msToNextUtcMidnight, todayUtcISO } from "../lib/time";
-import { usePageTitle } from "../lib/usePageTitle";
+import { usePageHead } from "../lib/usePageHead";
 import { BOSSES_MAX_GUESSES as MAX_GUESSES, recordGame } from "../lib/stats";
 import {
   loadBossesState,
@@ -155,7 +155,11 @@ function useBossesRollover(puzzleDate: string | undefined, refetch: () => void) 
 }
 
 export default function BossesPage() {
-  usePageTitle("Daily Boss | Expedition33dle");
+  usePageHead({
+    title: "Daily Boss | Expedition 33dle",
+    description: "Guess today's Clair Obscur: Expedition 33 boss. A new boss puzzle every day at midnight UTC.",
+    path: "/bosses",
+  });
   const { data: today, isPending, error, refetch } = useQuery({
     queryKey: ["bosses-today"],
     queryFn: getBossesToday,

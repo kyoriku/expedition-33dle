@@ -93,6 +93,22 @@ describe("WeaponsPage", () => {
     expect(screen.queryByRole("table")).toBeNull();
   });
 
+  it("sets the weapons head tags", async () => {
+    renderPage();
+    await screen.findByRole("combobox");
+    expect(document.title).toBe("Daily Weapon | Expedition 33dle");
+    expect(
+      document.head
+        .querySelector('link[rel="canonical"]')
+        ?.getAttribute("href"),
+    ).toBe("https://expedition33dle.com/weapons");
+    expect(
+      document.head
+        .querySelector('meta[property="og:url"]')
+        ?.getAttribute("content"),
+    ).toBe("https://expedition33dle.com/weapons");
+  });
+
   it("scores a guess and exposes scalar + directional feedback to assistive tech", async () => {
     vi.mocked(submitWeaponGuess).mockResolvedValue({
       guess: wpn(2, "Blodam", { wielder: ["Lune"], max_power: 3487 }),

@@ -20,7 +20,7 @@ import ShareButton from "../components/ShareButton";
 import { ApiError, getWeaponsToday, revealWeapon, submitWeaponGuess } from "../lib/api";
 import { buildWeaponsShareString } from "../lib/share";
 import { msToNextUtcMidnight, todayUtcISO } from "../lib/time";
-import { usePageTitle } from "../lib/usePageTitle";
+import { usePageHead } from "../lib/usePageHead";
 import { WEAPONS_MAX_GUESSES as MAX_GUESSES, recordGame } from "../lib/stats";
 import {
   loadWeaponsState,
@@ -166,7 +166,11 @@ function useWeaponsRollover(puzzleDate: string | undefined, refetch: () => void)
 }
 
 export default function WeaponsPage() {
-  usePageTitle("Daily Weapon | Expedition33dle");
+  usePageHead({
+    title: "Daily Weapon | Expedition 33dle",
+    description: "Guess today's Clair Obscur: Expedition 33 weapon. A new weapon puzzle every day at midnight UTC.",
+    path: "/weapons",
+  });
   const { data: today, isPending, error, refetch } = useQuery({
     queryKey: ["weapons-today"],
     queryFn: getWeaponsToday,
