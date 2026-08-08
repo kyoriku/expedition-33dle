@@ -20,7 +20,7 @@ import ShareButton from "../components/ShareButton";
 import { ApiError, getPictosToday, revealPicto, submitPictoGuess } from "../lib/api";
 import { buildPictosShareString } from "../lib/share";
 import { msToNextUtcMidnight, todayUtcISO } from "../lib/time";
-import { usePageTitle } from "../lib/usePageTitle";
+import { usePageHead } from "../lib/usePageHead";
 import { PICTOS_MAX_GUESSES as MAX_GUESSES, recordGame } from "../lib/stats";
 import {
   loadPictosState,
@@ -167,7 +167,11 @@ function usePictosRollover(puzzleDate: string | undefined, refetch: () => void) 
 }
 
 export default function PictosPage() {
-  usePageTitle("Daily Picto | Expedition 33dle");
+  usePageHead({
+    title: "Daily Picto | Expedition 33dle",
+    description: "Guess today's Clair Obscur: Expedition 33 picto. A new picto puzzle every day at midnight UTC.",
+    path: "/pictos",
+  });
   const { data: today, isPending, error, refetch } = useQuery({
     queryKey: ["pictos-today"],
     queryFn: getPictosToday,

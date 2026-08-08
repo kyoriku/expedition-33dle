@@ -16,7 +16,7 @@ import { ApiError, fetchToday, revealAnswer, submitGuess } from "../lib/api";
 import { buildShareString } from "../lib/share";
 import { CLASSIC_MAX_GUESSES as MAX_GUESSES, recordGame } from "../lib/stats";
 import { msToNextUtcMidnight, todayUtcISO } from "../lib/time";
-import { usePageTitle } from "../lib/usePageTitle";
+import { usePageHead } from "../lib/usePageHead";
 import StatsBlock from "../components/StatsBlock";
 import Histogram from "../components/Histogram";
 import Countdown from "../components/Countdown";
@@ -130,7 +130,11 @@ function useDailyRollover(puzzleDate: string | undefined, refetch: () => void) {
 }
 
 export default function ClassicPage() {
-  usePageTitle("Daily Character | Expedition 33dle");
+  usePageHead({
+    title: "Daily Character | Expedition 33dle",
+    description: "Guess today's Clair Obscur: Expedition 33 character. A new character puzzle every day at midnight UTC.",
+    path: "/classic",
+  });
   // Server state only; game state lives in <Game> + localStorage.
   const { data: today, isPending, error, refetch } = useQuery({
     queryKey: ["today"],

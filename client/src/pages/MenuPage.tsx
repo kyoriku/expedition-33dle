@@ -19,7 +19,7 @@ import {
   loadWeaponsStats,
 } from "../lib/storage";
 import { todayUtcISO } from "../lib/time";
-import { usePageTitle } from "../lib/usePageTitle";
+import { usePageHead } from "../lib/usePageHead";
 
 /** Bust silhouette — the character-flavored Classic mode. Decorative; the <h2>
  *  names the mode for assistive tech. */
@@ -119,7 +119,11 @@ function ModeCard({
 }
 
 export default function MenuPage() {
-  usePageTitle("Expedition 33dle");
+  usePageHead({
+    title: "Expedition 33dle",
+    description: "A daily guessing game for Clair Obscur: Expedition 33. New puzzle every day at midnight UTC.",
+    path: "/",
+  });
   // Status is read once from localStorage — no API call on menu load. The menu
   // remounts on navigation, so returning from a game reflects the new state.
   const today = todayUtcISO();
