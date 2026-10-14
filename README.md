@@ -8,6 +8,22 @@ and up/down arrows for numeric hints — within a fixed number of guesses.
 Live at **[expedition33dle.com](https://expedition33dle.com)** ·
 React 19 + TypeScript · FastAPI + Python 3.12 · PostgreSQL · Railway + Cloudflare
 
+**Reading the code**, the short tour, no clone needed:
+
+- [`server/app/services/scheduling.py`](server/app/services/scheduling.py): each day's answer is a
+  pure function of the date, the sorted roster, and a fixed seed. There is no puzzles table to leak,
+  and no response carries the answer until the game is provably over.
+- [`server/app/services/scheduling_guard.py`](server/app/services/scheduling_guard.py): a behavioral
+  fingerprint asserted at import. A deploy that would reshuffle past answers crashes before uvicorn
+  binds, fails the healthcheck, and the previous release stays live.
+- [`server/scripts/seed.py`](server/scripts/seed.py): roster membership behind count and prune gates
+  that abort before any write; a tripped gate is tested to issue zero deletes.
+- [`server/app/middleware.py`](server/app/middleware.py): pure-ASGI security headers and an
+  injection-escaped access log keyed to the real client IP behind Cloudflare.
+- [`docs/DEPLOY.md`](docs/DEPLOY.md): the production runbook covering DNS cutover, cache rules, edge
+  protection written from observed scanner traffic, and a false-signals table of real incidents, each
+  with its authoritative verification command.
+
 ![The mode menu at expedition33dle.com](docs/screenshots/expedition33dle-home.png)
 
 ## Modes

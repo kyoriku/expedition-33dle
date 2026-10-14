@@ -54,8 +54,8 @@ export default function GuessGridBase<T extends NamedEntity, F>({
           </div>
         </div>
         <div className="flex flex-col gap-1.5" role="rowgroup">
-          {/* Oldest guess on top, newest at the bottom (traditional Wordle
-              order) — matches the chronological storage and share-string order. */}
+          {/* Oldest guess on top, newest at the bottom — matches the
+              chronological storage and share-string order. */}
           {guesses.map((g) => (
             <GuessRowBase
               key={g.guess.id}
