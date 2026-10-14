@@ -215,7 +215,9 @@ schema unserved.
 **Rate limiting** (Security → Rate limiting rules — the free plan allows
 exactly one rule, and this is the one that gets it):
 
-- Expression: `http.host eq "expedition33dle.com"` (all paths)
+- Expression: `http.request.uri.path wildcard "/*"` (all paths; Free-plan rate
+  limiting can only match on Path and Verified Bot, and the path match covers
+  every host in the zone, including `www.` and host:port requests)
 - Characteristic: IP
 - Threshold: 100 requests / 10 seconds
 - Action: Block, duration 10 seconds
