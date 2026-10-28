@@ -4,10 +4,10 @@
 #   - volume-init: Runs once at startup, fixes ownership on named volumes
 #                  so the non-root vscode user can write to them. Exits when done.
 #   - dev:        Container where Claude Code runs (Python + Node + uv + claude CLI)
-#   - postgres:   Database, isolated to this project, data persisted in a named volume
+#   - postgres:   Database, internal to this project's network (not published to
+#                 the Mac), data persisted in a named volume
 
 services:
-  # Init service. Runs once, fixes permissions on named volumes, exits.
   volume-init:
     image: alpine:3.20
     command: >
@@ -54,9 +54,8 @@ services:
       POSTGRES_DB: expedition33dle
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    # Exposed to Mac on 5433 to avoid collision with SBG's 5432.
-    ports:
-      - "5433:5432"
+    # No published ports: reach it from the dev container or other containers on
+    # this network at postgres:5432, or from the Mac with docker exec ... psql.
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d expedition33dle"]
       interval: 5s
