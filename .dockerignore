@@ -5,3 +5,5 @@ client/dist
 **/*.pyc
 .devcontainer
 server/tests
+**/.venv
+**/.env
